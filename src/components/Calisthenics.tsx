@@ -10,7 +10,7 @@ const Calithenics = () => {
   return (
     <>
       <div
-        className={`z-50 relative flex justify-center items-center w-full
+        className={`z-40 relative flex justify-center items-center w-full
     `}
       >
         <div
@@ -80,11 +80,11 @@ const Calithenics = () => {
         ></div>
       </div>
       {/* Bottom solid background for header effect */}
-      <div
-        className={`z-[999] relative bottom-0 h-800H z-0
-    ${theme === 'theme1' ? 'bg-cyan-dark' : 'bg-cyan-dark'}
+      {/* <div
+        className={`z-50 relative -bottom-800I h-800H z-0
+    ${theme === 'theme1' ? 'bg-black' : 'bg-black'}
     `}
-      />
+      /> */}
     </>
   );
 };

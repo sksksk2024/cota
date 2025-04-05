@@ -153,6 +153,7 @@ module.exports = {
         '1.375': '25rem',
       },
       maxWidth: {
+        'container-48': '3rem',
         'container-100': '6.25rem',
         'container-176': '11rem',
         'container-200': '12.5rem',
@@ -301,6 +302,10 @@ module.exports = {
         '600H': '37.5rem',
         '624H': '39rem',
         '800H': '50rem',
+        '816H': '51rem',
+        '832H': '52rem',
+        '848H': '53rem',
+        '864H': '54rem',
       },
       screens: {
         '3xs': '0px',

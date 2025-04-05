@@ -130,7 +130,7 @@ img {
 /* Styles */
 html,
 body {
-  min-height: auto;
+  height: 100dvh;
   width: 100dvw;
   overflow-x: clip;
   overflow-y: scroll;

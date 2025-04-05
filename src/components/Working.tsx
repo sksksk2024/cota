@@ -9,7 +9,7 @@ const Working = () => {
 
   return (
     <div
-      className={`z-50 relative flex justify-center items-center
+      className={`z-40 relative flex justify-center items-center
     `}
     >
       {/* Top solid background for header effect */}
