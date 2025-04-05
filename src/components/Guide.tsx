@@ -26,10 +26,10 @@ const Guide = () => {
     <>
       <div
         id="intro"
-        className={`z-0 relative top-96I h-96H w-full
+        className={`z-0 relative top-0 h-96H w-full
         ${theme === 'theme1' ? 'bg-background-dark' : 'bg-cyan-dark'}
         `}
-      ></div>
+      />
       <ul
         className={`z-50 sticky top-0 flex justify-around items-center py-24P
     ${theme === 'theme1' ? 'bg-background-dark/50' : 'bg-cyan-dark/50'}

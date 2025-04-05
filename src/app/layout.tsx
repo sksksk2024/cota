@@ -17,7 +17,7 @@ export default function RootLayout({
         <link rel="icon" href="/favicon.ico" sizes="any" />
         <link rel="apple-touch-icon" href="/favicon.png" />
       </head>
-      <body className={`antialiased`}>
+      <body className={`antialiased relative`}>
         <ThemeProvider>{children}</ThemeProvider>
       </body>
     </html>

@@ -18,7 +18,7 @@ const Footer = () => {
   return (
     <footer
       id="contact"
-      className={`flex flex-col justify-center items-center gap-20 p-64P -pb-128P
+      className={`z-10 flex flex-col justify-center items-center gap-20 p-64P pb-0
         ${theme === 'theme1' ? 'text-white' : 'text-textis'}
     `}
     >
@@ -46,7 +46,7 @@ const Footer = () => {
         </div>
       </div>
 
-      <div className="flex flex-col justify-center items-center gap-12 md:flex-row">
+      <div className="flex flex-col justify-center items-center gap-12 md:flex-row -mb-320M">
         <div className="flex justify-around items-center gap-10">
           {/* LINKS A BIT ROTATED WHEN HOVERED */}
           <Link

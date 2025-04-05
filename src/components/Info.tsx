@@ -29,10 +29,7 @@ const Info = () => {
         `}
       >
         <div className="relative flex flex-col justify-start items-start w-full h-800H">
-          <div
-            id="about"
-            className="flex justify-around items-center pt-48P w-full h-600H"
-          >
+          <div className="flex justify-around items-center pt-48P w-full h-600H">
             {goals === false ? <About /> : <Goals />}
           </div>
           {/* toggle 2 sections with button and transition */}

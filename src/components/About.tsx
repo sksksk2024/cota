@@ -9,6 +9,7 @@ const About = () => {
 
   return (
     <>
+      {/* Adding a div as the parking spot for the sticky nav */}
       <div
         className={`flex flex-col justify-start items-start gap-10 max-w-1/2
             ${theme === 'theme1' ? 'text-white' : 'text-textis'}
