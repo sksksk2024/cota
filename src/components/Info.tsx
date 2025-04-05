@@ -6,6 +6,7 @@ import { useState } from 'react';
 import { useThemeStore } from './store/useThemeStore';
 import About from './About';
 import Goals from './Goals';
+import Calithenics from './Calisthenics';
 
 const Info = () => {
   const { theme } = useThemeStore();
@@ -20,23 +21,26 @@ const Info = () => {
   return (
     <>
       <main
-        className={`relative flex flex-col justify-around items-center w-full h-800H
+        className={`relative flex flex-col justify-around items-center w-full pt-128P
         ${
           theme === 'theme1' ? 'bg-deep-dark-transition' : 'bg-green-cyan-light'
         }
         `}
       >
-        <div className="flex justify-around items-center w-full">
-          {goals === false ? <About /> : <Goals />}
+        <div className="relative flex flex-col justify-start items-start w-full h-800H">
+          <div className="flex justify-around items-center w-full h-600H">
+            {goals === false ? <About /> : <Goals />}
+          </div>
+          {/* toggle 2 sections with button and transition */}
+          <button
+            type="button"
+            className="relative bg-black text-3xl text-white translate-x-2/3 my-64M cursor-pointer"
+            onClick={handleToggle}
+          >
+            Next section
+          </button>
         </div>
-        {/* toggle 2 sections with button and transition */}
-        <button
-          type="button"
-          className="absolute bottom-32I bg-black text-3xl text-white cursor-pointer"
-          onClick={handleToggle}
-        >
-          Next section
-        </button>
+        <Calithenics />
       </main>
     </>
   );
