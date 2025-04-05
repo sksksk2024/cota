@@ -1,10 +1,12 @@
 'use client';
 
+import logo from './../app/favicon.ico';
 import Info from '@/components/Info';
 import Header from '@/components/Header';
 import Working from '@/components/Working';
 import { useThemeStore } from '@/components/store/useThemeStore';
 import Guide from '@/components/Guide';
+import Image from 'next/image';
 
 const Home = () => {
   const { theme } = useThemeStore();
@@ -30,10 +32,12 @@ const Home = () => {
         </div>
       </div>
       <div
-        className={`z-0 absolute -bottom-208I h-300H md:-bottom-96I md:h-192H w-full
+        className={`z-0 absolute -bottom-208I flex justify-center items-center h-300H md:-bottom-96I md:h-192H w-full
             ${theme === 'theme1' ? 'bg-background-dark' : 'bg-cyan-dark'}
             `}
-      />
+      >
+        <Image src={logo} className="relative bottom-80I w-192W" alt="logo" />
+      </div>
     </section>
   );
 };
