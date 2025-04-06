@@ -22,18 +22,20 @@ const Goals = () => {
             Qualities
           </h2>
           <p className="font-semibold tracking-widest">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas
-            quidem tenetur in officia quae sequi suscipit aliquam neque ab!
-            Magni aperiam exercitationem tempora assumenda hic reprehenderit
-            aliquid nulla perspiciatis cum nam atque sint temporibus inventore
-            tempore, minima libero voluptatum rem accusantium ad sunt! Voluptas
-            ex nostrum cumque suscipit odio? Necessitatibus blanditiis corrupti
-            ipsam autem libero aut fugiat illo repellat amet minus! Doloribus
-            doloremque autem, provident ad facilis dolorem. Officia suscipit quo
-            repellendus voluptatibus id sunt nemo cumque libero quam dolorem
-            dolor veniam assumenda modi, alias perspiciatis eveniet voluptates.
-            Quasi laboriosam quis quia consequuntur, fugit cum voluptatem itaque
-            et hic nobis!
+            <span className="italic">Determination</span> and{' '}
+            <span className="italic">resilience</span> define my approach to
+            life. I’m not afraid to take risks or tackle challenges{' '}
+            <span className="italic">head-on</span>. I value{' '}
+            <span className="italic">hard work</span>, both physically and
+            mentally, and strive to be someone who doesn’t settle for
+            mediocrity. Through my journey in{' '}
+            <span className="italic">calisthenics</span>,{' '}
+            <span className="italic">entrepreneurship</span>, and{' '}
+            <span className="italic">web development</span>, I’ve learned to
+            embrace failure as a lesson and keep moving forward. My commitment
+            to <span className="italic">self-improvement</span> drives me to
+            constantly evolve, learn, and grow, ensuring that I can contribute
+            positively to both my personal and professional communities.
           </p>
         </div>
         <div className="space-y-5">
@@ -44,18 +46,22 @@ const Goals = () => {
             Goals for 2025
           </h2>
           <p className="font-semibold tracking-widest">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Id, magnam
-            rem error inventore eius nihil, laudantium nulla dolorem
-            necessitatibus debitis ullam veniam iusto in velit dolore vel! Esse
-            rem molestiae quisquam aspernatur enim impedit. Accusamus voluptatem
-            aperiam ullam, esse error aliquid doloribus fugiat eum dicta,
-            excepturi, aliquam odio! Consequatur, explicabo culpa. Quibusdam,
-            eveniet? Commodi dignissimos nesciunt veritatis facilis dolore est
-            eligendi cupiditate laudantium eos, ad odio eaque id perferendis
-            fugit iure voluptates molestiae deserunt ullam? Doloribus incidunt
-            aspernatur aliquam cumque dolorem aperiam consectetur animi
-            veritatis ducimus maiores, nostrum accusantium quia, tempora libero,
-            laboriosam quasi harum? Asperiores ipsum nam rerum quis.
+            In 2025, my primary focus is on{' '}
+            <span className="italic">personal</span> and{' '}
+            <span className="italic">professional growth</span>. I aim to deepen
+            my <span className="italic">web development skills</span> while
+            building a business that empowers others. I want to create a
+            platform to celebrate unsung heroes—those who risk their lives in
+            physically demanding jobs like{' '}
+            <span className="italic">firefighters</span>,{' '}
+            <span className="italic">soldiers</span>, and{' '}
+            <span className="italic">construction workers</span>. My goal is
+            also to change how society views{' '}
+            <span className="italic">sports</span> and athletes, promoting it as
+            a viable career path. Through these endeavors, I hope to contribute
+            to a world where <span className="italic">financial stress</span>{' '}
+            doesn't dictate people's lives, allowing them to live freely and
+            pursue their passions.
           </p>
         </div>
       </div>
