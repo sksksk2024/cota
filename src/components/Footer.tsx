@@ -3,7 +3,8 @@
 import Image from 'next/image';
 import phone from './../images/icon-phone.svg';
 import email from './../images/icon-email.svg';
-import { useThemeStore } from './store/useThemeStore';
+import { useThemeStore } from './hooks/useThemeStore';
+import { useCopyToClipboard } from './hooks/useCopyToClipboard';
 import Insta from './utils/Insta';
 import LinkedIn from './utils/LinkedIn';
 import GitHub from './utils/Github';
@@ -14,6 +15,7 @@ import Phone from './utils/Phone';
 
 const Footer = () => {
   const { theme } = useThemeStore();
+  const { copy, copied } = useCopyToClipboard();
 
   return (
     <footer
@@ -32,18 +34,32 @@ const Footer = () => {
         className={`flex flex-col justify-center items-center gap-5 md:flex-row md:gap-12
         `}
       >
-        <div
-          className={`text-xl font-bold flex justify-start items-center gap-2
-          ${theme === 'theme1' ? 'text-white' : 'text-textis'}
+        <button
+          onClick={() => copy('+40770753746')}
+          className={`text-xl font-bold flex justify-start items-center gap-2 cursor-pointer 
+          ${
+            theme === 'theme1'
+              ? 'text-white hover:text-warning'
+              : 'text-textis hover:text-highlight'
+          }
           `}
         >
           <Phone />
           +40-770-753-746 {/* Business Number */}
-        </div>
-        <div className="text-xl font-bold flex justify-start items-center gap-2">
+        </button>
+        <button
+          onClick={() => copy('cota8091@gmail.com')}
+          className={`text-xl font-bold flex justify-start items-center gap-2 cursor-pointer
+            ${
+              theme === 'theme1'
+                ? 'text-white hover:text-warning'
+                : 'text-textis hover:text-highlight'
+            }
+            `}
+        >
           <Email />
           cota8091@gmail.com {/* Business Email */}
-        </div>
+        </button>
       </div>
 
       <div className="flex flex-col justify-center items-center gap-12 md:flex-row -mb-320M">

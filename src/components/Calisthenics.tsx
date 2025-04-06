@@ -2,7 +2,7 @@
 
 import Image from 'next/image';
 import logo from './../app/favicon.ico';
-import { useThemeStore } from './store/useThemeStore';
+import { useThemeStore } from './hooks/useThemeStore';
 
 const Calithenics = () => {
   const { theme } = useThemeStore();

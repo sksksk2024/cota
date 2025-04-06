@@ -4,7 +4,7 @@ import logo from './../app/favicon.ico';
 import Info from '@/components/Info';
 import Header from '@/components/Header';
 import Working from '@/components/Working';
-import { useThemeStore } from '@/components/store/useThemeStore';
+import { useThemeStore } from '@/components/hooks/useThemeStore';
 import Guide from '@/components/Guide';
 import Image from 'next/image';
 

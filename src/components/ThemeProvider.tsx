@@ -1,6 +1,6 @@
 'use client';
 
-import { useThemeStore } from '@/components/store/useThemeStore';
+import { useThemeStore } from '@/components/hooks/useThemeStore';
 
 export default function ThemeProvider({
   children,

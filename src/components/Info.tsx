@@ -1,13 +1,14 @@
 'use client';
 
 import Image from 'next/image';
-import logo from './../app/favicon.ico';
+import arrow from './../images/icon-arrow.svg';
 import { useState } from 'react';
-import { useThemeStore } from './store/useThemeStore';
+import { useThemeStore } from './hooks/useThemeStore';
 import About from './About';
 import Goals from './Goals';
 import Calithenics from './Calisthenics';
 import Footer from './Footer';
+import Arrow from './utils/Arrow';
 
 const Info = () => {
   const { theme } = useThemeStore();
@@ -28,24 +29,53 @@ const Info = () => {
         }
         `}
       >
-        <div className="relative flex flex-col justify-start items-start text-center w-full xl:text-start xl:h-800H">
+        <div className="relative flex flex-col justify-start items-start text-center w-full xl:top-48I xl:text-start xl:h-880H">
           <div className="flex justify-around items-center pt-48P w-full max-w-container-1000 mx-auto xl:max-w-container-1440 xl:h-600H">
             {goals === false ? <About /> : <Goals />}
           </div>
           {/* toggle 2 sections with button and transition */}
-          <button
-            type="button"
-            className="mx-auto bg-black text-3xl text-white my-64M cursor-pointer xl:hidden"
+          <div
+            className="relative top-48I mx-auto text-xl my-64M xl:hidden"
             onClick={handleToggle}
           >
-            Next section
-          </button>
+            <button
+              type="button"
+              className={`cursor-pointer px-16P pr-64P py-8P rounded-5BR font-bold tracking-wide
+              ${
+                theme === 'theme1'
+                  ? 'text-white bg-green-dark hover:text-background-dark hover:bg-warning'
+                  : ' bg-green-light text-background-dark hover:text-cyan-dark hover:bg-highlight'
+              }
+              `}
+            >
+              Next section
+            </button>
+            <div className="absolute left-176I bottom-[1px]">
+              <Arrow />
+            </div>
+          </div>
 
           <div className="flex justify-around items-center pt-48P w-full max-w-container-1000 mx-auto xl:max-w-container-1440 xl:h-600H">
-            <div className="relative -left-32I hidden xl:block text-3xl text-white my-64M cursor-pointer xl:w-1/2 xl:max-w-container-1000">
-              <button type="button" className="bg-black" onClick={handleToggle}>
+            <div
+              className={`relative -left-32I hidden flex justify-center items-center text-xl text-white my-64M cursor-pointer xl:block xl:w-1/2 xl:max-w-container-1000
+              `}
+              onClick={handleToggle}
+            >
+              <button
+                type="button"
+                className={`px-16P pr-64P py-8P rounded-5BR cursor-pointer font-bold tracking-wide
+                  ${
+                    theme === 'theme1'
+                      ? 'text-white bg-green-dark hover:text-background-dark hover:bg-warning'
+                      : ' bg-green-light text-background-dark hover:text-cyan-dark hover:bg-highlight'
+                  }
+                  `}
+              >
                 Next section
               </button>
+              <div className="absolute left-176I bottom-[1px]">
+                <Arrow />
+              </div>
             </div>
             <div className="hidden xl:block opacity-0">hello</div>
           </div>

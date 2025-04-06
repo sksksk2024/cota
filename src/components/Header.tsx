@@ -5,7 +5,7 @@ import logo from './../app/favicon.ico';
 import moon from './../images/icon-moon.svg';
 import sun from './../images/icon-sun.svg';
 import Image from 'next/image';
-import { useThemeStore } from './store/useThemeStore';
+import { useThemeStore } from './hooks/useThemeStore';
 import Sun from './utils/Sun';
 import Moon from './utils/Moon';
 
@@ -50,7 +50,7 @@ const Header = () => {
         {theme === 'theme1' ? (
           <Sun
             onClick={toggleTheme}
-            className="hidden min-w-container-48 w-64W h-64H cursor-pointer fill-white text-white hover:text-yellow-300 hover:fill-yellow-300 transition-colors duration-300 md:block"
+            className="hidden min-w-container-48 w-64W h-64H cursor-pointer fill-white text-white hover:text-warning hover:fill-warning transition-colors duration-300 md:block"
           />
         ) : (
           <Moon

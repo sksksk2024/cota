@@ -1,12 +1,14 @@
 'use client';
 
 import { motion, Variants } from 'framer-motion';
-import { useThemeStore } from '../store/useThemeStore';
+import { useThemeStore } from '../hooks/useThemeStore';
 
 type AnimatedSVGProps = {
   pathData: string;
   label: string;
   onClick?: () => void;
+  height: number;
+  width: number;
 };
 
 const svgVariants: Variants = {
@@ -34,23 +36,29 @@ const pathVariants = {
   },
 };
 
-const AnimatedSVG: React.FC<AnimatedSVGProps> = ({ pathData, label }) => {
+const AnimatedSVG: React.FC<AnimatedSVGProps> = ({
+  pathData,
+  label,
+  width = 24,
+  height = 24,
+}) => {
   const { theme } = useThemeStore();
 
   return (
     <div className="group cursor-pointer" aria-label={label} role="button">
       <motion.svg
         xmlns="http://www.w3.org/2000/svg"
-        width="24"
-        height="24"
+        width={width}
+        height={height}
+        viewBox="0 0 24 24"
         className={`transition duration-300
           ${
             theme === 'theme1'
-              ? 'fill-white group-hover:fill-cyan-500'
+              ? 'fill-white group-hover:fill-warning'
               : 'fill-black group-hover:fill-highlight'
           }
           `}
-        variants={svgVariants}
+        // variants={svgVariants}
         initial="hidden"
         animate="visible"
       >

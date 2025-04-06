@@ -2,7 +2,7 @@
 
 import Image from 'next/image';
 import logo from './../app/favicon.ico';
-import { useThemeStore } from './store/useThemeStore';
+import { useThemeStore } from './hooks/useThemeStore';
 
 const About = () => {
   const { theme } = useThemeStore();
@@ -46,8 +46,11 @@ const About = () => {
           ut quis iure consequatur quaerat eum laudantium? Fuga quas modi animi
           sit aliquid.
         </p>
+        <div className="relative translate-y-1/4 w-full xl:hidden">
+          <Image src={logo} className="mx-auto w-auto" alt="me pro" />
+        </div>
       </div>
-      <div className="relative translate-y-1/2">
+      <div className="hidden relative translate-y-1/2 xl:block">
         <Image src={logo} className="w-full" alt="me pro" />
       </div>
     </>

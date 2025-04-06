@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { useThemeStore } from './store/useThemeStore';
+import { useThemeStore } from './hooks/useThemeStore';
 
 const Guide = () => {
   const { theme } = useThemeStore();
@@ -39,8 +39,12 @@ const Guide = () => {
           <li
             key={label}
             onClick={() => scrollTo(label.toLowerCase())}
-            className={`border border-2 border-green-dark p-8P rounded-5BR cursor-pointer hover:opacity-80
-        ${theme === 'theme1' ? ' bg-green-dark' : ' bg-background-dark'}
+            className={`px-16P py-8P rounded-5BR cursor-pointer font-bold tracking-wide
+        ${
+          theme === 'theme1'
+            ? 'text-white bg-green-dark hover:text-background-dark hover:bg-warning'
+            : ' bg-green-light text-background-dark hover:text-cyan-dark hover:bg-highlight'
+        }
         `}
           >
             {label}
