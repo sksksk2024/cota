@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from 'react';
 import { useThemeStore } from './hooks/useThemeStore';
-import SideNavbar from './SideNavbar';
 import BurgerMenu from './utils/BurgerMenu';
 import XMenu from './utils/XMenu';
 

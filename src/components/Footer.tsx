@@ -20,7 +20,7 @@ import Newsletter from './utils/Newsletter';
 const Footer = () => {
   const { theme } = useThemeStore();
   const { copy, copied } = useCopyToClipboard();
-  const [isSignedUp, setSignedUp] = useState<boolean>(false);
+  const [isSignedUp, setSignedUp] = useState<boolean>(true);
 
   return (
     <footer
