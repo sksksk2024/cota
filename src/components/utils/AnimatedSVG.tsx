@@ -2,13 +2,20 @@
 
 import { motion, Variants } from 'framer-motion';
 import { useThemeStore } from '../hooks/useThemeStore';
+import { ReactNode } from 'react';
 
 type AnimatedSVGProps = {
   pathData: string;
   label: string;
   onClick?: () => void;
-  height: number;
-  width: number;
+  height?: number;
+  width?: number;
+  className?: string;
+  strokeWidth?: number;
+  viewBox?: string;
+  children?: ReactNode;
+  stroke?: string;
+  fill?: string;
 };
 
 const svgVariants: Variants = {
@@ -30,7 +37,7 @@ const pathVariants = {
     opacity: 1,
     pathLength: 1,
     transition: {
-      duration: 2,
+      duration: 1,
       ease: 'easeInOut',
     },
   },
@@ -41,6 +48,13 @@ const AnimatedSVG: React.FC<AnimatedSVGProps> = ({
   label,
   width = 24,
   height = 24,
+  strokeWidth = 2,
+  viewBox,
+  className = '',
+  children,
+  onClick,
+  stroke,
+  fill,
 }) => {
   const { theme } = useThemeStore();
 
@@ -50,8 +64,11 @@ const AnimatedSVG: React.FC<AnimatedSVGProps> = ({
         xmlns="http://www.w3.org/2000/svg"
         width={width}
         height={height}
-        viewBox="0 0 24 24"
-        className={`transition duration-300
+        viewBox={viewBox || '0 0 24 24'}
+        stroke={stroke}
+        strokeWidth={strokeWidth}
+        fill="currentColor"
+        className={`${className} transition duration-0
           ${
             theme === 'theme1'
               ? 'fill-white group-hover:fill-warning'

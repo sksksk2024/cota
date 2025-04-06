@@ -30,7 +30,7 @@ const Header = () => {
           {theme === 'theme1' ? (
             <Sun
               onClick={toggleTheme}
-              className="min-w-container-48 w-64W h-64H cursor-pointer fill-white text-white hover:text-yellow-300 hover:fill-yellow-300 transition-colors duration-300 md:hidden"
+              className="min-w-container-48 w-64W h-64H cursor-pointer fill-white text-white hover:text-warning hover:fill-warning transition-colors duration-300 md:hidden"
             />
           ) : (
             <Moon

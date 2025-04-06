@@ -1,7 +1,5 @@
 'use client';
 
-import Image from 'next/image';
-import arrow from './../images/icon-arrow.svg';
 import { useState } from 'react';
 import { useThemeStore } from './hooks/useThemeStore';
 import About from './About';
@@ -13,7 +11,9 @@ import Arrow from './utils/Arrow';
 const Info = () => {
   const { theme } = useThemeStore();
 
-  const [goals, setGoals] = useState(false);
+  const [goals, setGoals] = useState<boolean>(false);
+
+  const [isSignedUp, setIsSignedUp] = useState<boolean>(false);
 
   // Handle Toggle Between About Me and Goals
   const handleToggle = () => {
@@ -81,18 +81,37 @@ const Info = () => {
           </div>
         </div>
         <Calithenics />
-        <div
-          className={`z-10 relative -top-64I pt-144P w-full h-500H
+        {!isSignedUp ? (
+          <>
+            <div
+              className={`z-10 relative -top-64I pt-144P w-full h-500H
           ${theme === 'theme1' ? 'bg-background-dark' : 'bg-cyan-dark'}
           `}
-        >
-          <Footer />
-        </div>
-        <div
-          className={`z-0 absolute -bottom-208I h-272H md:-bottom-80I md:h-400H w-full
+            >
+              <Footer />
+            </div>
+            <div
+              className={`z-0 absolute -bottom-208I h-272H md:-bottom-80I md:h-400H w-full
           ${theme === 'theme1' ? 'bg-background-dark' : 'bg-cyan-dark'}
           `}
-        ></div>
+            ></div>
+          </>
+        ) : (
+          <>
+            <div
+              className={`z-10 relative -top-64I pt-144P w-full h-848H md:h-640H
+            ${theme === 'theme1' ? 'bg-background-dark' : 'bg-cyan-dark'}
+            `}
+            >
+              <Footer />
+            </div>
+            <div
+              className={`z-0 absolute -bottom-208I h-272H md:-bottom-80I lg:-bottom-320I md:h-400H lg:h-600H w-full
+            ${theme === 'theme1' ? 'bg-background-dark' : 'bg-cyan-dark'}
+            `}
+            ></div>
+          </>
+        )}
       </main>
     </>
   );

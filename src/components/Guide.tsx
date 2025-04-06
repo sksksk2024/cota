@@ -2,10 +2,15 @@
 
 import { useEffect, useState } from 'react';
 import { useThemeStore } from './hooks/useThemeStore';
+import SideNavbar from './SideNavbar';
+import BurgerMenu from './utils/BurgerMenu';
+import XMenu from './utils/XMenu';
 
 const Guide = () => {
   const { theme } = useThemeStore();
   const [scrolled, setScrolled] = useState(false);
+
+  const [openSideBar, setOpenSideBar] = useState<boolean>(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -22,6 +27,10 @@ const Guide = () => {
     if (el) el.scrollIntoView({ behavior: 'smooth' });
   };
 
+  const handleToggleSideBar = () => {
+    setOpenSideBar(!openSideBar);
+  };
+
   return (
     <>
       <div
@@ -35,21 +44,49 @@ const Guide = () => {
     ${theme === 'theme1' ? 'bg-background-dark/50' : 'bg-cyan-dark/50'}
     `}
       >
-        {['Intro', 'About', 'Contact'].map((label) => (
-          <li
-            key={label}
-            onClick={() => scrollTo(label.toLowerCase())}
-            className={`px-16P py-8P rounded-5BR cursor-pointer font-bold tracking-wide
-        ${
-          theme === 'theme1'
-            ? 'text-white bg-green-dark hover:text-background-dark hover:bg-warning'
-            : ' bg-green-light text-background-dark hover:text-cyan-dark hover:bg-highlight'
-        }
-        `}
-          >
-            {label}
-          </li>
-        ))}
+        {openSideBar ? (
+          <>
+            <div onClick={handleToggleSideBar}>
+              <XMenu />
+            </div>
+            {['Sign Up', 'Sign In', 'Sign Out', 'Edit Profile'].map((label) => (
+              <li
+                key={label}
+                onClick={() => scrollTo(label.toLowerCase())}
+                className={`px-16P py-8P rounded-5BR cursor-pointer font-bold tracking-wide
+          ${
+            theme === 'theme1'
+              ? 'text-white bg-green-dark hover:text-background-dark hover:bg-warning'
+              : ' bg-green-light text-background-dark hover:text-cyan-dark hover:bg-highlight'
+          }
+          `}
+              >
+                {label}
+              </li>
+            ))}
+          </>
+        ) : (
+          <>
+            <div onClick={handleToggleSideBar}>
+              <BurgerMenu />
+            </div>
+            {['Intro', 'About', 'Explore'].map((label) => (
+              <li
+                key={label}
+                onClick={() => scrollTo(label.toLowerCase())}
+                className={`px-16P py-8P rounded-5BR cursor-pointer font-bold tracking-wide
+          ${
+            theme === 'theme1'
+              ? 'text-white bg-green-dark hover:text-background-dark hover:bg-warning'
+              : ' bg-green-light text-background-dark hover:text-cyan-dark hover:bg-highlight'
+          }
+          `}
+              >
+                {label}
+              </li>
+            ))}
+          </>
+        )}
       </ul>
     </>
   );
