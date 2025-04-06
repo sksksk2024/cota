@@ -16,16 +16,17 @@ import Live from './utils/Live';
 import Tutorials from './utils/Tutorials';
 import Donations from './utils/Donations';
 import Newsletter from './utils/Newsletter';
+import WingsLogo from './utils/WingsLogo';
 
 const Footer = () => {
   const { theme } = useThemeStore();
   const { copy, copied } = useCopyToClipboard();
-  const [isSignedUp, setSignedUp] = useState<boolean>(true);
+  const [isSignedUp, setSignedUp] = useState<boolean>(false);
 
   return (
     <footer
       id="explore"
-      className={`z-10 flex flex-col justify-center items-center p-64P pb-0
+      className={`z-10 flex flex-col justify-center items-center py-64P sm:px-64P pb-0
         ${theme === 'theme1' ? 'text-white' : 'text-textis'}
         ${!isSignedUp ? 'gap-20' : 'gap-4'}
     `}
@@ -128,57 +129,64 @@ ${theme === 'theme1' ? 'text-white' : 'text-textis'}
               More To Do
             </h2>
 
-            <div className="flex flex-wrap justify-center items-center gap-10">
+            <div className="flex flex-col justify-center items-center gap-10 lg:flex-row">
               {/* LINKS A BIT ROTATED WHEN HOVERED */}
-              <Link
-                target="_blank"
-                href="https://www.instagram.com/alextvop2016"
-                passHref
-              >
-                <Blog />
-              </Link>
-              <Link
-                target="_blank"
-                href="https://github.com/sksksk2024"
-                passHref
-              >
-                <Games />
-              </Link>
-              <Link
-                target="_blank"
-                href="https://www.linkedin.com/in/alexandru-co%C8%9Ba-34567b354/"
-                passHref
-              >
-                <Live />
-              </Link>
-              <Link
-                target="_blank"
-                href="https://www.frontendmentor.io/profile/sksksk2024"
-                passHref
-              >
-                <Tutorials />
-              </Link>
-              <Link
-                target="_blank"
-                href="https://www.frontendmentor.io/profile/sksksk2024"
-                passHref
-              >
-                <Donations />
-              </Link>
-              <Link
-                target="_blank"
-                href="https://www.frontendmentor.io/profile/sksksk2024"
-                passHref
-              >
-                Wings
-              </Link>
-              <Link
-                target="_blank"
-                href="https://www.frontendmentor.io/profile/sksksk2024"
-                passHref
-              >
-                <Newsletter />
-              </Link>
+              <div className="flex justify-center items-center gap-5 sm:gap-10">
+                <Link
+                  target="_blank"
+                  href="https://www.instagram.com/alextvop2016"
+                  passHref
+                >
+                  <Blog />
+                </Link>
+                <Link
+                  target="_blank"
+                  href="https://github.com/sksksk2024"
+                  passHref
+                >
+                  <Games />
+                </Link>
+                <Link
+                  target="_blank"
+                  href="https://www.linkedin.com/in/alexandru-co%C8%9Ba-34567b354/"
+                  passHref
+                >
+                  <Live />
+                </Link>
+                <Link
+                  target="_blank"
+                  href="https://www.frontendmentor.io/profile/sksksk2024"
+                  passHref
+                >
+                  <Tutorials />
+                </Link>
+              </div>
+              <div className="flex justify-center items-center gap-5 sm:gap-10">
+                <Link
+                  target="_blank"
+                  href="https://www.frontendmentor.io/profile/sksksk2024"
+                  passHref
+                >
+                  <Donations />
+                </Link>
+                <div className="relative flex justify-center items-center m-auto w-48W h-48H">
+                  <Link
+                    target="_blank"
+                    className="absolute top-16I"
+                    href="https://www.frontendmentor.io/profile/sksksk2024"
+                    passHref
+                  >
+                    <WingsLogo />
+                  </Link>
+                </div>
+                <Link
+                  target="_blank"
+                  href="https://www.frontendmentor.io/profile/sksksk2024"
+                  passHref
+                >
+                  <Newsletter />
+                </Link>
+              </div>
             </div>
           </div>
 
