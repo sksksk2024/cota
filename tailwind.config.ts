@@ -223,7 +223,8 @@ module.exports = {
         '496W': '31rem',
         '600W': '37.5rem',
         '736W': '46rem',
-        '800W': '50rem',
+        '800W': '90rem',
+        // '800W': '50rem',
         '936W': '58.5rem',
         logo: '7.8125rem',
         how: '11.375rem',
@@ -309,6 +310,7 @@ module.exports = {
         '832H': '52rem',
         '848H': '53rem',
         '864H': '54rem',
+        '880H': '55rem',
       },
       screens: {
         '3xs': '0px',

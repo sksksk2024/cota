@@ -28,18 +28,27 @@ const Info = () => {
         }
         `}
       >
-        <div className="relative flex flex-col justify-start items-start w-full h-800H">
-          <div className="flex justify-around items-center pt-48P w-full h-600H">
+        <div className="relative flex flex-col justify-start items-start text-center w-full xl:text-start xl:h-800H">
+          <div className="flex justify-around items-center pt-48P w-full max-w-container-1000 mx-auto xl:max-w-container-1440 xl:h-600H">
             {goals === false ? <About /> : <Goals />}
           </div>
           {/* toggle 2 sections with button and transition */}
           <button
             type="button"
-            className="relative top-48I bg-black text-3xl text-white translate-x-2/3 my-64M cursor-pointer"
+            className="mx-auto bg-black text-3xl text-white my-64M cursor-pointer xl:hidden"
             onClick={handleToggle}
           >
             Next section
           </button>
+
+          <div className="flex justify-around items-center pt-48P w-full max-w-container-1000 mx-auto xl:max-w-container-1440 xl:h-600H">
+            <div className="relative -left-32I hidden xl:block text-3xl text-white my-64M cursor-pointer xl:w-1/2 xl:max-w-container-1000">
+              <button type="button" className="bg-black" onClick={handleToggle}>
+                Next section
+              </button>
+            </div>
+            <div className="hidden xl:block opacity-0">hello</div>
+          </div>
         </div>
         <Calithenics />
         <div

@@ -36,7 +36,11 @@ const Home = () => {
             ${theme === 'theme1' ? 'bg-background-dark' : 'bg-cyan-dark'}
             `}
       >
-        <Image src={logo} className="relative bottom-80I w-192W" alt="logo" />
+        <Image
+          src={logo}
+          className="relative bottom-80I w-96W md:w-144W"
+          alt="logo"
+        />
       </div>
     </section>
   );

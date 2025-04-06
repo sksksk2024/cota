@@ -11,12 +11,12 @@ const About = () => {
     <>
       {/* Adding a div as the parking spot for the sticky nav */}
       <div
-        className={`flex flex-col justify-start items-start gap-10 max-w-1/2
+        className={`flex flex-col justify-start items-start gap-10 px-32P xl:px-0 xl:max-w-1/2
             ${theme === 'theme1' ? 'text-white' : 'text-textis'}
             `}
       >
         <h2
-          className={`text-2xl text-start font-bold
+          className={`text-2xl text-center font-bold mx-auto xl:text-start xl:mx-0
             `}
         >
           About Me and What I Do?

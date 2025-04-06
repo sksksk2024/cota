@@ -8,15 +8,15 @@ const Goals = () => {
   const { theme } = useThemeStore();
 
   return (
-    <div className="flex justify-around items-center">
+    <div className="flex flex-col justify-around items-center xl:flex-row">
       <div
-        className={`flex flex-col justify-start items-start gap-10 max-w-1/2
+        className={`flex flex-col justify-start items-start gap-10 px-32P xl:px-0 xl:max-w-1/2
             ${theme === 'theme1' ? 'text-white' : 'text-textis'}
             `}
       >
         <div className="space-y-5">
           <h2
-            className={`text-2xl text-start font-bold
+            className={`text-2xl text-center font-bold xl:text-start
             `}
           >
             Qualities
@@ -38,7 +38,7 @@ const Goals = () => {
         </div>
         <div className="space-y-5">
           <h2
-            className={`text-2xl text-start font-bold
+            className={`text-2xl text-center font-bold xl:text-start
             `}
           >
             Goals for 2025
