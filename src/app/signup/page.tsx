@@ -172,7 +172,7 @@ const SignUp = () => {
         </div>
 
         <p
-          className={`text-sm text-center font-bold ${
+          className={`flex flex-col justify-center items-center xs:block text-sm text-center font-bold ${
             theme === 'theme1' ? 'text-white' : 'text-textis'
           }`}
         >
