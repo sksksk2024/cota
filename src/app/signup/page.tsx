@@ -2,14 +2,19 @@
 
 import { useThemeStore } from '@/components/hooks/useThemeStore';
 import Link from 'next/link';
-import React from 'react';
+import { useState } from 'react';
 import GitHubIcon from '@/components/svgs/github.svg';
 import GoogleIcon from '@/components/svgs/google.svg';
 import InstaIcon from '@/components/svgs/instagram.svg';
-import FacebookIcon from '@/components/svgs/facebook.svg';
+import LinkedInIcon from '@/components/svgs/linkedin.svg';
+import OpenEye from '@/components/svgs/openEye.svg';
+import CloseEye from '@/components/svgs/closeEye.svg';
+import { button } from 'framer-motion/client';
 
 const signup = () => {
   const { theme } = useThemeStore();
+
+  const [showPassword, setShowPassword] = useState(false);
 
   return (
     <main
@@ -60,16 +65,46 @@ const signup = () => {
           />
         </label>
 
-        <label className={`w-full`} htmlFor="password">
+        <label className={`relative group w-full`} htmlFor="password">
           <input
             className={`outline-none text-textis text-center font-bold px-32P py-8P rounded-5BR bg-snow-gray border-none w-full shadow-soft-cyan focus:shadow-hover-cyan placeholder:text-gray-400 placeholder:opacity-90 focus:outline-none focus:ring-0 focus:border-transparent hover:placeholder:text-gray-900
               ${theme === 'theme1' ? 'hover:bg-warning' : 'hover:bg-highlight'}
               `}
             id="password"
             name="password"
-            type="password"
+            type={`${showPassword ? 'text' : 'password'}`}
             placeholder="Add Your Password"
           />
+          {!showPassword ? (
+            <button
+              type="button"
+              aria-label="Show Password"
+              className={`absolute top-1 right-1 flex justify-center items-center gap-2 font-bold text-lg text-center font-bold rounded-5BR ring-none border-none w-32W tracking-0.1 shadow-soft-cyan cursor-pointer
+            ${
+              theme === 'theme1'
+                ? 'bg-snow-gray hover:text-background-dark group-hover:bg-warning'
+                : ' bg-green-light text-background-dark hover:text-cyan-dark hover:bg-highlight'
+            }`}
+              typeof="button"
+              onClick={() => setShowPassword(true)}
+            >
+              <OpenEye />
+            </button>
+          ) : (
+            <button
+              type="button"
+              aria-label="Hide Password"
+              className={`absolute top-1 right-1 flex justify-center items-center gap-2 font-bold text-lg text-center font-bold rounded-5BR ring-none border-none w-32W tracking-0.1 shadow-soft-cyan cursor-pointer
+            ${
+              theme === 'theme1'
+                ? 'bg-snow-gray hover:text-background-dark group-hover:bg-warning'
+                : ' bg-green-light text-background-dark hover:text-cyan-dark hover:bg-highlight'
+            }`}
+              onClick={() => setShowPassword(false)}
+            >
+              <CloseEye />
+            </button>
+          )}
         </label>
 
         {/* DIVIDER */}
@@ -130,8 +165,8 @@ const signup = () => {
             }
             `}
           >
-            <FacebookIcon className="w-6 h-6 text-white hover:text-cyan-400 transition stroke-current stroke-2" />
-            Facebook
+            <LinkedInIcon className="w-6 h-6 text-white hover:text-cyan-400 transition stroke-current stroke-2" />
+            LinkedIn
           </button>
         </div>
       </form>
