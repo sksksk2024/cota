@@ -28,7 +28,7 @@ const Home = () => {
           {/* Bottom gradient background for header effect */}
           <div
             className={`z-0 relative bottom-80I h-auto w-full backdrop-blur-md -mb-160M
-            ${theme === 'theme1' ? 'bg-deep-dark-transition' : 'bg-deep-dark'}
+            ${theme === 'theme1' ? 'bg-deep-dark' : 'bg-deep-dark'}
           `}
           >
             <Info />

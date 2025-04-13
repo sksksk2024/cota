@@ -24,9 +24,7 @@ const Info = () => {
     <>
       <main
         className={`relative flex flex-col justify-around items-center w-full pt-128P
-        ${
-          theme === 'theme1' ? 'bg-deep-dark-transition' : 'bg-green-cyan-light'
-        }
+        ${theme === 'theme1' ? 'bg-deep-dark' : 'bg-green-cyan-light'}
         `}
       >
         <div className="relative flex flex-col justify-start items-start text-center w-full xl:top-48I xl:text-start xl:h-880H">
