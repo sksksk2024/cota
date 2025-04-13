@@ -5,7 +5,7 @@ import { useThemeStore } from './hooks/useThemeStore';
 import BurgerMenu from './utils/BurgerMenu';
 import XMenu from './utils/XMenu';
 import Link from 'next/link';
-import { li } from 'framer-motion/client';
+import { button, li } from 'framer-motion/client';
 
 const Guide = () => {
   const { theme } = useThemeStore();
@@ -53,20 +53,26 @@ const Guide = () => {
             {['Sign Up', 'Sign In', 'Sign Out', 'Edit Profile'].map((label) => (
               <li
                 className={`rounded-5BR cursor-pointer font-bold tracking-wide
-                ${
-                  theme === 'theme1'
-                    ? 'text-white bg-green-dark hover:text-background-dark hover:bg-warning'
-                    : 'bg-green-light text-background-dark hover:text-cyan-dark hover:bg-highlight'
-                }
-              `}
+                  ${
+                    theme === 'theme1'
+                      ? 'text-white bg-green-dark hover:text-background-dark hover:bg-warning'
+                      : 'bg-green-light text-background-dark hover:text-cyan-dark hover:bg-highlight'
+                  }
+                `}
                 key={label}
               >
-                <Link
-                  className="px-16P py-8P w-full h-full flex items-center justify-center"
-                  href={`/${label.toLowerCase().replace(/\s+/g, '')}`}
-                >
-                  {label}
-                </Link>
+                {label !== 'Sign Out' ? (
+                  <Link
+                    className="px-16P py-8P w-full h-full flex items-center justify-center"
+                    href={`/${label.toLowerCase().replace(/\s+/g, '')}`}
+                  >
+                    {label}
+                  </Link>
+                ) : (
+                  <button className="px-16P py-8P w-full h-full flex items-center justify-center cursor-pointer">
+                    {label}
+                  </button>
+                )}
               </li>
             ))}
           </>

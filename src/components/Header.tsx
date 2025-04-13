@@ -32,7 +32,7 @@ const Header = () => {
           ) : (
             <Moon
               onClick={toggleTheme}
-              className="min-w-container-48 w-64W h-64H cursor-pointer fill-textis hover:fill-yellow-400 transition-colors duration-300 md:hidden"
+              className="min-w-container-48 w-64W h-64H cursor-pointer fill-textis hover:fill-highlight transition-colors duration-300 md:hidden"
             />
           )}
         </div>
@@ -52,7 +52,7 @@ const Header = () => {
         ) : (
           <Moon
             onClick={toggleTheme}
-            className="hidden min-w-container-48 w-64W h-64H cursor-pointer fill-textis hover:fill-yellow-400 transition-colors duration-300 md:block"
+            className="hidden min-w-container-48 w-64W h-64H cursor-pointer fill-textis hover:fill-highlight transition-colors duration-300 md:block"
           />
         )}
       </div>

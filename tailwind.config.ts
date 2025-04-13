@@ -143,7 +143,8 @@ module.exports = {
         'green-dark': '#00A656',
         'background-dark': '#0A192F',
         'background-light': '#F5F7FA',
-        highlight: '#F4D06F',
+        highlight: '#E0F7F7',
+        // highlight: '#F4D06F',
         warning: '#FF8243',
         textis: '#000',
         'snow-gray': '#F1F3F2',
@@ -199,6 +200,7 @@ module.exports = {
         '24W': '1.5rem',
         '28-8W': '1.8rem',
         '32W': '2rem',
+        '40W': '2.5rem',
         '48W': '3rem',
         '64W': '4rem',
         '80W': '5rem',
@@ -498,6 +500,7 @@ module.exports = {
       boxShadow: {
         'deep-green': '0 10px 30px rgba(27, 59, 54, 0.15)',
         'soft-cyan': '0 2px 8px rgba(0, 184, 169, 0.15)',
+        'soft-cyan-light': '0 0 0.25rem 0.15rem rgba(0, 179, 179, 0.4)',
         'hover-cyan': '0 4px 12px rgba(0, 184, 169, 0.2)',
       },
       userSelect: {
