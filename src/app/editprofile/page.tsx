@@ -2,15 +2,74 @@
 
 import { useThemeStore } from '@/components/hooks/useThemeStore';
 import Link from 'next/link';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
 import OpenEye from '@/components/svgs/openEye.svg';
 import CloseEye from '@/components/svgs/closeEye.svg';
+import { useUser } from '@/components/hooks/useUser';
 
 const EditProfile = () => {
+  const router = useRouter();
   const { theme } = useThemeStore();
+  const user = useUser();
 
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+
+  useEffect(() => {
+    if (user) {
+      setEmail(user.email);
+    }
+  }, [user]);
+
+  const handleDeleteUser = async () => {
+    const confirmed = confirm(
+      'Are you sure you want to delete your user? This cannot be undone.'
+    );
+    if (!confirmed) return;
+
+    const res = await fetch('/api/deleteuser', {
+      method: 'DELETE',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ userId: user?.id }),
+    });
+
+    if (res.ok) {
+      alert('User Deleted');
+      router.push('/');
+    }
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    if (password !== confirmPassword) {
+      alert('Passwords do not match');
+      return;
+    }
+
+    const res = await fetch('/api/editprofile', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        userId: user?.id,
+        email,
+        password,
+      }),
+    });
+
+    const data = await res.json();
+    if (!res.ok) {
+      alert(data.error || 'Something went wrong');
+      return;
+    }
+
+    alert('Profile Updated!');
+  };
 
   return (
     <main
@@ -29,6 +88,7 @@ const EditProfile = () => {
 
       {/* FORM */}
       <form
+        onSubmit={handleSubmit}
         className={`shadow-deep-green flex flex-col justify-center items-center gap-5 px-16P py-32P rounded-5BR w-full min-w-container-300 max-w-container-600
         caret-black md:px-32P
         ${theme === 'theme1' ? 'bg-deep-dark' : 'bg-green-cyan-light'}
@@ -37,6 +97,8 @@ const EditProfile = () => {
         {/* EDIT EMAIL */}
         <label className={`w-full`} htmlFor="email">
           <input
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
             className={`outline-none text-textis text-center font-bold px-32P py-8P rounded-5BR bg-snow-gray border-none w-full shadow-soft-cyan focus:shadow-hover-cyan placeholder:text-gray-400 placeholder:opacity-90 focus:outline-none focus:ring-0 focus:border-transparent hover:placeholder:text-gray-900
               ${theme === 'theme1' ? 'hover:bg-warning' : 'hover:bg-highlight'}
               `}
@@ -50,6 +112,8 @@ const EditProfile = () => {
         {/* EDIT PASSWORD */}
         <label className={`relative group w-full`} htmlFor="password">
           <input
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
             className={`outline-none text-textis text-center font-bold px-32P py-8P rounded-5BR bg-snow-gray border-none w-full shadow-soft-cyan focus:shadow-hover-cyan placeholder:text-gray-400 placeholder:opacity-90 focus:outline-none focus:ring-0 focus:border-transparent hover:placeholder:text-gray-900
               ${theme === 'theme1' ? 'hover:bg-warning' : 'hover:bg-highlight'}
               `}
@@ -93,6 +157,8 @@ const EditProfile = () => {
         {/* CONFIRM PASSWORD */}
         <label className={`relative group w-full`} htmlFor="confirm-password">
           <input
+            value={confirmPassword}
+            onChange={(e) => setConfirmPassword(e.target.value)}
             className={`outline-none text-textis text-center font-bold px-32P py-8P rounded-5BR bg-snow-gray border-none w-full shadow-soft-cyan focus:shadow-hover-cyan placeholder:text-gray-400 placeholder:opacity-90 focus:outline-none focus:ring-0 focus:border-transparent hover:placeholder:text-gray-900
               ${theme === 'theme1' ? 'hover:bg-warning' : 'hover:bg-highlight'}
               `}
@@ -135,6 +201,7 @@ const EditProfile = () => {
 
         {/* Edit Profile Button */}
         <button
+          type="submit"
           className={`flex justify-center items-center gap-2 font-bold text-lg text-center font-bold px-32P py-8P rounded-5BR ring-none border-none w-full tracking-0.1 shadow-soft-cyan cursor-pointer transition
             ${
               theme === 'theme1'
@@ -147,20 +214,36 @@ const EditProfile = () => {
         </button>
       </form>
 
-      {/* HOME LINK */}
-      <Link
-        className={`cursor-pointer px-16P py-8P rounded-5BR font-bold tracking-wide
+      {/* HOME LINK && DELETE LINK */}
+      <div className="flex justify-center items-center gap-5 w-full min-w-container-300 max-w-container-600">
+        <Link
+          className={`text-center w-1/2 cursor-pointer px-16P py-8P rounded-5BR font-bold tracking-wide
               ${
                 theme === 'theme1'
                   ? 'text-white bg-green-dark hover:text-background-dark hover:bg-warning'
                   : ' bg-green-light text-background-dark hover:text-cyan-dark hover:bg-highlight'
               }
               `}
-        href="/"
-        passHref
-      >
-        Go Home
-      </Link>
+          href="/"
+          passHref
+        >
+          Go Home
+        </Link>
+
+        <button
+          type="button"
+          onClick={handleDeleteUser}
+          className={`w-1/2 cursor-pointer px-16P py-8P rounded-5BR font-bold tracking-wide
+              ${
+                theme === 'theme1'
+                  ? 'text-white bg-green-dark hover:text-background-dark hover:bg-warning'
+                  : ' bg-green-light text-background-dark hover:text-cyan-dark hover:bg-highlight'
+              }
+              `}
+        >
+          Delete User
+        </button>
+      </div>
     </main>
   );
 };

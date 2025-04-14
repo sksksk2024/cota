@@ -16,7 +16,6 @@ model User {
   name           String?
   email          String?  @unique
   emailVerified  DateTime?
-  image          String?
   password       String? // For credentials-based auth
   accounts       Account[]
   sessions       Session[]

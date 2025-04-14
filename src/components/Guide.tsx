@@ -6,7 +6,6 @@ import BurgerMenu from './utils/BurgerMenu';
 import XMenu from './utils/XMenu';
 import Link from 'next/link';
 import { useUser } from './hooks/useUser';
-import { signOut } from 'next-auth/react';
 import SignOutButton from './SignOutButton';
 
 const Guide = () => {
