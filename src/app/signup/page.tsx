@@ -2,18 +2,55 @@
 
 import { useThemeStore } from '@/components/hooks/useThemeStore';
 import Link from 'next/link';
-import { useState } from 'react';
+import { FormEvent, useState } from 'react';
 import GitHubIcon from '@/components/svgs/github.svg';
 import GoogleIcon from '@/components/svgs/google.svg';
 import InstaIcon from '@/components/svgs/instagram.svg';
 import LinkedInIcon from '@/components/svgs/linkedin.svg';
 import OpenEye from '@/components/svgs/openEye.svg';
 import CloseEye from '@/components/svgs/closeEye.svg';
+import { useRouter } from 'next/navigation';
 
 const SignUp = () => {
+  const router = useRouter();
+
   const { theme } = useThemeStore();
 
   const [showPassword, setShowPassword] = useState(false);
+
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    const form = e.target as HTMLFormElement;
+    const name = (form.elements.namedItem('name') as HTMLInputElement).value;
+    const email = (form.elements.namedItem('email') as HTMLInputElement).value;
+    const password = (form.elements.namedItem('password') as HTMLInputElement)
+      .value;
+
+    const res = await fetch('/api/signup', {
+      method: 'POST',
+      body: JSON.stringify({ name, email, password }),
+      headers: { 'Content-Type': 'application/json' },
+    });
+
+    const text = await res.text();
+    console.log('Raw response:', text);
+
+    let data;
+    try {
+      data = JSON.parse(text);
+    } catch (err) {
+      console.error('Failed to parse JSON:', err);
+      return alert('Something went wrong. Check the console for details.');
+    }
+
+    if (res.ok) {
+      console.log('Signed up:', data);
+      router.push('/');
+    } else {
+      alert(data.error);
+    }
+  };
 
   return (
     <main
@@ -32,6 +69,7 @@ const SignUp = () => {
 
       {/* FORM */}
       <form
+        onSubmit={handleSubmit}
         className={`shadow-deep-green flex flex-col justify-center items-center gap-5 px-16P py-32P rounded-5BR w-full min-w-container-300 max-w-container-600
         caret-black md:px-32P
         ${theme === 'theme1' ? 'bg-deep-dark' : 'bg-green-cyan-light'}
@@ -106,8 +144,21 @@ const SignUp = () => {
           )}
         </label>
 
+        <button
+          type="submit"
+          className={`flex justify-center items-center gap-2 font-bold text-lg text-center font-bold px-32P py-8P rounded-5BR ring-none border-none w-full tracking-0.1 shadow-soft-cyan cursor-pointer transition
+            ${
+              theme === 'theme1'
+                ? 'text-white bg-green-dark hover:text-background-dark hover:bg-warning'
+                : ' bg-green-light text-background-dark hover:text-cyan-dark hover:bg-highlight'
+            }
+            `}
+        >
+          Sign Up
+        </button>
+
         {/* DIVIDER */}
-        <h2 className="flex justify-center items-center gap-2 sm:gap-0 text-center w-full mx-auto my-64M">
+        <h2 className="flex justify-center items-center gap-2 sm:gap-0 text-center w-full mx-auto my-16M">
           <span className="block bg-white w-1/6 xs:w-1/3 h-[2px]"></span>
           <span className="text-lg xs:w-1/3 tracking-widest">
             or sign up with

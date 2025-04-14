@@ -17,21 +17,22 @@ import Tutorials from './utils/Tutorials';
 import Donations from './utils/Donations';
 import Newsletter from './utils/Newsletter';
 import WingsLogo from './utils/WingsLogo';
+import { useUser } from './hooks/useUser';
 
 const Footer = () => {
   const { theme } = useThemeStore();
   const { copy, copied } = useCopyToClipboard();
-  const [isSignedUp, setSignedUp] = useState<boolean>(false);
+  const user = useUser();
 
   return (
     <footer
       id="explore"
       className={`z-10 flex flex-col justify-center items-center py-64P sm:px-64P pb-0
         ${theme === 'theme1' ? 'text-white' : 'text-textis'}
-        ${!isSignedUp ? 'gap-20' : 'gap-4'}
+        ${!user ? 'gap-20' : 'gap-4'}
     `}
     >
-      {!isSignedUp ? (
+      {!user ? (
         <>
           <h2
             className={`text-2xl text-start font-bold

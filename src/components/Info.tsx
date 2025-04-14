@@ -7,13 +7,14 @@ import Goals from './Goals';
 import Calithenics from './Calisthenics';
 import Footer from './Footer';
 import Arrow from './utils/Arrow';
+import { useUser } from './hooks/useUser';
 
 const Info = () => {
   const { theme } = useThemeStore();
 
   const [goals, setGoals] = useState<boolean>(false);
 
-  const [isSignedUp, setIsSignedUp] = useState<boolean>(false);
+  const user = useUser();
 
   // Handle Toggle Between About Me and Goals
   const handleToggle = () => {
@@ -79,7 +80,7 @@ const Info = () => {
           </div>
         </div>
         <Calithenics />
-        {!isSignedUp ? (
+        {!user ? (
           <>
             <div
               className={`z-10 relative -top-64I pt-144P w-full h-500H

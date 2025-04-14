@@ -1,6 +1,5 @@
 'use client';
 
-import { useState } from 'react';
 import logo from './../app/favicon.ico';
 import Info from '@/components/Info';
 import Header from '@/components/Header';
@@ -8,10 +7,11 @@ import Working from '@/components/Working';
 import { useThemeStore } from '@/components/hooks/useThemeStore';
 import Guide from '@/components/Guide';
 import Image from 'next/image';
+import { useUser } from '@/components/hooks/useUser';
 
 const Home = () => {
   const { theme } = useThemeStore();
-  const [isSignedUp, setIsSignedUp] = useState<boolean>(false);
+  const user = useUser();
 
   return (
     <>
@@ -34,7 +34,7 @@ const Home = () => {
             <Info />
           </div>
         </div>
-        {!isSignedUp ? (
+        {!user ? (
           <div
             className={`z-0 absolute -bottom-208I flex justify-center items-center h-300H md:-bottom-96I md:h-192H w-full
               ${theme === 'theme1' ? 'bg-background-dark' : 'bg-cyan-dark'}

@@ -5,9 +5,11 @@ import Image from 'next/image';
 import { useThemeStore } from './hooks/useThemeStore';
 import Sun from './utils/Sun';
 import Moon from './utils/Moon';
+import { useUser } from './hooks/useUser';
 
 const Header = () => {
   const { theme, toggleTheme } = useThemeStore();
+  const user = useUser();
 
   return (
     <header
@@ -41,7 +43,21 @@ const Header = () => {
             ${theme === 'theme1' ? 'text-white' : 'text-textis'}
             `}
         >
-          Strength isn't just physical — it's in every decision to keep going.
+          {user?.name ? (
+            <>
+              Welcome back,{' '}
+              <span
+                className={`
+                ${theme === 'theme1' ? 'text-warning' : 'text-highlight'}
+                `}
+              >
+                {user.name}
+              </span>
+              ! 🫡
+            </>
+          ) : (
+            "Strength isn't just physical — it's in every decision to keep going."
+          )}
         </h1>
 
         {theme === 'theme1' ? (

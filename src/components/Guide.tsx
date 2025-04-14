@@ -5,14 +5,38 @@ import { useThemeStore } from './hooks/useThemeStore';
 import BurgerMenu from './utils/BurgerMenu';
 import XMenu from './utils/XMenu';
 import Link from 'next/link';
-import { button, li } from 'framer-motion/client';
+import { useUser } from './hooks/useUser';
+import { signOut } from 'next-auth/react';
+import SignOutButton from './SignOutButton';
 
 const Guide = () => {
   const { theme } = useThemeStore();
   const [scrolled, setScrolled] = useState(false);
+  const user = useUser();
 
   const [openSideBar, setOpenSideBar] = useState<boolean>(false);
 
+  // Map Logic to be more clean
+  const navItems = ['Sign Up', 'Sign In', 'Sign Out', 'Edit Profile'];
+
+  const getLinkPath = (label: string) =>
+    `/${label.toLowerCase().replace(/\s+/g, '')}`;
+
+  const isVisible = (label: string, user: any) => {
+    if (user) return label !== 'Sign In' && label !== 'Sign Up';
+    return label !== 'Sign Out' && label !== 'Edit Profile';
+  };
+
+  const liClasses = `rounded-5BR cursor-pointer font-bold tracking-wide ${
+    theme === 'theme1'
+      ? 'text-white bg-green-dark hover:text-background-dark hover:bg-warning'
+      : 'bg-green-light text-background-dark hover:text-cyan-dark hover:bg-highlight'
+  }`;
+
+  const contentClasses =
+    'px-16P py-8P w-full h-full flex items-center justify-center cursor-pointer';
+
+  // Sticky Navbar
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 10);
@@ -50,31 +74,19 @@ const Guide = () => {
             <div onClick={handleToggleSideBar}>
               <XMenu />
             </div>
-            {['Sign Up', 'Sign In', 'Sign Out', 'Edit Profile'].map((label) => (
-              <li
-                className={`rounded-5BR cursor-pointer font-bold tracking-wide
-                  ${
-                    theme === 'theme1'
-                      ? 'text-white bg-green-dark hover:text-background-dark hover:bg-warning'
-                      : 'bg-green-light text-background-dark hover:text-cyan-dark hover:bg-highlight'
-                  }
-                `}
-                key={label}
-              >
-                {label !== 'Sign Out' ? (
-                  <Link
-                    className="px-16P py-8P w-full h-full flex items-center justify-center"
-                    href={`/${label.toLowerCase().replace(/\s+/g, '')}`}
-                  >
-                    {label}
-                  </Link>
-                ) : (
-                  <button className="px-16P py-8P w-full h-full flex items-center justify-center cursor-pointer">
-                    {label}
-                  </button>
-                )}
-              </li>
-            ))}
+            {navItems.map((label) =>
+              isVisible(label, user) ? (
+                <li className={liClasses} key={label}>
+                  {user && label === 'Sign Out' ? (
+                    <SignOutButton contentClasses={contentClasses} />
+                  ) : (
+                    <Link href={getLinkPath(label)} className={contentClasses}>
+                      {label}
+                    </Link>
+                  )}
+                </li>
+              ) : null
+            )}
           </>
         ) : (
           <>
