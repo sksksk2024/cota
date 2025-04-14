@@ -6,7 +6,9 @@ export const useUser = () => {
   useEffect(() => {
     const fetchUserFromCookie = async () => {
       try {
-        const res = await fetch('/api/check-user');
+        const res = await fetch('/api/check-user', {
+          credentials: 'include', // <== This ensures cookies are sent with the request
+        });
         if (!res.ok) {
           console.error('User check failed:', res.status);
           setUser(null);

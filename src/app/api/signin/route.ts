@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import { PrismaClient } from '@prisma/client';
 import bcrypt from 'bcryptjs';
+import { serialize } from 'cookie';
 
 const prisma = new PrismaClient();
 
@@ -21,10 +22,21 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: 'Invalid credentials' }, { status: 401 });
   }
 
-  return NextResponse.json(
-    { message: 'Sign In successful', user },
+  // Serialize user into a cookie (DON'T do this in production — use tokens instead)
+  const cookie = serialize(
+    'user',
+    JSON.stringify({ id: user.id, name: user.name, email: user.email }),
     {
-      status: 200,
+      httpOnly: true,
+      path: '/',
+      maxAge: 60 * 60 * 24 * 7, // 1 week
+      sameSite: 'lax',
+      secure: process.env.NODE_ENV === 'production',
     }
   );
+
+  const res = NextResponse.json({ message: 'Sign In successful', user });
+  res.headers.set('Set-Cookie', cookie);
+
+  return res;
 }

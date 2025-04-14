@@ -31,6 +31,7 @@ const SignUp = () => {
       method: 'POST',
       body: JSON.stringify({ name, email, password }),
       headers: { 'Content-Type': 'application/json' },
+      credentials: 'include', // important for sending/receiving cookies
     });
 
     const text = await res.text();

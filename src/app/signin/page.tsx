@@ -2,14 +2,52 @@
 
 import { useThemeStore } from '@/components/hooks/useThemeStore';
 import Link from 'next/link';
-import { useState } from 'react';
+import { FormEvent, useState } from 'react';
 import OpenEye from '@/components/svgs/openEye.svg';
 import CloseEye from '@/components/svgs/closeEye.svg';
+import { useRouter } from 'next/navigation';
 
 const SignIn = () => {
+  const router = useRouter();
+
   const { theme } = useThemeStore();
 
   const [showPassword, setShowPassword] = useState(false);
+
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    const form = e.target as HTMLFormElement;
+    const email = (form.elements.namedItem('email') as HTMLInputElement).value;
+    const password = (form.elements.namedItem('password') as HTMLInputElement)
+      .value;
+
+    const res = await fetch('/api/signin', {
+      method: 'POST',
+      body: JSON.stringify({ email, password }),
+      headers: { 'Content-Type': 'application/json' },
+      credentials: 'include', // important for sending/receiving cookies
+    });
+
+    const text = await res.text();
+    console.log('Raw response:', text);
+
+    let data;
+
+    try {
+      data = JSON.parse(text);
+    } catch (error) {
+      console.error('Failed to parse JSON:', error);
+      return alert('Something went wrong. Check the console for details');
+    }
+
+    if (res.ok) {
+      console.log('Signed in:', data);
+      router.push('/');
+    } else {
+      alert(data.error);
+    }
+  };
 
   return (
     <main
@@ -28,6 +66,7 @@ const SignIn = () => {
 
       {/* FORM */}
       <form
+        onSubmit={handleSubmit}
         className={`shadow-deep-green flex flex-col justify-center items-center gap-5 px-16P py-32P rounded-5BR w-full min-w-container-300 max-w-container-600
         caret-black md:px-32P
         ${theme === 'theme1' ? 'bg-deep-dark' : 'bg-green-cyan-light'}
@@ -88,6 +127,7 @@ const SignIn = () => {
         </label>
 
         <button
+          type="submit"
           className={`flex justify-center items-center gap-2 font-bold text-lg text-center font-bold px-32P py-8P rounded-5BR ring-none border-none w-full tracking-0.1 shadow-soft-cyan cursor-pointer transition
             ${
               theme === 'theme1'
