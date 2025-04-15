@@ -1,5 +1,6 @@
 import { PrismaClient } from '@prisma/client';
 import { NextResponse } from 'next/server';
+import { serialize } from 'cookie';
 
 const prisma = new PrismaClient();
 
@@ -14,5 +15,17 @@ export async function DELETE(req: Request) {
     where: { id: userId },
   });
 
-  return NextResponse.json({ message: 'User Deleted' }, { status: 200 });
+  // Serialize user into a cookie (DON'T do this in production — use tokens instead)
+  const cookie = serialize('user', '', {
+    httpOnly: true,
+    path: '/',
+    maxAge: 0, // Delete the cookie immediately
+    sameSite: 'lax',
+    secure: process.env.NODE_ENV === 'production',
+  });
+
+  const res = NextResponse.json({ message: 'User Deleted' }, { status: 200 });
+  res.headers.set('Set-Cookie', cookie);
+
+  return res;
 }

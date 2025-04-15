@@ -16,12 +16,14 @@ const EditProfile = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
+  const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
 
   useEffect(() => {
     if (user) {
+      setName(user.name);
       setEmail(user.email);
     }
   }, [user]);
@@ -57,6 +59,7 @@ const EditProfile = () => {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         userId: user?.id,
+        name,
         email,
         password,
       }),
@@ -69,6 +72,7 @@ const EditProfile = () => {
     }
 
     alert('Profile Updated!');
+    router.push('/');
   };
 
   return (
@@ -94,6 +98,21 @@ const EditProfile = () => {
         ${theme === 'theme1' ? 'bg-deep-dark' : 'bg-green-cyan-light'}
         `}
       >
+        {/* EDIT NAME */}
+        <label className={`w-full`} htmlFor="name">
+          <input
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            className={`outline-none text-textis text-center font-bold px-32P py-8P rounded-5BR bg-snow-gray border-none w-full shadow-soft-cyan focus:shadow-hover-cyan placeholder:text-gray-400 placeholder:opacity-90 focus:outline-none focus:ring-0 focus:border-transparent hover:placeholder:text-gray-900
+              ${theme === 'theme1' ? 'hover:bg-warning' : 'hover:bg-highlight'}
+              `}
+            id="name"
+            name="name"
+            type="text"
+            placeholder="Add Your Name"
+          />
+        </label>
+
         {/* EDIT EMAIL */}
         <label className={`w-full`} htmlFor="email">
           <input
