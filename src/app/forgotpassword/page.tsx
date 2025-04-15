@@ -5,8 +5,12 @@ import Link from 'next/link';
 import { useState } from 'react';
 import OpenEye from '@/components/svgs/openEye.svg';
 import CloseEye from '@/components/svgs/closeEye.svg';
+import { useRouter } from 'next/navigation';
+import { useUser } from '@/components/hooks/useUser';
 
 const ForgotPassword = () => {
+  const user = useUser();
+  const router = useRouter();
   const { theme } = useThemeStore();
 
   const [showPassword, setShowPassword] = useState(false);
@@ -15,8 +19,33 @@ const ForgotPassword = () => {
   const [newPassword, setNewPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
 
-  const handlePasswordReset = () => {
+  const handlePasswordReset = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    if (newPassword !== confirmPassword) {
+      alert('Passwords do not match');
+      return;
+    }
+
     // Handle the password reset process (e.g., API call)
+    const res = await fetch('/api/forgotpassword', {
+      method: 'POST',
+      body: JSON.stringify({
+        email,
+        newPassword,
+      }),
+      headers: { 'Content-Type': 'application/json' },
+    });
+
+    const data = await res.json();
+
+    if (!res.ok) {
+      alert(data.error || 'Something went wrong');
+      return;
+    }
+
+    alert('Password has been changed');
+    router.push('/signin');
   };
 
   return (
@@ -36,11 +65,11 @@ const ForgotPassword = () => {
 
       {/* FORM */}
       <form
+        onSubmit={handlePasswordReset}
         className={`shadow-deep-green flex flex-col justify-center items-center gap-5 px-16P py-32P rounded-5BR w-full min-w-container-300 max-w-container-600
         caret-black md:px-32P
         ${theme === 'theme1' ? 'bg-deep-dark' : 'bg-green-cyan-light'}
         `}
-        onSubmit={handlePasswordReset}
       >
         {/* EMAIL INPUT */}
         <label className={`w-full`} htmlFor="email">
