@@ -80,7 +80,7 @@ const SignIn = () => {
             id="email"
             name="email"
             type="email"
-            placeholder="Add Your Email"
+            placeholder="Email"
           />
         </label>
 
@@ -92,7 +92,7 @@ const SignIn = () => {
             id="password"
             name="password"
             type={`${showPassword ? 'text' : 'password'}`}
-            placeholder="Add Your Password"
+            placeholder="Password"
           />
           {!showPassword ? (
             <button

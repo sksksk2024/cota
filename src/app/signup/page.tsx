@@ -88,7 +88,7 @@ const SignUp = () => {
             id="name"
             name="name"
             type="text"
-            placeholder="Add Your Name"
+            placeholder="Name"
           />
         </label>
         <label className={`w-full`} htmlFor="email">
@@ -99,7 +99,7 @@ const SignUp = () => {
             id="email"
             name="email"
             type="email"
-            placeholder="Add Your Email"
+            placeholder="Email"
           />
         </label>
 
@@ -111,7 +111,7 @@ const SignUp = () => {
             id="password"
             name="password"
             type={`${showPassword ? 'text' : 'password'}`}
-            placeholder="Add Your Password"
+            placeholder="Password"
           />
           {!showPassword ? (
             <button

@@ -6,6 +6,8 @@ import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import OpenEye from '@/components/svgs/openEye.svg';
 import CloseEye from '@/components/svgs/closeEye.svg';
+import Locked from '@/components/svgs/locked.svg';
+import Unlocked from '@/components/svgs/unlocked.svg';
 import { useUser } from '@/components/hooks/useUser';
 
 const EditProfile = () => {
@@ -13,8 +15,11 @@ const EditProfile = () => {
   const { theme } = useThemeStore();
   const user = useUser();
 
-  const [showPassword, setShowPassword] = useState(false);
-  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [editEmail, setEditEmail] = useState<boolean>(false);
+  const [editName, setEditName] = useState<boolean>(false);
+  const [showPassword, setShowPassword] = useState<boolean>(false);
+  const [showConfirmPassword, setShowConfirmPassword] =
+    useState<boolean>(false);
 
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -99,33 +104,109 @@ const EditProfile = () => {
         `}
       >
         {/* EDIT NAME */}
-        <label className={`w-full`} htmlFor="name">
+        <label
+          className={`relative group w-full
+            ${!editName && 'cursor-not-allowed select-none'}
+          `}
+          htmlFor="name"
+        >
           <input
             value={name}
             onChange={(e) => setName(e.target.value)}
+            readOnly={!editName}
+            tabIndex={!editName ? -1 : 0}
             className={`outline-none text-textis text-center font-bold px-32P py-8P rounded-5BR bg-snow-gray border-none w-full shadow-soft-cyan focus:shadow-hover-cyan placeholder:text-gray-400 placeholder:opacity-90 focus:outline-none focus:ring-0 focus:border-transparent hover:placeholder:text-gray-900
               ${theme === 'theme1' ? 'hover:bg-warning' : 'hover:bg-highlight'}
+              ${!editName && 'pointer-events-none'}
               `}
             id="name"
             name="name"
             type="text"
-            placeholder="Add Your Name"
+            placeholder="Name"
           />
+          {!editName ? (
+            <button
+              type="button"
+              aria-label="Edit Name"
+              className={`absolute top-0 right-0 bg-snow-gray rounded-5BR ring-none border-none w-40W p-8P tracking-0.1 shadow-soft-cyan cursor-pointer
+            ${
+              theme === 'theme1'
+                ? 'hover:text-background-dark group-hover:bg-warning'
+                : 'hover:text-cyan-dark group-hover:bg-highlight'
+            }`}
+              typeof="button"
+              onClick={() => setEditName(true)}
+            >
+              <Locked />
+            </button>
+          ) : (
+            <button
+              type="button"
+              aria-label="Hide Name"
+              className={`absolute top-0 right-0 bg-snow-gray rounded-5BR ring-none border-none w-40W p-8P tracking-0.1 shadow-soft-cyan cursor-pointer
+            ${
+              theme === 'theme1'
+                ? ' hover:text-background-dark group-hover:bg-warning'
+                : ' hover:text-cyan-dark group-hover:bg-highlight'
+            }`}
+              onClick={() => setEditName(false)}
+            >
+              <Unlocked />
+            </button>
+          )}
         </label>
 
         {/* EDIT EMAIL */}
-        <label className={`w-full`} htmlFor="email">
+        <label
+          className={`relative group w-full
+            ${!editEmail && 'cursor-not-allowed select-none'}
+          `}
+          htmlFor="email"
+        >
           <input
             value={email}
             onChange={(e) => setEmail(e.target.value)}
+            readOnly={!editEmail}
+            tabIndex={!editEmail ? -1 : 0}
             className={`outline-none text-textis text-center font-bold px-32P py-8P rounded-5BR bg-snow-gray border-none w-full shadow-soft-cyan focus:shadow-hover-cyan placeholder:text-gray-400 placeholder:opacity-90 focus:outline-none focus:ring-0 focus:border-transparent hover:placeholder:text-gray-900
               ${theme === 'theme1' ? 'hover:bg-warning' : 'hover:bg-highlight'}
+              ${!editEmail && 'pointer-events-none'}
               `}
             id="email"
             name="email"
             type="email"
-            placeholder="Add Your Email"
+            placeholder="Email"
           />
+          {!editEmail ? (
+            <button
+              type="button"
+              aria-label="Edit Email"
+              className={`absolute top-0 right-0 bg-snow-gray rounded-5BR ring-none border-none w-40W p-8P tracking-0.1 shadow-soft-cyan cursor-pointer
+            ${
+              theme === 'theme1'
+                ? 'hover:text-background-dark group-hover:bg-warning'
+                : 'hover:text-cyan-dark group-hover:bg-highlight'
+            }`}
+              typeof="button"
+              onClick={() => setEditEmail(true)}
+            >
+              <Locked />
+            </button>
+          ) : (
+            <button
+              type="button"
+              aria-label="Hide Email"
+              className={`absolute top-0 right-0 bg-snow-gray rounded-5BR ring-none border-none w-40W p-8P tracking-0.1 shadow-soft-cyan cursor-pointer
+            ${
+              theme === 'theme1'
+                ? ' hover:text-background-dark group-hover:bg-warning'
+                : ' hover:text-cyan-dark group-hover:bg-highlight'
+            }`}
+              onClick={() => setEditEmail(false)}
+            >
+              <Unlocked />
+            </button>
+          )}
         </label>
 
         {/* EDIT PASSWORD */}
@@ -139,7 +220,7 @@ const EditProfile = () => {
             id="password"
             name="password"
             type={`${showPassword ? 'text' : 'password'}`}
-            placeholder="Add Your Password"
+            placeholder="New Password"
           />
           {!showPassword ? (
             <button
@@ -184,7 +265,7 @@ const EditProfile = () => {
             id="confirm-password"
             name="confirm-password"
             type={`${showConfirmPassword ? 'text' : 'password'}`}
-            placeholder="Confirm Your Password"
+            placeholder="Confirm Password"
           />
           {!showConfirmPassword ? (
             <button
