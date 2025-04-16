@@ -2,24 +2,33 @@ import { NextResponse } from 'next/server';
 import { PrismaClient } from '@prisma/client';
 import bcrypt from 'bcryptjs';
 import { serialize } from 'cookie';
+import { editProfileSchema } from '@/lib/validations/schemas';
 
 const prisma = new PrismaClient();
 
 export async function POST(req: Request) {
-  const { userId, name, email, password } = await req.json();
+  // const { userId, name, email, password } = await req.json();
+  const body = await req.json();
+  const result = editProfileSchema.safeParse(body);
 
-  if (!userId || !name || !email || !password) {
-    return NextResponse.json({ error: 'Missing fields' }, { status: 400 });
+  if (!result.success) {
+    const firstIssue = result.error.issues[0]?.message || 'Invalid input';
+    return NextResponse.json({ error: firstIssue }, { status: 400 });
   }
 
-  const hashedPassword = await bcrypt.hash(password, 10);
+  const { userId, name, email, password } = result.data;
+
+  let hashedPassword: string | undefined = undefined;
+  if (password) {
+    hashedPassword = await bcrypt.hash(password, 10);
+  }
 
   const user = await prisma.user.update({
     where: { id: userId },
     data: {
       name,
       email,
-      password: hashedPassword,
+      ...(hashedPassword && { password: hashedPassword }),
     },
   });
 

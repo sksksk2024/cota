@@ -10,13 +10,15 @@ import LinkedInIcon from '@/components/svgs/linkedin.svg';
 import OpenEye from '@/components/svgs/openEye.svg';
 import CloseEye from '@/components/svgs/closeEye.svg';
 import { useRouter } from 'next/navigation';
+import { signupSchema, SignupInput } from '@/lib/validations/schemas';
 
 const SignUp = () => {
   const router = useRouter();
 
   const { theme } = useThemeStore();
 
-  const [showPassword, setShowPassword] = useState(false);
+  const [showPassword, setShowPassword] = useState<boolean>(false);
+  const [errorMsg, setErrorMsg] = useState<string | null>(null);
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -27,30 +29,49 @@ const SignUp = () => {
     const password = (form.elements.namedItem('password') as HTMLInputElement)
       .value;
 
-    const res = await fetch('/api/signup', {
-      method: 'POST',
-      body: JSON.stringify({ name, email, password }),
-      headers: { 'Content-Type': 'application/json' },
-      credentials: 'include', // important for sending/receiving cookies
-    });
+    const formData: SignupInput = { name, email, password };
 
-    const text = await res.text();
-    console.log('Raw response:', text);
+    // Validate with ZOD
+    const result = signupSchema.safeParse(formData);
+    if (!result.success) {
+      const errorList = result.error.errors
+        .map((err) => err.message)
+        .join('\n');
+      setErrorMsg(errorList);
+      return;
+    }
 
-    let data;
+    // Try catch block for validation
     try {
-      data = JSON.parse(text);
+      const res = await fetch('/api/signup', {
+        method: 'POST',
+        body: JSON.stringify(formData),
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'include', // important for sending/receiving cookies
+      });
+
+      const text = await res.text();
+      const data = JSON.parse(text);
+      // console.log('Raw response:', text);
+
+      if (res.ok) {
+        // console.log('Signed up:', data);
+        router.push('/');
+      } else {
+        setErrorMsg(data.error || 'Unknown error occurred');
+        // alert(data.error);
+      }
     } catch (err) {
-      console.error('Failed to parse JSON:', err);
-      return alert('Something went wrong. Check the console for details.');
+      setErrorMsg('Network error or unexpected issue.');
     }
 
-    if (res.ok) {
-      console.log('Signed up:', data);
-      router.push('/');
-    } else {
-      alert(data.error);
-    }
+    // let data;
+    // try {
+    //   data = JSON.parse(text);
+    // } catch (err) {
+    //   console.error('Failed to parse JSON:', err);
+    //   return alert('Something went wrong. Check the console for details.');
+    // }
   };
 
   return (
@@ -157,6 +178,15 @@ const SignUp = () => {
         >
           Sign Up
         </button>
+
+        {/* ERROR MESSAGE */}
+        {errorMsg && (
+          <div className="text-center text-red-500 font-semibold">
+            {errorMsg.split('\n').map((msg, i) => (
+              <p key={i}>{msg}</p>
+            ))}
+          </div>
+        )}
 
         {/* DIVIDER */}
         <h2 className="flex justify-center items-center gap-2 sm:gap-0 text-center w-full mx-auto my-16M">

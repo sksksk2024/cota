@@ -2,15 +2,19 @@ import { NextResponse } from 'next/server';
 import { PrismaClient } from '@prisma/client';
 import bcrypt from 'bcryptjs';
 import { serialize } from 'cookie';
+import { signupSchema } from '@/lib/validations/schemas';
 
 const prisma = new PrismaClient();
 
 export async function POST(req: Request) {
-  const { name, email, password } = await req.json();
+  const body = await req.json();
+  const result = signupSchema.safeParse(body);
 
-  if (!email || !password) {
-    return NextResponse.json({ error: 'Missing fields' }, { status: 400 });
+  if (!result.success) {
+    return NextResponse.json({ error: result.error.format() }, { status: 400 });
   }
+
+  const { name, email, password } = result.data;
 
   // Check if user exists
   const existingUser = await prisma.user.findUnique({ where: { email } });

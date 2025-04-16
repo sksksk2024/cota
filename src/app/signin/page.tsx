@@ -6,13 +6,16 @@ import { FormEvent, useState } from 'react';
 import OpenEye from '@/components/svgs/openEye.svg';
 import CloseEye from '@/components/svgs/closeEye.svg';
 import { useRouter } from 'next/navigation';
+import { signinSchema, SignInInput } from '@/lib/validations/schemas';
 
 const SignIn = () => {
   const router = useRouter();
 
   const { theme } = useThemeStore();
 
-  const [showPassword, setShowPassword] = useState(false);
+  const [showPassword, setShowPassword] = useState<boolean>(false);
+
+  const [errorMsg, setErrorMsg] = useState<string | null>(null);
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -22,30 +25,39 @@ const SignIn = () => {
     const password = (form.elements.namedItem('password') as HTMLInputElement)
       .value;
 
-    const res = await fetch('/api/signin', {
-      method: 'POST',
-      body: JSON.stringify({ email, password }),
-      headers: { 'Content-Type': 'application/json' },
-      credentials: 'include', // important for sending/receiving cookies
-    });
+    const formData: SignInInput = { email, password };
 
-    const text = await res.text();
-    console.log('Raw response:', text);
-
-    let data;
-
-    try {
-      data = JSON.parse(text);
-    } catch (error) {
-      console.error('Failed to parse JSON:', error);
-      return alert('Something went wrong. Check the console for details');
+    // Validate with ZOD
+    const result = signinSchema.safeParse(formData);
+    if (!result.success) {
+      const errorList = result.error.errors
+        .map((err) => err.message)
+        .join('\n');
+      setErrorMsg(errorList);
+      return;
     }
 
-    if (res.ok) {
-      console.log('Signed in:', data);
-      router.push('/');
-    } else {
-      alert(data.error);
+    try {
+      const res = await fetch('/api/signin', {
+        method: 'POST',
+        body: JSON.stringify(formData),
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'include', // important for sending/receiving cookies
+      });
+
+      const text = await res.text();
+      const data = JSON.parse(text);
+      // console.log('Raw response:', text);
+
+      if (res.ok) {
+        // console.log('Signed in:', data);
+        router.push('/');
+      } else {
+        setErrorMsg(data.error || 'Unknown error occurred');
+        // alert(data.error);
+      }
+    } catch (err) {
+      setErrorMsg('Network error or unexpected issue.');
     }
   };
 
@@ -138,6 +150,15 @@ const SignIn = () => {
         >
           Sign In
         </button>
+
+        {/* ERROR MESSAGE */}
+        {errorMsg && (
+          <div className="text-center text-red-500 font-semibold">
+            {errorMsg?.split('\n').map((msg, i) => (
+              <p key={i}>{msg}</p>
+            ))}
+          </div>
+        )}
 
         <p
           className={`text-sm text-center font-bold ${

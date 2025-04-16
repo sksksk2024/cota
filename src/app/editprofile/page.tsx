@@ -9,6 +9,7 @@ import CloseEye from '@/components/svgs/closeEye.svg';
 import Locked from '@/components/svgs/locked.svg';
 import Unlocked from '@/components/svgs/unlocked.svg';
 import { useUser } from '@/components/hooks/useUser';
+import { editProfileSchema, EditProfileInput } from '@/lib/validations/schemas';
 
 const EditProfile = () => {
   const router = useRouter();
@@ -21,10 +22,12 @@ const EditProfile = () => {
   const [showConfirmPassword, setShowConfirmPassword] =
     useState<boolean>(false);
 
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
+  const [name, setName] = useState<string>('');
+  const [email, setEmail] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
+  const [confirmPassword, setConfirmPassword] = useState<string>('');
+
+  const [errorMsg, setErrorMsg] = useState<string | null>(null);
 
   useEffect(() => {
     if (user) {
@@ -54,30 +57,47 @@ const EditProfile = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (password !== confirmPassword) {
-      alert('Passwords do not match');
+    const formData: EditProfileInput = {
+      userId: user?.id,
+    };
+
+    if (name !== user?.name) formData.name = name;
+    if (email !== user?.email) formData.email = email;
+    if (password) formData.password = password;
+    if (confirmPassword) formData.confirmPassword = confirmPassword;
+
+    // Validate with ZOD
+    const result = editProfileSchema.safeParse(formData);
+    if (!result.success) {
+      const errorList = result.error.errors
+        .map((err) => err.message)
+        .join('\n');
+      setErrorMsg(errorList);
       return;
     }
 
-    const res = await fetch('/api/editprofile', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        userId: user?.id,
-        name,
-        email,
-        password,
-      }),
-    });
+    try {
+      const res = await fetch('/api/editprofile', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          userId: user?.id,
+          name,
+          email,
+          ...(password && { password }),
+        }),
+      });
 
-    const data = await res.json();
-    if (!res.ok) {
-      alert(data.error || 'Something went wrong');
-      return;
+      const data = await res.json();
+      if (!res.ok) {
+        alert(data.error || 'Something went wrong');
+        return;
+      }
+      router.push('/');
+      // alert('Profile Updated!');
+    } catch (err) {
+      setErrorMsg('Network error or unexpected issue');
     }
-
-    alert('Profile Updated!');
-    router.push('/');
   };
 
   return (
@@ -255,15 +275,15 @@ const EditProfile = () => {
         </label>
 
         {/* CONFIRM PASSWORD */}
-        <label className={`relative group w-full`} htmlFor="confirm-password">
+        <label className={`relative group w-full`} htmlFor="confirmPassword">
           <input
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
             className={`outline-none text-textis text-center font-bold px-32P py-8P rounded-5BR bg-snow-gray border-none w-full shadow-soft-cyan focus:shadow-hover-cyan placeholder:text-gray-400 placeholder:opacity-90 focus:outline-none focus:ring-0 focus:border-transparent hover:placeholder:text-gray-900
               ${theme === 'theme1' ? 'hover:bg-warning' : 'hover:bg-highlight'}
               `}
-            id="confirm-password"
-            name="confirm-password"
+            id="confirmPassword"
+            name="confirmPassword"
             type={`${showConfirmPassword ? 'text' : 'password'}`}
             placeholder="Confirm Password"
           />
@@ -312,6 +332,15 @@ const EditProfile = () => {
         >
           Edit Profile
         </button>
+
+        {/* ERROR MESSAGE */}
+        {errorMsg && (
+          <div className="text-center text-red-500 font-semibold">
+            {errorMsg.split('\n').map((msg, i) => (
+              <p key={i}>{msg}</p>
+            ))}
+          </div>
+        )}
       </form>
 
       {/* HOME LINK && DELETE LINK */}

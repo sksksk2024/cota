@@ -2,21 +2,28 @@ import { NextResponse } from 'next/server';
 import { PrismaClient } from '@prisma/client';
 import bcrypt from 'bcryptjs';
 import { serialize } from 'cookie';
+import { signinSchema } from '@/lib/validations/schemas';
 
 const prisma = new PrismaClient();
 
 export async function POST(req: Request) {
-  const { email, password } = await req.json();
+  // const { email, password } = await req.json();
+  const body = await req.json();
+  const result = signinSchema.safeParse(body);
 
-  if (!email || !password) {
-    return NextResponse.json({ error: 'Missing fields' }, { status: 400 });
+  if (!result.success) {
+    return NextResponse.json({ error: result.error.format() }, { status: 400 });
   }
 
+  const { email, password } = result.data;
+
+  // Verifies if it's an unique user
   const user = await prisma.user.findUnique({ where: { email } });
   if (!user || !user.password) {
     return NextResponse.json({ error: 'User not found' }, { status: 400 });
   }
 
+  // Verifies if the password from db is identical with the one from the input
   const passwordMatch = await bcrypt.compare(password, user.password);
   if (!passwordMatch) {
     return NextResponse.json({ error: 'Invalid credentials' }, { status: 401 });

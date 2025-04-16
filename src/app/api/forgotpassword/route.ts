@@ -2,17 +2,23 @@
 import { NextResponse } from 'next/server';
 import { PrismaClient } from '@prisma/client';
 import bcrypt from 'bcryptjs';
-import { serialize } from 'cookie';
+import { forgotPasswordSchema } from '@/lib/validations/schemas';
 
 const prisma = new PrismaClient();
 
 export async function POST(req: Request) {
-  const { email, newPassword } = await req.json();
+  // const { email, newPassword } = await req.json();
+  const body = await req.json();
+  const result = forgotPasswordSchema.safeParse(body);
 
-  if (!email || !newPassword) {
-    return NextResponse.json({ error: 'Missing fields' }, { status: 400 });
+  if (!result.success) {
+    const firstIssue = result.error.issues[0]?.message || 'Invalid input';
+    return NextResponse.json({ error: firstIssue }, { status: 400 });
   }
 
+  const { email, newPassword } = result.data;
+
+  // Check if user exists
   const existingUser = await prisma.user.findUnique({
     where: { email: email.toLowerCase() },
   });

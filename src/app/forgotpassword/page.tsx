@@ -7,45 +7,68 @@ import OpenEye from '@/components/svgs/openEye.svg';
 import CloseEye from '@/components/svgs/closeEye.svg';
 import { useRouter } from 'next/navigation';
 import { useUser } from '@/components/hooks/useUser';
+import {
+  forgotPasswordSchema,
+  ForgotPasswordInput,
+} from '@/lib/validations/schemas';
 
 const ForgotPassword = () => {
-  const user = useUser();
+  // const user = useUser();
   const router = useRouter();
   const { theme } = useThemeStore();
 
-  const [showPassword, setShowPassword] = useState(false);
-  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-  const [email, setEmail] = useState('');
-  const [newPassword, setNewPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
+  const [showPassword, setShowPassword] = useState<boolean>(false);
+  const [showConfirmPassword, setShowConfirmPassword] =
+    useState<boolean>(false);
+  const [email, setEmail] = useState<string>('');
+  const [newPassword, setNewPassword] = useState<string>('');
+  const [confirmPassword, setConfirmPassword] = useState<string>('');
+
+  const [errorMsg, setErrorMsg] = useState<string | null>(null);
 
   const handlePasswordReset = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (newPassword !== confirmPassword) {
-      alert('Passwords do not match');
+    const formData: ForgotPasswordInput = {
+      email,
+      newPassword,
+      confirmPassword,
+    };
+
+    // Validate with ZOD
+    const result = forgotPasswordSchema.safeParse(formData);
+    if (!result.success) {
+      const errorList = result.error.errors
+        .map((err) => err.message)
+        .join('\n');
+      setErrorMsg(errorList);
       return;
     }
 
-    // Handle the password reset process (e.g., API call)
-    const res = await fetch('/api/forgotpassword', {
-      method: 'POST',
-      body: JSON.stringify({
-        email,
-        newPassword,
-      }),
-      headers: { 'Content-Type': 'application/json' },
-    });
+    try {
+      // Handle the password reset process (e.g., API call)
+      const res = await fetch('/api/forgotpassword', {
+        method: 'POST',
+        body: JSON.stringify({
+          email,
+          newPassword,
+          confirmPassword,
+        }),
+        headers: { 'Content-Type': 'application/json' },
+      });
 
-    const data = await res.json();
+      const data = await res.json();
 
-    if (!res.ok) {
-      alert(data.error || 'Something went wrong');
-      return;
+      if (!res.ok) {
+        alert(data.error || 'Something went wrong');
+        return;
+      }
+
+      router.push('/signin');
+      // alert('Password has been changed');
+    } catch (err) {
+      setErrorMsg('Network error or unexpected issue.');
     }
-
-    alert('Password has been changed');
-    router.push('/signin');
   };
 
   return (
@@ -187,6 +210,15 @@ const ForgotPassword = () => {
         >
           Reset Password
         </button>
+
+        {/* ERROR MESSAGE */}
+        {errorMsg && (
+          <div className="text-center text-red-500 font-semibold">
+            {errorMsg.split('\n').map((msg, i) => (
+              <p key={i}>{msg}</p>
+            ))}
+          </div>
+        )}
       </form>
 
       {/* SIGN IN LINK */}
