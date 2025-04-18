@@ -17,6 +17,10 @@ const Spinner = () => {
     },
     exit: {
       opacity: 0,
+      transition: {
+        duration: 0.5,
+        ease: 'easeIn',
+      },
     },
   };
 
