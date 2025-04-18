@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server';
 import { PrismaClient } from '@prisma/client';
 import bcrypt from 'bcryptjs';
 import { serialize } from 'cookie';
-import { signupSchema } from '@/lib/validations/schemas';
+import { signupSchema } from '@/lib/schemas';
 
 const prisma = new PrismaClient();
 

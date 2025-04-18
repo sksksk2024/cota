@@ -7,10 +7,7 @@ import OpenEye from '@/components/svgs/openEye.svg';
 import CloseEye from '@/components/svgs/closeEye.svg';
 import { useRouter } from 'next/navigation';
 import { useUser } from '@/components/hooks/useUser';
-import {
-  forgotPasswordSchema,
-  ForgotPasswordInput,
-} from '@/lib/validations/schemas';
+import { forgotPasswordSchema, ForgotPasswordInput } from '@/lib/schemas';
 
 const ForgotPassword = () => {
   // const user = useUser();

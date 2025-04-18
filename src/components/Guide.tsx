@@ -7,6 +7,7 @@ import XMenu from './utils/XMenu';
 import Link from 'next/link';
 import { useUser } from './hooks/useUser';
 import SignOutButton from './SignOutButton';
+import { useSession } from 'next-auth/react';
 
 const Guide = () => {
   const { theme } = useThemeStore();
@@ -14,6 +15,14 @@ const Guide = () => {
   const user = useUser();
 
   const [openSideBar, setOpenSideBar] = useState<boolean>(false);
+
+  const { data: session, status } = useSession();
+
+  if (status === 'loading') {
+    return <div>Loading...</div>; // Or some loading spinner
+  }
+
+  const displayName = session?.user?.name ?? user?.name;
 
   // Map Logic to be more clean
   const navItems = ['Sign Up', 'Sign In', 'Sign Out', 'Edit Profile'];
@@ -74,9 +83,9 @@ const Guide = () => {
               <XMenu />
             </div>
             {navItems.map((label) =>
-              isVisible(label, user) ? (
+              isVisible(label, displayName) ? (
                 <li className={liClasses} key={label}>
-                  {user && label === 'Sign Out' ? (
+                  {displayName && label === 'Sign Out' ? (
                     <SignOutButton contentClasses={contentClasses} />
                   ) : (
                     <Link href={getLinkPath(label)} className={contentClasses}>

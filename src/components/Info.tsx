@@ -8,6 +8,7 @@ import Calithenics from './Calisthenics';
 import Footer from './Footer';
 import Arrow from './utils/Arrow';
 import { useUser } from './hooks/useUser';
+import { useSession } from 'next-auth/react';
 
 const Info = () => {
   const { theme } = useThemeStore();
@@ -15,6 +16,14 @@ const Info = () => {
   const [goals, setGoals] = useState<boolean>(false);
 
   const user = useUser();
+
+  const { data: session, status } = useSession();
+
+  const displayName = session?.user ?? user;
+
+  if (status === 'loading') {
+    return <div>Loading...</div>; // Or some loading spinner
+  }
 
   // Handle Toggle Between About Me and Goals
   const handleToggle = () => {
@@ -80,7 +89,7 @@ const Info = () => {
           </div>
         </div>
         <Calithenics />
-        {!user ? (
+        {!displayName ? (
           <>
             <div
               className={`z-10 relative -top-64I pt-144P w-full h-500H

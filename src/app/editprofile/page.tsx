@@ -9,7 +9,7 @@ import CloseEye from '@/components/svgs/closeEye.svg';
 import Locked from '@/components/svgs/locked.svg';
 import Unlocked from '@/components/svgs/unlocked.svg';
 import { useUser } from '@/components/hooks/useUser';
-import { editProfileSchema, EditProfileInput } from '@/lib/validations/schemas';
+import { editProfileSchema, EditProfileInput } from '@/lib/schemas';
 
 const EditProfile = () => {
   const router = useRouter();
@@ -29,10 +29,13 @@ const EditProfile = () => {
 
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
 
+  const [isOAuthUser, setIsOAuthUser] = useState(true);
+
   useEffect(() => {
     if (user) {
       setName(user.name);
       setEmail(user.email);
+      setIsOAuthUser(user.provider ? user.provider !== 'credentials' : false);
     }
   }, [user]);
 
@@ -42,15 +45,23 @@ const EditProfile = () => {
     );
     if (!confirmed) return;
 
-    const res = await fetch('/api/deleteuser', {
-      method: 'DELETE',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ userId: user?.id }),
-    });
+    try {
+      const res = await fetch('/api/deleteuser', {
+        method: 'DELETE',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ userId: user?.id }),
+      });
 
-    if (res.ok) {
-      alert('User Deleted');
-      router.push('/');
+      if (res.ok) {
+        alert('User Deleted');
+        router.push('/');
+      } else {
+        const data = await res.json();
+        alert(`Error: ${data.error}`);
+      }
+    } catch (error) {
+      console.error(error);
+      alert('Something went wrong. Please try again.');
     }
   };
 
@@ -59,14 +70,16 @@ const EditProfile = () => {
 
     const formData: EditProfileInput = {
       userId: user?.id,
+      name,
     };
 
-    if (name !== user?.name) formData.name = name;
-    if (email !== user?.email) formData.email = email;
-    if (password) formData.password = password;
-    if (confirmPassword) formData.confirmPassword = confirmPassword;
+    if (!isOAuthUser) {
+      setIsOAuthUser(false);
+      formData.email = email;
+      if (password) formData.password = password;
+      if (confirmPassword) formData.confirmPassword = confirmPassword;
+    }
 
-    // Validate with ZOD
     const result = editProfileSchema.safeParse(formData);
     if (!result.success) {
       const errorList = result.error.errors
@@ -80,12 +93,7 @@ const EditProfile = () => {
       const res = await fetch('/api/editprofile', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          userId: user?.id,
-          name,
-          email,
-          ...(password && { password }),
-        }),
+        body: JSON.stringify(formData),
       });
 
       const data = await res.json();
@@ -93,8 +101,8 @@ const EditProfile = () => {
         alert(data.error || 'Something went wrong');
         return;
       }
+
       router.push('/');
-      // alert('Profile Updated!');
     } catch (err) {
       setErrorMsg('Network error or unexpected issue');
     }
@@ -133,8 +141,8 @@ const EditProfile = () => {
           <input
             value={name}
             onChange={(e) => setName(e.target.value)}
-            readOnly={!editName}
-            tabIndex={!editName ? -1 : 0}
+            readOnly={isOAuthUser || !editName}
+            tabIndex={isOAuthUser || !editName ? -1 : 0}
             className={`outline-none text-textis text-center font-bold px-32P py-8P rounded-5BR bg-snow-gray border-none w-full shadow-soft-cyan focus:shadow-hover-cyan placeholder:text-gray-400 placeholder:opacity-90 focus:outline-none focus:ring-0 focus:border-transparent hover:placeholder:text-gray-900
               ${theme === 'theme1' ? 'hover:bg-warning' : 'hover:bg-highlight'}
               ${!editName && 'pointer-events-none'}
@@ -148,6 +156,7 @@ const EditProfile = () => {
             <button
               type="button"
               aria-label="Edit Name"
+              disabled={isOAuthUser}
               className={`absolute top-0 right-0 bg-snow-gray rounded-5BR ring-none border-none w-40W p-8P tracking-0.1 shadow-soft-cyan cursor-pointer
             ${
               theme === 'theme1'
@@ -163,6 +172,7 @@ const EditProfile = () => {
             <button
               type="button"
               aria-label="Hide Name"
+              disabled={isOAuthUser}
               className={`absolute top-0 right-0 bg-snow-gray rounded-5BR ring-none border-none w-40W p-8P tracking-0.1 shadow-soft-cyan cursor-pointer
             ${
               theme === 'theme1'
@@ -186,8 +196,8 @@ const EditProfile = () => {
           <input
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            readOnly={!editEmail}
-            tabIndex={!editEmail ? -1 : 0}
+            readOnly={isOAuthUser || !editEmail}
+            tabIndex={isOAuthUser || !editEmail ? -1 : 0}
             className={`outline-none text-textis text-center font-bold px-32P py-8P rounded-5BR bg-snow-gray border-none w-full shadow-soft-cyan focus:shadow-hover-cyan placeholder:text-gray-400 placeholder:opacity-90 focus:outline-none focus:ring-0 focus:border-transparent hover:placeholder:text-gray-900
               ${theme === 'theme1' ? 'hover:bg-warning' : 'hover:bg-highlight'}
               ${!editEmail && 'pointer-events-none'}
@@ -201,6 +211,7 @@ const EditProfile = () => {
             <button
               type="button"
               aria-label="Edit Email"
+              disabled={isOAuthUser}
               className={`absolute top-0 right-0 bg-snow-gray rounded-5BR ring-none border-none w-40W p-8P tracking-0.1 shadow-soft-cyan cursor-pointer
             ${
               theme === 'theme1'
@@ -216,6 +227,7 @@ const EditProfile = () => {
             <button
               type="button"
               aria-label="Hide Email"
+              disabled={isOAuthUser}
               className={`absolute top-0 right-0 bg-snow-gray rounded-5BR ring-none border-none w-40W p-8P tracking-0.1 shadow-soft-cyan cursor-pointer
             ${
               theme === 'theme1'
@@ -229,95 +241,102 @@ const EditProfile = () => {
           )}
         </label>
 
-        {/* EDIT PASSWORD */}
-        <label className={`relative group w-full`} htmlFor="password">
-          <input
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            className={`outline-none text-textis text-center font-bold px-32P py-8P rounded-5BR bg-snow-gray border-none w-full shadow-soft-cyan focus:shadow-hover-cyan placeholder:text-gray-400 placeholder:opacity-90 focus:outline-none focus:ring-0 focus:border-transparent hover:placeholder:text-gray-900
+        {!isOAuthUser && (
+          <>
+            {/* EDIT PASSWORD */}
+            <label className={`relative group w-full`} htmlFor="password">
+              <input
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                className={`outline-none text-textis text-center font-bold px-32P py-8P rounded-5BR bg-snow-gray border-none w-full shadow-soft-cyan focus:shadow-hover-cyan placeholder:text-gray-400 placeholder:opacity-90 focus:outline-none focus:ring-0 focus:border-transparent hover:placeholder:text-gray-900
               ${theme === 'theme1' ? 'hover:bg-warning' : 'hover:bg-highlight'}
               `}
-            id="password"
-            name="password"
-            type={`${showPassword ? 'text' : 'password'}`}
-            placeholder="New Password"
-          />
-          {!showPassword ? (
-            <button
-              type="button"
-              aria-label="Show Password"
-              className={`absolute top-0 right-0 bg-snow-gray rounded-5BR ring-none border-none w-40W p-8P tracking-0.1 shadow-soft-cyan cursor-pointer
+                id="password"
+                name="password"
+                type={`${showPassword ? 'text' : 'password'}`}
+                placeholder="New Password"
+              />
+              {!showPassword ? (
+                <button
+                  type="button"
+                  aria-label="Show Password"
+                  className={`absolute top-0 right-0 bg-snow-gray rounded-5BR ring-none border-none w-40W p-8P tracking-0.1 shadow-soft-cyan cursor-pointer
             ${
               theme === 'theme1'
                 ? 'hover:text-background-dark group-hover:bg-warning'
                 : 'hover:text-cyan-dark group-hover:bg-highlight'
             }`}
-              typeof="button"
-              onClick={() => setShowPassword(true)}
-            >
-              <OpenEye />
-            </button>
-          ) : (
-            <button
-              type="button"
-              aria-label="Hide Password"
-              className={`absolute top-0 right-0 bg-snow-gray rounded-5BR ring-none border-none w-40W p-8P tracking-0.1 shadow-soft-cyan cursor-pointer
+                  typeof="button"
+                  onClick={() => setShowPassword(true)}
+                >
+                  <OpenEye />
+                </button>
+              ) : (
+                <button
+                  type="button"
+                  aria-label="Hide Password"
+                  className={`absolute top-0 right-0 bg-snow-gray rounded-5BR ring-none border-none w-40W p-8P tracking-0.1 shadow-soft-cyan cursor-pointer
             ${
               theme === 'theme1'
                 ? ' hover:text-background-dark group-hover:bg-warning'
                 : ' hover:text-cyan-dark group-hover:bg-highlight'
             }`}
-              onClick={() => setShowPassword(false)}
-            >
-              <CloseEye />
-            </button>
-          )}
-        </label>
+                  onClick={() => setShowPassword(false)}
+                >
+                  <CloseEye />
+                </button>
+              )}
+            </label>
 
-        {/* CONFIRM PASSWORD */}
-        <label className={`relative group w-full`} htmlFor="confirmPassword">
-          <input
-            value={confirmPassword}
-            onChange={(e) => setConfirmPassword(e.target.value)}
-            className={`outline-none text-textis text-center font-bold px-32P py-8P rounded-5BR bg-snow-gray border-none w-full shadow-soft-cyan focus:shadow-hover-cyan placeholder:text-gray-400 placeholder:opacity-90 focus:outline-none focus:ring-0 focus:border-transparent hover:placeholder:text-gray-900
+            {/* CONFIRM PASSWORD */}
+            <label
+              className={`relative group w-full`}
+              htmlFor="confirmPassword"
+            >
+              <input
+                value={confirmPassword}
+                onChange={(e) => setConfirmPassword(e.target.value)}
+                className={`outline-none text-textis text-center font-bold px-32P py-8P rounded-5BR bg-snow-gray border-none w-full shadow-soft-cyan focus:shadow-hover-cyan placeholder:text-gray-400 placeholder:opacity-90 focus:outline-none focus:ring-0 focus:border-transparent hover:placeholder:text-gray-900
               ${theme === 'theme1' ? 'hover:bg-warning' : 'hover:bg-highlight'}
               `}
-            id="confirmPassword"
-            name="confirmPassword"
-            type={`${showConfirmPassword ? 'text' : 'password'}`}
-            placeholder="Confirm Password"
-          />
-          {!showConfirmPassword ? (
-            <button
-              type="button"
-              aria-label="Show Password"
-              className={`absolute top-0 right-0 bg-snow-gray rounded-5BR ring-none border-none w-40W p-8P tracking-0.1 shadow-soft-cyan cursor-pointer
+                id="confirmPassword"
+                name="confirmPassword"
+                type={`${showConfirmPassword ? 'text' : 'password'}`}
+                placeholder="Confirm Password"
+              />
+              {!showConfirmPassword ? (
+                <button
+                  type="button"
+                  aria-label="Show Password"
+                  className={`absolute top-0 right-0 bg-snow-gray rounded-5BR ring-none border-none w-40W p-8P tracking-0.1 shadow-soft-cyan cursor-pointer
             ${
               theme === 'theme1'
                 ? 'hover:text-background-dark group-hover:bg-warning'
                 : 'hover:text-cyan-dark group-hover:bg-highlight'
             }`}
-              typeof="button"
-              onClick={() => setShowConfirmPassword(true)}
-            >
-              <OpenEye />
-            </button>
-          ) : (
-            <button
-              type="button"
-              aria-label="Hide Confirm Password"
-              className={`absolute top-0 right-0 bg-snow-gray rounded-5BR ring-none border-none w-40W p-8P tracking-0.1 shadow-soft-cyan cursor-pointer
+                  typeof="button"
+                  onClick={() => setShowConfirmPassword(true)}
+                >
+                  <OpenEye />
+                </button>
+              ) : (
+                <button
+                  type="button"
+                  aria-label="Hide Confirm Password"
+                  className={`absolute top-0 right-0 bg-snow-gray rounded-5BR ring-none border-none w-40W p-8P tracking-0.1 shadow-soft-cyan cursor-pointer
             ${
               theme === 'theme1'
                 ? ' hover:text-background-dark group-hover:bg-warning'
                 : ' hover:text-cyan-dark group-hover:bg-highlight'
             }`}
-              onClick={() => setShowConfirmPassword(false)}
-            >
-              <CloseEye />
-            </button>
-          )}
-        </label>
+                  onClick={() => setShowConfirmPassword(false)}
+                >
+                  <CloseEye />
+                </button>
+              )}
+            </label>
+          </>
+        )}
 
         {/* Edit Profile Button */}
         <button
@@ -373,6 +392,12 @@ const EditProfile = () => {
           Delete User
         </button>
       </div>
+
+      {isOAuthUser && (
+        <p className="text-center text-sm text-gray-500">
+          Email and password cannot be changed for OAuth accounts.
+        </p>
+      )}
     </main>
   );
 };

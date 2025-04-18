@@ -2,7 +2,7 @@
 import { NextResponse } from 'next/server';
 import { PrismaClient } from '@prisma/client';
 import bcrypt from 'bcryptjs';
-import { forgotPasswordSchema } from '@/lib/validations/schemas';
+import { forgotPasswordSchema } from '@/lib/schemas';
 
 const prisma = new PrismaClient();
 

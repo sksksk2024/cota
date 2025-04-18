@@ -5,12 +5,11 @@ import Link from 'next/link';
 import { FormEvent, useState } from 'react';
 import GitHubIcon from '@/components/svgs/github.svg';
 import GoogleIcon from '@/components/svgs/google.svg';
-import InstaIcon from '@/components/svgs/instagram.svg';
-import LinkedInIcon from '@/components/svgs/linkedin.svg';
 import OpenEye from '@/components/svgs/openEye.svg';
 import CloseEye from '@/components/svgs/closeEye.svg';
 import { useRouter } from 'next/navigation';
-import { signupSchema, SignupInput } from '@/lib/validations/schemas';
+import { signupSchema, SignupInput } from '@/lib/schemas';
+import { signIn } from 'next-auth/react';
 
 const SignUp = () => {
   const router = useRouter();
@@ -131,7 +130,7 @@ const SignUp = () => {
               `}
             id="password"
             name="password"
-            type={`${showPassword ? 'text' : 'password'}`}
+            type={showPassword ? 'text' : 'password'}
             placeholder="Password"
           />
           {!showPassword ? (
@@ -200,6 +199,7 @@ const SignUp = () => {
         {/* SOCIAL AUTH */}
         <div className="flex flex-col justify-center items-center gap-5 w-full">
           <button
+            onClick={() => signIn('google', { callbackUrl: '/' })}
             className={`flex justify-center items-center gap-2 font-bold text-lg text-center font-bold px-32P py-8P rounded-5BR ring-none border-none w-full tracking-0.1 shadow-soft-cyan cursor-pointer transition
             ${
               theme === 'theme1'
@@ -213,6 +213,7 @@ const SignUp = () => {
           </button>
 
           <button
+            onClick={() => signIn('github', { callbackUrl: '/' })}
             className={`flex justify-center items-center gap-2 font-bold text-lg text-center font-bold px-32P py-8P rounded-5BR ring-none border-none w-full tracking-0.1 shadow-soft-cyan cursor-pointer transition
             ${
               theme === 'theme1'
@@ -223,33 +224,6 @@ const SignUp = () => {
           >
             <GitHubIcon className="w-6 h-6 text-white hover:text-cyan-400 transition stroke-current stroke-3" />
             GitHub
-          </button>
-
-          {/* Instagram */}
-          <button
-            className={`flex justify-center items-center gap-2 font-bold text-lg text-center font-bold px-32P py-8P rounded-5BR ring-none border-none w-full tracking-0.1 shadow-soft-cyan cursor-pointer transition
-            ${
-              theme === 'theme1'
-                ? 'text-white bg-green-dark hover:text-background-dark hover:bg-warning'
-                : ' bg-green-light text-background-dark hover:text-cyan-dark hover:bg-highlight'
-            }
-            `}
-          >
-            <InstaIcon className="w-6 h-6 text-white hover:text-cyan-400 transition stroke-current stroke-0" />
-            Instagram
-          </button>
-
-          <button
-            className={`flex justify-center items-center gap-2 font-bold text-lg text-center font-bold px-32P py-8P rounded-5BR ring-none border-none w-full tracking-0.1 shadow-soft-cyan cursor-pointer transition
-            ${
-              theme === 'theme1'
-                ? 'text-white bg-green-dark hover:text-background-dark hover:bg-warning'
-                : ' bg-green-light text-background-dark hover:text-cyan-dark hover:bg-highlight'
-            }
-            `}
-          >
-            <LinkedInIcon className="w-6 h-6 text-white hover:text-cyan-400 transition stroke-current stroke-2" />
-            LinkedIn
           </button>
         </div>
 

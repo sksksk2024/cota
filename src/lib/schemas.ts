@@ -1,4 +1,4 @@
-// lib/validations/schemas.ts
+// lib/schemas.ts
 
 import { z } from 'zod';
 

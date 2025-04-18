@@ -6,7 +6,7 @@ import { FormEvent, useState } from 'react';
 import OpenEye from '@/components/svgs/openEye.svg';
 import CloseEye from '@/components/svgs/closeEye.svg';
 import { useRouter } from 'next/navigation';
-import { signinSchema, SignInInput } from '@/lib/validations/schemas';
+import { signinSchema, SignInInput } from '@/lib/schemas';
 
 const SignIn = () => {
   const router = useRouter();

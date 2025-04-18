@@ -6,10 +6,19 @@ import { useThemeStore } from './hooks/useThemeStore';
 import Sun from './utils/Sun';
 import Moon from './utils/Moon';
 import { useUser } from './hooks/useUser';
+import { useSession } from 'next-auth/react';
 
-const Header = () => {
+const Header = ({}) => {
   const { theme, toggleTheme } = useThemeStore();
   const user = useUser();
+
+  const { data: session, status } = useSession();
+
+  if (status === 'loading') {
+    return <div>Loading...</div>; // Or some loading spinner
+  }
+
+  const displayName = session?.user?.name ?? user?.name;
 
   return (
     <header
@@ -43,7 +52,7 @@ const Header = () => {
             ${theme === 'theme1' ? 'text-white' : 'text-textis'}
             `}
         >
-          {user?.name ? (
+          {displayName ? (
             <>
               Welcome back,{' '}
               <span
@@ -51,7 +60,7 @@ const Header = () => {
                 ${theme === 'theme1' ? 'text-warning' : 'text-highlight'}
                 `}
               >
-                {user.name}
+                {displayName}
               </span>
               ! 🫡
             </>

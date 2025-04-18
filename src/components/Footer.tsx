@@ -18,21 +18,30 @@ import Donations from './utils/Donations';
 import Newsletter from './utils/Newsletter';
 import WingsLogo from './utils/WingsLogo';
 import { useUser } from './hooks/useUser';
+import { useSession } from 'next-auth/react';
 
 const Footer = () => {
   const { theme } = useThemeStore();
   const { copy, copied } = useCopyToClipboard();
   const user = useUser();
 
+  const { data: session, status } = useSession();
+
+  if (status === 'loading') {
+    return <div>Loading...</div>; // Or some loading spinner
+  }
+
+  const displayUser = session?.user ?? user;
+
   return (
     <footer
       id="explore"
       className={`z-10 flex flex-col justify-center items-center py-64P sm:px-64P pb-0
         ${theme === 'theme1' ? 'text-white' : 'text-textis'}
-        ${!user ? 'gap-20' : 'gap-4'}
+        ${!displayUser ? 'gap-20' : 'gap-4'}
     `}
     >
-      {!user ? (
+      {!displayUser ? (
         <>
           <h2
             className={`text-2xl text-start font-bold
