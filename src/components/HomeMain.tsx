@@ -9,6 +9,8 @@ import Guide from '@/components/Guide';
 import Image from 'next/image';
 import { useUser } from '@/components/hooks/useUser';
 import { useSession } from 'next-auth/react';
+import Spinner from './Spinner';
+import { div } from 'framer-motion/client';
 
 const HomeMain = () => {
   const { theme } = useThemeStore();
@@ -17,7 +19,15 @@ const HomeMain = () => {
   const { data: session, status } = useSession();
 
   if (status === 'loading') {
-    return <div>Loading...</div>; // Or some loading spinner
+    return (
+      <div
+        className={`w-full h-[100dvh] flex justify-center items-center m-auto
+        ${theme === 'theme1' ? 'bg-background-dark' : 'bg-cyan-dark'}
+      `}
+      >
+        <Spinner />
+      </div>
+    );
   }
 
   const displayName = session?.user ?? user;

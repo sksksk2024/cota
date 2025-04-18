@@ -394,7 +394,11 @@ const EditProfile = () => {
       </div>
 
       {isOAuthUser && (
-        <p className="text-center text-sm text-gray-500">
+        <p
+          className={`text-center text-sm
+        ${theme === 'theme1' ? 'text-white' : 'text-textis'}
+        `}
+        >
           Email and password cannot be changed for OAuth accounts.
         </p>
       )}

@@ -8,6 +8,7 @@ import Link from 'next/link';
 import { useUser } from './hooks/useUser';
 import SignOutButton from './SignOutButton';
 import { useSession } from 'next-auth/react';
+import Spinner from './Spinner';
 
 const Guide = () => {
   const { theme } = useThemeStore();
@@ -19,7 +20,15 @@ const Guide = () => {
   const { data: session, status } = useSession();
 
   if (status === 'loading') {
-    return <div>Loading...</div>; // Or some loading spinner
+    return (
+      <div
+        className={`w-full h-[100dvh] flex justify-center items-center m-auto
+        ${theme === 'theme1' ? 'bg-background-dark' : 'bg-cyan-dark'}
+      `}
+      >
+        <Spinner />
+      </div>
+    );
   }
 
   const displayName = session?.user?.name ?? user?.name;

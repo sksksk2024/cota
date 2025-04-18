@@ -9,6 +9,7 @@ import Footer from './Footer';
 import Arrow from './utils/Arrow';
 import { useUser } from './hooks/useUser';
 import { useSession } from 'next-auth/react';
+import Spinner from './Spinner';
 
 const Info = () => {
   const { theme } = useThemeStore();
@@ -22,7 +23,15 @@ const Info = () => {
   const displayName = session?.user ?? user;
 
   if (status === 'loading') {
-    return <div>Loading...</div>; // Or some loading spinner
+    return (
+      <div
+        className={`w-full h-[100dvh] flex justify-center items-center m-auto
+        ${theme === 'theme1' ? 'bg-background-dark' : 'bg-cyan-dark'}
+      `}
+      >
+        <Spinner />
+      </div>
+    );
   }
 
   // Handle Toggle Between About Me and Goals

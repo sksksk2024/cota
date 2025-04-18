@@ -7,6 +7,7 @@ import Sun from './utils/Sun';
 import Moon from './utils/Moon';
 import { useUser } from './hooks/useUser';
 import { useSession } from 'next-auth/react';
+import Spinner from './Spinner';
 
 const Header = ({}) => {
   const { theme, toggleTheme } = useThemeStore();
@@ -15,7 +16,15 @@ const Header = ({}) => {
   const { data: session, status } = useSession();
 
   if (status === 'loading') {
-    return <div>Loading...</div>; // Or some loading spinner
+    return (
+      <div
+        className={`w-full h-[100dvh] flex justify-center items-center m-auto
+        ${theme === 'theme1' ? 'bg-background-dark' : 'bg-cyan-dark'}
+      `}
+      >
+        <Spinner />
+      </div>
+    );
   }
 
   const displayName = session?.user?.name ?? user?.name;
