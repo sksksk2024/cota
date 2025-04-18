@@ -6,6 +6,7 @@ CREATE TABLE "User" (
     "emailVerified" TIMESTAMP(3),
     "password" TEXT,
     "image" TEXT,
+    "theme" TEXT,
 
     CONSTRAINT "User_pkey" PRIMARY KEY ("id")
 );
