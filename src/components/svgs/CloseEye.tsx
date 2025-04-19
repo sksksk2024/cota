@@ -1,15 +1,7 @@
 import { motion, Variants } from 'framer-motion';
+import { closedEyeVariants } from '../motionVariants/motionVariants';
 
 export const CloseEye = () => {
-  const closedEyeVariants = {
-    hidden: { opacity: 0, scale: 0.8 },
-    visible: {
-      opacity: 1,
-      scale: 1,
-      transition: { duration: 0.3, ease: 'easeOut' },
-    },
-  };
-
   return (
     <motion.svg
       viewBox="0 0 24 24"

@@ -1,24 +1,14 @@
 import { motion } from 'framer-motion';
+import { openedEyeVariants } from '../motionVariants/motionVariants';
 
 export const OpenEye = () => {
-  const eyeVariants = {
-    visible: { scaleY: 1 },
-    blink: {
-      scaleY: [1, 0.1, 1], // squish vertically
-      transition: {
-        duration: 0.3,
-        ease: 'easeInOut',
-      },
-    },
-  };
-
   return (
     <motion.svg
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 24 24"
       fill="none"
       className="w-6 h-6"
-      variants={eyeVariants}
+      variants={openedEyeVariants}
       animate="visible"
       whileHover="blink"
     >

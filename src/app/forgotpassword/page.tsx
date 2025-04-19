@@ -3,6 +3,11 @@
 import { motion, Variants } from 'framer-motion';
 import { OpenEye } from '@/components/svgs/OpenEye';
 import { CloseEye } from '@/components/svgs/CloseEye';
+import {
+  buttonVariants,
+  mainButtonVariants,
+  inputVariants,
+} from '@/components/motionVariants/motionVariants';
 import { useThemeStore } from '@/components/hooks/useThemeStore';
 import Link from 'next/link';
 import { useState } from 'react';
@@ -69,47 +74,6 @@ const ForgotPassword = () => {
     } catch (err) {
       setErrorMsg('Network error or unexpected issue.');
     }
-  };
-
-  const buttonVariants: Variants = {
-    hidden: {
-      scale: 1,
-    },
-    hover: {
-      scale: [1, 1.01, 1.05, 1.07],
-      transition: {
-        duration: 0.3,
-        repeat: Infinity,
-        repeatType: 'reverse',
-        ease: 'easeInOut',
-      },
-    },
-  };
-
-  const mainButtonVariants: Variants = {
-    hidden: {
-      scale: 1,
-    },
-    hover: {
-      scale: 1.04,
-      transition: {
-        duration: 0.2,
-        ease: 'easeInOut',
-      },
-    },
-  };
-
-  const inputVariants: Variants = {
-    hidden: {
-      scale: 1,
-    },
-    hover: {
-      scale: 1.01,
-      transition: {
-        duration: 0.3,
-        ease: 'easeInOut',
-      },
-    },
   };
 
   return (

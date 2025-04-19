@@ -1,6 +1,7 @@
 'use client';
 
-import { motion, Variants } from 'framer-motion';
+import { motion } from 'framer-motion';
+import { svgVariants, pathVariants } from '../motionVariants/motionVariants';
 import { useThemeStore } from '../hooks/useThemeStore';
 import { ReactNode } from 'react';
 
@@ -16,31 +17,6 @@ type AnimatedSVGProps = {
   children?: ReactNode;
   stroke?: string;
   fill?: string;
-};
-
-const svgVariants: Variants = {
-  hidden: { rotate: -360 },
-  visible: {
-    rotate: 0,
-    transition: {
-      duration: 2,
-      ease: 'easeInOut',
-      repeat: 20,
-      repeatType: 'reverse',
-    },
-  },
-};
-
-const pathVariants = {
-  hidden: { opacity: 0, pathLength: 0 },
-  visible: {
-    opacity: 1,
-    pathLength: 1,
-    transition: {
-      duration: 1,
-      ease: 'easeInOut',
-    },
-  },
 };
 
 const AnimatedSVG: React.FC<AnimatedSVGProps> = ({

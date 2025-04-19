@@ -1,29 +1,8 @@
 // components/Spinner.tsx
 import { motion, Variants } from 'framer-motion';
+import { loadingVariants } from './motionVariants/motionVariants';
 
 const Spinner = () => {
-  const loadingVariants: Variants = {
-    hidden: {
-      scale: 0.6,
-      opacity: 0,
-    },
-    visible: {
-      scale: 1,
-      opacity: 1,
-      transition: {
-        duration: 0.7,
-        ease: 'easeIn',
-      },
-    },
-    exit: {
-      opacity: 0,
-      transition: {
-        duration: 0.5,
-        ease: 'easeIn',
-      },
-    },
-  };
-
   return (
     <motion.div
       className="container"
