@@ -33,7 +33,7 @@ const HomeMain = () => {
   return (
     <main className="relative w-full h-full">
       {/* AnimatePresence ensures exit animation runs (Spinner) */}
-      <AnimatePresence>
+      {/* <AnimatePresence>
         {isLoading && (
           <motion.div
             key="spinner"
@@ -48,56 +48,56 @@ const HomeMain = () => {
             <Spinner />
           </motion.div>
         )}
-      </AnimatePresence>
+      </AnimatePresence> */}
 
       {/* App Content */}
-      {!isLoading && (
-        <div className="relative">
-          {/* Object to fill in the gaps */}
-          <div
-            className={`relative -top-96I
+      {/* {!isLoading && ( */}
+      <div className="relative">
+        {/* Object to fill in the gaps */}
+        <div
+          className={`relative -top-96I
           ${theme === 'theme1' ? 'bg-background-dark' : 'bg-cyan-dark'}
           `}
-          >
-            <Guide />
-            <Header />
-            <Working />
-            {/* Bottom gradient background for header effect */}
-            <div
-              className={`z-0 relative bottom-80I h-auto w-full backdrop-blur-md -mb-160M
+        >
+          <Guide />
+          <Header />
+          <Working />
+          {/* Bottom gradient background for header effect */}
+          <div
+            className={`z-0 relative bottom-80I h-auto w-full backdrop-blur-md -mb-160M
             ${theme === 'theme1' ? 'bg-deep-dark' : 'bg-deep-dark'}
           `}
-            >
-              <Info />
-            </div>
+          >
+            <Info />
           </div>
-          {!displayName ? (
-            <div
-              className={`z-0 absolute -bottom-208I flex justify-center items-center h-300H md:-bottom-96I md:h-192H w-full
-              ${theme === 'theme1' ? 'bg-background-dark' : 'bg-cyan-dark'}
-              `}
-            >
-              <Image
-                src={logo}
-                className="relative bottom-80I w-96W md:w-144W"
-                alt="logo"
-              />
-            </div>
-          ) : (
-            <div
-              className={`z-0 absolute -bottom-320I flex justify-center items-center h-300H md:-bottom-96I md:h-192H w-full lg:-bottom-320I
-              ${theme === 'theme1' ? 'bg-background-dark' : 'bg-cyan-dark'}
-              `}
-            >
-              <Image
-                src={logo}
-                className="relative w-144W bottom-96I xs:bottom-288I md:bottom-0 lg:bottom-240I"
-                alt="logo"
-              />
-            </div>
-          )}
         </div>
-      )}
+        {!displayName ? (
+          <div
+            className={`z-0 absolute -bottom-208I flex justify-center items-center h-300H md:-bottom-96I md:h-192H w-full
+              ${theme === 'theme1' ? 'bg-background-dark' : 'bg-cyan-dark'}
+              `}
+          >
+            <Image
+              src={logo}
+              className="relative bottom-80I w-96W md:w-144W"
+              alt="logo"
+            />
+          </div>
+        ) : (
+          <div
+            className={`z-0 absolute -bottom-320I flex justify-center items-center h-300H md:-bottom-96I md:h-192H w-full lg:-bottom-320I
+              ${theme === 'theme1' ? 'bg-background-dark' : 'bg-cyan-dark'}
+              `}
+          >
+            <Image
+              src={logo}
+              className="relative w-144W bottom-96I xs:bottom-288I md:bottom-0 lg:bottom-240I"
+              alt="logo"
+            />
+          </div>
+        )}
+      </div>
+      {/* )} */}
     </main>
   );
 };

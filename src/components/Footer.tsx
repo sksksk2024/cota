@@ -141,39 +141,23 @@ ${theme === 'theme1' ? 'text-white' : 'text-textis'}
               <div className="flex justify-center items-center gap-5 sm:gap-10">
                 <Link
                   target="_blank"
-                  href="https://www.instagram.com/alextvop2016"
+                  href="https://github.com/sksksk2024/cota"
                   passHref
                 >
                   <Blog />
                 </Link>
-                <Link
-                  target="_blank"
-                  href="https://github.com/sksksk2024"
-                  passHref
-                >
+                <Link href="/games" passHref>
                   <Games />
                 </Link>
-                <Link
-                  target="_blank"
-                  href="https://www.linkedin.com/in/alexandru-co%C8%9Ba-34567b354/"
-                  passHref
-                >
+                <Link href="/live" passHref>
                   <Live />
                 </Link>
-                <Link
-                  target="_blank"
-                  href="https://www.frontendmentor.io/profile/sksksk2024"
-                  passHref
-                >
+                <Link href="/tutorials" passHref>
                   <Tutorials />
                 </Link>
               </div>
               <div className="flex justify-center items-center gap-5 sm:gap-10">
-                <Link
-                  target="_blank"
-                  href="https://www.frontendmentor.io/profile/sksksk2024"
-                  passHref
-                >
+                <Link href="/donations" passHref>
                   <Donations />
                 </Link>
                 <div className="relative flex justify-center items-center m-auto w-48W h-48H">
@@ -186,11 +170,7 @@ ${theme === 'theme1' ? 'text-white' : 'text-textis'}
                     <WingsLogo />
                   </Link>
                 </div>
-                <Link
-                  target="_blank"
-                  href="https://www.frontendmentor.io/profile/sksksk2024"
-                  passHref
-                >
+                <Link href="/newsletter" passHref>
                   <Newsletter />
                 </Link>
               </div>
