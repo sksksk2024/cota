@@ -1,14 +1,19 @@
 import { Variants } from 'framer-motion';
 
 export const svgVariants: Variants = {
-  hidden: { rotate: -360 },
+  hidden: { rotate: 0 },
   visible: {
     rotate: 0,
     transition: {
-      duration: 2,
       ease: 'easeInOut',
-      repeat: 20,
-      repeatType: 'reverse',
+    },
+  },
+  hover: {
+    scale: 1.1,
+    rotate: -10,
+    transition: {
+      duration: 0.4,
+      ease: 'easeInOut',
     },
   },
 };

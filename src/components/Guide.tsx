@@ -1,5 +1,7 @@
 'use client';
 
+import { motion } from 'framer-motion';
+import { buttonVariants } from './motionVariants/motionVariants';
 import { useEffect, useState } from 'react';
 import { useThemeStore } from './hooks/useThemeStore';
 import BurgerMenu from './utils/BurgerMenu';
@@ -93,7 +95,13 @@ const Guide = () => {
             </div>
             {navItems.map((label) =>
               isVisible(label, displayName) ? (
-                <li className={liClasses} key={label}>
+                <motion.li
+                  className={liClasses}
+                  key={label}
+                  variants={buttonVariants}
+                  initial="hidden"
+                  whileHover="hover"
+                >
                   {displayName && label === 'Sign Out' ? (
                     <SignOutButton contentClasses={contentClasses} />
                   ) : (
@@ -101,7 +109,7 @@ const Guide = () => {
                       {label}
                     </Link>
                   )}
-                </li>
+                </motion.li>
               ) : null
             )}
           </>
@@ -111,19 +119,22 @@ const Guide = () => {
               <BurgerMenu />
             </div>
             {['Intro', 'About', 'Explore'].map((label) => (
-              <li
+              <motion.li
+                className={`px-16P py-8P rounded-5BR cursor-pointer font-bold tracking-wide
+                ${
+                  theme === 'theme1'
+                    ? 'text-white bg-green-dark hover:text-background-dark hover:bg-warning'
+                    : ' bg-green-light text-background-dark hover:text-cyan-dark hover:bg-highlight'
+                }
+                `}
                 key={label}
                 onClick={() => scrollTo(label.toLowerCase())}
-                className={`px-16P py-8P rounded-5BR cursor-pointer font-bold tracking-wide
-          ${
-            theme === 'theme1'
-              ? 'text-white bg-green-dark hover:text-background-dark hover:bg-warning'
-              : ' bg-green-light text-background-dark hover:text-cyan-dark hover:bg-highlight'
-          }
-          `}
+                variants={buttonVariants}
+                initial="hidden"
+                whileHover="hover"
               >
                 {label}
-              </li>
+              </motion.li>
             ))}
           </>
         )}

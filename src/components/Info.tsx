@@ -1,5 +1,7 @@
 'use client';
 
+import { motion } from 'framer-motion';
+import { buttonVariants } from './motionVariants/motionVariants';
 import { useState } from 'react';
 import { useThemeStore } from './hooks/useThemeStore';
 import About from './About';
@@ -55,18 +57,21 @@ const Info = () => {
             className="relative top-48I mx-auto text-xl my-64M xl:hidden"
             onClick={handleToggle}
           >
-            <button
-              type="button"
+            <motion.button
               className={`cursor-pointer px-16P pr-64P py-8P rounded-5BR font-bold tracking-wide
-              ${
-                theme === 'theme1'
-                  ? 'text-white bg-green-dark hover:text-background-dark hover:bg-warning'
-                  : ' bg-green-light text-background-dark hover:text-cyan-dark hover:bg-highlight'
-              }
-              `}
+                ${
+                  theme === 'theme1'
+                    ? 'text-white bg-green-dark hover:text-background-dark hover:bg-warning'
+                    : ' bg-green-light text-background-dark hover:text-cyan-dark hover:bg-highlight'
+                }
+                `}
+              type="button"
+              variants={buttonVariants}
+              initial="hidden"
+              whileHover="hover"
             >
               Next section
-            </button>
+            </motion.button>
             <div className="absolute left-176I bottom-[1px]">
               <Arrow />
             </div>
@@ -78,8 +83,7 @@ const Info = () => {
               `}
               onClick={handleToggle}
             >
-              <button
-                type="button"
+              <motion.button
                 className={`px-16P pr-64P py-8P rounded-5BR cursor-pointer font-bold tracking-wide
                   ${
                     theme === 'theme1'
@@ -87,9 +91,13 @@ const Info = () => {
                       : ' bg-green-light text-background-dark hover:text-cyan-dark hover:bg-highlight'
                   }
                   `}
+                type="button"
+                variants={buttonVariants}
+                initial="hidden"
+                whileHover="hover"
               >
                 Next section
-              </button>
+              </motion.button>
               <div className="absolute left-176I bottom-[1px]">
                 <Arrow />
               </div>

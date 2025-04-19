@@ -52,9 +52,10 @@ const AnimatedSVG: React.FC<AnimatedSVGProps> = ({
               : 'fill-black group-hover:fill-highlight'
           }
           `}
-        // variants={svgVariants}
+        variants={svgVariants}
         initial="hidden"
         animate="visible"
+        whileHover="hover"
       >
         <motion.path
           d={pathData}
