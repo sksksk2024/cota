@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { buttonVariants } from './motionVariants/motionVariants';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useThemeStore } from './hooks/useThemeStore';
 import BurgerMenu from './utils/BurgerMenu';
 import XMenu from './utils/XMenu';
@@ -10,7 +10,6 @@ import Link from 'next/link';
 import { useUser } from './hooks/useUser';
 import SignOutButton from './SignOutButton';
 import { useSession } from 'next-auth/react';
-import Spinner from './Spinner';
 
 const Guide = () => {
   const { theme } = useThemeStore();
@@ -88,7 +87,7 @@ const Guide = () => {
             </div>
             {navItems.map((label) =>
               isVisible(label, displayName) ? (
-                <>
+                <React.Fragment key={label}>
                   {displayName && label === 'Edit Profile' && !user ? (
                     <motion.li className={disabledClasses} key={label}>
                       <button disabled className={contentDisabledClasses}>
@@ -117,7 +116,7 @@ const Guide = () => {
                       )}
                     </motion.li>
                   )}
-                </>
+                </React.Fragment>
               ) : null
             )}
           </>

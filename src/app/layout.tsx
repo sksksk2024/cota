@@ -1,4 +1,5 @@
 import ThemeProvider from '@/components/ThemeProvider';
+import { Toaster } from 'react-hot-toast';
 import './globals.css';
 
 export const metadata = {
@@ -18,7 +19,10 @@ export default function RootLayout({
         <link rel="apple-touch-icon" href="/favicon.png" />
       </head>
       <body className={`antialiased relative`}>
-        <ThemeProvider>{children}</ThemeProvider>
+        <ThemeProvider>
+          {children}
+          <Toaster position="top-right" reverseOrder={false} />
+        </ThemeProvider>
       </body>
     </html>
   );

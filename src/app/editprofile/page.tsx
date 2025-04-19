@@ -1,5 +1,6 @@
 'use client';
 
+import { useToast } from '@/components/hooks/useToast';
 import { motion } from 'framer-motion';
 import { OpenEye } from '@/components/svgs/OpenEye';
 import { CloseEye } from '@/components/svgs/CloseEye';
@@ -20,6 +21,8 @@ import { ProtectedPage } from '@/components/ProtectedPage';
 import PageWrapper from '@/components/PageWrapper';
 
 const EditProfile = () => {
+  const { success, error, loading, dismiss } = useToast();
+
   const router = useRouter();
   const { theme } = useThemeStore();
   const { user } = useUser();
@@ -53,6 +56,7 @@ const EditProfile = () => {
     );
     if (!confirmed) return;
 
+    loading('Deleting User...');
     try {
       const res = await fetch('/api/deleteuser', {
         method: 'DELETE',
@@ -60,16 +64,18 @@ const EditProfile = () => {
         body: JSON.stringify({ userId: user?.id }),
       });
 
+      dismiss();
+
       if (res.ok) {
-        alert('User Deleted');
+        success('User Successfully Deleted!');
         router.push('/');
       } else {
         const data = await res.json();
-        alert(`Error: ${data.error}`);
+        error(data.error || 'Something went wrong.');
       }
-    } catch (error) {
-      console.error(error);
-      alert('Something went wrong. Please try again.');
+    } catch (err) {
+      console.error(err);
+      error('Something went wrong.');
     }
   };
 
@@ -97,6 +103,7 @@ const EditProfile = () => {
       return;
     }
 
+    loading('Editing User...');
     try {
       const res = await fetch('/api/editprofile', {
         method: 'POST',
@@ -105,14 +112,18 @@ const EditProfile = () => {
       });
 
       const data = await res.json();
+      dismiss();
+
       if (!res.ok) {
-        alert(data.error || 'Something went wrong');
+        error(data.error || 'Something went wrong');
         return;
       }
 
+      success('User Successfully Edited!');
       router.push('/');
     } catch (err) {
       setErrorMsg('Network error or unexpected issue');
+      error('Something went wrong.');
     }
   };
 

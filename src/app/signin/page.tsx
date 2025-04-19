@@ -1,5 +1,6 @@
 'use client';
 
+import { useToast } from '@/components/hooks/useToast';
 import { motion } from 'framer-motion';
 import { OpenEye } from '@/components/svgs/OpenEye';
 import { CloseEye } from '@/components/svgs/CloseEye';
@@ -16,6 +17,8 @@ import { signinSchema, SignInInput } from '@/lib/schemas';
 import PageWrapper from '@/components/PageWrapper';
 
 const SignIn = () => {
+  const { success, error, loading, dismiss } = useToast();
+
   const router = useRouter();
 
   const { theme } = useThemeStore();
@@ -44,6 +47,7 @@ const SignIn = () => {
       return;
     }
 
+    loading('Signing In...');
     try {
       const res = await fetch('/api/signin', {
         method: 'POST',
@@ -54,17 +58,18 @@ const SignIn = () => {
 
       const text = await res.text();
       const data = JSON.parse(text);
-      // console.log('Raw response:', text);
+      dismiss();
 
       if (res.ok) {
-        // console.log('Signed in:', data);
+        success('Successfully Signed In!');
         router.push('/');
       } else {
         setErrorMsg(data.error || 'Unknown error occurred');
-        // alert(data.error);
+        error(data.error || 'Something Went Wrong!');
       }
     } catch (err) {
       setErrorMsg('Network error or unexpected issue.');
+      error('Something Went Wrong!');
     }
   };
 

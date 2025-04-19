@@ -1,5 +1,6 @@
 'use client';
 
+import { useToast } from '@/components/hooks/useToast';
 import { motion } from 'framer-motion';
 import { OpenEye } from '@/components/svgs/OpenEye';
 import { CloseEye } from '@/components/svgs/CloseEye';
@@ -13,14 +14,14 @@ import Link from 'next/link';
 import { FormEvent, useState } from 'react';
 import GitHubIcon from '@/components/svgs/github.svg';
 import GoogleIcon from '@/components/svgs/google.svg';
-// import OpenEye from '@/components/svgs/openEye.svg';
-// import CloseEye from '@/components/svgs/closeEye.svg';
 import { useRouter } from 'next/navigation';
 import { signupSchema, SignupInput } from '@/lib/schemas';
 import { signIn } from 'next-auth/react';
 import PageWrapper from '@/components/PageWrapper';
 
 const SignUp = () => {
+  const { success, error, loading, dismiss } = useToast();
+
   const router = useRouter();
 
   const { theme } = useThemeStore();
@@ -49,6 +50,7 @@ const SignUp = () => {
       return;
     }
 
+    loading('Signing Up...');
     // Try catch block for validation
     try {
       const res = await fetch('/api/signup', {
@@ -60,17 +62,18 @@ const SignUp = () => {
 
       const text = await res.text();
       const data = JSON.parse(text);
-      // console.log('Raw response:', text);
+      dismiss();
 
       if (res.ok) {
-        // console.log('Signed up:', data);
+        success('Successfully Signed Up!');
         router.push('/');
       } else {
         setErrorMsg(data.error || 'Unknown error occurred');
-        // alert(data.error);
+        error(data.error || 'Something Went Wrong!');
       }
     } catch (err) {
       setErrorMsg('Network error or unexpected issue.');
+      error('Something Went Wrong!');
     }
   };
 

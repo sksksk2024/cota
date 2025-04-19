@@ -1,5 +1,6 @@
 'use client';
 
+import { useToast } from '@/components/hooks/useToast';
 import { motion } from 'framer-motion';
 import { OpenEye } from '@/components/svgs/OpenEye';
 import { CloseEye } from '@/components/svgs/CloseEye';
@@ -16,6 +17,8 @@ import { forgotPasswordSchema, ForgotPasswordInput } from '@/lib/schemas';
 import PageWrapper from '@/components/PageWrapper';
 
 const ForgotPassword = () => {
+  const { success, error, loading, dismiss } = useToast();
+
   const router = useRouter();
   const { theme } = useThemeStore();
 
@@ -47,6 +50,7 @@ const ForgotPassword = () => {
       return;
     }
 
+    loading('Resetting password...');
     try {
       // Handle the password reset process (e.g., API call)
       const res = await fetch('/api/forgotpassword', {
@@ -60,16 +64,18 @@ const ForgotPassword = () => {
       });
 
       const data = await res.json();
+      dismiss();
 
       if (!res.ok) {
-        alert(data.error || 'Something went wrong');
+        error(data.error || 'Something Went Wrong!');
         return;
       }
 
+      success('Password Successfully Changed!');
       router.push('/signin');
-      // alert('Password has been changed');
     } catch (err) {
       setErrorMsg('Network error or unexpected issue.');
+      error('Something Went Wrong!');
     }
   };
 

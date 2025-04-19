@@ -1,5 +1,6 @@
 'use client';
 
+import { useToast } from './hooks/useToast';
 import { useRouter } from 'next/navigation';
 
 type SignOutButtonProps = {
@@ -7,20 +8,24 @@ type SignOutButtonProps = {
 };
 
 const SignOutButton = ({ contentClasses = '' }: SignOutButtonProps) => {
+  const { success, error, loading, dismiss } = useToast();
+
   const router = useRouter();
 
   const handleSignOut = async () => {
+    loading('Signing Out...');
     try {
       const response = await fetch('/api/signout', {
         method: 'GET',
         credentials: 'include',
       });
 
-      console.log('Sign-out response:', response);
+      dismiss();
 
+      success('Successfully Signed Out!');
       router.push('/signin');
-    } catch (error) {
-      console.error('Sign out failed:', error);
+    } catch (err) {
+      error('Something Went Wrong!');
     }
   };
 
