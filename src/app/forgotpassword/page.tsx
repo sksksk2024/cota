@@ -1,10 +1,13 @@
 'use client';
 
+import { motion, Variants } from 'framer-motion';
+import { OpenEye } from '@/components/svgs/OpenEye';
+import { CloseEye } from '@/components/svgs/CloseEye';
 import { useThemeStore } from '@/components/hooks/useThemeStore';
 import Link from 'next/link';
 import { useState } from 'react';
-import OpenEye from '@/components/svgs/openEye.svg';
-import CloseEye from '@/components/svgs/closeEye.svg';
+// import OpenEye from '@/components/svgs/openEye.svg';
+// import CloseEye from '@/components/svgs/closeEye.svg';
 import { useRouter } from 'next/navigation';
 import { useUser } from '@/components/hooks/useUser';
 import { forgotPasswordSchema, ForgotPasswordInput } from '@/lib/schemas';
@@ -68,6 +71,47 @@ const ForgotPassword = () => {
     }
   };
 
+  const buttonVariants: Variants = {
+    hidden: {
+      scale: 1,
+    },
+    hover: {
+      scale: [1, 1.01, 1.05, 1.07],
+      transition: {
+        duration: 0.3,
+        repeat: Infinity,
+        repeatType: 'reverse',
+        ease: 'easeInOut',
+      },
+    },
+  };
+
+  const mainButtonVariants: Variants = {
+    hidden: {
+      scale: 1,
+    },
+    hover: {
+      scale: 1.04,
+      transition: {
+        duration: 0.2,
+        ease: 'easeInOut',
+      },
+    },
+  };
+
+  const inputVariants: Variants = {
+    hidden: {
+      scale: 1,
+    },
+    hover: {
+      scale: 1.01,
+      transition: {
+        duration: 0.3,
+        ease: 'easeInOut',
+      },
+    },
+  };
+
   return (
     <main
       className={`w-full h-[100dvh] my-auto flex flex-col justify-center items-center gap-10 px-16P md:px-64P
@@ -93,7 +137,7 @@ const ForgotPassword = () => {
       >
         {/* EMAIL INPUT */}
         <label className={`w-full`} htmlFor="email">
-          <input
+          <motion.input
             className={`outline-none text-textis text-center font-bold px-32P py-8P rounded-5BR bg-snow-gray border-none w-full shadow-soft-cyan focus:shadow-hover-cyan placeholder:text-gray-400 placeholder:opacity-90 focus:outline-none focus:ring-0 focus:border-transparent hover:placeholder:text-gray-900
               ${theme === 'theme1' ? 'hover:bg-warning' : 'hover:bg-highlight'}
               `}
@@ -103,12 +147,15 @@ const ForgotPassword = () => {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             placeholder="Enter Your Email"
+            variants={inputVariants}
+            initial="hidden"
+            whileHover="hover"
           />
         </label>
 
         {/* NEW PASSWORD */}
         <label className={`relative group w-full`} htmlFor="newPassword">
-          <input
+          <motion.input
             className={`outline-none text-textis text-center font-bold px-32P py-8P rounded-5BR bg-snow-gray border-none w-full shadow-soft-cyan focus:shadow-hover-cyan placeholder:text-gray-400 placeholder:opacity-90 focus:outline-none focus:ring-0 focus:border-transparent hover:placeholder:text-gray-900
               ${theme === 'theme1' ? 'hover:bg-warning' : 'hover:bg-highlight'}
               `}
@@ -118,6 +165,9 @@ const ForgotPassword = () => {
             value={newPassword}
             onChange={(e) => setNewPassword(e.target.value)}
             placeholder="Enter New Password"
+            variants={inputVariants}
+            initial="hidden"
+            whileHover="hover"
           />
           {!showPassword ? (
             <button
@@ -152,7 +202,7 @@ const ForgotPassword = () => {
 
         {/* CONFIRM PASSWORD */}
         <label className={`relative group w-full`} htmlFor="confirmPassword">
-          <input
+          <motion.input
             className={`outline-none text-textis text-center font-bold px-32P py-8P rounded-5BR bg-snow-gray border-none w-full shadow-soft-cyan focus:shadow-hover-cyan placeholder:text-gray-400 placeholder:opacity-90 focus:outline-none focus:ring-0 focus:border-transparent hover:placeholder:text-gray-900
               ${theme === 'theme1' ? 'hover:bg-warning' : 'hover:bg-highlight'}
               `}
@@ -162,6 +212,9 @@ const ForgotPassword = () => {
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
             placeholder="Confirm New Password"
+            variants={inputVariants}
+            initial="hidden"
+            whileHover="hover"
           />
           {!showConfirmPassword ? (
             <button
@@ -195,7 +248,7 @@ const ForgotPassword = () => {
         </label>
 
         {/* SUBMIT BUTTON */}
-        <button
+        <motion.button
           type="submit"
           className={`flex justify-center items-center gap-2 font-bold text-lg text-center font-bold px-32P py-8P rounded-5BR ring-none border-none w-full tracking-0.1 shadow-soft-cyan cursor-pointer transition
             ${
@@ -204,9 +257,12 @@ const ForgotPassword = () => {
                 : ' bg-green-light text-background-dark hover:text-cyan-dark hover:bg-highlight'
             }
             `}
+          variants={mainButtonVariants}
+          initial="hidden"
+          whileHover="hover"
         >
           Reset Password
-        </button>
+        </motion.button>
 
         {/* ERROR MESSAGE */}
         {errorMsg && (
@@ -219,7 +275,7 @@ const ForgotPassword = () => {
       </form>
 
       {/* SIGN IN LINK */}
-      <Link
+      <motion.div
         className={`cursor-pointer px-16P py-8P rounded-5BR font-bold tracking-wide
               ${
                 theme === 'theme1'
@@ -227,11 +283,14 @@ const ForgotPassword = () => {
                   : ' bg-green-light text-background-dark hover:text-cyan-dark hover:bg-highlight'
               }
               `}
-        href="/signin"
-        passHref
+        variants={buttonVariants}
+        initial="hidden"
+        whileHover="hover"
       >
-        Sign In
-      </Link>
+        <Link href="/signin" passHref>
+          Sign In
+        </Link>
+      </motion.div>
     </main>
   );
 };

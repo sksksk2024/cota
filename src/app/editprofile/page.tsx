@@ -1,11 +1,14 @@
 'use client';
 
+import { motion, Variants } from 'framer-motion';
+import { OpenEye } from '@/components/svgs/OpenEye';
+import { CloseEye } from '@/components/svgs/CloseEye';
 import { useThemeStore } from '@/components/hooks/useThemeStore';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import OpenEye from '@/components/svgs/openEye.svg';
-import CloseEye from '@/components/svgs/closeEye.svg';
+// import OpenEye from '@/components/svgs/openEye.svg';
+// import CloseEye from '@/components/svgs/closeEye.svg';
 import Locked from '@/components/svgs/locked.svg';
 import Unlocked from '@/components/svgs/unlocked.svg';
 import { useUser } from '@/components/hooks/useUser';
@@ -108,6 +111,47 @@ const EditProfile = () => {
     }
   };
 
+  const buttonVariants: Variants = {
+    hidden: {
+      scale: 1,
+    },
+    hover: {
+      scale: [1, 1.01, 1.05, 1.07],
+      transition: {
+        duration: 0.3,
+        repeat: Infinity,
+        repeatType: 'reverse',
+        ease: 'easeInOut',
+      },
+    },
+  };
+
+  const mainButtonVariants: Variants = {
+    hidden: {
+      scale: 1,
+    },
+    hover: {
+      scale: 1.04,
+      transition: {
+        duration: 0.2,
+        ease: 'easeInOut',
+      },
+    },
+  };
+
+  const inputVariants: Variants = {
+    hidden: {
+      scale: 1,
+    },
+    hover: {
+      scale: 1.01,
+      transition: {
+        duration: 0.3,
+        ease: 'easeInOut',
+      },
+    },
+  };
+
   return (
     <main
       className={`w-full h-[100dvh] my-auto flex flex-col justify-center items-center gap-10 px-16P md:px-64P
@@ -138,7 +182,7 @@ const EditProfile = () => {
           `}
           htmlFor="name"
         >
-          <input
+          <motion.input
             value={name}
             onChange={(e) => setName(e.target.value)}
             readOnly={isOAuthUser || !editName}
@@ -151,6 +195,9 @@ const EditProfile = () => {
             name="name"
             type="text"
             placeholder="Name"
+            variants={inputVariants}
+            initial="hidden"
+            whileHover="hover"
           />
           {!editName ? (
             <button
@@ -193,7 +240,7 @@ const EditProfile = () => {
           `}
           htmlFor="email"
         >
-          <input
+          <motion.input
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             readOnly={isOAuthUser || !editEmail}
@@ -206,6 +253,9 @@ const EditProfile = () => {
             name="email"
             type="email"
             placeholder="Email"
+            variants={inputVariants}
+            initial="hidden"
+            whileHover="hover"
           />
           {!editEmail ? (
             <button
@@ -245,7 +295,7 @@ const EditProfile = () => {
           <>
             {/* EDIT PASSWORD */}
             <label className={`relative group w-full`} htmlFor="password">
-              <input
+              <motion.input
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 className={`outline-none text-textis text-center font-bold px-32P py-8P rounded-5BR bg-snow-gray border-none w-full shadow-soft-cyan focus:shadow-hover-cyan placeholder:text-gray-400 placeholder:opacity-90 focus:outline-none focus:ring-0 focus:border-transparent hover:placeholder:text-gray-900
@@ -255,6 +305,9 @@ const EditProfile = () => {
                 name="password"
                 type={`${showPassword ? 'text' : 'password'}`}
                 placeholder="New Password"
+                variants={inputVariants}
+                initial="hidden"
+                whileHover="hover"
               />
               {!showPassword ? (
                 <button
@@ -293,7 +346,7 @@ const EditProfile = () => {
               className={`relative group w-full`}
               htmlFor="confirmPassword"
             >
-              <input
+              <motion.input
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
                 className={`outline-none text-textis text-center font-bold px-32P py-8P rounded-5BR bg-snow-gray border-none w-full shadow-soft-cyan focus:shadow-hover-cyan placeholder:text-gray-400 placeholder:opacity-90 focus:outline-none focus:ring-0 focus:border-transparent hover:placeholder:text-gray-900
@@ -303,6 +356,9 @@ const EditProfile = () => {
                 name="confirmPassword"
                 type={`${showConfirmPassword ? 'text' : 'password'}`}
                 placeholder="Confirm Password"
+                variants={inputVariants}
+                initial="hidden"
+                whileHover="hover"
               />
               {!showConfirmPassword ? (
                 <button
@@ -339,18 +395,21 @@ const EditProfile = () => {
         )}
 
         {/* Edit Profile Button */}
-        <button
+        <motion.button
           type="submit"
-          className={`flex justify-center items-center gap-2 font-bold text-lg text-center font-bold px-32P py-8P rounded-5BR ring-none border-none w-full tracking-0.1 shadow-soft-cyan cursor-pointer transition
+          className={`flex justify-center items-center gap-2 font-bold text-center font-bold px-32P py-8P rounded-5BR ring-none border-none w-full tracking-0.1 shadow-soft-cyan cursor-pointer transition
             ${
               theme === 'theme1'
                 ? 'text-white bg-green-dark hover:text-background-dark hover:bg-warning'
                 : ' bg-green-light text-background-dark hover:text-cyan-dark hover:bg-highlight'
             }
             `}
+          variants={mainButtonVariants}
+          initial="hidden"
+          whileHover="hover"
         >
-          Edit Profile
-        </button>
+          <div className="text-lg">Edit Profile</div>
+        </motion.button>
 
         {/* ERROR MESSAGE */}
         {errorMsg && (
@@ -364,21 +423,24 @@ const EditProfile = () => {
 
       {/* HOME LINK && DELETE LINK */}
       <div className="flex justify-center items-center gap-5 w-full min-w-container-300 max-w-container-600">
-        <Link
+        <motion.div
           className={`text-center w-1/2 cursor-pointer px-16P py-8P rounded-5BR font-bold tracking-wide
-              ${
-                theme === 'theme1'
-                  ? 'text-white bg-green-dark hover:text-background-dark hover:bg-warning'
-                  : ' bg-green-light text-background-dark hover:text-cyan-dark hover:bg-highlight'
-              }
-              `}
-          href="/"
-          passHref
+          ${
+            theme === 'theme1'
+              ? 'text-white bg-green-dark hover:text-background-dark hover:bg-warning'
+              : ' bg-green-light text-background-dark hover:text-cyan-dark hover:bg-highlight'
+          }
+          `}
+          variants={buttonVariants}
+          initial="hidden"
+          whileHover="hover"
         >
-          Go Home
-        </Link>
+          <Link href="/" passHref>
+            Go Home
+          </Link>
+        </motion.div>
 
-        <button
+        <motion.button
           type="button"
           onClick={handleDeleteUser}
           className={`w-1/2 cursor-pointer px-16P py-8P rounded-5BR font-bold tracking-wide
@@ -388,9 +450,12 @@ const EditProfile = () => {
                   : ' bg-green-light text-background-dark hover:text-cyan-dark hover:bg-highlight'
               }
               `}
+          variants={buttonVariants}
+          initial="hidden"
+          whileHover="hover"
         >
           Delete User
-        </button>
+        </motion.button>
       </div>
 
       {isOAuthUser && (
