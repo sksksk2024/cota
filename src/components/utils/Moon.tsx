@@ -1,4 +1,4 @@
-const Sun = ({
+const Moon = ({
   onClick,
   className,
 }: {
@@ -19,4 +19,4 @@ const Sun = ({
   );
 };
 
-export default Sun;
+export default Moon;

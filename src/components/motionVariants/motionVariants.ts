@@ -1,5 +1,39 @@
 import { Variants } from 'framer-motion';
 
+export const sunVariants: Variants = {
+  initial: {
+    rotate: 0,
+    transition: {
+      duration: 0.4,
+      ease: 'easeInOut',
+    },
+  },
+  hover: {
+    rotate: 180,
+    transition: {
+      duration: 0.8,
+      ease: 'easeInOut',
+    },
+  },
+};
+
+export const moonVariants: Variants = {
+  initial: {
+    rotate: 0,
+    transition: {
+      duration: 0.4,
+      ease: 'easeInOut',
+    },
+  },
+  hover: {
+    rotate: 360,
+    transition: {
+      duration: 0.8,
+      ease: 'easeInOut',
+    },
+  },
+};
+
 export const svgVariants: Variants = {
   hidden: { rotate: 0 },
   visible: {

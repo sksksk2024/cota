@@ -52,12 +52,12 @@ const HomeMain = () => {
 
       {/* App Content */}
       {!isLoading && (
-        <motion.div className="relative">
+        <div className="relative">
           {/* Object to fill in the gaps */}
           <div
             className={`relative -top-96I
-        ${theme === 'theme1' ? 'bg-background-dark' : 'bg-cyan-dark'}
-        `}
+          ${theme === 'theme1' ? 'bg-background-dark' : 'bg-cyan-dark'}
+          `}
           >
             <Guide />
             <Header />
@@ -96,7 +96,7 @@ const HomeMain = () => {
               />
             </div>
           )}
-        </motion.div>
+        </div>
       )}
     </main>
   );
