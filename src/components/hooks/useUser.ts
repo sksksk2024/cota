@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 
 export const useUser = () => {
   const [user, setUser] = useState<any>(null);
+  const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
     const fetchUserFromCookie = async () => {
@@ -16,14 +17,18 @@ export const useUser = () => {
         }
         const data = await res.json();
         setUser(data.user);
+        setLoading(false);
       } catch (err) {
         console.error('Error fetching user:', err);
         setUser(null);
+        setLoading(false);
+      } finally {
+        setLoading(false);
       }
     };
 
     fetchUserFromCookie();
   }, []);
 
-  return user;
+  return { user, loading };
 };

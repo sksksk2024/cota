@@ -1,35 +1,29 @@
-// app/api/deleteuser/route.ts
 import { getServerSession } from 'next-auth/next';
 import { authOptions } from '@/lib/auth';
 import { PrismaClient } from '@prisma/client';
 import { NextResponse } from 'next/server';
-import { cookies } from 'next/headers';
 import { serialize } from 'cookie';
 
 const prisma = new PrismaClient();
 
 export async function DELETE(req: Request) {
-  // Try to get the session (GitHub/Google users)
-  const session = await getServerSession(authOptions);
-
-  let userId = session?.user?.id;
-
-  // If session-based ID not found, try reading from body (manual users)
-  if (!userId) {
-    const { userId: bodyId } = await req.json();
-    if (!bodyId) {
-      return NextResponse.json({ error: 'Missing user ID' }, { status: 400 });
-    }
-    userId = bodyId;
-  }
+  let userId: string | undefined;
 
   try {
+    const session = await getServerSession(authOptions);
+    userId = session?.user?.id;
+
+    if (!userId) {
+      const body = await req.json();
+      userId = body?.userId;
+      if (!userId) {
+        return NextResponse.json({ error: 'Missing user ID' }, { status: 400 });
+      }
+    }
+
     await prisma.user.delete({
       where: { id: userId },
     });
-
-    // Clear both next-auth cookie & custom cookie for safety
-    const res = NextResponse.json({ message: 'User Deleted' }, { status: 200 });
 
     const clearNextAuth = serialize('next-auth.session-token', '', {
       httpOnly: true,
@@ -39,7 +33,7 @@ export async function DELETE(req: Request) {
       secure: process.env.NODE_ENV === 'production',
     });
 
-    const clearCustomCookie = serialize('user', '', {
+    const clearCustom = serialize('user', '', {
       httpOnly: true,
       path: '/',
       maxAge: 0,
@@ -47,10 +41,8 @@ export async function DELETE(req: Request) {
       secure: process.env.NODE_ENV === 'production',
     });
 
-    res.headers.set(
-      'Set-Cookie',
-      [clearNextAuth, clearCustomCookie].join(', ')
-    );
+    const res = NextResponse.json({ message: 'User Deleted' }, { status: 200 });
+    res.headers.set('Set-Cookie', [clearNextAuth, clearCustom].join(', '));
 
     return res;
   } catch (err) {

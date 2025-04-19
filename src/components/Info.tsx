@@ -18,23 +18,11 @@ const Info = () => {
 
   const [goals, setGoals] = useState<boolean>(false);
 
-  const user = useUser();
+  const { user } = useUser();
 
-  const { data: session, status } = useSession();
+  const { data: session } = useSession();
 
   const displayName = session?.user ?? user;
-
-  if (status === 'loading') {
-    return (
-      <div
-        className={`w-full h-[100dvh] flex justify-center items-center m-auto
-        ${theme === 'theme1' ? 'bg-background-dark' : 'bg-cyan-dark'}
-      `}
-      >
-        <Spinner />
-      </div>
-    );
-  }
 
   // Handle Toggle Between About Me and Goals
   const handleToggle = () => {

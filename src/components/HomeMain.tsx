@@ -16,7 +16,7 @@ import { useEffect, useState } from 'react';
 const HomeMain = () => {
   const [isLoading, setIsLoading] = useState(true);
   const { theme } = useThemeStore();
-  const user = useUser();
+  const { user } = useUser();
 
   const { data: session, status } = useSession();
 

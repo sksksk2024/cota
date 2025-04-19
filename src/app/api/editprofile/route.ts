@@ -7,7 +7,6 @@ import { editProfileSchema } from '@/lib/schemas';
 const prisma = new PrismaClient();
 
 export async function POST(req: Request) {
-  // const { userId, name, email, password } = await req.json();
   const body = await req.json();
   const result = editProfileSchema.safeParse(body);
 
@@ -18,38 +17,48 @@ export async function POST(req: Request) {
 
   const { userId, name, email, password } = result.data;
 
-  let hashedPassword: string | undefined = undefined;
-  if (password) {
-    hashedPassword = await bcrypt.hash(password, 10);
+  try {
+    const hashedPassword = password
+      ? await bcrypt.hash(password, 10)
+      : undefined;
+
+    const updatedUser = await prisma.user.update({
+      where: { id: userId },
+      data: {
+        name,
+        email,
+        ...(hashedPassword && { password: hashedPassword }),
+      },
+    });
+
+    const cookie = serialize(
+      'user',
+      JSON.stringify({
+        id: updatedUser.id,
+        name: updatedUser.name,
+        email: updatedUser.email,
+      }),
+      {
+        httpOnly: true,
+        path: '/',
+        maxAge: 60 * 60 * 24 * 7, // 1 week
+        sameSite: 'lax',
+        secure: process.env.NODE_ENV === 'production',
+      }
+    );
+
+    const res = NextResponse.json(
+      { message: 'User Updated', user: updatedUser },
+      { status: 200 }
+    );
+    res.headers.set('Set-Cookie', cookie);
+
+    return res;
+  } catch (err) {
+    console.error('Error updating user:', err);
+    return NextResponse.json(
+      { error: 'Failed to update user' },
+      { status: 500 }
+    );
   }
-
-  const user = await prisma.user.update({
-    where: { id: userId },
-    data: {
-      name,
-      email,
-      ...(hashedPassword && { password: hashedPassword }),
-    },
-  });
-
-  // Serialize user into a cookie (DON'T do this in production — use tokens instead)
-  const cookie = serialize(
-    'user',
-    JSON.stringify({ id: user.id, name: user.name, email: user.email }),
-    {
-      httpOnly: true,
-      path: '/',
-      maxAge: 60 * 60 * 24 * 7, // 1 week
-      sameSite: 'lax',
-      secure: process.env.NODE_ENV === 'production',
-    }
-  );
-
-  const res = NextResponse.json(
-    { message: 'User Updated', user },
-    { status: 200 }
-  );
-  res.headers.set('Set-Cookie', cookie);
-
-  return res;
 }

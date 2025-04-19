@@ -15,23 +15,11 @@ import Spinner from './Spinner';
 const Guide = () => {
   const { theme } = useThemeStore();
   const [scrolled, setScrolled] = useState(false);
-  const user = useUser();
+  const { user } = useUser();
 
   const [openSideBar, setOpenSideBar] = useState<boolean>(false);
 
-  const { data: session, status } = useSession();
-
-  if (status === 'loading') {
-    return (
-      <div
-        className={`w-full h-[100dvh] flex justify-center items-center m-auto
-        ${theme === 'theme1' ? 'bg-background-dark' : 'bg-cyan-dark'}
-      `}
-      >
-        <Spinner />
-      </div>
-    );
-  }
+  const { data: session } = useSession();
 
   const displayName = session?.user?.name ?? user?.name;
 
@@ -51,6 +39,11 @@ const Guide = () => {
       ? 'text-white bg-green-dark hover:text-background-dark hover:bg-warning'
       : 'bg-green-light text-background-dark hover:text-cyan-dark hover:bg-highlight'
   }`;
+
+  const disabledClasses = `rounded-5BR cursor-not-allowed font-bold tracking-wide text-white bg-gray-500`;
+
+  const contentDisabledClasses =
+    'px-16P py-8P w-full h-full flex items-center justify-center';
 
   const contentClasses =
     'px-16P py-8P w-full h-full flex items-center justify-center cursor-pointer';
@@ -95,21 +88,36 @@ const Guide = () => {
             </div>
             {navItems.map((label) =>
               isVisible(label, displayName) ? (
-                <motion.li
-                  className={liClasses}
-                  key={label}
-                  variants={buttonVariants}
-                  initial="hidden"
-                  whileHover="hover"
-                >
-                  {displayName && label === 'Sign Out' ? (
-                    <SignOutButton contentClasses={contentClasses} />
+                <>
+                  {displayName && label === 'Edit Profile' && !user ? (
+                    <motion.li className={disabledClasses} key={label}>
+                      <button disabled className={contentDisabledClasses}>
+                        {label}
+                      </button>
+                    </motion.li>
                   ) : (
-                    <Link href={getLinkPath(label)} className={contentClasses}>
-                      {label}
-                    </Link>
+                    <motion.li
+                      className={liClasses}
+                      key={label}
+                      variants={buttonVariants}
+                      initial="hidden"
+                      whileHover="hover"
+                    >
+                      {displayName && label === 'Sign Out' ? (
+                        <SignOutButton contentClasses={contentClasses} />
+                      ) : (
+                        <button disabled>
+                          <Link
+                            href={getLinkPath(label)}
+                            className={contentClasses}
+                          >
+                            {label}
+                          </Link>
+                        </button>
+                      )}
+                    </motion.li>
                   )}
-                </motion.li>
+                </>
               ) : null
             )}
           </>

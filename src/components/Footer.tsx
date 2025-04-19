@@ -24,21 +24,9 @@ import Spinner from './Spinner';
 const Footer = () => {
   const { theme } = useThemeStore();
   const { copy, copied } = useCopyToClipboard();
-  const user = useUser();
+  const { user } = useUser();
 
-  const { data: session, status } = useSession();
-
-  if (status === 'loading') {
-    return (
-      <div
-        className={`w-full h-[100dvh] flex justify-center items-center m-auto
-        ${theme === 'theme1' ? 'bg-background-dark' : 'bg-cyan-dark'}
-      `}
-      >
-        <Spinner />
-      </div>
-    );
-  }
+  const { data: session } = useSession();
 
   const displayUser = session?.user ?? user;
 
