@@ -1,6 +1,6 @@
 'use client';
 
-import { AnimatePresence, motion, Variants } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 import logo from './../app/favicon.ico';
 import Info from '@/components/Info';
 import Header from '@/components/Header';

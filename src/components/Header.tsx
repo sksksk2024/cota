@@ -9,7 +9,7 @@ import { useUser } from './hooks/useUser';
 import { useSession } from 'next-auth/react';
 import Spinner from './Spinner';
 
-const Header = ({}) => {
+const Header = () => {
   const { theme, toggleTheme } = useThemeStore();
   const user = useUser();
 
