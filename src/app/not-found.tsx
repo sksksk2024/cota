@@ -1,7 +1,11 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { buttonVariants } from '@/components/motionVariants/motionVariants';
+import {
+  buttonVariants,
+  moonVariants,
+  sunVariants,
+} from '@/components/motionVariants/motionVariants';
 import Image from 'next/image';
 import logo from './favicon.ico';
 import { useThemeStore } from '@/components/hooks/useThemeStore';
@@ -30,15 +34,27 @@ const notFound = () => {
             alt="triangle"
           />
           {theme === 'theme1' ? (
-            <Sun
-              onClick={toggleTheme}
-              className="min-w-container-48 w-64W h-64H cursor-pointer fill-white text-white hover:text-warning hover:fill-warning transition-colors duration-300 md:hidden"
-            />
+            <motion.div
+              variants={sunVariants}
+              initial="initial"
+              whileHover="hover"
+            >
+              <Sun
+                onClick={toggleTheme}
+                className="min-w-container-48 w-64W h-64H cursor-pointer fill-white text-white hover:text-warning hover:fill-warning transition-colors duration-300 md:hidden"
+              />
+            </motion.div>
           ) : (
-            <Moon
-              onClick={toggleTheme}
-              className="min-w-container-48 w-64W h-64H cursor-pointer fill-textis hover:fill-highlight transition-colors duration-300 md:hidden"
-            />
+            <motion.div
+              variants={moonVariants}
+              initial="initial"
+              whileHover="hover"
+            >
+              <Moon
+                onClick={toggleTheme}
+                className="min-w-container-48 w-64W h-64H cursor-pointer fill-textis hover:fill-highlight transition-colors duration-300 md:hidden"
+              />
+            </motion.div>
           )}
         </div>
         <h1
@@ -50,15 +66,27 @@ const notFound = () => {
         </h1>
 
         {theme === 'theme1' ? (
-          <Sun
-            onClick={toggleTheme}
-            className="hidden min-w-container-48 w-64W h-64H cursor-pointer fill-white text-white hover:text-warning hover:fill-warning transition-colors duration-300 md:block"
-          />
+          <motion.div
+            variants={sunVariants}
+            initial="initial"
+            whileHover="hover"
+          >
+            <Sun
+              onClick={toggleTheme}
+              className="hidden min-w-container-48 w-64W h-64H cursor-pointer fill-white text-white hover:text-warning hover:fill-warning transition-colors duration-300 md:block"
+            />
+          </motion.div>
         ) : (
-          <Moon
-            onClick={toggleTheme}
-            className="hidden min-w-container-48 w-64W h-64H cursor-pointer fill-textis hover:fill-highlight transition-colors duration-300 md:block"
-          />
+          <motion.div
+            variants={moonVariants}
+            initial="initial"
+            whileHover="hover"
+          >
+            <Moon
+              onClick={toggleTheme}
+              className="hidden min-w-container-48 w-64W h-64H cursor-pointer fill-textis hover:fill-highlight transition-colors duration-300 md:block"
+            />
+          </motion.div>
         )}
       </section>
       <section
