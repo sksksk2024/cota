@@ -1,5 +1,7 @@
 'use client';
 
+import { motion } from 'framer-motion';
+import { buttonVariants } from '@/components/motionVariants/motionVariants';
 import Image from 'next/image';
 import logo from './favicon.ico';
 import { useThemeStore } from '@/components/hooks/useThemeStore';
@@ -66,19 +68,25 @@ const notFound = () => {
       >
         <h1>Looks like you've hit a dead end! This page doesn't exist.</h1>
 
-        <Link
-          className={`cursor-pointer px-16P py-8P rounded-5BR font-bold tracking-wide
+        <motion.button
+          variants={buttonVariants}
+          initial="initial"
+          whileHover="hover"
+        >
+          <Link
+            className={`cursor-pointer px-16P py-8P rounded-5BR font-bold tracking-wide
               ${
                 theme === 'theme1'
                   ? 'text-white bg-green-dark hover:text-background-dark hover:bg-warning'
                   : ' bg-green-light text-background-dark hover:text-cyan-dark hover:bg-highlight'
               }
               `}
-          href="/"
-          passHref
-        >
-          Go Home
-        </Link>
+            href="/"
+            passHref
+          >
+            Go Home
+          </Link>
+        </motion.button>
 
         <Image
           src={logo}

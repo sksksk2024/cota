@@ -1,5 +1,22 @@
 import { Variants } from 'framer-motion';
 
+export const piggyWiggle: Variants = {
+  initial: { rotate: 0 },
+  hover: {
+    scale: [1, 1.01, 1.05, 1.07],
+    transition: {
+      duration: 0.3,
+      repeat: Infinity,
+      repeatType: 'reverse',
+      ease: 'easeInOut',
+    },
+  },
+  tap: {
+    rotate: [0, -10, 10, -8, 8, -5, 5, 0],
+    transition: { duration: 0.6, ease: 'easeInOut' },
+  },
+};
+
 export const sunVariants: Variants = {
   initial: {
     rotate: 0,
