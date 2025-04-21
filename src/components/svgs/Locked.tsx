@@ -1,7 +1,11 @@
 import { motion } from 'framer-motion';
 import { unlockedVariants } from '../motionVariants/motionVariants';
 
-export const Locked = () => {
+type LockedProps = {
+  className?: string;
+};
+
+export const Locked = ({ className }: LockedProps) => {
   return (
     <motion.svg
       viewBox="0 0 24 24"
@@ -10,7 +14,7 @@ export const Locked = () => {
       initial="hidden"
       animate="visible"
       variants={unlockedVariants}
-      className="w-6 h-6"
+      className={className}
     >
       <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
       <g

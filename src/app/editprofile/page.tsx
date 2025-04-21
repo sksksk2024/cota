@@ -190,7 +190,7 @@ const EditProfile = () => {
                   typeof="button"
                   onClick={() => setEditName(true)}
                 >
-                  <Locked />
+                  <Locked className="w-6 h-6" />
                 </button>
               ) : (
                 <button
@@ -248,7 +248,7 @@ const EditProfile = () => {
                   typeof="button"
                   onClick={() => setEditEmail(true)}
                 >
-                  <Locked />
+                  <Locked className="w-6 h-6" />
                 </button>
               ) : (
                 <button
