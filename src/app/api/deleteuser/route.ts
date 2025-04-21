@@ -1,10 +1,8 @@
 import { getServerSession } from 'next-auth/next';
 import { authOptions } from '@/lib/auth';
-import { PrismaClient } from '@prisma/client';
 import { NextResponse } from 'next/server';
 import { serialize } from 'cookie';
-
-const prisma = new PrismaClient();
+import { prisma } from '@/lib/prisma';
 
 export async function DELETE(req: Request) {
   let userId: string | undefined;

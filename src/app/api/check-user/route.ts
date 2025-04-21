@@ -3,13 +3,24 @@ import { parse } from 'cookie';
 
 export async function GET(req: Request) {
   const cookieHeader = req.headers.get('cookie') || '';
-  console.log('Cookie Header:', cookieHeader);
-
   const cookies = parse(cookieHeader);
-  const user = cookies.user ? JSON.parse(cookies.user) : null;
+
+  let user = null;
+
+  try {
+    if (cookies.user) {
+      user = JSON.parse(cookies.user);
+    }
+  } catch (err) {
+    console.error('Failed to parse user cookie:', err);
+    return NextResponse.json(
+      { error: 'Invalid user cookie.' },
+      { status: 400 }
+    );
+  }
 
   console.log('Parsed cookies:', cookies);
-  console.log('User cookie:', cookies.user);
+  console.log('User:', user);
 
   return NextResponse.json({ user });
 }
