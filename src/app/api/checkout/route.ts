@@ -44,7 +44,7 @@ export async function POST(req: Request) {
         userId: user?.id,
         userEmail: user?.email,
       },
-    } as Stripe.Checkout.SessionCreateParams); // 👈 This is key
+    } as Stripe.Checkout.SessionCreateParams); // 👈 This is key (very important, in order to work)
 
     return NextResponse.json({ sessionId: session.id });
   } catch (error: any) {
