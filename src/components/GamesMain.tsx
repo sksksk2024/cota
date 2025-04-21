@@ -10,11 +10,11 @@ import React from 'react';
 import Image from 'next/image';
 import Sun from './utils/Sun';
 import { Locked } from '@/components/svgs/Locked';
+import { TappyIcon } from './svgs/TappyIcon';
 
 const GamesMain = () => {
   const { theme } = useThemeStore();
 
-  // TAPPING GAME
   return (
     <ProtectedPageAll>
       <main
@@ -33,14 +33,18 @@ const GamesMain = () => {
         {/* Games Grid */}
         <section className="grid xs:grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-20 place-items-center place-content-center max-w-container-1440">
           <Link
-            className="flex flex-col justify-start items-center min-w-container-300 w-full max-w-container-300 h-300H bg-black cursor-pointer hover:scale-[0.99]"
-            href={'/games'}
+            className="flex flex-col justify-start items-center min-w-container-300 w-full max-w-container-300 h-300H bg-gray-500 cursor-pointer hover:scale-[0.99]"
+            href={'/tappy'}
           >
             <div className="w-1/2">
-              <Sun />
+              <TappyIcon />
             </div>
-            <div className="flex justify-center items-center w-full h-full p-16P bg-white tracking-widest">
-              <h2 className="text-lg text-black font-bold mx-auto">Tappy</h2>
+            <div
+              className={`flex justify-center items-center w-full h-full p-16P  tracking-widest
+              ${theme === 'theme1' ? 'bg-textis text-white' : 'bg-white text-textis'}
+              `}
+            >
+              <h2 className="text-lg font-bold mx-auto">Tappy</h2>
             </div>
           </Link>
 
