@@ -11,7 +11,7 @@ type Props = {
   children: ReactNode;
 };
 
-export default function ProtectedPageAllUsers({ children }: Props) {
+export default function ProtectedPageAll({ children }: Props) {
   const { theme } = useThemeStore();
   const { user, loading } = useUser();
   const router = useRouter();
