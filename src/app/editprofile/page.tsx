@@ -17,7 +17,7 @@ import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useUser } from '@/components/hooks/useUser';
 import { editProfileSchema, EditProfileInput } from '@/lib/schemas';
-import { ProtectedPage } from '@/components/ProtectedPage';
+import { ProtectedPageCustom } from '@/components/ProtectedPageCustom';
 import PageWrapper from '@/components/PageWrapper';
 
 const EditProfile = () => {
@@ -128,7 +128,7 @@ const EditProfile = () => {
   };
 
   return (
-    <ProtectedPage>
+    <ProtectedPageCustom>
       <PageWrapper>
         <main
           className={`w-full h-[100dvh] my-auto flex flex-col justify-center items-center gap-10 px-16P md:px-64P
@@ -446,7 +446,7 @@ const EditProfile = () => {
           )}
         </main>
       </PageWrapper>
-    </ProtectedPage>
+    </ProtectedPageCustom>
   );
 };
 

@@ -16,7 +16,7 @@ import { useSession } from 'next-auth/react';
 import { Unlocked } from './svgs/Unlocked';
 import { Locked } from './svgs/Locked';
 import { useUser } from './hooks/useUser';
-import { ProtectedPage } from './ProtectedPage';
+import ProtectedPageAll from '@/components/ProtectedPageAll';
 
 const NewsletterMain = () => {
   const { success, error, loading, dismiss } = useToast();
@@ -38,9 +38,12 @@ const NewsletterMain = () => {
     e.preventDefault();
 
     // Determine email from session or manual input
-    const userEmail = displayEmail
-      ? session?.data?.user?.email || user?.email
-      : '';
+    // const userEmail = displayEmail
+    //   ? session?.data?.user?.email || user?.email
+    //   : '';
+
+    const userEmail =
+      email?.trim() || session?.data?.user?.email || user?.email;
 
     if (!userEmail) {
       setErrorMsg('Please enter a valid email address or sign in first.');
@@ -88,7 +91,7 @@ const NewsletterMain = () => {
   };
 
   return (
-    <ProtectedPage>
+    <ProtectedPageAll>
       <main
         className={`w-full h-[100dvh] my-auto flex flex-col justify-center items-center gap-10 px-16P py-48P md:px-64P
         ${theme === 'theme1' ? 'bg-background-dark' : 'bg-cyan-dark'}
@@ -126,7 +129,7 @@ const NewsletterMain = () => {
               <p
                 className={`${theme === 'theme1' ? 'text-white' : 'text-textis'}`}
               >
-                Want to subscribe with a different email?
+                Want to subscribe with a different email? Click the lock icon.
               </p>
               <label
                 className={`relative group w-full
@@ -242,7 +245,7 @@ const NewsletterMain = () => {
           </Link>
         </motion.button>
       </main>
-    </ProtectedPage>
+    </ProtectedPageAll>
   );
 };
 

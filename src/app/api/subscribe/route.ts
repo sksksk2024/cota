@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { getServerSession } from 'next-auth';
+import { getServerSession } from 'next-auth/next'; // not just 'next-auth'
 import { authOptions } from '@/lib/auth';
 import { prisma } from '@/lib/prisma';
 import { newsLetterSchema } from '@/lib/schemas';

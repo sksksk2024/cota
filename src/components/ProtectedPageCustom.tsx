@@ -1,15 +1,27 @@
-// components/ProtectedPage.tsx
+'use client';
+
 import { useRouter } from 'next/navigation';
 import { useUser } from '@/components/hooks/useUser';
 import Spinner from '@/components/Spinner';
 import { useThemeStore } from '@/components/hooks/useThemeStore';
+import { useEffect } from 'react';
 
-export const ProtectedPage = ({ children }: { children: React.ReactNode }) => {
+export const ProtectedPageCustom = ({
+  children,
+}: {
+  children: React.ReactNode;
+}) => {
   const { theme } = useThemeStore();
   const { user, loading } = useUser();
   const router = useRouter();
 
-  if (loading) {
+  useEffect(() => {
+    if (!loading && !user) {
+      router.push('/signin');
+    }
+  }, [loading, user, router]);
+
+  if (loading || !user) {
     return (
       <div
         className={`w-full h-[100dvh] flex justify-center items-center m-auto
@@ -19,11 +31,6 @@ export const ProtectedPage = ({ children }: { children: React.ReactNode }) => {
         <Spinner />
       </div>
     );
-  }
-
-  if (!user) {
-    router.push('/signin');
-    return null;
   }
 
   return <>{children}</>;
