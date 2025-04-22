@@ -6,12 +6,13 @@ import { buttonVariants } from '@/components/motionVariants/motionVariants';
 import { useThemeStore } from '@/components/hooks/useThemeStore';
 import ProtectedPageAll from '@/components/ProtectedPageAll';
 import Link from 'next/link';
-import React from 'react';
+import React, { useState } from 'react';
 import { Locked } from '@/components/svgs/Locked';
-import { tutorials } from '@/components/jsonFiles/tutorials';
 
 const TutorialsMain = () => {
   const { theme } = useThemeStore();
+
+  const [isLive, setIsLive] = useState<boolean>(true);
 
   return (
     <ProtectedPageAll>
@@ -25,35 +26,43 @@ const TutorialsMain = () => {
             ${theme === 'theme1' ? 'text-white' : 'text-textis'}
           `}
         >
-          Tutorials Page
+          Live Page -{' '}
+          {!isLive ? (
+            <span
+              className={`${theme === 'theme1' ? 'text-warning' : 'text-highlight'}`}
+            >
+              Not Live
+            </span>
+          ) : (
+            <span
+              className={`${theme === 'theme1' ? 'text-warning' : 'text-highlight'}`}
+            >
+              Live Now
+            </span>
+          )}
         </h1>
 
-        {/* Tutorials Grid */}
-        <section className="grid xs:grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-20 place-items-center place-content-center max-w-container-1440">
-          {tutorials.map((tutorial, index) => (
+        {/* Live Section */}
+        <section className="min-w-container-300 w-full max-w-container-1440 hover:scale-[0.99]">
+          {!isLive ? (
             <div
-              key={index}
-              className="min-w-container-300 max-w-container-300 h-300H hover:scale-[0.99]"
+              className={`w-full h-800H flex justify-center items-center
+                ${theme === 'theme1' ? 'bg-deep-dark' : 'bg-green-cyan-light'}
+            `}
             >
-              {tutorial.locked ? (
-                <div
-                  className={`w-full h-full flex justify-center items-center 
-                  ${theme === 'theme1' ? 'bg-deep-dark' : 'bg-green-cyan-light'}
-                `}
-                >
-                  <Locked className="w-full" />
-                </div>
-              ) : (
-                <ReactPlayer
-                  url={tutorial.url}
-                  width="100%"
-                  height="100%"
-                  controls={true}
-                  light
-                />
-              )}
+              <Locked className="w-1/2" />
             </div>
-          ))}
+          ) : (
+            <div className="w-full h-800H flex justify-center">
+              <ReactPlayer
+                url="https://www.youtube.com/watch?v=OmKfROtB45Q"
+                width="100%"
+                height="100%"
+                controls={true}
+                light
+              />
+            </div>
+          )}
         </section>
 
         <motion.button
