@@ -23,6 +23,7 @@
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-hot-toast": "^2.5.2",
+    "react-player": "^2.16.0",
     "resend": "^4.3.0",
     "stripe": "^18.0.0",
     "tailwindcss-animate": "^1.0.7",
