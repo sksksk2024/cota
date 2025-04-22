@@ -19,11 +19,11 @@ const SuccessPage = () => {
     >
       {/* LOGO */}
       <section
-        className={`relative flex flex-col justify-start items-center gap-10 p-112P text-2xl text-center font-bold h-3/4
+        className={`relative flex flex-col justify-start items-center gap-10 px-32P py-112P text-2xl text-center font-bold h-3/4
           
           `}
       >
-        <h1>Thanks for the donation. It means a lot. 🥲</h1>
+        <h1>Thanks for the donation. It means a lot. 🥲🎉</h1>
 
         <motion.button
           variants={buttonVariants}

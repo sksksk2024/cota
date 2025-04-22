@@ -1,12 +1,15 @@
 'use client';
 
 import TutorialsMain from '@/components/TutorialsMain';
+import PageWrapper from '@/components/PageWrapper';
 import { SessionProvider } from 'next-auth/react';
 
 const Tutorials = () => {
   return (
     <SessionProvider>
-      <TutorialsMain />
+      <PageWrapper>
+        <TutorialsMain />
+      </PageWrapper>
     </SessionProvider>
   );
 };

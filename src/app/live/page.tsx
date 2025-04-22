@@ -1,12 +1,15 @@
 'use client';
 
 import LiveMain from '@/components/LiveMain';
+import PageWrapper from '@/components/PageWrapper';
 import { SessionProvider } from 'next-auth/react';
 
 const Live = () => {
   return (
     <SessionProvider>
-      <LiveMain />
+      <PageWrapper>
+        <LiveMain />
+      </PageWrapper>
     </SessionProvider>
   );
 };

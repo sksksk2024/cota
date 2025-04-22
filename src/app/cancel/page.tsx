@@ -19,13 +19,16 @@ const CancelPage = () => {
     >
       {/* LOGO */}
       <section
-        className={`relative flex flex-col justify-start items-center gap-10 p-112P text-2xl text-center font-bold h-3/4
+        className={`relative flex flex-col justify-start items-center gap-10 px-32P py-112P text-2xl text-center font-bold h-3/4
           
           `}
       >
-        <h1>No stress! Payment was canceled. 🛑</h1>
+        <h1 className="leading-tight">
+          No stress! Payment was canceled.{' '}
+          {/* <span className="inline-block align-middle">🛑</span> */}
+        </h1>
 
-        <p className="text-lg mt-2">Come back anytime — we’ll be here. 😎</p>
+        <p className="text-lg mt-2">Come back anytime — we’ll be here.</p>
 
         <motion.button
           variants={buttonVariants}

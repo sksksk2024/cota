@@ -101,25 +101,25 @@ const Donations = () => {
               >
                 <h2
                   id="donation-title"
-                  className="text-xl font-bold mb-4 text-center"
+                  className="text-xl text-center text-textis font-bold mb-4"
                 >
-                  Help Keep Us Going 😁⚡
+                  Help Keep Us Going <br /> 😁⚡
                 </h2>
 
-                <p className="mb-6 text-center">
-                  Thank you for considering donating! 🎉 Every bit helps.
+                <p className="text-center text-textis mb-6">
+                  Thank you for considering donating! <br /> Every bit helps.
                 </p>
 
                 <button
                   onClick={handlePayment}
-                  className="w-full bg-green-500 hover:bg-green-600 text-white font-semibold py-3 px-6 rounded-lg"
+                  className="text-white font-semibold w-full bg-green-500 py-3 px-6 rounded-lg cursor-pointer hover:bg-green-600"
                 >
                   Donate 5 lei
                 </button>
 
                 <button
                   onClick={() => setShowModal(false)}
-                  className="mt-4 w-full text-sm text-gray-500 hover:underline"
+                  className="text-gray-500 mt-4 w-full text-sm cursor-pointer hover:underline"
                 >
                   Cancel
                 </button>
