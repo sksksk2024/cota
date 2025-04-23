@@ -96,23 +96,24 @@ const notFound = () => {
       >
         <h1>Looks like you've hit a dead end! This page doesn't exist.</h1>
 
-        <motion.button
-          className={`w-full min-w-container-200 max-w-container-600 cursor-pointer p-16P rounded-5BR font-bold tracking-wide
-          ${
-            theme === 'theme1'
-              ? 'text-white bg-green-dark hover:text-background-dark hover:bg-warning'
-              : ' bg-green-light text-background-dark hover:text-cyan-dark hover:bg-highlight'
-          }
-          `}
+        {/* HOME LINK */}
+        <motion.div
+          className={`w-full min-w-container-300 max-w-container-600 text-center text-md cursor-pointer p-16P rounded-5BR font-bold tracking-wide
+        ${
+          theme === 'theme1'
+            ? 'text-white bg-green-dark hover:text-background-dark hover:bg-warning'
+            : ' bg-green-light text-background-dark hover:text-cyan-dark hover:bg-highlight'
+        }
+        `}
           variants={buttonVariants}
-          initial="initial"
+          initial="hidden"
           whileHover="hover"
           animate="exit"
         >
           <Link href="/" passHref>
             Go Home
           </Link>
-        </motion.button>
+        </motion.div>
 
         {/* <Image
           src={logo}

@@ -11,7 +11,6 @@ import Footer from './Footer';
 import Arrow from './utils/Arrow';
 import { useUser } from './hooks/useUser';
 import { useSession } from 'next-auth/react';
-import Spinner from './Spinner';
 
 const Info = () => {
   const { theme } = useThemeStore();
