@@ -2,14 +2,12 @@
 
 import { motion } from 'framer-motion';
 import { sunVariants, moonVariants } from './motionVariants/motionVariants';
-import logo from './../app/favicon.ico';
-import Image from 'next/image';
+import CotaLogo from './svgs/CotaLogo';
 import { useThemeStore } from './hooks/useThemeStore';
 import Sun from './utils/Sun';
 import Moon from './utils/Moon';
 import { useUser } from './hooks/useUser';
 import { useSession } from 'next-auth/react';
-import Spinner from './Spinner';
 
 const Header = () => {
   const { theme, toggleTheme } = useThemeStore();
@@ -28,16 +26,15 @@ const Header = () => {
         className={`relative z-50 flex flex-col justify-center items-center gap-10 text-center p-16P py-32P pb-144P bg-cyanDark md:justify-around md:flex-row md:p-48P`}
       >
         <div className="group flex justify-around items-center w-full md:w-auto">
-          <Image
-            src={logo}
-            className="w-64W  min-w-container-48"
-            alt="triangle"
-          />
+          <CotaLogo />
           {theme === 'theme1' ? (
             <motion.div
               variants={sunVariants}
               initial="initial"
               whileHover="hover"
+              drag
+              dragConstraints={{ left: 0, top: 0, right: 0, bottom: 0 }}
+              dragElastic={0.7}
             >
               <Sun
                 onClick={toggleTheme}
@@ -49,6 +46,9 @@ const Header = () => {
               variants={moonVariants}
               initial="initial"
               whileHover="hover"
+              drag
+              dragConstraints={{ left: 0, top: 0, right: 0, bottom: 0 }}
+              dragElastic={0.7}
             >
               <Moon
                 onClick={toggleTheme}
@@ -84,6 +84,9 @@ const Header = () => {
             variants={sunVariants}
             initial="initial"
             whileHover="hover"
+            drag
+            dragConstraints={{ left: 0, top: 0, right: 0, bottom: 0 }}
+            dragElastic={0.7}
           >
             <Sun
               onClick={toggleTheme}
@@ -95,6 +98,9 @@ const Header = () => {
             variants={moonVariants}
             initial="initial"
             whileHover="hover"
+            drag
+            dragConstraints={{ left: 0, top: 0, right: 0, bottom: 0 }}
+            dragElastic={0.7}
           >
             <Moon
               onClick={toggleTheme}
@@ -103,7 +109,6 @@ const Header = () => {
           </motion.div>
         )}
       </div>
-      <Sun className="z-30 w-64W relative mx-auto" />
     </header>
   );
 };

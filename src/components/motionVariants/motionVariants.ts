@@ -1,5 +1,24 @@
 import { Variants } from 'framer-motion';
 
+export const comingVariants: Variants = {
+  hidden: {
+    translateX: -100,
+    opacity: 0,
+    transition: {
+      duration: 0.3,
+      ease: 'easeInOut',
+    },
+  },
+  visible: {
+    translateX: 0,
+    opacity: 1,
+    transition: {
+      duration: 0.3,
+      ease: 'easeIn',
+    },
+  },
+};
+
 export const piggyWiggle: Variants = {
   initial: { rotate: 0 },
   hover: {

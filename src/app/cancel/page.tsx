@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { buttonVariants } from '@/components/motionVariants/motionVariants';
+import cancelMe from '@/images/cancelMe.png';
 import Image from 'next/image';
 import { useThemeStore } from '@/components/hooks/useThemeStore';
 import Link from 'next/link';
@@ -31,50 +32,47 @@ const CancelPage = () => {
         <p className="text-lg mt-2">Come back anytime — we’ll be here.</p>
 
         <motion.button
+          className={`z-50 w-full min-w-container-300 max-w-container-600 text-center text-md cursor-pointer p-16P rounded-5BR font-bold tracking-wide
+            ${
+              theme === 'theme1'
+                ? 'text-white bg-green-dark hover:text-background-dark hover:bg-warning'
+                : ' bg-green-light text-background-dark hover:text-cyan-dark hover:bg-highlight'
+            }
+            `}
           variants={buttonVariants}
-          initial="initial"
+          initial="hidden"
           whileHover="hover"
+          animate="exit"
         >
-          <Link
-            className={`cursor-pointer px-16P py-8P rounded-5BR font-bold tracking-wide
-              ${
-                theme === 'theme1'
-                  ? 'text-white bg-green-dark hover:text-background-dark hover:bg-warning'
-                  : ' bg-green-light text-background-dark hover:text-cyan-dark hover:bg-highlight'
-              }
-              `}
-            href="/donations"
-            passHref
-          >
+          <Link href="/donations" passHref>
             Try Again
           </Link>
         </motion.button>
 
+        {/* HOME LINK */}
         <motion.button
+          className={`z-50 w-full min-w-container-300 max-w-container-600 text-center text-md cursor-pointer p-16P rounded-5BR font-bold tracking-wide
+        ${
+          theme === 'theme1'
+            ? 'text-white bg-green-dark hover:text-background-dark hover:bg-warning'
+            : ' bg-green-light text-background-dark hover:text-cyan-dark hover:bg-highlight'
+        }
+        `}
           variants={buttonVariants}
-          initial="initial"
+          initial="hidden"
           whileHover="hover"
+          animate="exit"
         >
-          <Link
-            className={`cursor-pointer p-16P rounded-5BR font-bold tracking-wide
-              ${
-                theme === 'theme1'
-                  ? 'text-white bg-green-dark hover:text-background-dark hover:bg-warning'
-                  : ' bg-green-light text-background-dark hover:text-cyan-dark hover:bg-highlight'
-              }
-              `}
-            href="/"
-            passHref
-          >
+          <Link href="/" passHref>
             Go Home
           </Link>
         </motion.button>
 
-        {/* <Image
-          src={logo}
-          className="absolute -bottom-256I w-400W"
-          alt="me building"
-        /> */}
+        <Image
+          src={cancelMe}
+          className="absolute -bottom-256I w-400W opacity-40"
+          alt="me looking serious in the phone"
+        />
       </section>
     </main>
   );

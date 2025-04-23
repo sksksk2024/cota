@@ -37,17 +37,17 @@ export default function ProtectedPageAll({ children }: Props) {
     return () => clearTimeout(timeout);
   }, [loading, isCustomUser, isSessionUser, router]);
 
-  // if (loading || (!isCustomUser && !isSessionUser)) {
-  //   return (
-  //     <div
-  //       className={`w-full h-[100dvh] flex justify-center items-center m-auto
-  //       ${theme === 'theme1' ? 'bg-background-dark' : 'bg-cyan-dark'}
-  //     `}
-  //     >
-  //       <Spinner />
-  //     </div>
-  //   );
-  // }
+  if (loading || (!isCustomUser && !isSessionUser)) {
+    return (
+      <div
+        className={`w-full h-[100dvh] flex justify-center items-center m-auto
+        ${theme === 'theme1' ? 'bg-background-dark' : 'bg-cyan-dark'}
+      `}
+      >
+        <Spinner />
+      </div>
+    );
+  }
 
   return <>{children}</>;
 }

@@ -7,37 +7,39 @@ import {
   sunVariants,
 } from '@/components/motionVariants/motionVariants';
 import Image from 'next/image';
-import logo from './favicon.ico';
+import notFoundMe from '@/images/notFoundMe.png';
 import { useThemeStore } from '@/components/hooks/useThemeStore';
 import Sun from '@/components/utils/Sun';
 import Moon from '@/components/utils/Moon';
 import Link from 'next/link';
+import CotaLogo from '@/components/svgs/CotaLogo';
 
 const notFound = () => {
   const { theme, toggleTheme } = useThemeStore();
 
   return (
     <main
-      className={`overflow-y-clip min-h-[100dvh] ${
+      className={`overflow-y-clip min-h-[100dvh] flex flex-col justify-start items-center ${
         theme === 'theme1'
           ? 'text-white bg-deep-dark'
           : 'text-background-dark bg-green-cyan-light'
       }`}
     >
       <section
-        className={`flex flex-col justify-center items-center gap-10 text-center p-16P py-32P pb-144P bg-cyanDark md:justify-around md:flex-row md:p-48P`}
+        className={`z-50 flex flex-col justify-center items-center gap-10 text-center p-16P py-32P pb-144P bg-cyanDark md:justify-around md:flex-row md:p-48P`}
       >
         <div className="group flex justify-around items-center w-full md:w-auto">
-          <Image
-            src={logo}
-            className="w-64W  min-w-container-48"
-            alt="triangle"
-          />
+          <div className="w-64W  min-w-container-48">
+            <CotaLogo />
+          </div>
           {theme === 'theme1' ? (
             <motion.div
               variants={sunVariants}
               initial="initial"
               whileHover="hover"
+              drag
+              dragConstraints={{ left: 0, top: 0, right: 0, bottom: 0 }}
+              dragElastic={0.7}
             >
               <Sun
                 onClick={toggleTheme}
@@ -49,6 +51,9 @@ const notFound = () => {
               variants={moonVariants}
               initial="initial"
               whileHover="hover"
+              drag
+              dragConstraints={{ left: 0, top: 0, right: 0, bottom: 0 }}
+              dragElastic={0.7}
             >
               <Moon
                 onClick={toggleTheme}
@@ -70,6 +75,9 @@ const notFound = () => {
             variants={sunVariants}
             initial="initial"
             whileHover="hover"
+            drag
+            dragConstraints={{ left: 0, top: 0, right: 0, bottom: 0 }}
+            dragElastic={0.7}
           >
             <Sun
               onClick={toggleTheme}
@@ -97,8 +105,8 @@ const notFound = () => {
         <h1>Looks like you've hit a dead end! This page doesn't exist.</h1>
 
         {/* HOME LINK */}
-        <motion.div
-          className={`w-full min-w-container-300 max-w-container-600 text-center text-md cursor-pointer p-16P rounded-5BR font-bold tracking-wide
+        <motion.button
+          className={`z-50 w-full min-w-container-300 max-w-container-600 text-center text-md cursor-pointer p-16P rounded-5BR font-bold tracking-wide
         ${
           theme === 'theme1'
             ? 'text-white bg-green-dark hover:text-background-dark hover:bg-warning'
@@ -109,18 +117,18 @@ const notFound = () => {
           initial="hidden"
           whileHover="hover"
           animate="exit"
+          drag
+          dragConstraints={{ left: 0, top: 0, right: 0, bottom: 0 }}
+          dragElastic={0.7}
         >
           <Link href="/" passHref>
             Go Home
           </Link>
-        </motion.div>
-
-        {/* <Image
-          src={logo}
-          className="absolute -bottom-256I w-400W"
-          alt="me building"
-        /> */}
+        </motion.button>
       </section>
+      <div className="w-400W md:w-full max-w-container-1000 absolute bottom-0 opacity-30">
+        <Image src={notFoundMe} className="w-full" alt="aboutMe" />
+      </div>
     </main>
   );
 };

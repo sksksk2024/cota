@@ -1,6 +1,5 @@
 'use client';
 
-import { useState } from 'react';
 import { useThemeStore } from './hooks/useThemeStore';
 import { useCopyToClipboard } from './hooks/useCopyToClipboard';
 import Insta from './utils/Insta';
@@ -19,7 +18,6 @@ import Newsletter from './utils/Newsletter';
 import WingsLogo from './utils/WingsLogo';
 import { useUser } from './hooks/useUser';
 import { useSession } from 'next-auth/react';
-import Spinner from './Spinner';
 
 const Footer = () => {
   const { theme } = useThemeStore();

@@ -1,10 +1,12 @@
 'use client';
 
+import { motion } from 'framer-motion';
+import { comingVariants } from './motionVariants/motionVariants';
 import Image from 'next/image';
-import logo from './../app/favicon.ico';
+import calisthenicsMe from '@/images/calisthenicsMe.jpg';
 import { useThemeStore } from './hooks/useThemeStore';
 
-const Calithenics = () => {
+const Calisthenics = () => {
   const { theme } = useThemeStore();
 
   return (
@@ -43,11 +45,23 @@ const Calithenics = () => {
           ${theme === 'theme1' ? 'bg-green-dark' : 'bg-green-light'}
           `}
         ></div>
-        <Image
-          src={logo}
-          className="z-20 absolute translate-x-1/2 right-1/2 w-1/4"
-          alt="me working"
-        />
+        {/* <Image
+          src={calisthenicsMe}
+          className="z-20 absolute translate-x-1/2 right-1/2 w-[700px] h-[700px] opacity-30 object-contain"
+          alt="me doing a handstand"
+        /> */}
+        <motion.span
+          variants={comingVariants}
+          initial="hidden"
+          whileInView="visible"
+          className="z-20 absolute translate-x-1/2 right-1/2 w-full max-w-[700px] h-[700px]"
+        >
+          <Image
+            src={calisthenicsMe}
+            className="z-20 absolute translate-x-1/2 right-1/2 w-[700px] h-[700px] opacity-30 object-contain"
+            alt="me working"
+          />
+        </motion.span>
         <div
           className={`z-10 relative rounded-full h-800H w-800W
           ${theme === 'theme1' ? 'bg-green-dark' : 'bg-green-light'}
@@ -79,14 +93,8 @@ const Calithenics = () => {
           `}
         ></div>
       </div>
-      {/* Bottom solid background for header effect */}
-      {/* <div
-        className={`z-50 relative -bottom-800I h-800H z-0
-    ${theme === 'theme1' ? 'bg-black' : 'bg-black'}
-    `}
-      /> */}
     </>
   );
 };
 
-export default Calithenics;
+export default Calisthenics;

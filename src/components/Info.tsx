@@ -6,7 +6,7 @@ import { useState } from 'react';
 import { useThemeStore } from './hooks/useThemeStore';
 import About from './About';
 import Goals from './Goals';
-import Calithenics from './Calisthenics';
+import Calisthenics from './Calisthenics';
 import Footer from './Footer';
 import Arrow from './utils/Arrow';
 import { useUser } from './hooks/useUser';
@@ -92,7 +92,7 @@ const Info = () => {
             <div className="hidden xl:block opacity-0">hello</div>
           </div>
         </div>
-        <Calithenics />
+        <Calisthenics />
         {!displayName ? (
           <>
             <div

@@ -1,16 +1,14 @@
 'use client';
 
-import logo from '@/app/favicon.ico';
 import Info from '@/components/Info';
 import Header from '@/components/Header';
 import Working from '@/components/Working';
 import { useThemeStore } from '@/components/hooks/useThemeStore';
 import Guide from '@/components/Guide';
-import Image from 'next/image';
 import { useUser } from '@/components/hooks/useUser';
 import { useSession } from 'next-auth/react';
-import Spinner from '../Spinner';
 import { useEffect, useState } from 'react';
+import CotaLogo from '../svgs/CotaLogo';
 
 const HomeMain = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -76,11 +74,9 @@ const HomeMain = () => {
               ${theme === 'theme1' ? 'bg-background-dark' : 'bg-cyan-dark'}
               `}
           >
-            <Image
-              src={logo}
-              className="relative bottom-80I w-96W md:w-144W"
-              alt="logo"
-            />
+            <div className="relative bottom-80I w-96W md:w-144W">
+              <CotaLogo />
+            </div>
           </div>
         ) : (
           <div
@@ -88,11 +84,9 @@ const HomeMain = () => {
               ${theme === 'theme1' ? 'bg-background-dark' : 'bg-cyan-dark'}
               `}
           >
-            <Image
-              src={logo}
-              className="relative w-144W bottom-96I xs:bottom-288I md:bottom-0 lg:bottom-240I"
-              alt="logo"
-            />
+            <div className="relative w-144W bottom-96I xs:bottom-288I md:bottom-0 lg:bottom-240I">
+              <CotaLogo />
+            </div>
           </div>
         )}
       </div>

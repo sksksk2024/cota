@@ -1,7 +1,7 @@
 'use client';
 
 import Image from 'next/image';
-import logo from './../app/favicon.ico';
+import goalsMe from '@/images/goalsMe.png';
 import { useThemeStore } from './hooks/useThemeStore';
 import PageWrapper from './PageWrapper';
 
@@ -16,7 +16,7 @@ const Goals = () => {
             ${theme === 'theme1' ? 'text-white' : 'text-textis'}
             `}
         >
-          <div className="space-y-5">
+          <div className="z-50 space-y-5">
             <h2
               className={`text-2xl text-center font-bold xl:text-start
             `}
@@ -40,7 +40,7 @@ const Goals = () => {
               positively to both my personal and professional communities.
             </p>
           </div>
-          <div className="space-y-5">
+          <div className="z-50 space-y-5">
             <h2
               className={`text-2xl text-center font-bold xl:text-start
             `}
@@ -68,9 +68,10 @@ const Goals = () => {
             </p>
           </div>
         </div>
-        <div className="relative translate-y-1/2">
-          <Image src={logo} className="w-full" alt="logo" />
+        <div className="md:w-[700px] xl:w-full xl:max-w-container-700 absolute -bottom-32I xl:right-0 opacity-30">
+          <Image src={goalsMe} className="w-full" alt="aboutMe" />
         </div>
+        <div className="w-128W h-1"></div>
       </div>
     </PageWrapper>
   );
