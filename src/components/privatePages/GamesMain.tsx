@@ -8,9 +8,9 @@ import ProtectedPageAll from '@/components/ProtectedPageAll';
 import Link from 'next/link';
 import React from 'react';
 import Image from 'next/image';
-import Sun from './utils/Sun';
+import Sun from '../utils/Sun';
 import { Locked } from '@/components/svgs/Locked';
-import { TappyIcon } from './svgs/TappyIcon';
+import { TappyIcon } from '../svgs/TappyIcon';
 
 const GamesMain = () => {
   const { theme } = useThemeStore();
@@ -33,8 +33,10 @@ const GamesMain = () => {
         {/* Games Grid */}
         <section className="grid xs:grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-20 place-items-center place-content-center max-w-container-1440">
           <Link
-            className="flex flex-col justify-start items-center min-w-container-300 w-full max-w-container-300 h-300H bg-gray-500 cursor-pointer hover:scale-[0.99]"
-            href={'/tappy'}
+            className={`flex flex-col justify-start items-center min-w-container-300 w-full max-w-container-300 h-300H bg-gray-500 cursor-pointer rounded-xl shadow-lg  transition-shadow hover:scale-[0.99]
+              ${theme === 'theme1' ? 'hover:shadow-cyan-400/20' : 'hover:shadow-cyan-800/90'}
+              `}
+            href={'/games/tappy'}
           >
             <div className="w-1/2">
               <TappyIcon />

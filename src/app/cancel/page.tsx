@@ -25,7 +25,7 @@ const CancelPage = () => {
       >
         <h1 className="leading-tight">
           No stress! Payment was canceled.{' '}
-          {/* <span className="inline-block align-middle">🛑</span> */}
+          {/* 🛑 the emoji to be in the favicon of this page(near future) */}
         </h1>
 
         <p className="text-lg mt-2">Come back anytime — we’ll be here.</p>

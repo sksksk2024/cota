@@ -1,7 +1,6 @@
 'use client';
 
-import { AnimatePresence, motion } from 'framer-motion';
-import logo from './../app/favicon.ico';
+import logo from '@/app/favicon.ico';
 import Info from '@/components/Info';
 import Header from '@/components/Header';
 import Working from '@/components/Working';
@@ -10,7 +9,7 @@ import Guide from '@/components/Guide';
 import Image from 'next/image';
 import { useUser } from '@/components/hooks/useUser';
 import { useSession } from 'next-auth/react';
-import Spinner from './Spinner';
+import Spinner from '../Spinner';
 import { useEffect, useState } from 'react';
 
 const HomeMain = () => {

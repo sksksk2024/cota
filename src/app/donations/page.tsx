@@ -1,6 +1,6 @@
 'use client';
 
-import DonationsMain from '@/components/DonationsMain';
+import DonationsMain from '@/components/privatePages/DonationsMain';
 import PageWrapper from '@/components/PageWrapper';
 import { SessionProvider } from 'next-auth/react';
 

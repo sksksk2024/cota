@@ -13,9 +13,9 @@ import Link from 'next/link';
 import { FormEvent, useState } from 'react';
 import { NewsLetterInput, newsLetterSchema } from '@/lib/schemas';
 import { useSession } from 'next-auth/react';
-import { Unlocked } from './svgs/Unlocked';
-import { Locked } from './svgs/Locked';
-import { useUser } from './hooks/useUser';
+import { Unlocked } from '../svgs/Unlocked';
+import { Locked } from '../svgs/Locked';
+import { useUser } from '../hooks/useUser';
 import ProtectedPageAll from '@/components/ProtectedPageAll';
 
 const NewsletterMain = () => {

@@ -1,6 +1,6 @@
 'use client';
 
-import LiveMain from '@/components/LiveMain';
+import LiveMain from '@/components/privatePages/LiveMain';
 import PageWrapper from '@/components/PageWrapper';
 import { SessionProvider } from 'next-auth/react';
 

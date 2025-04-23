@@ -1,6 +1,6 @@
 'use client';
 
-import GamesMain from '@/components/GamesMain';
+import GamesMain from '@/components/privatePages/GamesMain';
 import PageWrapper from '@/components/PageWrapper';
 import { SessionProvider } from 'next-auth/react';
 

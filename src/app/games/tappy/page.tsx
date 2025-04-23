@@ -1,17 +1,17 @@
 'use client';
 
-import NewsletterMain from '@/components/privatePages/NewsletterMain';
+import TappyMain from '@/components/privatePages/TappyMain';
 import PageWrapper from '@/components/PageWrapper';
 import { SessionProvider } from 'next-auth/react';
 
-const Newsletter = () => {
+const Tappy = () => {
   return (
     <SessionProvider>
       <PageWrapper>
-        <NewsletterMain />
+        <TappyMain />
       </PageWrapper>
     </SessionProvider>
   );
 };
 
-export default Newsletter;
+export default Tappy;

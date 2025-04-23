@@ -1,13 +1,16 @@
 'use client';
 
-import HomeMain from '@/components/HomeMain';
+import HomeMain from '@/components/privatePages/HomeMain';
 import { SessionProvider } from 'next-auth/react';
+import PageWrapper from '@/components/PageWrapper';
 
 const Home = () => {
   return (
     <>
       <SessionProvider>
-        <HomeMain />
+        <PageWrapper>
+          <HomeMain />
+        </PageWrapper>
       </SessionProvider>
     </>
   );
