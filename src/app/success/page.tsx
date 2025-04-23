@@ -31,7 +31,7 @@ const SuccessPage = () => {
           whileHover="hover"
         >
           <Link
-            className={`cursor-pointer px-16P py-8P rounded-5BR font-bold tracking-wide
+            className={`cursor-pointer p-16P rounded-5BR font-bold tracking-wide
               ${
                 theme === 'theme1'
                   ? 'text-white bg-green-dark hover:text-background-dark hover:bg-warning'

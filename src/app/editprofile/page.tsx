@@ -401,7 +401,7 @@ const EditProfile = () => {
           {/* HOME LINK && DELETE LINK */}
           <div className="flex flex-col-reverse justify-center items-center gap-5 w-full min-w-container-300 max-w-container-600 xs:flex-row">
             <motion.div
-              className={`w-full text-center cursor-pointer px-16P py-8P rounded-5BR font-bold tracking-wide xs:w-1/2
+              className={`w-full text-center cursor-pointer p-16P rounded-5BR font-bold tracking-wide xs:w-1/2
           ${
             theme === 'theme1'
               ? 'text-white bg-green-dark hover:text-background-dark hover:bg-warning'

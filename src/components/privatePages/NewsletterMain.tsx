@@ -109,7 +109,7 @@ const NewsletterMain = () => {
         {/* SUBSCRIBE FORM */}
         <form
           onSubmit={handleSubmit}
-          className={`shadow-deep-green flex flex-col justify-center items-center gap-5 px-16P py-32P rounded-5BR w-full min-w-container-300 max-w-container-600
+          className={`text-center shadow-deep-green flex flex-col justify-center items-center gap-5 px-16P py-32P rounded-5BR w-full min-w-container-300 max-w-container-600
         caret-black md:px-32P
         ${theme === 'theme1' ? 'bg-deep-dark' : 'bg-green-cyan-light'}
         `}
@@ -231,7 +231,7 @@ const NewsletterMain = () => {
           whileHover="hover"
         >
           <Link
-            className={`cursor-pointer px-16P py-8P rounded-5BR font-bold tracking-wide
+            className={`cursor-pointer p-16P rounded-5BR font-bold tracking-wide
               ${
                 theme === 'theme1'
                   ? 'text-white bg-green-dark hover:text-background-dark hover:bg-warning'

@@ -176,9 +176,7 @@ const SignIn = () => {
           {/* ERROR MESSAGE */}
           {errorMsg && (
             <div className="text-center text-red-500 font-semibold">
-              {errorMsg?.split('\n').map((msg, i) => (
-                <p key={i}>{msg}</p>
-              ))}
+              {errorMsg?.split('\n').map((msg, i) => <p key={i}>{msg}</p>)}
             </div>
           )}
 
@@ -216,7 +214,7 @@ const SignIn = () => {
 
         {/* HOME LINK */}
         <motion.div
-          className={`cursor-pointer px-16P py-8P rounded-5BR font-bold tracking-wide
+          className={`cursor-pointer p-16P rounded-5BR font-bold tracking-wide
         ${
           theme === 'theme1'
             ? 'text-white bg-green-dark hover:text-background-dark hover:bg-warning'
