@@ -94,7 +94,7 @@ const Donations = () => {
               aria-labelledby="donation-title"
             >
               <motion.div
-                className="bg-white dark:bg-gray-900 rounded-2xl p-10 w-full max-w-lg shadow-lg"
+                className="bg-white dark:bg-gray-900 rounded-2xl p-10 w-full max-w-lg shadow-lg mx-16M"
                 initial={{ y: 50, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 exit={{ y: 50, opacity: 0 }}
@@ -132,18 +132,16 @@ const Donations = () => {
           variants={buttonVariants}
           initial="initial"
           whileHover="hover"
+          animate="exit"
+          className={`w-full min-w-container-200 max-w-container-600 cursor-pointer p-16P rounded-5BR font-bold tracking-wide
+            ${
+              theme === 'theme1'
+                ? 'text-white bg-green-dark hover:text-background-dark hover:bg-warning'
+                : ' bg-green-light text-background-dark hover:text-cyan-dark hover:bg-highlight'
+            }
+          `}
         >
-          <Link
-            className={`cursor-pointer p-16P rounded-5BR font-bold tracking-wide
-              ${
-                theme === 'theme1'
-                  ? 'text-white bg-green-dark hover:text-background-dark hover:bg-warning'
-                  : ' bg-green-light text-background-dark hover:text-cyan-dark hover:bg-highlight'
-              }
-            `}
-            href="/"
-            passHref
-          >
+          <Link href="/" passHref>
             Go Home
           </Link>
         </motion.button>

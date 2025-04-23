@@ -410,6 +410,7 @@ const EditProfile = () => {
           `}
               variants={buttonVariants}
               initial="hidden"
+              animate="exit"
               whileHover="hover"
             >
               <Link href="/" passHref>
@@ -420,7 +421,7 @@ const EditProfile = () => {
             <motion.button
               type="button"
               onClick={handleDeleteUser}
-              className={`w-full cursor-pointer px-16P py-8P rounded-5BR font-bold tracking-wide xs:w-1/2
+              className={`w-full cursor-pointer p-16P rounded-5BR font-bold tracking-wide xs:w-1/2
               ${
                 theme === 'theme1'
                   ? 'text-white bg-green-dark hover:text-background-dark hover:bg-warning'

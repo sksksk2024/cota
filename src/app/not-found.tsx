@@ -18,7 +18,7 @@ const notFound = () => {
 
   return (
     <main
-      className={`overflow-y-clip h-[100dvh] ${
+      className={`overflow-y-clip min-h-[100dvh] ${
         theme === 'theme1'
           ? 'text-white bg-deep-dark'
           : 'text-background-dark bg-green-cyan-light'
@@ -90,37 +90,35 @@ const notFound = () => {
         )}
       </section>
       <section
-        className={`relative flex flex-col justify-start items-center gap-10 p-112P text-2xl text-center font-bold h-3/4
+        className={`relative flex flex-col justify-start items-center gap-10 px-32P pb-112P text-2xl text-center font-bold h-3/4
           
           `}
       >
         <h1>Looks like you've hit a dead end! This page doesn't exist.</h1>
 
         <motion.button
+          className={`w-full min-w-container-200 max-w-container-600 cursor-pointer p-16P rounded-5BR font-bold tracking-wide
+          ${
+            theme === 'theme1'
+              ? 'text-white bg-green-dark hover:text-background-dark hover:bg-warning'
+              : ' bg-green-light text-background-dark hover:text-cyan-dark hover:bg-highlight'
+          }
+          `}
           variants={buttonVariants}
           initial="initial"
           whileHover="hover"
+          animate="exit"
         >
-          <Link
-            className={`cursor-pointer p-16P rounded-5BR font-bold tracking-wide
-              ${
-                theme === 'theme1'
-                  ? 'text-white bg-green-dark hover:text-background-dark hover:bg-warning'
-                  : ' bg-green-light text-background-dark hover:text-cyan-dark hover:bg-highlight'
-              }
-              `}
-            href="/"
-            passHref
-          >
+          <Link href="/" passHref>
             Go Home
           </Link>
         </motion.button>
 
-        <Image
+        {/* <Image
           src={logo}
           className="absolute -bottom-256I w-400W"
           alt="me building"
-        />
+        /> */}
       </section>
     </main>
   );

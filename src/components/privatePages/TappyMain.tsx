@@ -51,7 +51,7 @@ const TappyMain = () => {
         <div className="text-lg">Time left: {timer}s</div>
       </header>
 
-      <main className="flex justify-center items-center gap-5 max-w-container-300">
+      <main className="flex justify-center items-center gap-5 w-full min-w-container-300 max-w-container-600">
         {timer > 0 ? (
           <button
             className={`text-center cursor-pointer p-16P rounded-5BR font-bold tracking-wide w-300W
@@ -67,7 +67,7 @@ const TappyMain = () => {
           </button>
         ) : (
           <button
-            className={`text-center p-16P rounded-5BR font-bold tracking-wide w-300W
+            className={`w-full min-w-container-300 max-w-container-600 text-center p-16P rounded-5BR font-bold tracking-wide w-300W
           ${
             theme === 'theme1'
               ? 'text-white bg-green-dark'
@@ -86,16 +86,17 @@ const TappyMain = () => {
       <footer className="flex justify-center items-center w-full">
         {/* GO BACK TO GAMES */}
         <motion.button
-          className={`cursor-pointer p-16P rounded-5BR font-bold tracking-wide w-300W
+          variants={buttonVariants}
+          initial="initial"
+          animate="exit"
+          whileHover="hover"
+          className={`w-full min-w-container-300 max-w-container-600 cursor-pointer p-16P rounded-5BR font-bold tracking-wide
             ${
               theme === 'theme1'
                 ? 'text-white bg-green-dark hover:text-background-dark hover:bg-warning'
                 : ' bg-green-light text-background-dark hover:text-cyan-dark hover:bg-highlight'
             }
-            `}
-          variants={buttonVariants}
-          initial="initial"
-          whileHover="hover"
+          `}
         >
           <Link href="/games" passHref>
             Go To Games

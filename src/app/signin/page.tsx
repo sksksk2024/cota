@@ -214,16 +214,17 @@ const SignIn = () => {
 
         {/* HOME LINK */}
         <motion.div
-          className={`cursor-pointer p-16P rounded-5BR font-bold tracking-wide
-        ${
-          theme === 'theme1'
-            ? 'text-white bg-green-dark hover:text-background-dark hover:bg-warning'
-            : ' bg-green-light text-background-dark hover:text-cyan-dark hover:bg-highlight'
-        }
-        `}
+          className={`w-full min-w-container-300 max-w-container-600 text-center cursor-pointer p-16P rounded-5BR font-bold tracking-wide
+            ${
+              theme === 'theme1'
+                ? 'text-white bg-green-dark hover:text-background-dark hover:bg-warning'
+                : ' bg-green-light text-background-dark hover:text-cyan-dark hover:bg-highlight'
+            }
+            `}
           variants={buttonVariants}
           initial="hidden"
           whileHover="hover"
+          animate="exit"
         >
           <Link href="/" passHref>
             Go Home

@@ -94,6 +94,13 @@ export const buttonVariants: Variants = {
       ease: 'easeInOut',
     },
   },
+  exit: {
+    scale: 1,
+    transition: {
+      duration: 0.25,
+      ease: 'easeInOut',
+    },
+  },
 };
 
 export const mainButtonVariants: Variants = {

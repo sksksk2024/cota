@@ -69,18 +69,16 @@ const TutorialsMain = () => {
           variants={buttonVariants}
           initial="initial"
           whileHover="hover"
+          animate="exit"
+          className={`w-full min-w-container-300 max-w-container-600 cursor-pointer p-16P rounded-5BR font-bold tracking-wide
+            ${
+              theme === 'theme1'
+                ? 'text-white bg-green-dark hover:text-background-dark hover:bg-warning'
+                : ' bg-green-light text-background-dark hover:text-cyan-dark hover:bg-highlight'
+            }
+          `}
         >
-          <Link
-            className={`cursor-pointer p-16P rounded-5BR font-bold tracking-wide
-              ${
-                theme === 'theme1'
-                  ? 'text-white bg-green-dark hover:text-background-dark hover:bg-warning'
-                  : ' bg-green-light text-background-dark hover:text-cyan-dark hover:bg-highlight'
-              }
-            `}
-            href="/"
-            passHref
-          >
+          <Link href="/" passHref>
             Go Home
           </Link>
         </motion.button>
