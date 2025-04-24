@@ -37,11 +37,6 @@ const NewsletterMain = () => {
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    // Determine email from session or manual input
-    // const userEmail = displayEmail
-    //   ? session?.data?.user?.email || user?.email
-    //   : '';
-
     const userEmail =
       email?.trim() || session?.data?.user?.email || user?.email;
 
@@ -135,6 +130,7 @@ const NewsletterMain = () => {
                 className={`relative group w-full
               ${!typeEmail && 'cursor-not-allowed select-none'}`}
                 htmlFor="email"
+                aria-label="Enter Email"
               >
                 <input
                   className={`outline-none text-textis text-center font-bold px-32P py-8P rounded-5BR bg-snow-gray border-none w-full shadow-soft-cyan focus:shadow-hover-cyan placeholder:text-gray-400 placeholder:opacity-90 focus:outline-none focus:ring-0 focus:border-transparent hover:placeholder:text-gray-900

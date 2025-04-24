@@ -97,7 +97,7 @@ const SignIn = () => {
         ${theme === 'theme1' ? 'bg-deep-dark' : 'bg-green-cyan-light'}
         `}
         >
-          <label className={`w-full`} htmlFor="email">
+          <label className={`w-full`} htmlFor="email" aria-label="Enter Email">
             <motion.input
               className={`outline-none text-textis text-center font-bold px-32P py-8P rounded-5BR bg-snow-gray border-none w-full shadow-soft-cyan focus:shadow-hover-cyan placeholder:text-gray-400 placeholder:opacity-90 focus:outline-none focus:ring-0 focus:border-transparent hover:placeholder:text-gray-900
               ${theme === 'theme1' ? 'hover:bg-warning' : 'hover:bg-highlight'}
@@ -112,7 +112,11 @@ const SignIn = () => {
             />
           </label>
 
-          <label className={`relative group w-full`} htmlFor="password">
+          <label
+            className={`relative group w-full`}
+            htmlFor="password"
+            aria-label="Enter Password"
+          >
             <motion.input
               className={`outline-none text-textis text-center font-bold px-32P py-8P rounded-5BR bg-snow-gray border-none w-full shadow-soft-cyan focus:shadow-hover-cyan placeholder:text-gray-400 placeholder:opacity-90 focus:outline-none focus:ring-0 focus:border-transparent hover:placeholder:text-gray-900
               ${theme === 'theme1' ? 'hover:bg-warning' : 'hover:bg-highlight'}

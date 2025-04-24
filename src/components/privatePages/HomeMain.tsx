@@ -29,26 +29,7 @@ const HomeMain = () => {
 
   return (
     <main className="relative w-full h-full">
-      {/* AnimatePresence ensures exit animation runs (Spinner) */}
-      {/* <AnimatePresence>
-        {isLoading && (
-          <motion.div
-            key="spinner"
-            className={`fixed top-0 left-0 w-full h-[100dvh] flex justify-center items-center z-50
-            ${theme === 'theme1' ? 'bg-background-dark' : 'bg-cyan-dark'}
-          `}
-            initial={{ opacity: 1 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.8 }}
-          >
-            <Spinner />
-          </motion.div>
-        )}
-      </AnimatePresence> */}
-
       {/* App Content */}
-      {/* {!isLoading && ( */}
       <div className="relative">
         {/* Object to fill in the gaps */}
         <div
@@ -90,7 +71,6 @@ const HomeMain = () => {
           </div>
         )}
       </div>
-      {/* )} */}
     </main>
   );
 };

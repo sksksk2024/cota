@@ -19,6 +19,7 @@ import { useUser } from '@/components/hooks/useUser';
 import { editProfileSchema, EditProfileInput } from '@/lib/schemas';
 import { ProtectedPageCustom } from '@/components/ProtectedPageCustom';
 import PageWrapper from '@/components/PageWrapper';
+import { ConfirmModal } from '@/components/utils/ConfirmModal';
 
 const EditProfile = () => {
   const { success, error, loading, dismiss } = useToast();
@@ -32,6 +33,8 @@ const EditProfile = () => {
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const [showConfirmPassword, setShowConfirmPassword] =
     useState<boolean>(false);
+
+  const [showConfirm, setShowConfirm] = useState(false);
 
   const [name, setName] = useState<string>('');
   const [email, setEmail] = useState<string>('');
@@ -50,11 +53,21 @@ const EditProfile = () => {
     }
   }, [user]);
 
+  const handleDeleteClick = () => {
+    setShowConfirm(true); // just show modal
+  };
+
+  const handleConfirm = () => {
+    setShowConfirm(false);
+    // Proceed with the delete logic
+  };
+
+  const handleCancel = () => {
+    setShowConfirm(false);
+  };
+
   const handleDeleteUser = async () => {
-    const confirmed = confirm(
-      'Are you sure you want to delete your user? This cannot be undone.'
-    );
-    if (!confirmed) return;
+    // setShowConfirm(true);
 
     loading('Deleting User...');
     try {
@@ -158,6 +171,7 @@ const EditProfile = () => {
             ${!editName && 'cursor-not-allowed select-none'}
           `}
               htmlFor="name"
+              aria-label="Enter Name"
             >
               <motion.input
                 value={name}
@@ -216,6 +230,7 @@ const EditProfile = () => {
             ${!editEmail && 'cursor-not-allowed select-none'}
           `}
               htmlFor="email"
+              aria-label="Enter Email"
             >
               <motion.input
                 value={email}
@@ -271,7 +286,11 @@ const EditProfile = () => {
             {!isOAuthUser && (
               <>
                 {/* EDIT PASSWORD */}
-                <label className={`relative group w-full`} htmlFor="password">
+                <label
+                  className={`relative group w-full`}
+                  htmlFor="password"
+                  aria-label="Enter Password"
+                >
                   <motion.input
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
@@ -322,6 +341,7 @@ const EditProfile = () => {
                 <label
                   className={`relative group w-full`}
                   htmlFor="confirmPassword"
+                  aria-label="Enter Confirm Password"
                 >
                   <motion.input
                     value={confirmPassword}
@@ -420,7 +440,7 @@ const EditProfile = () => {
 
             <motion.button
               type="button"
-              onClick={handleDeleteUser}
+              onClick={handleDeleteClick}
               className={`w-full cursor-pointer p-16P rounded-5BR font-bold tracking-wide xs:w-1/2
               ${
                 theme === 'theme1'
@@ -434,6 +454,13 @@ const EditProfile = () => {
             >
               Delete User
             </motion.button>
+
+            <ConfirmModal
+              show={showConfirm}
+              message="Are you sure you want to delete your user? This cannot be undone."
+              onCancel={handleCancel}
+              onConfirm={handleDeleteUser}
+            />
           </div>
 
           {isOAuthUser && (
