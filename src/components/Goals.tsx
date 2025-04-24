@@ -1,9 +1,11 @@
 'use client';
 
+import { motion } from 'framer-motion';
 import Image from 'next/image';
 import goalsMe from '@/images/goalsMe.png';
 import { useThemeStore } from './hooks/useThemeStore';
 import PageWrapper from './PageWrapper';
+import { comingMeVariants } from './motionVariants/motionVariants';
 
 const Goals = () => {
   const { theme } = useThemeStore();
@@ -68,9 +70,18 @@ const Goals = () => {
             </p>
           </div>
         </div>
-        <div className="md:w-[700px] xl:w-full xl:max-w-container-700 absolute -bottom-32I xl:right-0 opacity-30">
-          <Image src={goalsMe} className="w-full" alt="aboutMe" />
-        </div>
+        <motion.div
+          variants={comingMeVariants}
+          initial="hidden"
+          animate="visible"
+          className="md:w-[700px] xl:w-full xl:max-w-container-700 absolute -bottom-32I xl:right-0"
+        >
+          <Image
+            src={goalsMe}
+            className="w-full pointer-events-none"
+            alt="aboutMe"
+          />
+        </motion.div>
         <div className="w-128W h-1"></div>
       </div>
     </PageWrapper>

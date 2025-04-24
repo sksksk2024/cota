@@ -1,5 +1,44 @@
 import { Variants } from 'framer-motion';
 
+export const ulVariants: Variants = {
+  hidden: {
+    x: '-100dvw',
+  },
+  visible: {
+    x: 0,
+    transition: {
+      duration: 1,
+      delay: 0.5,
+      type: 'spring',
+      stiffness: 50, // speed of the bounce
+      damping: 10, // lower = more bounce
+    },
+  },
+};
+
+export const comingMeVariants: Variants = {
+  hidden: {
+    x: '-100dvw',
+    opacity: 0,
+    transition: {
+      duration: 0.3,
+      ease: 'easeInOut',
+    },
+  },
+  visible: {
+    x: 0,
+    opacity: 0.3,
+    transition: {
+      delay: 1,
+      duration: 0.5,
+      ease: 'easeInOut',
+      type: 'spring',
+      stiffness: 50, // speed of the bounce
+      damping: 8, // lower = more bounce
+    },
+  },
+};
+
 export const comingVariants: Variants = {
   hidden: {
     translateX: -100,

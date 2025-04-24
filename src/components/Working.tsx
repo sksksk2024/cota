@@ -59,7 +59,7 @@ const Working = () => {
         >
           <Image
             src={workingMe}
-            className="z-20 absolute translate-x-1/2 right-1/2 w-[700px] h-[700px] opacity-30 object-contain"
+            className="z-20 absolute translate-x-1/2 right-1/2 w-[700px] h-[700px] opacity-30 object-contain pointer-events-none"
             alt="me working"
           />
         </motion.span>

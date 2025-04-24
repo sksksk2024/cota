@@ -45,11 +45,6 @@ const Calisthenics = () => {
           ${theme === 'theme1' ? 'bg-green-dark' : 'bg-green-light'}
           `}
         ></div>
-        {/* <Image
-          src={calisthenicsMe}
-          className="z-20 absolute translate-x-1/2 right-1/2 w-[700px] h-[700px] opacity-30 object-contain"
-          alt="me doing a handstand"
-        /> */}
         <motion.span
           variants={comingVariants}
           initial="hidden"
@@ -58,8 +53,8 @@ const Calisthenics = () => {
         >
           <Image
             src={calisthenicsMe}
-            className="z-20 absolute translate-x-1/2 right-1/2 w-[700px] h-[700px] opacity-30 object-contain"
-            alt="me working"
+            className="z-20 absolute translate-x-1/2 right-1/2 w-[700px] h-[700px] opacity-30 object-contain pointer-events-none"
+            alt="me doing a handstand"
           />
         </motion.span>
         <div

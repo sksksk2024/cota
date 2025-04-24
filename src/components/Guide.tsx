@@ -1,8 +1,13 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { buttonVariants } from './motionVariants/motionVariants';
-import React, { useEffect, useState } from 'react';
+import {
+  buttonVariants,
+  comingMeVariants,
+  ulVariants,
+} from './motionVariants/motionVariants';
+import { comingVariants } from './motionVariants/motionVariants';
+import React, { Fragment, useEffect, useState } from 'react';
 import { useThemeStore } from './hooks/useThemeStore';
 import BurgerMenu from './utils/BurgerMenu';
 import XMenu from './utils/XMenu';
@@ -75,7 +80,10 @@ const Guide = () => {
         ${theme === 'theme1' ? 'bg-background-dark' : 'bg-cyan-dark'}
         `}
       />
-      <ul
+      <motion.ul
+        variants={ulVariants}
+        initial="hidden"
+        animate="visible"
         className={`z-50 sticky top-0 flex justify-around items-center py-24P
     ${theme === 'theme1' ? 'bg-background-dark/50' : 'bg-cyan-dark/50'}
     `}
@@ -90,9 +98,12 @@ const Guide = () => {
                 <React.Fragment key={label}>
                   {displayName && label === 'Edit Profile' && !user ? (
                     <motion.li className={disabledClasses} key={label}>
-                      <button disabled className={contentDisabledClasses}>
+                      <motion.button
+                        disabled
+                        className={contentDisabledClasses}
+                      >
                         {label}
-                      </button>
+                      </motion.button>
                     </motion.li>
                   ) : (
                     <motion.li
@@ -145,7 +156,7 @@ const Guide = () => {
             ))}
           </>
         )}
-      </ul>
+      </motion.ul>
     </>
   );
 };
