@@ -1,3 +1,5 @@
+'use client';
+
 import { motion } from 'framer-motion';
 import { sunVariants, moonVariants } from './motionVariants/motionVariants';
 import CotaLogo from './svgs/CotaLogo';
@@ -6,6 +8,7 @@ import Sun from './utils/Sun';
 import Moon from './utils/Moon';
 import { useUser } from './hooks/useUser';
 import { useSession } from 'next-auth/react';
+import { useEffect, useState } from 'react';
 
 const Header = () => {
   const { theme, toggleTheme } = useThemeStore();
@@ -13,7 +16,7 @@ const Header = () => {
 
   const { data: session } = useSession();
 
-  const displayName = session?.user?.name ?? user?.name;
+  const displayName = session?.user?.name || user?.name;
 
   return (
     <header

@@ -1,3 +1,6 @@
+// hooks/useThemeStore.ts
+'use client';
+
 import { create } from 'zustand';
 
 type ThemeState = {
@@ -7,13 +10,13 @@ type ThemeState = {
 };
 
 export const useThemeStore = create<ThemeState>((set, get) => ({
-  theme: 'theme1',
+  theme: 'theme1', // Default theme
   setTheme: (theme) => set({ theme }),
   toggleTheme: async () => {
     const currentTheme = get().theme;
     const newTheme = currentTheme === 'theme1' ? 'theme2' : 'theme1';
 
-    set({ theme: newTheme });
+    set({ theme: newTheme }); // Update state
 
     try {
       await fetch('/api/theme', {

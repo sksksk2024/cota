@@ -49,11 +49,11 @@ const Calisthenics = () => {
           variants={comingVariants}
           initial="hidden"
           whileInView="visible"
-          className="z-20 absolute translate-x-1/2 right-1/2 w-full max-w-[700px] h-[700px]"
+          className="z-20 absolute translate-x-1/2 right-1/2 w-full max-w-[700px] h-[600px]"
         >
           <Image
             src={calisthenicsMe}
-            className="z-20 absolute translate-x-1/2 right-1/2 w-[700px] h-[700px] opacity-30 object-contain pointer-events-none"
+            className="z-20 absolute translate-x-1/2 right-1/2 w-[700px] h-[600px] opacity-30 object-contain pointer-events-none"
             alt="me doing a handstand"
           />
         </motion.span>

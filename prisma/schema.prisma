@@ -21,10 +21,8 @@ model User {
   id             String   @id @default(cuid())
   name           String?
   email          String?  @unique
-  emailVerified  DateTime?
   password       String?
-  image    String?
-  theme    String?
+  theme          String   @default("theme1")
   accounts       Account[]
   sessions       Session[]
 }

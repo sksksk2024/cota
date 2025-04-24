@@ -25,7 +25,7 @@ const Guide = () => {
 
   const { data: session } = useSession();
 
-  const displayName = session?.user?.name ?? user?.name;
+  const displayName = session?.user?.name || user?.name;
 
   // Map Logic to be more clean
   const navItems = ['Sign Up', 'Sign In', 'Sign Out', 'Edit Profile'];
