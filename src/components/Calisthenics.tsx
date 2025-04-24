@@ -3,7 +3,7 @@
 import { motion } from 'framer-motion';
 import { comingVariants } from './motionVariants/motionVariants';
 import Image from 'next/image';
-import calisthenicsMe from '@/images/calisthenicsMe.jpg';
+import calisthenicsMe from '@/images/calisthenicsMe.webp';
 import { useThemeStore } from './hooks/useThemeStore';
 
 const Calisthenics = () => {

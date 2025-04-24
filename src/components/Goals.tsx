@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion';
 import Image from 'next/image';
-import goalsMe from '@/images/goalsMe.png';
+import goalsMe from '@/images/goalsMe.webp';
 import { useThemeStore } from './hooks/useThemeStore';
 import PageWrapper from './PageWrapper';
 import { comingMeVariants } from './motionVariants/motionVariants';

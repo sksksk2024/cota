@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { buttonVariants } from '@/components/motionVariants/motionVariants';
-import successfulMe from '@/images/successfulMe.png';
+import successfulMe from '@/images/successfulMe.webp';
 import Image from 'next/image';
 import { useThemeStore } from '@/components/hooks/useThemeStore';
 import Link from 'next/link';

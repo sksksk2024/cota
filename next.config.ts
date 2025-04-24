@@ -11,6 +11,15 @@ const nextConfig: NextConfig = {
 
     return config;
   },
+  images: {
+    formats: ['image/avif', 'image/webp'], // for modern format
+    // domains: ['your-image-domain.com'], // if external
+  },
+  compress: true,
+  swcMinify: true,
+  experimental: {
+    optimizeCss: true,
+  },
 };
 
 export default nextConfig;

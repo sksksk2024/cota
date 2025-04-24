@@ -4,12 +4,7 @@ import daisyui from 'daisyui';
 module.exports = {
   darkMode: ['class'],
   content: [
-    './public/**/*.html',
-    './index.html',
-    './src/**/*.{js,jsx,ts,tsx,svg}',
-    './src/**/*.svg',
     // Nextjs
-    './pages/**/*.{js,ts,jsx,tsx}', // This will include all files inside the 'pages' folder
     './components/**/*.{js,ts,jsx,tsx}', // This will include all files inside the 'components' folder
     './app/**/*.{js,ts,jsx,tsx}', // If you're using the new app folder structure in Next.js
   ],

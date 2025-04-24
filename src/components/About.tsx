@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion';
 import Image from 'next/image';
-import aboutMe from '@/images/aboutMe.png';
+import aboutMe from '@/images/aboutMe.webp';
 import { useThemeStore } from './hooks/useThemeStore';
 import PageWrapper from './PageWrapper';
 import { comingMeVariants } from './motionVariants/motionVariants';

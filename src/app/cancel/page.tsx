@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { buttonVariants } from '@/components/motionVariants/motionVariants';
-import cancelMe from '@/images/cancelMe.png';
+import cancelMe from '@/images/cancelMe.webp';
 import Image from 'next/image';
 import { useThemeStore } from '@/components/hooks/useThemeStore';
 import Link from 'next/link';

@@ -3,7 +3,7 @@
 import { motion } from 'framer-motion';
 import { comingVariants } from './motionVariants/motionVariants';
 import Image from 'next/image';
-import workingMe from '@/images/workingMe.jpg';
+import workingMe from '@/images/workingMe.webp';
 import { useThemeStore } from './hooks/useThemeStore';
 
 const Working = () => {

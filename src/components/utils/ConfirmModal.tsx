@@ -1,7 +1,7 @@
 // ConfirmModal.tsx
 'use client';
 
-import { useState, useRef } from 'react';
+import { useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 export const ConfirmModal = ({

@@ -7,7 +7,7 @@ import {
   sunVariants,
 } from '@/components/motionVariants/motionVariants';
 import Image from 'next/image';
-import notFoundMe from '@/images/notFoundMe.png';
+import notFoundMe from '@/images/notFoundMe.webp';
 import { useThemeStore } from '@/components/hooks/useThemeStore';
 import Sun from '@/components/utils/Sun';
 import Moon from '@/components/utils/Moon';
