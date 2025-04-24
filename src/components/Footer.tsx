@@ -1,11 +1,13 @@
 'use client';
 
 import { useThemeStore } from './hooks/useThemeStore';
-import { useCopyToClipboard } from './hooks/useCopyToClipboard';
-import Insta from './utils/Insta';
-import LinkedIn from './utils/LinkedIn';
-import GitHub from './utils/Github';
-import FrontendMentor from './utils/FrontendMentor';
+const Insta = dynamic(() => import('./utils/Insta'), { ssr: false });
+const LinkedIn = dynamic(() => import('./utils/LinkedIn'), { ssr: false });
+const GitHub = dynamic(() => import('./utils/Github'), { ssr: false });
+const FrontendMentor = dynamic(() => import('./utils/FrontendMentor'), {
+  ssr: false,
+});
+
 import Link from 'next/link';
 import Email from './utils/Email';
 import Phone from './utils/Phone';
@@ -18,10 +20,10 @@ import Newsletter from './utils/Newsletter';
 import WingsLogo from './utils/WingsLogo';
 import { useUser } from './hooks/useUser';
 import { useSession } from 'next-auth/react';
+import dynamic from 'next/dynamic';
 
 const Footer = () => {
   const { theme } = useThemeStore();
-  const { copy, copied } = useCopyToClipboard();
   const { user } = useUser();
 
   const { data: session } = useSession();
@@ -49,8 +51,7 @@ const Footer = () => {
         `}
           >
             <button
-              onClick={() => copy('+40770753746')}
-              className={`text-xl font-bold flex justify-start items-center gap-2 cursor-pointer 
+              className={`select-text text-xl font-bold flex justify-start items-center gap-2 cursor-pointer 
           ${
             theme === 'theme1'
               ? 'text-white hover:text-warning'
@@ -62,8 +63,7 @@ const Footer = () => {
               +40-770-753-746 {/* Business Number */}
             </button>
             <button
-              onClick={() => copy('cota8091@gmail.com')}
-              className={`text-xl font-bold flex justify-start items-center gap-2 cursor-pointer
+              className={`select-text text-xl font-bold flex justify-start items-center gap-2 cursor-pointer
             ${
               theme === 'theme1'
                 ? 'text-white hover:text-warning'
@@ -192,8 +192,7 @@ ${theme === 'theme1' ? 'text-white' : 'text-textis'}
 `}
             >
               <button
-                onClick={() => copy('+40770753746')}
-                className={`text-xl font-bold flex justify-start items-center gap-2 cursor-pointer 
+                className={`select-text text-xl font-bold flex justify-start items-center gap-2 cursor-pointer 
 ${
   theme === 'theme1'
     ? 'text-white hover:text-warning'
@@ -205,8 +204,7 @@ ${
                 +40-770-753-746 {/* Business Number */}
               </button>
               <button
-                onClick={() => copy('cota8091@gmail.com')}
-                className={`text-xl font-bold flex justify-start items-center gap-2 cursor-pointer
+                className={`select-text text-xl font-bold flex justify-start items-center gap-2 cursor-pointer
 ${
   theme === 'theme1'
     ? 'text-white hover:text-warning'

@@ -90,9 +90,9 @@ const Guide = () => {
       >
         {openSideBar ? (
           <>
-            <div onClick={handleToggleSideBar}>
+            <li onClick={handleToggleSideBar}>
               <XMenu />
-            </div>
+            </li>
             {navItems.map((label) =>
               isVisible(label, displayName) ? (
                 <React.Fragment key={label}>
@@ -133,9 +133,9 @@ const Guide = () => {
           </>
         ) : (
           <>
-            <div onClick={handleToggleSideBar}>
+            <li onClick={handleToggleSideBar}>
               <BurgerMenu />
-            </div>
+            </li>
             {['Intro', 'About', 'Explore'].map((label) => (
               <motion.li
                 className={`px-16P py-8P rounded-5BR cursor-pointer font-bold tracking-wide

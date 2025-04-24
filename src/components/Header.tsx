@@ -1,5 +1,3 @@
-'use client';
-
 import { motion } from 'framer-motion';
 import { sunVariants, moonVariants } from './motionVariants/motionVariants';
 import CotaLogo from './svgs/CotaLogo';

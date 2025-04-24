@@ -16,7 +16,6 @@ const nextConfig: NextConfig = {
     // domains: ['your-image-domain.com'], // if external
   },
   compress: true,
-  swcMinify: true,
   experimental: {
     optimizeCss: true,
   },
