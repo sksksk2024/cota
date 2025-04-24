@@ -23,8 +23,8 @@ export default function RootLayout({
           crossOrigin="anonymous"
         />
         <link rel="preconnect" href="https://js.stripe.com" />
-        <link rel="icon" href="/favicon.ico" sizes="any" />
-        <link rel="apple-touch-icon" href="/favicon.png" />
+        <link rel="icon" href="/cotaFavicon.svg" sizes="32x32" />
+        <link rel="apple-touch-icon" href="/cotaFavicon.svg" sizes="32x32" />
       </head>
       <body className={`antialiased relative`}>
         <ThemeProvider>
