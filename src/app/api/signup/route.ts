@@ -14,6 +14,14 @@ export async function POST(req: Request) {
 
   const { name, email, password } = result.data;
 
+  // 🔥 Cleanup ghost users (in case a theme-only user exists)
+  await prisma.user.deleteMany({
+    where: {
+      email,
+      OR: [{ password: null }, { name: null }],
+    },
+  });
+
   // Check if user exists
   const existingUser = await prisma.user.findUnique({ where: { email } });
   if (existingUser) {
