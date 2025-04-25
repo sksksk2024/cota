@@ -13,7 +13,7 @@ import { useSession } from 'next-auth/react';
 
 const Guide = () => {
   const { theme } = useThemeStore();
-  const [_unused, setScrolled] = useState(false);
+  const [, setScrolled] = useState(false);
   const { user } = useUser();
 
   const [openSideBar, setOpenSideBar] = useState<boolean>(false);
