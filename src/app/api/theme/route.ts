@@ -26,24 +26,31 @@ export async function POST(req: Request) {
     // Set cookie regardless of session
     const email = session?.user?.email || customUser?.email;
 
-    // Merging to save everything
-    const updatedUser = {
-      ...customUser,
-      email,
-      theme,
-    };
+    if (session?.user?.email || customUser?.email) {
+      // Merging to save everything
+      const updatedUser = {
+        ...customUser,
+        email,
+        theme,
+      };
 
-    const cookie = serialize('user', JSON.stringify(updatedUser), {
-      httpOnly: true,
-      path: '/',
-      maxAge: 60 * 60 * 24 * 365,
-    });
+      const cookie = serialize('user', JSON.stringify(updatedUser), {
+        httpOnly: true,
+        path: '/',
+        maxAge: 60 * 60 * 24 * 365,
+      });
 
-    const response = NextResponse.json({
-      message: 'Theme updated successfully',
-    });
-    response.headers.set('Set-Cookie', cookie);
-    return response;
+      const response = NextResponse.json({
+        message: 'Theme updated successfully',
+      });
+      response.headers.set('Set-Cookie', cookie);
+      return response;
+    }
+
+    return NextResponse.json(
+      { error: 'No user found to associate theme with.' },
+      { status: 400 }
+    );
   } catch (err) {
     console.error('Failed to update theme:', err);
     return NextResponse.json(
