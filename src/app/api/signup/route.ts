@@ -18,7 +18,7 @@ export async function POST(req: Request) {
   await prisma.user.deleteMany({
     where: {
       email,
-      OR: [{ password: null }, { name: null }],
+      OR: [{ name: null }, { name: '' }, { password: null }, { password: '' }],
     },
   });
 
