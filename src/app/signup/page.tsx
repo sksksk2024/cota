@@ -72,7 +72,7 @@ const SignUp = () => {
         error(data.error || 'Something Went Wrong!');
       }
     } catch (err) {
-      setErrorMsg('Network error or unexpected issue.');
+      setErrorMsg(`Network error or unexpected issue: ${err}`);
       error('Something Went Wrong!');
     }
   };

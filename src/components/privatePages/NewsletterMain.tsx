@@ -78,7 +78,7 @@ const NewsletterMain = () => {
         error(data.error || 'Failed To Subscribe!');
       }
     } catch (err) {
-      setErrorMsg('Network error or unexpected issue.');
+      setErrorMsg(`Network error or unexpected issue: ${err}`);
       error('Something Went Wrong!');
     } finally {
       dismiss();

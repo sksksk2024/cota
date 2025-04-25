@@ -1,14 +1,11 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { useToast } from '@/components/hooks/useToast';
 import { buttonVariants } from '@/components/motionVariants/motionVariants';
 import { useThemeStore } from '@/components/hooks/useThemeStore';
 import ProtectedPageAll from '@/components/ProtectedPageAll';
 import Link from 'next/link';
 import React from 'react';
-import Image from 'next/image';
-import Sun from '../utils/Sun';
 import { Locked } from '@/components/svgs/Locked';
 import { TappyIcon } from '../svgs/TappyIcon';
 

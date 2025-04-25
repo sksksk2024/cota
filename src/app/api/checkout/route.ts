@@ -19,7 +19,10 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
   } catch (err) {
-    return NextResponse.json({ error: 'Invalid user cookie' }, { status: 400 });
+    return NextResponse.json(
+      { error: `Invalid user cookie, ${err}` },
+      { status: 400 }
+    );
   }
 
   try {
@@ -47,8 +50,13 @@ export async function POST(req: Request) {
     } as Stripe.Checkout.SessionCreateParams); // 👈 This is key (very important, in order to work)
 
     return NextResponse.json({ sessionId: session.id });
-  } catch (error: any) {
-    console.error('Stripe error:', error.message);
+  } catch (error: unknown) {
+    if (error instanceof Error) {
+      console.error('Stripe error:', error.message);
+    } else {
+      console.error('Unknown error:', error);
+    }
+
     return NextResponse.json(
       { error: 'Something went wrong while creating the checkout session.' },
       { status: 500 }

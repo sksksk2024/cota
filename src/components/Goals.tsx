@@ -28,14 +28,14 @@ const Goals = () => {
             <p className="font-semibold tracking-widest">
               <span className="italic">Determination</span> and{' '}
               <span className="italic">resilience</span> define my approach to
-              life. I’m not afraid to take risks or tackle challenges{' '}
+              life. I'm not afraid to take risks or tackle challenges{' '}
               <span className="italic">head-on</span>. I value{' '}
               <span className="italic">hard work</span>, both physically and
-              mentally, and strive to be someone who doesn’t settle for
+              mentally, and strive to be someone who doesn't settle for
               mediocrity. Through my journey in{' '}
               <span className="italic">calisthenics</span>,{' '}
               <span className="italic">entrepreneurship</span>, and{' '}
-              <span className="italic">web development</span>, I’ve learned to
+              <span className="italic">web development</span>, I've learned to
               embrace failure as a lesson and keep moving forward. My commitment
               to <span className="italic">self-improvement</span> drives me to
               constantly evolve, learn, and grow, ensuring that I can contribute

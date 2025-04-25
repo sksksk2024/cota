@@ -27,10 +27,7 @@ const AnimatedSVG: React.FC<AnimatedSVGProps> = ({
   strokeWidth = 2,
   viewBox,
   className = '',
-  children,
-  onClick,
   stroke,
-  fill,
 }) => {
   const { theme } = useThemeStore();
 

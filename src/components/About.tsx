@@ -26,12 +26,12 @@ const About = () => {
               About Me and What I Do?
             </h2>
             <p className="font-semibold tracking-widest">
-              I’m <span className="font-bold italic">Cota Alexandru</span>, an
+              I'm <span className="font-bold italic">Cota Alexandru</span>, an
               18-year-old passionate about{' '}
               <span className="italic">overcoming challenges</span> and
               improving myself every day. From my early days in{' '}
               <span className="italic">calisthenics</span> to my transition into{' '}
-              <span className="italic">web development</span>, I’ve always
+              <span className="italic">web development</span>, I've always
               sought to find new ways to push my limits. Web development started
               as a tool for building my business, but it quickly became my{' '}
               <span className="italic">passion</span>. I want to use my skills

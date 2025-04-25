@@ -8,7 +8,6 @@ import Sun from './utils/Sun';
 import Moon from './utils/Moon';
 import { useUser } from './hooks/useUser';
 import { useSession } from 'next-auth/react';
-import { useEffect, useState } from 'react';
 
 const Header = () => {
   const { theme, toggleTheme } = useThemeStore();

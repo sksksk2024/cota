@@ -57,11 +57,6 @@ const EditProfile = () => {
     setShowConfirm(true); // just show modal
   };
 
-  const handleConfirm = () => {
-    setShowConfirm(false);
-    // Proceed with the delete logic
-  };
-
   const handleCancel = () => {
     setShowConfirm(false);
   };
@@ -88,7 +83,7 @@ const EditProfile = () => {
       }
     } catch (err) {
       console.error(err);
-      error('Something went wrong.');
+      error(`Something went wrong: ${err}`);
     }
   };
 
@@ -135,7 +130,7 @@ const EditProfile = () => {
       success('User Successfully Edited!');
       router.push('/');
     } catch (err) {
-      setErrorMsg('Network error or unexpected issue');
+      setErrorMsg(`Network error or unexpected issue: ${err}`);
       error('Something went wrong.');
     }
   };

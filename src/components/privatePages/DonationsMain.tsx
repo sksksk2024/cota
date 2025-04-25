@@ -8,7 +8,6 @@ import {
   buttonVariants,
 } from '@/components/motionVariants/motionVariants';
 import { useThemeStore } from '@/components/hooks/useThemeStore';
-import { useRouter } from 'next/navigation';
 import { loadStripe } from '@stripe/stripe-js';
 import PiggyBank from '@/components/svgs/PiggyBank';
 import ProtectedPageAll from '@/components/ProtectedPageAll';
@@ -17,7 +16,6 @@ import Link from 'next/link';
 const Donations = () => {
   const { success, error, loading, dismiss } = useToast();
   const { theme } = useThemeStore();
-  const router = useRouter();
 
   const [showModal, setShowModal] = useState(false);
   const modalRef = useRef<HTMLDivElement | null>(null);
@@ -41,7 +39,7 @@ const Donations = () => {
       }
 
       await stripe?.redirectToCheckout({ sessionId: data.sessionId });
-    } catch (err: any) {
+    } catch (err: unknown) {
       console.error(err);
       error('Something went wrong during checkout.');
     }

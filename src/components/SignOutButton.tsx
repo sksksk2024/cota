@@ -15,7 +15,7 @@ const SignOutButton = ({ contentClasses = '' }: SignOutButtonProps) => {
   const handleSignOut = async () => {
     loading('Signing Out...');
     try {
-      const response = await fetch('/api/signout', {
+      await fetch('/api/signout', {
         method: 'GET',
         credentials: 'include',
       });
@@ -25,7 +25,7 @@ const SignOutButton = ({ contentClasses = '' }: SignOutButtonProps) => {
       success('Successfully Signed Out!');
       router.push('/signin');
     } catch (err) {
-      error('Something Went Wrong!');
+      error(`Something Went Wrong: ${err}`);
     }
   };
 

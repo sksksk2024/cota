@@ -1,13 +1,8 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import {
-  buttonVariants,
-  comingMeVariants,
-  ulVariants,
-} from './motionVariants/motionVariants';
-import { comingVariants } from './motionVariants/motionVariants';
-import React, { Fragment, useEffect, useState } from 'react';
+import { buttonVariants, ulVariants } from './motionVariants/motionVariants';
+import React, { useEffect, useState } from 'react';
 import { useThemeStore } from './hooks/useThemeStore';
 import BurgerMenu from './utils/BurgerMenu';
 import XMenu from './utils/XMenu';
@@ -18,7 +13,7 @@ import { useSession } from 'next-auth/react';
 
 const Guide = () => {
   const { theme } = useThemeStore();
-  const [scrolled, setScrolled] = useState(false);
+  const [_, setScrolled] = useState(false);
   const { user } = useUser();
 
   const [openSideBar, setOpenSideBar] = useState<boolean>(false);

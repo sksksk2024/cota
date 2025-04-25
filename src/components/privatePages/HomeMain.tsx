@@ -12,7 +12,7 @@ const Info = lazy(() => import('@/components/Info'));
 const CotaLogo = lazy(() => import('../svgs/CotaLogo'));
 
 const HomeMain = () => {
-  const [isLoading, setIsLoading] = useState(true);
+  const [_, setIsLoading] = useState(true);
   const { theme } = useThemeStore();
   const { user } = useUser();
 
