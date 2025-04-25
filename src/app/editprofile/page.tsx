@@ -46,7 +46,7 @@ const EditProfile = () => {
   const [isOAuthUser, setIsOAuthUser] = useState(true);
 
   useEffect(() => {
-    if (user) {
+    if (user.id) {
       setName(user.name ?? '');
       setEmail(user.email ?? '');
       setIsOAuthUser(

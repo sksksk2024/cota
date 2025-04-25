@@ -31,7 +31,7 @@ const Guide = () => {
     `/${label.toLowerCase().replace(/\s+/g, '')}`;
 
   const isVisible = (label: string, user: ExtendedUser | null) => {
-    if (user) return label !== 'Sign In' && label !== 'Sign Up';
+    if (user?.id) return label !== 'Sign In' && label !== 'Sign Up';
     return label !== 'Sign Out' && label !== 'Edit Profile';
   };
 
@@ -93,7 +93,7 @@ const Guide = () => {
             {navItems.map((label) =>
               isVisible(label, currentUser) ? (
                 <React.Fragment key={label}>
-                  {displayName && label === 'Edit Profile' && !user ? (
+                  {displayName && label === 'Edit Profile' && !user?.id ? (
                     <motion.li className={disabledClasses} key={label}>
                       <motion.button
                         disabled

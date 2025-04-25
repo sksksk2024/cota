@@ -26,7 +26,7 @@ const HomeMain = () => {
     }
   }, [status]);
 
-  const displayName = session?.user ?? user;
+  const displayName = session?.user ?? user.id;
 
   return (
     <main className="relative w-full h-full">
