@@ -50,8 +50,10 @@ const SignUp = () => {
       return;
     }
 
+    console.log('hello1'); // Log the response text
     loading('Signing Up...');
     // Try catch block for validation
+    console.log('hello2'); // Log the response text
     try {
       const res = await fetch('/api/signup', {
         method: 'POST',
@@ -61,6 +63,8 @@ const SignUp = () => {
       });
 
       const text = await res.text();
+      console.log('Response Text:', text); // Log the response text
+
       const data = JSON.parse(text);
       dismiss();
 
@@ -202,9 +206,14 @@ const SignUp = () => {
 
           {/* ERROR MESSAGE */}
           {errorMsg && (
-            <div className="text-center text-red-500 font-semibold">
+            <div className="select-text pointer-events-auto cursor-pointer text-center text-red-500 font-semibold">
               {errorMsg.split('\n').map((msg, i) => (
-                <p key={i}>{msg}</p>
+                <p
+                  className="select-text pointer-events-auto cursor-pointer"
+                  key={i}
+                >
+                  {msg}
+                </p>
               ))}
             </div>
           )}

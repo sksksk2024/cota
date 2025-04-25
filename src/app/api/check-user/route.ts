@@ -8,8 +8,10 @@ export async function GET(req: Request) {
   let user = null;
 
   try {
+    console.log('Cookie header:', cookieHeader); // Log the raw cookie header
     if (cookies.user) {
-      user = JSON.parse(cookies.user);
+      console.log('User cookie:', cookies.user); // Log the cookie value
+      user = JSON.parse(cookies.user); // Try parsing the user cookie
     }
   } catch (err) {
     console.error('Failed to parse user cookie:', err);

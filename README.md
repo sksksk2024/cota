@@ -14,10 +14,10 @@
 
 ### Screenshot
 
-<div style="display: flex; gap: 10px; justify-content: center; align-items: center;" width="800">
+<p align="center">
   <img src="./design/desktop-preview.png" alt="Desktop Preview" width="300"/>
   <img src="./design/mobile-preview-light.png" alt="Mobile Preview" width="150"/>
-</div>
+</p>
 
 ---
 
