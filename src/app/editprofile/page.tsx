@@ -47,9 +47,13 @@ const EditProfile = () => {
 
   useEffect(() => {
     if (user) {
-      setName(user.name);
-      setEmail(user.email);
-      setIsOAuthUser(user.provider ? user.provider !== 'credentials' : false);
+      setName(user.name ?? '');
+      setEmail(user.email ?? '');
+      setIsOAuthUser(
+        user.accounts && user.accounts.length > 0
+          ? user.accounts[0].provider !== 'credentials'
+          : false
+      );
     }
   }, [user]);
 
