@@ -10,6 +10,7 @@ import Link from 'next/link';
 import { useUser } from './hooks/useUser';
 import SignOutButton from './SignOutButton';
 import { useSession } from 'next-auth/react';
+import { ExtendedUser } from '@/components/hooks/userTypes';
 
 const Guide = () => {
   const { theme } = useThemeStore();
@@ -21,6 +22,7 @@ const Guide = () => {
   const { data: session } = useSession();
 
   const displayName = session?.user?.name || user?.name;
+  const currentUser: ExtendedUser | null = session?.user || user || null;
 
   // Map Logic to be more clean
   const navItems = ['Sign Up', 'Sign In', 'Sign Out', 'Edit Profile'];
@@ -28,7 +30,7 @@ const Guide = () => {
   const getLinkPath = (label: string) =>
     `/${label.toLowerCase().replace(/\s+/g, '')}`;
 
-  const isVisible = (label: string, user: any) => {
+  const isVisible = (label: string, user: ExtendedUser | null) => {
     if (user) return label !== 'Sign In' && label !== 'Sign Up';
     return label !== 'Sign Out' && label !== 'Edit Profile';
   };
@@ -89,7 +91,7 @@ const Guide = () => {
               <XMenu />
             </li>
             {navItems.map((label) =>
-              isVisible(label, displayName) ? (
+              isVisible(label, currentUser) ? (
                 <React.Fragment key={label}>
                   {displayName && label === 'Edit Profile' && !user ? (
                     <motion.li className={disabledClasses} key={label}>
