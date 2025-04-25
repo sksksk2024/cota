@@ -14,7 +14,7 @@ import ProtectedPageAll from '@/components/ProtectedPageAll';
 import Link from 'next/link';
 
 const Donations = () => {
-  const { success, error, loading, dismiss } = useToast();
+  const { error, loading } = useToast();
   const { theme } = useThemeStore();
 
   const [showModal, setShowModal] = useState(false);

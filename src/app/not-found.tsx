@@ -14,7 +14,7 @@ import Moon from '@/components/utils/Moon';
 import Link from 'next/link';
 import CotaLogo from '@/components/svgs/CotaLogo';
 
-const notFound = () => {
+const NotFound = () => {
   const { theme, toggleTheme } = useThemeStore();
 
   return (
@@ -102,7 +102,9 @@ const notFound = () => {
           
           `}
       >
-        <h1>Looks like you've hit a dead end! This page doesn't exist.</h1>
+        <h1>
+          Looks like you&apos;ve hit a dead end! This page doesn&apos;t exist.
+        </h1>
 
         {/* HOME LINK */}
         <motion.button
@@ -133,4 +135,4 @@ const notFound = () => {
   );
 };
 
-export default notFound;
+export default NotFound;

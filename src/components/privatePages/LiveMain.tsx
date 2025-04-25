@@ -12,7 +12,7 @@ import { Locked } from '@/components/svgs/Locked';
 const TutorialsMain = () => {
   const { theme } = useThemeStore();
 
-  const [isLive, _] = useState<boolean>(false);
+  const [isLive, _unused] = useState<boolean>(false);
 
   return (
     <ProtectedPageAll>

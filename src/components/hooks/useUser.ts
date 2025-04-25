@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 
 export const useUser = () => {
-  const [user, setUser] = useState<any>(null);
+  const [user, setUser] = useState<unknown>(null);
   const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
