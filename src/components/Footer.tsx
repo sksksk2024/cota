@@ -28,7 +28,7 @@ const Footer = () => {
 
   const { data: session } = useSession();
 
-  const displayUser = session?.user || (user?.id ? user : null);
+  const displayUser = session?.user.name || (user?.id ? user : null);
 
   return (
     <footer

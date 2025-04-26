@@ -1,4 +1,4 @@
-import ThemeProvider from '@/components/ThemeProvider';
+import { Providers } from '@/components/Providers';
 import { Toaster } from 'react-hot-toast';
 import './globals.css';
 
@@ -25,10 +25,10 @@ export default function RootLayout({
         <link rel="apple-touch-icon" href="/cotaFavicon.svg" sizes="32x32" />
       </head>
       <body className={`antialiased relative`}>
-        <ThemeProvider>
+        <Providers>
           {children}
           <Toaster position="top-right" reverseOrder={false} />
-        </ThemeProvider>
+        </Providers>
       </body>
     </html>
   );

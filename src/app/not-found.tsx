@@ -8,14 +8,19 @@ import {
 } from '@/components/motionVariants/motionVariants';
 import Image from 'next/image';
 import notFoundMe from '@/images/notFoundMe.webp';
-import { useThemeStore } from '@/components/hooks/useThemeStore';
 import Sun from '@/components/utils/Sun';
 import Moon from '@/components/utils/Moon';
 import Link from 'next/link';
 import CotaLogo from '@/components/svgs/CotaLogo';
+import { useThemeStore } from '@/components/hooks/useThemeStore';
+import { useToggleTheme } from '@/components/hooks/useToggleTheme';
+// import { useHydrateTheme } from '@/components/hooks/useHydrateTheme';
 
 const NotFound = () => {
-  const { theme, toggleTheme } = useThemeStore();
+  // useHydrateTheme();
+
+  const { theme } = useThemeStore();
+  const toggleTheme = useToggleTheme();
 
   return (
     <main

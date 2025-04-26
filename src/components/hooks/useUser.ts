@@ -24,6 +24,7 @@ export const useUser = () => {
     const fetchUserFromCookie = async () => {
       try {
         const res = await fetch('/api/check-user', {
+          method: 'GET',
           credentials: 'include', // <== This ensures cookies are sent with the request
         });
         const data = await res.json();

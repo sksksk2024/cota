@@ -3,19 +3,32 @@
 import { motion } from 'framer-motion';
 import { sunVariants, moonVariants } from './motionVariants/motionVariants';
 import CotaLogo from './svgs/CotaLogo';
-import { useThemeStore } from './hooks/useThemeStore';
 import Sun from './utils/Sun';
 import Moon from './utils/Moon';
 import { useUser } from './hooks/useUser';
 import { useSession } from 'next-auth/react';
+import { useToast } from './hooks/useToast';
+import { useThemeStore } from './hooks/useThemeStore';
+import { useToggleTheme } from './hooks/useToggleTheme';
 
 const Header = () => {
-  const { theme, toggleTheme } = useThemeStore();
+  const { theme } = useThemeStore();
+  const toggleTheme = useToggleTheme();
   const { user } = useUser();
 
   const { data: session } = useSession();
+  const { error } = useToast(); // Call useToast hook here to avoid calling it inside zustand store.
 
   const displayName = session?.user?.name || user?.name;
+
+  // Handle theme toggle with error handling
+  const handleThemeToggle = async () => {
+    if (session?.user?.email || user?.email) {
+      toggleTheme(); // Proceed with toggling theme
+    } else {
+      error('You must sign up if you want to change the theme!');
+    }
+  };
 
   return (
     <header
@@ -37,7 +50,7 @@ const Header = () => {
               dragElastic={0.7}
             >
               <Sun
-                onClick={toggleTheme}
+                onClick={handleThemeToggle}
                 className="min-w-container-48 w-64W h-64H cursor-pointer fill-white text-white hover:text-warning hover:fill-warning transition-colors duration-300 md:hidden"
               />
             </motion.div>
@@ -51,7 +64,7 @@ const Header = () => {
               dragElastic={0.7}
             >
               <Moon
-                onClick={toggleTheme}
+                onClick={handleThemeToggle}
                 className="min-w-container-48 w-64W h-64H cursor-pointer fill-textis hover:fill-highlight transition-colors duration-300 md:hidden"
               />
             </motion.div>
@@ -89,7 +102,7 @@ const Header = () => {
             dragElastic={0.7}
           >
             <Sun
-              onClick={toggleTheme}
+              onClick={handleThemeToggle}
               className="hidden min-w-container-48 w-64W h-64H cursor-pointer fill-white text-white hover:text-warning hover:fill-warning transition-colors duration-300 md:block"
             />
           </motion.div>
@@ -103,7 +116,7 @@ const Header = () => {
             dragElastic={0.7}
           >
             <Moon
-              onClick={toggleTheme}
+              onClick={handleThemeToggle}
               className="hidden min-w-container-48 w-64W h-64H cursor-pointer fill-textis hover:fill-highlight transition-colors duration-300 md:block"
             />
           </motion.div>

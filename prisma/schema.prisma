@@ -22,7 +22,7 @@ model User {
   name           String?
   email          String?  @unique
   password       String?
-  theme          String   @default("theme1")
+  theme          String?   @default("theme1")
   accounts       Account[]
   sessions       Session[]
 }

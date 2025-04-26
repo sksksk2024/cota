@@ -21,7 +21,7 @@ const Info = () => {
 
   const { data: session } = useSession();
 
-  const displayName = session?.user ?? user.id;
+  const displayName = session?.user.name || user?.name;
 
   // Handle Toggle Between About Me and Goals
   const handleToggle = () => {

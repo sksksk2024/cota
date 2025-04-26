@@ -1,40 +1,64 @@
-// ThemeProvider
 'use client';
 
 import { useEffect, useState } from 'react';
 import { useThemeStore } from '@/components/hooks/useThemeStore';
+import { useSession } from 'next-auth/react';
 
 export default function ThemeProvider({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const { theme, setTheme } = useThemeStore();
+  const { theme, setTheme } = useThemeStore(); // Zustand store
   const [isLoading, setIsLoading] = useState(true);
+  const { data: session, status } = useSession();
 
+  // Fetch theme initially
   useEffect(() => {
+    let isMounted = true;
+
     const getTheme = async () => {
       try {
-        const res = await fetch('/api/session');
+        const res = await fetch('/api/theme');
         const data = await res.json();
-        if (typeof data.theme === 'string') {
-          setTheme(data.theme as 'theme1' | 'theme2');
+        if (isMounted && typeof data.theme === 'string') {
+          setTheme(data.theme);
         }
       } catch (err) {
         console.error('Error loading user theme:', err);
       } finally {
-        setIsLoading(false);
+        if (isMounted) setIsLoading(false);
       }
     };
 
     getTheme();
+
+    return () => {
+      isMounted = false;
+    };
   }, [setTheme]);
 
-  if (isLoading) return null; // Optional: Add a spinner here
+  // Update theme when session changes
+  useEffect(() => {
+    if (status === 'authenticated' && session?.user?.theme) {
+      setTheme(session.user.theme);
+    }
+  }, [status, session, setTheme]);
 
-  return (
-    <div className={theme === 'theme1' ? 'bg-background-dark' : 'bg-cyan-dark'}>
-      {children}
-    </div>
-  );
+  // 🛠️ NEW: Update the <body> class based on theme
+  useEffect(() => {
+    if (!isLoading) {
+      document.body.classList.remove('bg-background-dark', 'bg-cyan-dark');
+      document.body.classList.add(
+        theme === 'theme1' ? 'bg-background-dark' : 'bg-cyan-dark'
+      );
+    }
+  }, [theme, isLoading]);
+
+  if (isLoading) {
+    return null;
+  }
+
+  // ❌ Don't wrap children with a div anymore
+  return <>{children}</>;
 }
