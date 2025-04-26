@@ -21,6 +21,7 @@ const nextConfig: NextConfig = {
   productionBrowserSourceMaps: true,
   experimental: {
     optimizeCss: true,
+    serverActions: {},
   },
 };
 
