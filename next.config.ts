@@ -18,6 +18,7 @@ const nextConfig: NextConfig = {
     // domains: ['your-image-domain.com'], // if external
   },
   compress: true,
+  productionBrowserSourceMaps: true,
   experimental: {
     optimizeCss: true,
   },
