@@ -5,8 +5,8 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "node .next/standalone/server.js",
-    "postinstall": "prisma generate && prisma migrate deploy",
+    "start": "prisma generate && prisma migrate deploy && node .next/standalone/server.js",
+    "postinstall": "prisma generate",
     "lint": "next lint"
   },
   "dependencies": {
