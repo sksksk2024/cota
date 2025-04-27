@@ -1,15 +1,15 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { User as PrismaUser, Account, Session } from '@prisma/client';
+import { User, Account, Session } from '@prisma/client';
 
-type User = PrismaUser & {
+type UserType = User & {
   accounts: Account[];
   sessions: Session[];
 };
 
 export const useUser = () => {
-  const [user, setUser] = useState<User>({
+  const [user, setUser] = useState<UserType>({
     id: '',
     name: null,
     email: null,
@@ -25,7 +25,7 @@ export const useUser = () => {
       try {
         const res = await fetch('/api/check-user', {
           method: 'GET',
-          credentials: 'include', // <== This ensures cookies are sent with the request
+          credentials: 'include', // Ensures cookies are sent with the request
         });
         const data = await res.json();
         if (!res.ok) {
