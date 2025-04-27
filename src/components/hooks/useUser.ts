@@ -1,11 +1,11 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { User, Account, Session } from '@prisma/client';
+import { Prisma } from '@prisma/client'; // Using Prisma namespace
 
-type UserType = User & {
-  accounts: Account[];
-  sessions: Session[];
+type UserType = Prisma.User & {
+  accounts: Prisma.Account[];
+  sessions: Prisma.Session[];
 };
 
 export const useUser = () => {
