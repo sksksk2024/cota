@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "sleep 10 && prisma generate && prisma migrate deploy && node .next/standalone/server.js",
+    "start": "sleep 10 && prisma generate && node .next/standalone/server.js",
     "postinstall": "prisma generate",
     "lint": "next lint"
   },
