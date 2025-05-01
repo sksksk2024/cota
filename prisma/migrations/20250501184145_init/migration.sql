@@ -14,7 +14,7 @@ CREATE TABLE "User" (
     "name" TEXT,
     "email" TEXT,
     "password" TEXT,
-    "theme" TEXT NOT NULL DEFAULT 'theme1',
+    "theme" TEXT DEFAULT 'theme1',
 
     CONSTRAINT "User_pkey" PRIMARY KEY ("id")
 );
