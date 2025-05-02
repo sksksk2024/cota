@@ -51,7 +51,7 @@ const EditProfile = () => {
       setEmail(user.email ?? '');
       setIsOAuthUser(
         user.accounts && user.accounts.length > 0
-          ? user.accounts[0].provider !== 'credentials'
+          ? user.accounts[0] !== 'credentials'
           : false
       );
     }
