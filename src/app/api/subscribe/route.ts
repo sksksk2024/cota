@@ -1,17 +1,22 @@
 import { NextResponse } from 'next/server';
-import { getServerSession } from 'next-auth/next'; // not just 'next-auth'
+import { getServerSession } from 'next-auth/next';
 import { authOptions } from '@/lib/auth';
 import { prisma } from '@/lib/prisma';
 import { newsLetterSchema } from '@/lib/schemas';
-import { Resend } from 'resend';
 import { parse } from 'cookie';
+import sgMail from '@sendgrid/mail';
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+sgMail.setApiKey(process.env.SENDGRID_API_KEY!);
 
 export async function POST(req: Request) {
   try {
+    // Get session
     const session = await getServerSession(authOptions);
+
+    // Get raw JSON input
     const body = await req.json();
+
+    // Validate with Zod schema
     const parsed = newsLetterSchema.safeParse(body);
 
     if (!parsed.success) {
@@ -19,18 +24,18 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: errorList }, { status: 400 });
     }
 
-    // 👇 Get cookies for custom user
+    // Read cookies
     const cookieHeader = req.headers.get('cookie') || '';
     const cookies = parse(cookieHeader);
     const customUser = cookies.user ? JSON.parse(cookies.user) : null;
 
-    // 👇 Use priority: next-auth session > custom user cookie > manual input
+    // Priority: session > cookie > manual input
     const email =
       session?.user?.email || customUser?.email || parsed.data.email;
 
     if (!email) {
       return NextResponse.json(
-        { error: `Please enter a valid email address.` },
+        { error: 'Please enter a valid email address.' },
         { status: 400 }
       );
     }
@@ -47,17 +52,27 @@ export async function POST(req: Request) {
       );
     }
 
-    console.log(`New subscription: ${email}`);
-
+    // Save to DB
     await prisma.newsletterSubscription.create({
       data: { email },
     });
 
-    await resend.emails.send({
-      from: 'onboarding@resend.dev',
+    console.log(`New subscription: ${email}`);
+
+    // Send confirmation email to the user
+    await sgMail.send({
       to: email,
+      from: 'cota8091@gmail.com',
       subject: 'Thanks for Subscribing',
       html: `<p>You have successfully subscribed to our newsletter.</p>`,
+    });
+
+    // Send notification to you (the owner)
+    await sgMail.send({
+      to: 'cotaalexandru0403@gmail.com',
+      from: 'cota8091@gmail.com',
+      subject: `New Newsletter Subscription: ${email}`,
+      html: `<p>${email} just subscribed to the newsletter.</p>`,
     });
 
     return NextResponse.json({ success: true }, { status: 200 });
