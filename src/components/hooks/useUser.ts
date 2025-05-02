@@ -1,15 +1,10 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { User, Account, Session } from '@prisma/client';
-
-type UserType = User & {
-  accounts: Account[];
-  sessions: Session[];
-};
+import type { UserWithRelations } from '@/../types/user';
 
 export const useUser = () => {
-  const [user, setUser] = useState<UserType>({
+  const [user, setUser] = useState<UserWithRelations | null>({
     id: '',
     name: null,
     email: null,
