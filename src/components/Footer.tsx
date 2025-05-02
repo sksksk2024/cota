@@ -139,7 +139,7 @@ ${theme === 'theme1' ? 'text-white' : 'text-textis'}
               <div className="flex justify-center items-center gap-5 sm:gap-10">
                 <Link
                   target="_blank"
-                  href="https://github.com/sksksk2024/cota"
+                  href="https://cotablog.onrender.com/"
                   passHref
                 >
                   <Blog />
@@ -162,7 +162,7 @@ ${theme === 'theme1' ? 'text-white' : 'text-textis'}
                   <Link
                     target="_blank"
                     className="absolute top-16I"
-                    href="https://www.frontendmentor.io/profile/sksksk2024"
+                    href="https://next-wings.onrender.com/"
                     passHref
                   >
                     <WingsLogo />
