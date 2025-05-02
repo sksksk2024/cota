@@ -10,8 +10,6 @@ import Link from 'next/link';
 import { useUser } from './hooks/useUser';
 import SignOutButton from './SignOutButton';
 import { useSession } from 'next-auth/react';
-// import { ExtendedUser } from '@/components/hooks/userTypes';
-import type { UserWithRelations } from '@/../types/user';
 
 const Guide = () => {
   const { theme } = useThemeStore();
@@ -23,7 +21,7 @@ const Guide = () => {
   const { data: session } = useSession();
 
   const displayName = session?.user?.name || user?.name;
-  const currentUser: UserWithRelations | null = session?.user || user || null;
+  const currentUser = session?.user || user || null;
 
   // Map Logic to be more clean
   const navItems = ['Sign Up', 'Sign In', 'Sign Out', 'Edit Profile'];
@@ -31,7 +29,7 @@ const Guide = () => {
   const getLinkPath = (label: string) =>
     `/${label.toLowerCase().replace(/\s+/g, '')}`;
 
-  const isVisible = (label: string, user: UserWithRelations | null) => {
+  const isVisible = (label: string, user: any | null) => {
     if (user?.id) return label !== 'Sign In' && label !== 'Sign Up';
     return label !== 'Sign Out' && label !== 'Edit Profile';
   };
