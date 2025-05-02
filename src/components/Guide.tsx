@@ -29,7 +29,7 @@ const Guide = () => {
   const getLinkPath = (label: string) =>
     `/${label.toLowerCase().replace(/\s+/g, '')}`;
 
-  const isVisible = (label: string, user: any | null) => {
+  const isVisible = (label: string, user: { id: unknown }) => {
     if (user?.id) return label !== 'Sign In' && label !== 'Sign Up';
     return label !== 'Sign Out' && label !== 'Edit Profile';
   };
