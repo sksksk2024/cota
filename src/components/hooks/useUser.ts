@@ -1,10 +1,9 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import type { UserWithRelations } from '@/../types/user';
 
 export const useUser = () => {
-  const [user, setUser] = useState<UserWithRelations | null>({
+  const [user, setUser] = useState({
     id: '',
     name: null,
     email: null,
