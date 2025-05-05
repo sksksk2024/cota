@@ -222,7 +222,7 @@ ${
                 {/* LINKS A BIT ROTATED WHEN HOVERED */}
                 <Link
                   target="_blank"
-                  href="https://www.instagram.com/alextvop2016"
+                  href="https://www.instagram.com/h1_cota_alexandru_h1/"
                   passHref
                 >
                   <Insta />
