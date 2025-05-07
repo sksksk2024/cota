@@ -157,10 +157,14 @@ const MazeMain = () => {
   }, [score]);
 
   const getCellColor = (cell: string, isPlayer: boolean) => {
-    if (isPlayer) return 'bg-blue-500';
-    if (cell === '#') return 'bg-gray-500';
-    if (cell === ' ' || cell === 'S') return 'bg-green-500';
-    if (cell === 'G') return 'bg-yellow-500';
+    if (isPlayer)
+      return `${theme === 'theme1' ? 'bg-background-dark' : 'bg-cyan-dark'}`;
+    if (cell === '#')
+      return `${theme === 'theme1' ? 'bg-gray-500' : 'bg-textis'}`;
+    if (cell === ' ' || cell === 'S')
+      return `${theme === 'theme1' ? 'bg-green-light' : 'bg-green-light'}`;
+    if (cell === 'G')
+      return `${theme === 'theme1' ? 'bg-warning' : 'bg-highlight'}`;
     return 'bg-white';
   };
 
@@ -168,10 +172,10 @@ const MazeMain = () => {
     <ProtectedPageAll>
       <div
         className={`w-full min-h-[100dvh] my-auto flex flex-col justify-center items-center gap-10 px-16P py-48P md:px-64P
-      ${theme === 'theme1' ? 'bg-background-dark' : 'bg-cyan-dark'}
+      ${theme === 'theme1' ? 'bg-background-dark text-white' : 'bg-cyan-dark text-textis'}
     `}
       >
-        <header className="flex flex-col justify-center items-center gap-4 text-white max-w-container-600">
+        <header className="flex flex-col justify-center items-center gap-4 max-w-container-600">
           <h1 className="text-xl font-bold text-center">
             Maze! Be fast, and accurate.
           </h1>

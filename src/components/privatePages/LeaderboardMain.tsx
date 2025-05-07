@@ -2,6 +2,8 @@
 
 import { useEffect, useState } from 'react';
 import { useThemeStore } from '@/components/hooks/useThemeStore';
+import { buttonVariants } from '../motionVariants/motionVariants';
+import { motion } from 'framer-motion';
 
 type Game = 'tappy' | 'maze' | 'stackattack';
 
@@ -46,29 +48,42 @@ const LeaderboardMain = () => {
         ${theme === 'theme1' ? 'bg-background-dark text-white' : 'bg-cyan-dark text-background-dark'}
       `}
     >
-      <h1 className="text-2xl font-bold">
+      <h1
+        className={`text-2xl text-center font-bold
+        ${theme === 'theme1' ? 'text-white' : 'text-textis'}
+        `}
+      >
         🏆 {selectedGame.toUpperCase()} Leaderboard
       </h1>
 
       {/* Game Switcher */}
       <div className="flex gap-4 mb-4">
-        {(['tappy', 'maze', 'stackattack'] as Game[]).map((game) => (
-          <button
+        {(['tappy', 'maze', 'stack attack'] as Game[]).map((game) => (
+          <motion.button
             key={game}
             onClick={() => setSelectedGame(game)}
-            className={`px-4 py-2 rounded font-semibold transition ${
-              selectedGame === game
-                ? 'bg-white text-black'
-                : 'bg-gray-700 text-white hover:bg-gray-500'
-            }`}
+            variants={buttonVariants}
+            initial="hidden"
+            whileHover="hover"
+            className={`px-16P py-8P rounded-5BR cursor-pointer font-bold tracking-wide uppercase
+                              ${
+                                theme === 'theme1'
+                                  ? 'text-white bg-green-dark hover:text-background-dark hover:bg-warning'
+                                  : ' bg-green-light text-background-dark hover:text-cyan-dark hover:bg-highlight'
+                              }
+                              `}
           >
             {game.toUpperCase()}
-          </button>
+          </motion.button>
         ))}
       </div>
 
       {/* Score List */}
-      <ul className="w-full max-w-container-600">
+      <ul
+        className={`w-full max-w-container-600
+        ${theme === 'theme1' ? 'text-white' : 'text-textis'}
+        `}
+      >
         {scores.length === 0 ? (
           <li className="text-center">No scores yet.</li>
         ) : (

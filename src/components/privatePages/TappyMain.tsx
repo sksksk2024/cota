@@ -79,7 +79,11 @@ const TappyMain = () => {
     ${theme === 'theme1' ? 'bg-background-dark' : 'bg-cyan-dark'}
   `}
       >
-        <header className="flex flex-col justify-center items-center gap-4 text-white max-w-container-600">
+        <header
+          className={`flex flex-col justify-center items-center gap-4 text-white max-w-container-600
+              ${theme === 'theme1' ? 'text-white' : 'text-textis'}
+`}
+        >
           <h1 className="text-xl font-bold text-center">
             Welcome to Tappy! See this button? Click it as many times as you can
             in 10 seconds.

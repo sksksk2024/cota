@@ -122,15 +122,21 @@ const StackAttackMain = () => {
     ${theme === 'theme1' ? 'bg-background-dark' : 'bg-cyan-dark'}
   `}
       >
-        <header className="flex flex-col justify-center items-center gap-4 text-white max-w-container-600">
-          <h1 className="text-xl font-bold text-center">
+        <header
+          className={`flex flex-col justify-center items-center gap-4 text-white max-w-container-600 ${theme === 'theme1' ? 'text-white' : 'text-textis'}`}
+        >
+          <h1 className={`text-xl font-bold text-center`}>
             Stack Attack! Attack every letter, they are your enemy, or your
             friend. Be contious.
           </h1>
           <div className="text-lg">Score: {score}</div>
         </header>
 
-        <main className="flex flex-col justify-center items-center gap-5 w-full min-w-container-300 max-w-container-600">
+        <main
+          className={`flex flex-col justify-center items-center gap-5 w-full min-w-container-300 max-w-container-600
+          ${theme === 'theme1' ? 'text-white' : 'text-textis'}
+          `}
+        >
           <h2>
             Goal Word:
             <span
