@@ -6,8 +6,9 @@ import { useThemeStore } from '@/components/hooks/useThemeStore';
 import ProtectedPageAll from '@/components/ProtectedPageAll';
 import Link from 'next/link';
 import React from 'react';
-import { Locked } from '@/components/svgs/Locked';
 import { TappyIcon } from '../svgs/TappyIcon';
+import MazeIcon from '../svgs/MazeIcon';
+import StackAttackIcon from '../svgs/StackAttackIcon';
 
 const GamesMain = () => {
   const { theme } = useThemeStore();
@@ -28,14 +29,15 @@ const GamesMain = () => {
         </h1>
 
         {/* Games Grid */}
-        <section className="grid xs:grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-20 place-items-center place-content-center max-w-container-1440">
+        <section className="grid xs:grid-cols-1 lg:grid-cols-3 gap-20 place-items-center place-content-center max-w-container-1440">
+          {/* TAPPY */}
           <Link
             className={`flex flex-col justify-start items-center min-w-container-300 w-full max-w-container-300 h-300H bg-gray-500 cursor-pointer rounded-xl shadow-lg  transition-shadow hover:scale-[0.99]
               ${theme === 'theme1' ? 'hover:shadow-cyan-400/20' : 'hover:shadow-cyan-800/90'}
               `}
             href={'/games/tappy'}
           >
-            <div className="w-1/2">
+            <div className="w-1/2 p-16P">
               <TappyIcon />
             </div>
             <div
@@ -47,70 +49,65 @@ const GamesMain = () => {
             </div>
           </Link>
 
-          <div
-            className={`flex flex-col justify-start items-center min-w-container-300 w-full max-w-container-300 h-300H 
-            ${theme === 'theme1' ? 'bg-deep-dark' : 'bg-green-cyan-light'}`}
+          {/* STACK ATTACK */}
+          <Link
+            className={`flex flex-col justify-start items-center min-w-container-300 w-full max-w-container-300 h-300H bg-gray-500 cursor-pointer rounded-xl shadow-lg  transition-shadow hover:scale-[0.99]
+              ${theme === 'theme1' ? 'hover:shadow-cyan-400/20' : 'hover:shadow-cyan-800/90'}
+              `}
+            href={'/games/stackattack'}
           >
-            <div className="w-full h-200H">
-              <Locked className="w-full" />
+            <div className="w-1/2 p-16P">
+              <StackAttackIcon />
             </div>
-          </div>
+            <div
+              className={`flex justify-center items-center w-full h-full p-16P  tracking-widest
+              ${theme === 'theme1' ? 'bg-textis text-white' : 'bg-white text-textis'}
+              `}
+            >
+              <h2 className="text-lg font-bold mx-auto">Stack Attack</h2>
+            </div>
+          </Link>
 
-          <div
-            className={`flex flex-col justify-start items-center min-w-container-300 w-full max-w-container-300 h-300H 
-            ${theme === 'theme1' ? 'bg-deep-dark' : 'bg-green-cyan-light'}`}
+          {/* MAZE */}
+          <Link
+            className={`flex flex-col justify-start items-center min-w-container-300 w-full max-w-container-300 h-300H bg-gray-500 cursor-pointer rounded-xl shadow-lg  transition-shadow hover:scale-[0.99]
+              ${theme === 'theme1' ? 'hover:shadow-cyan-400/20' : 'hover:shadow-cyan-800/90'}
+              `}
+            href={'/games/maze'}
           >
-            <div className="w-full h-200H">
-              <Locked className="w-full" />
+            <div className="w-1/2 p-16P">
+              <MazeIcon />
             </div>
-          </div>
-
-          <div
-            className={`flex flex-col justify-start items-center min-w-container-300 w-full max-w-container-300 h-300H  
-            ${theme === 'theme1' ? 'bg-deep-dark' : 'bg-green-cyan-light'}`}
-          >
-            <div className="w-full h-200H">
-              <Locked className="w-full" />
+            <div
+              className={`flex justify-center items-center w-full h-full p-16P  tracking-widest
+              ${theme === 'theme1' ? 'bg-textis text-white' : 'bg-white text-textis'}
+              `}
+            >
+              <h2 className="text-lg font-bold mx-auto">Maze</h2>
             </div>
-          </div>
-
-          <div
-            className={`flex flex-col justify-start items-center min-w-container-300 w-full max-w-container-300 h-300H  
-            ${theme === 'theme1' ? 'bg-deep-dark' : 'bg-green-cyan-light'}`}
-          >
-            <div className="w-full h-200H">
-              <Locked className="w-full" />
-            </div>
-          </div>
-
-          <div
-            className={`flex flex-col justify-start items-center min-w-container-300 w-full max-w-container-300 h-300H  
-            ${theme === 'theme1' ? 'bg-deep-dark' : 'bg-green-cyan-light'}`}
-          >
-            <div className="w-full h-200H">
-              <Locked className="w-full" />
-            </div>
-          </div>
-
-          <div
-            className={`flex flex-col justify-start items-center min-w-container-300 w-full max-w-container-300 h-300H 
-            ${theme === 'theme1' ? 'bg-deep-dark' : 'bg-green-cyan-light'}`}
-          >
-            <div className="w-full h-200H">
-              <Locked className="w-full" />
-            </div>
-          </div>
-
-          <div
-            className={`flex flex-col justify-start items-center min-w-container-300 w-full max-w-container-300 h-300H  
-            ${theme === 'theme1' ? 'bg-deep-dark' : 'bg-green-cyan-light'}`}
-          >
-            <div className="w-full h-200H">
-              <Locked className="w-full" />
-            </div>
-          </div>
+          </Link>
         </section>
 
+        {/* LEADERBOARD */}
+        <motion.button
+          variants={buttonVariants}
+          initial="initial"
+          whileHover="hover"
+          className={`w-full min-w-container-300 max-w-container-600 cursor-pointer p-16P rounded-5BR font-bold tracking-wide
+            ${
+              theme === 'theme1'
+                ? 'text-white bg-green-dark hover:text-background-dark hover:bg-warning'
+                : ' bg-green-light text-background-dark hover:text-cyan-dark hover:bg-highlight'
+            }
+          `}
+          animate="exit"
+        >
+          <Link href="/leaderboard" passHref>
+            Leaderboards
+          </Link>
+        </motion.button>
+
+        {/* HOME */}
         <motion.button
           variants={buttonVariants}
           initial="initial"

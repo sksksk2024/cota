@@ -27,7 +27,26 @@ model User {
   image         String?
   accounts      Account[]
   sessions      Session[]
+  games         HighScore[]
   theme         String?   @default("theme1")
+}
+
+model HighScore {
+  id          String  @id @default(cuid())
+  userId      String
+  game        Game
+  score       Int
+  createdAt   DateTime  @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+}
+
+enum Game {
+  TAPPY
+  STACK_ATTACK
+  MAZE
 }
 
 model Account {
