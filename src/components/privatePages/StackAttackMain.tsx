@@ -6,6 +6,7 @@ import { useThemeStore } from '@/components/hooks/useThemeStore';
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import ProtectedPageAll from '../ProtectedPageAll';
+import { useToast } from '../hooks/useToast';
 
 const StackAttackMain = () => {
   const { theme } = useThemeStore();
@@ -13,6 +14,8 @@ const StackAttackMain = () => {
   const [goalWord, setGoalWord] = useState<string>('StackAttack');
   const [word, setWord] = useState<string>('StackAttackk');
   const [score, setScore] = useState<number>(0);
+
+  const { success, error } = useToast();
 
   // FETCH NEW WORD
   const fetchWord = async () => {
@@ -38,10 +41,35 @@ const StackAttackMain = () => {
     fetchWord();
   };
 
+  useEffect(() => {
+    // Save score
+    const saveScore = async () => {
+      try {
+        const res = await fetch('/api/highscore/stackattack', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ score }),
+        });
+
+        const data = await res.json();
+
+        if (!res.ok) {
+          error(`Failed to save score: ${data.message}`);
+        } else {
+          success('Score saved successfully');
+        }
+      } catch (err) {
+        error(`Error saving score ${err}`);
+      }
+    };
+  }, [score]);
+
   //   PUSH FUNCTION
   const pushWord = () => {
     if (word.length >= 64) {
-      console.error(`You can't add any more letters!`);
+      error(`You can't add any more letters!`);
     } else {
       const stringArr = [];
       for (let i = 0; i < word.length; ++i) {
@@ -73,7 +101,7 @@ const StackAttackMain = () => {
   // POP FUNCTION
   const popWord = () => {
     if (word.length <= 0) {
-      console.error(`You can't remove any more letters.`);
+      error(`You can't remove any more letters.`);
     } else {
       const stringArr = [];
       for (let i = 0; i < word.length - 1; ++i) {

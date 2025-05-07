@@ -72,7 +72,7 @@ const MazeMain = () => {
   const [playerPos, setPlayerPos] = useState<Position>({ x: 0, y: 0 });
   const [, setGoalPos] = useState<Position>({ x: 0, y: 0 });
   const [score, setScore] = useState<number>(0);
-  const { success } = useToast();
+  const { success, error } = useToast();
 
   const createNewMaze = () => {
     const rows = 15;
@@ -128,6 +128,33 @@ const MazeMain = () => {
     window.addEventListener('keydown', handleKey);
     return () => window.removeEventListener('keydown', handleKey);
   }, [playerPos, maze]);
+
+  useEffect(() => {
+    // Save score
+    const saveScore = async () => {
+      try {
+        const res = await fetch('/api/highscore/maze', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ score }),
+        });
+
+        const data = await res.json();
+
+        if (!res.ok) {
+          error(`Failed to save score: ${data.message}`);
+        } else {
+          success('Score saved successfully');
+        }
+      } catch (err) {
+        error(`Error saving score: ${err}`);
+      }
+    };
+
+    saveScore();
+  }, [score]);
 
   const getCellColor = (cell: string, isPlayer: boolean) => {
     if (isPlayer) return 'bg-blue-500';

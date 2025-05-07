@@ -6,6 +6,7 @@ import { useThemeStore } from '@/components/hooks/useThemeStore';
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import ProtectedPageAll from '../ProtectedPageAll';
+import { useToast } from '../hooks/useToast';
 
 const TappyMain = () => {
   const { theme } = useThemeStore();
@@ -13,6 +14,8 @@ const TappyMain = () => {
   const [score, setScore] = useState<number>(0);
   const [timer, setTimer] = useState<number>(0);
   const [isActive, setIsActive] = useState<boolean>(false);
+
+  const { success, error } = useToast();
 
   useEffect(() => {
     let interval: NodeJS.Timeout;
@@ -43,12 +46,12 @@ const TappyMain = () => {
           const data = await res.json();
 
           if (!res.ok) {
-            console.error('Failed to save score:', data.message);
+            error(`Failed to save score: ${data.message}`);
           } else {
-            console.log('Score saved successfully');
+            success('Score saved successfully');
           }
         } catch (err) {
-          console.error('Error saving score:', err);
+          error(`Error saving score: ${err}`);
         }
       };
 
