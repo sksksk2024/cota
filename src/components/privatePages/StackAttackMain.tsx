@@ -10,9 +10,9 @@ import ProtectedPageAll from '../ProtectedPageAll';
 const StackAttackMain = () => {
   const { theme } = useThemeStore();
 
-  let [goalWord, setGoalWord] = useState<string>('StackAttack');
-  let [word, setWord] = useState<string>('StackAttackk');
-  let [score, setScore] = useState<number>(0);
+  const [goalWord, setGoalWord] = useState<string>('StackAttack');
+  const [word, setWord] = useState<string>('StackAttackk');
+  const [score, setScore] = useState<number>(0);
 
   // FETCH NEW WORD
   const fetchWord = async () => {
@@ -43,7 +43,7 @@ const StackAttackMain = () => {
     if (word.length >= 64) {
       console.error(`You can't add any more letters!`);
     } else {
-      let stringArr = [];
+      const stringArr = [];
       for (let i = 0; i < word.length; ++i) {
         stringArr.push(word[i]);
       }
@@ -64,7 +64,7 @@ const StackAttackMain = () => {
 
       const letter = String.fromCharCode(number);
 
-      stringArr = [...stringArr, letter];
+      stringArr.push(letter);
       const newWord = stringArr.join('');
       setWord(newWord);
     }
