@@ -64,6 +64,8 @@ const StackAttackMain = () => {
         error(`Error saving score ${err}`);
       }
     };
+
+    saveScore();
   }, [score]);
 
   //   PUSH FUNCTION
