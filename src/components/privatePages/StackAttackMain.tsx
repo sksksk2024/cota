@@ -75,7 +75,7 @@ const StackAttackMain = () => {
     if (word.length <= 0) {
       console.error(`You can't remove any more letters.`);
     } else {
-      let stringArr = [];
+      const stringArr = [];
       for (let i = 0; i < word.length - 1; ++i) {
         stringArr.push(word[i]);
       }
