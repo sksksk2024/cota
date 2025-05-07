@@ -81,15 +81,28 @@ const TappyMain = () => {
       >
         <header
           className={`flex flex-col justify-center items-center gap-4 text-white max-w-container-600
-              ${theme === 'theme1' ? 'text-white' : 'text-textis'}
 `}
         >
-          <h1 className="text-xl font-bold text-center">
+          <h1
+            className={`text-xl font-bold text-center
+            ${theme === 'theme1' ? 'text-white' : 'text-textis'}
+            `}
+          >
             Welcome to Tappy! See this button? Click it as many times as you can
             in 10 seconds.
           </h1>
-          <div className="text-lg">Score: {score}</div>
-          <div className="text-lg">Time left: {timer}s</div>
+          <div
+            className={`text-lg
+            ${theme === 'theme1' ? 'text-white' : 'text-textis'}`}
+          >
+            Score: {score}
+          </div>
+          <div
+            className={`text-lg
+            ${theme === 'theme1' ? 'text-white' : 'text-textis'}`}
+          >
+            Time left: {timer}s
+          </div>
         </header>
 
         <main className="flex justify-center items-center gap-5 w-full min-w-container-300 max-w-container-600">

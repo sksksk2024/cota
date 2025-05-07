@@ -123,13 +123,23 @@ const StackAttackMain = () => {
   `}
       >
         <header
-          className={`flex flex-col justify-center items-center gap-4 text-white max-w-container-600 ${theme === 'theme1' ? 'text-white' : 'text-textis'}`}
+          className={`flex flex-col justify-center items-center gap-4 text-white max-w-container-600`}
         >
-          <h1 className={`text-xl font-bold text-center`}>
+          <h1
+            className={`text-xl font-bold text-center
+            ${theme === 'theme1' ? 'text-white' : 'text-textis'}
+            `}
+          >
             Stack Attack! Attack every letter, they are your enemy, or your
             friend. Be contious.
           </h1>
-          <div className="text-lg">Score: {score}</div>
+          <div
+            className={`text-lg
+              ${theme === 'theme1' ? 'text-white' : 'text-textis'}
+              `}
+          >
+            Score: {score}
+          </div>
         </header>
 
         <main
