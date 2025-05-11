@@ -10,7 +10,7 @@ export async function POST(req: Request) {
     const body = await req.json();
     const { score } = body;
 
-    if (typeof score !== 'number' || score < 0) {
+    if (typeof score !== 'number' || score <= 0) {
       return NextResponse.json({ message: 'Invalid score' }, { status: 400 });
     }
 

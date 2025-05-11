@@ -58,7 +58,7 @@ const LeaderboardMain = () => {
 
       {/* Game Switcher */}
       <div className="flex gap-4 mb-4">
-        {(['tappy', 'maze', 'stack attack'] as Game[]).map((game) => (
+        {(['tappy', 'maze', 'stackattack'] as Game[]).map((game) => (
           <motion.button
             key={game}
             onClick={() => setSelectedGame(game)}
@@ -73,7 +73,9 @@ const LeaderboardMain = () => {
                               }
                               `}
           >
-            {game.toUpperCase()}
+            {game.toUpperCase() === 'STACKATTACK'
+              ? 'STACK ATTACK'
+              : game.toUpperCase()}
           </motion.button>
         ))}
       </div>

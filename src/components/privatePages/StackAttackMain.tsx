@@ -36,47 +36,38 @@ const StackAttackMain = () => {
 
   useEffect(() => {});
 
-  const handleScore = () => {
-    setScore((prev) => prev + 1);
-    fetchWord();
-  };
+  const handleScore = async () => {
+    const newScore = score + 1;
+    setScore(newScore);
+    await fetchWord();
 
-  useEffect(() => {
-    // Save score
-    const saveScore = async () => {
-      try {
-        const res = await fetch('/api/highscore/stackattack', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ score }),
-        });
+    try {
+      const res = await fetch('/api/highscore/stackattack', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ score: newScore }),
+      });
 
-        const data = await res.json();
+      const data = await res.json();
 
-        if (!res.ok) {
-          error(`Failed to save score: ${data.message}`);
-        } else {
-          success('Score saved successfully');
-        }
-      } catch (err) {
-        error(`Error saving score ${err}`);
+      if (!res.ok) {
+        error(`Failed to save score: ${data.message}`);
+      } else {
+        success('Score saved successfully');
       }
-    };
-
-    saveScore();
-  }, [score]);
+    } catch (err) {
+      error(`Error saving score: ${err}`);
+    }
+  };
 
   //   PUSH FUNCTION
   const pushWord = () => {
     if (word.length >= 64) {
       error(`You can't add any more letters!`);
     } else {
-      const stringArr = [];
-      for (let i = 0; i < word.length; ++i) {
-        stringArr.push(word[i]);
-      }
+      const stringArr = word.split('');
 
       const option = Math.floor(Math.random() * 2);
 
