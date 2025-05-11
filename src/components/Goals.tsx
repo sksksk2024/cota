@@ -23,24 +23,48 @@ const Goals = () => {
               className={`text-2xl text-center font-bold xl:text-start
             `}
             >
-              Qualities
+              My Vision (Long Term)
             </h2>
             <p className="font-semibold tracking-widest">
-              <span className="italic">Determination</span> and{' '}
-              <span className="italic">resilience</span> define my approach to
-              life. I&apos;m not afraid to take risks or tackle challenges{' '}
-              <span className="italic">head-on</span>. I value{' '}
-              <span className="italic">hard work</span>, both physically and
-              mentally, and strive to be someone who doesn&apos;t settle for
-              mediocrity. Through my journey in{' '}
-              <span className="italic">calisthenics</span>,{' '}
-              <span className="italic">entrepreneurship</span>, and{' '}
-              <span className="italic">web development</span>, I&apos;ve learned
-              to embrace failure as a lesson and keep moving forward. My
-              commitment to <span className="italic">self-improvement</span>{' '}
-              drives me to constantly evolve, learn, and grow, ensuring that I
-              can contribute positively to both my personal and professional
-              communities.
+              I have complex goals — and I know they sound ambitious. I want to:
+              <ul className="list-disc list-inside space-y-2">
+                <li>
+                  Build a platform that gives real recognition to overlooked
+                  people: firefighters, soldiers, athletes, construction
+                  workers.
+                </li>
+                <li>
+                  Help shift how people see sports and physical discipline,
+                  showing it&apos;s more than just a hobby — it&apos;s a
+                  powerful career path.
+                </li>
+                <li>
+                  Remove financial barriers, so that discipline driven and
+                  talented people can reach development, no matter their
+                  background.
+                </li>
+              </ul>
+              <div className="my-32M">
+                But I also know that none of that can happen without{' '}
+                <span className="italic">action</span>. Currently, I&apos;m:
+              </div>
+              <ul className="list-disc list-inside space-y-2">
+                <li>Creating content to grow my audience on social media.</li>
+                <li>
+                  Practicing web development, making this website even more
+                  accessible.
+                </li>
+                <li>
+                  Writing consistent blogs to document my journey in
+                  communication and self-expression.
+                </li>
+                <li>
+                  Training mindfully in calisthenics to live the values I talk
+                  about.
+                </li>
+              </ul>
+              My ambitions are complex — but I&apos;m building the skills,
+              mindset, and tools to reach them step by step.
             </p>
           </div>
           <div className="z-50 space-y-5">
@@ -48,26 +72,16 @@ const Goals = () => {
               className={`text-2xl text-center font-bold xl:text-start
             `}
             >
-              Goals for 2025
+              Core Qualities
             </h2>
             <p className="font-semibold tracking-widest">
-              In 2025, my primary focus is on{' '}
-              <span className="italic">personal</span> and{' '}
-              <span className="italic">professional growth</span>. I aim to
-              deepen my <span className="italic">web development skills</span>{' '}
-              while building a business that empowers others. I want to create a
-              platform to celebrate unsung heroes—those who risk their lives in
-              physically demanding jobs like{' '}
-              <span className="italic">firefighters</span>,{' '}
-              <span className="italic">soldiers</span>, and{' '}
-              <span className="italic">construction workers</span>. My goal is
-              also to change how society views{' '}
-              <span className="italic">sports</span> and athletes, promoting it
-              as a viable career path. Through these endeavors, I hope to
-              contribute to a world where{' '}
-              <span className="italic">financial stress</span> doesn&apos;t
-              dictate people&apos;s lives, allowing them to live freely and
-              pursue their passions.
+              I don&apos;t quit. I aim high - sometimes near impossibility -
+              because{' '}
+              <span className="italic">
+                i enjoy the challenge of chasing results
+              </span>
+              . I don&apos;t pretend to have all the answers, but I do show up
+              every day, ready to learn, improve, and take the next step.
             </p>
           </div>
         </div>

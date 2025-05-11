@@ -23,23 +23,24 @@ const About = () => {
               className={`text-2xl text-center font-bold mx-auto xl:text-start xl:mx-0
             `}
             >
-              About Me and What I Do?
+              About Me and What I Do
             </h2>
             <p className="font-semibold tracking-widest">
               I&apos;m <span className="font-bold italic">Cota Alexandru</span>,
-              an 18-year-old passionate about{' '}
-              <span className="italic">overcoming challenges</span> and
-              improving myself every day. From my early days in{' '}
-              <span className="italic">calisthenics</span> to my transition into{' '}
-              <span className="italic">web development</span>, I&apos;ve always
-              sought to find new ways to push my limits. Web development started
-              as a tool for building my business, but it quickly became my{' '}
-              <span className="italic">passion</span>. I want to use my skills
-              to create a business that not only helps me, but also promotes the
-              recognition of those who often go unnoticed. My vision is to
-              empower others by breaking down{' '}
-              <span className="italic">financial barriers</span> and providing
-              opportunities for growth, regardless of one&apos;s background.
+              an 18-year-old who{' '}
+              <span className="italic">loves challenges</span> and and lives to
+              grow. I&apos;ve spent over 2.5 years in{' '}
+              <span className="italic">calisthenics</span>, in which i built I
+              built both physical and mental strength, and 1.5+ years in{' '}
+              <span className="italic">web development</span>, where I found a
+              creative way to express ideas and create something meaningful. I
+              recently launched my professional website to{' '}
+              <span className="italic">start my own business</span> — one that
+              combines my passion for fitness, tech, and helping others. My
+              mission is to create content, tools, and opportunities that will
+              not only inspire, but have{' '}
+              <span className="italic">people push past their limits</span>,
+              just like I try to do every day.
             </p>
           </div>
         </div>
