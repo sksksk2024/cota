@@ -201,7 +201,7 @@ ${
 `}
               >
                 <Phone />
-                +40-770-753-746 {/* Business Number */}
+                {/* Business Number */}
               </button>
               <button
                 className={`select-text text-xl font-bold flex justify-start items-center gap-2 cursor-pointer
