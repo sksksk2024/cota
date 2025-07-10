@@ -25,7 +25,7 @@ const Goals = () => {
             >
               My Vision (Long Term)
             </h2>
-            <p className="font-semibold tracking-widest">
+            <div className="font-semibold tracking-widest">
               I have complex goals — and I know they sound ambitious. I want to:
               <ul className="list-disc list-inside space-y-2">
                 <li>
@@ -65,7 +65,7 @@ const Goals = () => {
               </ul>
               My ambitions are complex — but I&apos;m building the skills,
               mindset, and tools to reach them step by step.
-            </p>
+            </div>
           </div>
           <div className="z-50 space-y-5">
             <h2

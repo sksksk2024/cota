@@ -11,11 +11,18 @@ import Footer from './Footer';
 import Arrow from './utils/Arrow';
 import { useUser } from './hooks/useUser';
 import { useSession } from 'next-auth/react';
+import Prices1 from './Prices1';
+import Prices2 from './Prices2';
+import Prices3 from './Prices3';
+
+type PriceOptions = 1 | 2 | 3;
 
 const Info = () => {
   const { theme } = useThemeStore();
 
   const [goals, setGoals] = useState<boolean>(false);
+
+  const [price, setPrice] = useState<PriceOptions | number>(1);
 
   const { user } = useUser();
 
@@ -28,9 +35,17 @@ const Info = () => {
     setGoals(!goals);
   };
 
+  const handlePriceOption = (price: number) => {
+    if (price === 3) {
+      price = 0;
+    }
+    price += 1;
+    setPrice(price);
+  };
+
   return (
     <>
-      <main
+      <section
         className={`relative flex flex-col justify-around items-center w-full pt-128P
         ${theme === 'theme1' ? 'bg-deep-dark' : 'bg-green-cyan-light'}
         `}
@@ -93,6 +108,60 @@ const Info = () => {
           </div>
         </div>
         <Calisthenics />
+        {price === 1 ? <Prices1 /> : price === 2 ? <Prices2 /> : <Prices3 />}
+        {/* toggle 3 sections with button and transition */}
+        <div
+          className="relative top-48I mx-auto text-xl my-64M 2xl:hidden"
+          onClick={handleToggle}
+        >
+          <motion.button
+            className={`cursor-pointer px-16P pr-64P py-8P rounded-5BR font-bold tracking-wide mb-32M
+                ${
+                  theme === 'theme1'
+                    ? 'text-white bg-green-dark hover:text-background-dark hover:bg-warning'
+                    : ' bg-green-light text-background-dark hover:text-cyan-dark hover:bg-highlight'
+                }
+                `}
+            type="button"
+            variants={buttonVariants}
+            initial="hidden"
+            whileHover="hover"
+          >
+            Next section
+          </motion.button>
+          <div className="absolute left-176I bottom-[33px]">
+            <Arrow />
+          </div>
+        </div>
+
+        <div className="flex justify-around items-center pt-48P w-full max-w-container-1000 mx-auto xl:max-w-container-1440">
+          <div
+            className={`hidden relative -left-64I flex justify-center items-center text-xl text-white my-64M cursor-pointer 2xl:block xl:w-1/2 xl:max-w-container-1000
+              `}
+            onClick={() => handlePriceOption(price)}
+          >
+            <motion.button
+              className={`hidden 2xl:block px-16P pr-64P py-8P rounded-5BR cursor-pointer font-bold tracking-wide
+                  ${
+                    theme === 'theme1'
+                      ? 'text-white bg-green-dark hover:text-background-dark hover:bg-warning'
+                      : ' bg-green-light text-background-dark hover:text-cyan-dark hover:bg-highlight'
+                  }
+                  `}
+              type="button"
+              variants={buttonVariants}
+              initial="hidden"
+              whileHover="hover"
+            >
+              Next section
+            </motion.button>
+            <div className="hidden 2xl:block absolute left-176I bottom-[1px]">
+              <Arrow />
+            </div>
+          </div>
+          <div className="hidden xl:block opacity-0">hello</div>
+        </div>
+        <Calisthenics />
         {!displayName ? (
           <>
             <div
@@ -124,7 +193,7 @@ const Info = () => {
             ></div>
           </>
         )}
-      </main>
+      </section>
     </>
   );
 };

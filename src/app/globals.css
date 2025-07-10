@@ -123,6 +123,11 @@ button {
   border-radius: 10px;
 }
 
+hr {
+  height: 0.05rem;
+  background-color: white;
+}
+
 /* Loader */
 .container {
   display: flex;
