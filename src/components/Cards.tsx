@@ -24,7 +24,7 @@ interface PricingData {
 
 const Cards = ({ data }: { data: PricingData[] }) => {
   const { error, loading } = useToast();
-  const [principle, _] = useState<string | null>(null);
+  const [principle] = useState<string | null>(null);
   const { theme } = useThemeStore();
 
   const priceButtonClasses = `relative w-full py-8P rounded-5BR cursor-pointer font-bold tracking-wide hover:border-2 border-textis ${

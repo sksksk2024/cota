@@ -6,7 +6,6 @@ import { useUser } from '@/components/hooks/useUser';
 import { useSession } from 'next-auth/react';
 
 import Header from '@/components/Header';
-import Prices from '../Prices1';
 const Guide = lazy(() => import('@/components/Guide'));
 const Working = lazy(() => import('@/components/Working'));
 const Info = lazy(() => import('@/components/Info'));
