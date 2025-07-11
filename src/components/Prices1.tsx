@@ -1,8 +1,5 @@
 'use client';
 
-import { motion } from 'framer-motion';
-import Image from 'next/image';
-import aboutMe from '@/images/aboutMe.webp';
 import { useThemeStore } from './hooks/useThemeStore';
 import PageWrapper from './PageWrapper';
 import Cards from './Cards';
@@ -16,16 +13,15 @@ const Prices1 = () => {
       <h2
         className={`
           ${theme === 'theme1' ? 'text-highlight' : 'text-textis'}
-          w-full text-2xl text-center font-bold mx-auto 2xl:text-start
-            py-32P`}
+          w-full text-2xl text-center font-bold mx-auto mt-48M py-32P 2xl:text-start`}
       >
         Website For Brands
       </h2>
       {/* TABEL PRETURI */}
-      <div className="w-full flex flex-col 2xl:flex-row 3xs:gap-10 overflow-y-clip mx-auto">
+      <div className="z-50 relative w-full flex flex-col 2xl:flex-row overflow-y-clip mx-auto py-[1.4rem]">
         <Cards data={common} />
-        <Cards data={rare} />
         <Cards data={legendary} />
+        <Cards data={rare} />
       </div>
     </PageWrapper>
   );

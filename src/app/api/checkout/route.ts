@@ -9,6 +9,7 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
 export async function POST(req: Request) {
   const cookieHeader = req.headers.get('cookie') || '';
   const cookies = parse(cookieHeader);
+  const { priceId } = await req.json(); // for multiple types of prices
 
   let user: { id: string; email: string } | null = null;
 
@@ -30,13 +31,7 @@ export async function POST(req: Request) {
       payment_method_types: ['card'],
       line_items: [
         {
-          price_data: {
-            currency: 'ron',
-            product_data: {
-              name: 'Help Keep Us Going 😁⚡',
-            },
-            unit_amount: 500,
-          },
+          price: priceId, // 👈 dynamic Stripe Price ID
           quantity: 1,
         },
       ],

@@ -12,6 +12,7 @@ import { loadStripe } from '@stripe/stripe-js';
 import PiggyBank from '@/components/svgs/PiggyBank';
 import ProtectedPageAll from '@/components/ProtectedPageAll';
 import Link from 'next/link';
+import { STRIPE_DONATION_IDS } from '@/lib/stripePrices';
 
 const Donations = () => {
   const { error, loading } = useToast();
@@ -20,7 +21,30 @@ const Donations = () => {
   const [showModal, setShowModal] = useState(false);
   const modalRef = useRef<HTMLDivElement | null>(null);
 
-  const handlePayment = async () => {
+  const donationOptions = [
+    {
+      id: STRIPE_DONATION_IDS.Donation1,
+      amount: '5 lei',
+      label: 'Small Donation',
+    },
+    {
+      id: STRIPE_DONATION_IDS.Donation2,
+      amount: '10 lei',
+      label: 'Medium Donation',
+    },
+    {
+      id: STRIPE_DONATION_IDS.Donation3,
+      amount: '20 lei',
+      label: 'Large Donation',
+    },
+    {
+      id: STRIPE_DONATION_IDS.Donation4,
+      amount: '50 lei',
+      label: 'Extra Donation',
+    },
+  ];
+
+  const handlePayment = async (priceId: string) => {
     loading('Redirecting to Stripe Checkout...');
 
     const stripe = await loadStripe(
@@ -30,7 +54,9 @@ const Donations = () => {
     try {
       const response = await fetch('/api/checkout', {
         method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
         credentials: 'include',
+        body: JSON.stringify({ priceId }), // 👈 Send priceId to API
       });
 
       const data = await response.json();
@@ -109,12 +135,22 @@ const Donations = () => {
                   Thank you for considering donating! <br /> Every bit helps.
                 </p>
 
-                <button
-                  onClick={handlePayment}
-                  className="text-white font-semibold w-full bg-green-500 py-3 px-6 rounded-lg cursor-pointer hover:bg-green-600"
-                >
-                  Donate 5 lei
-                </button>
+                <div className="grid grid-cols-1 xs:grid-cols-2 gap-4 mb-6">
+                  {donationOptions.map((option) => (
+                    <motion.button
+                      key={option.id}
+                      onClick={() => option.id && handlePayment(option.id)}
+                      className="text-white font-semibold w-full bg-green-500 py-3 px-6 rounded-lg cursor-pointer hover:bg-green-600"
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                    >
+                      {option.amount}
+                      <span className="block text-xs font-normal">
+                        {option.label}
+                      </span>
+                    </motion.button>
+                  ))}
+                </div>
 
                 <button
                   onClick={() => setShowModal(false)}

@@ -260,6 +260,7 @@ ${theme === 'theme1' ? 'text-warning' : 'text-highlight'}
               </div>
             </div>
           </div>
+          {/* PLAN TO ADD SOMETHING HERE FOR PAYMENTS INSIDE MY WEBSITE(LAW FREE) */}
         </>
       )}
     </footer>

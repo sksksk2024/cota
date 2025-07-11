@@ -1,21 +1,67 @@
 import { useState } from 'react';
 import { useThemeStore } from './hooks/useThemeStore';
+import { useToast } from '@/components/hooks/useToast';
+import { loadStripe } from '@stripe/stripe-js';
+import { motion } from 'framer-motion';
+import {
+  buttonVariants,
+  principlePriceVariant,
+  secondaryPriceVariant,
+} from './motionVariants/motionVariants';
+import { STRIPE_PRICE_IDS } from '@/lib/stripePrices';
 
 interface PricingData {
   title: string;
   desc: string;
   info1: string;
   info2?: string;
-  info3?: string;
-  info4?: string;
-  info5?: string;
+  info3?: number | string;
+  info4?: number | string;
+  info5?: number | string;
   info6?: string;
   info7?: string;
 }
 
 const Cards = ({ data }: { data: PricingData[] }) => {
-  const [principle, setPrinciple] = useState<string | null>(null);
+  const { error, loading } = useToast();
+  const [principle, _] = useState<string | null>(null);
   const { theme } = useThemeStore();
+
+  const priceButtonClasses = `relative w-full py-8P rounded-5BR cursor-pointer font-bold tracking-wide hover:border-2 border-textis ${
+    theme === 'theme1'
+      ? 'text-white bg-green-dark hover:text-background-dark hover:bg-warning'
+      : 'bg-green-light text-background-dark hover:text-cyan-dark hover:bg-highlight'
+  }`;
+
+  const handlePayment = async (priceId?: string) => {
+    loading('Redirecting to Stripe Checkout...');
+
+    const stripe = await loadStripe(
+      process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!
+    );
+
+    try {
+      const response = await fetch('/api/checkout', {
+        method: 'POST',
+        credentials: 'include',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ priceId }),
+      });
+
+      const data = await response.json();
+
+      if (!data.sessionId) {
+        throw new Error('No sessionId returned from /api/checkout');
+      }
+
+      await stripe?.redirectToCheckout({ sessionId: data.sessionId });
+    } catch (err: unknown) {
+      console.error(err);
+      error('Something went wrong during checkout.');
+    }
+  };
 
   const handlePrinciple = (title: string) =>
     ['Legendary Pack', 'Our Community', 'Mentoring'].includes(title);
@@ -24,16 +70,34 @@ const Cards = ({ data }: { data: PricingData[] }) => {
       {data.map((item, index) => {
         // Check if this card is the principle one
         const isPrinciple = !principle && handlePrinciple(item.title);
+        let priceService = -1;
+        if (typeof item.info3 === 'number') {
+          priceService = item.info3;
+        } else if (typeof item.info4 === 'number') {
+          priceService = item.info4;
+        } else if (typeof item.info5 === 'number') {
+          priceService = item.info5;
+        } else {
+          priceService = -1;
+        }
 
         return (
-          <div
+          <motion.div
             key={index}
-            onClick={() => setPrinciple(item.title)}
-            className={`flex justify-center items-center z-1 p-32P shadow-lg mx-auto rounded-lg ${
-              isPrinciple
-                ? `${theme === 'theme1' ? 'bg-green-cyan-light text-textis' : 'bg-deep-dark text-highlight'}`
-                : `${theme === 'theme1' ? 'bg-warning text-white' : 'bg-highlight text-textis'} scale-y-90`
-            }`}
+            variants={
+              isPrinciple ? principlePriceVariant : secondaryPriceVariant
+            }
+            initial="hidden"
+            whileInView="visible"
+            whileHover="hover"
+            animate="exit"
+            className={`
+              ${isPrinciple ? 'z-50' : 'z-40'}
+              relative flex flex-col justify-between items-center gap-10 p-32P shadow-lg mx-auto rounded-lg ${
+                isPrinciple
+                  ? `${theme === 'theme1' ? 'bg-green-cyan-light text-textis' : 'bg-deep-dark text-white'} `
+                  : `${theme === 'theme1' ? 'bg-warning' : 'bg-highlight'} text-textis scale-y-90`
+              }`}
           >
             <div className="card text-center min-w-[320px] max-w-[320px]">
               <h2
@@ -43,7 +107,11 @@ const Cards = ({ data }: { data: PricingData[] }) => {
                 {item.title}
               </h2>
               <h3 className="text-2xl font-bold mb-16M">{item.desc}</h3>
-              <div className="w-full h-1 bg-white opacity-20 my-16M" />
+              <div
+                className={`
+                    ${isPrinciple ? 'bg-highlight' : 'bg-textis'}
+                    w-full h-1 opacity-20 my-16M`}
+              />
               <p className="font-semibold text-lg py-8P">{item.info1}</p>
               {item.info2 && (
                 <>
@@ -62,7 +130,10 @@ const Cards = ({ data }: { data: PricingData[] }) => {
                     ${isPrinciple ? 'bg-highlight' : 'bg-textis'}
                     w-full h-1 opacity-20 my-16M`}
                   />
-                  <p className="font-semibold text-lg py-8P">{item.info3}</p>
+                  <p className="font-semibold text-lg py-8P">
+                    {item.info3}
+                    {typeof item.info3 === 'number' ? ' lei' : ''}
+                  </p>
                 </>
               )}
               {item.info4 && (
@@ -72,7 +143,10 @@ const Cards = ({ data }: { data: PricingData[] }) => {
                     ${isPrinciple ? 'bg-highlight' : 'bg-textis'}
                     w-full h-1 opacity-20 my-16M`}
                   />
-                  <p className="font-semibold text-lg py-8P">{item.info4}</p>
+                  <p className="font-semibold text-lg py-8P">
+                    {item.info4}
+                    {typeof item.info4 === 'number' ? ' lei' : ''}
+                  </p>
                 </>
               )}
               {item.info5 && (
@@ -82,7 +156,10 @@ const Cards = ({ data }: { data: PricingData[] }) => {
                     ${isPrinciple ? 'bg-highlight' : 'bg-textis'}
                     w-full h-1 opacity-20 my-16M`}
                   />
-                  <p className="font-semibold text-lg py-8P">{item.info5}</p>
+                  <p className="font-semibold text-lg py-8P">
+                    {item.info5}
+                    {typeof item.info5 === 'number' ? ' lei' : ''}
+                  </p>
                 </>
               )}
               {item.info6 && (
@@ -105,20 +182,30 @@ const Cards = ({ data }: { data: PricingData[] }) => {
                   <p className="font-semibold text-lg py-8P">{item.info7}</p>
                 </>
               )}
-              <button
-                aria-label="learn more"
-                className={`relative top-10I p-8P hover:p-6P ${
-                  item.title === 'Premium'
-                    ? 'text-white bg-green-500  hover:text-purple hover:border-purple hover:bg-none'
-                    : 'text-purple bg-white hover:bg-black hover:text-white hover-border-white'
-                } font-semibold rounded-5BR uppercase tracking-widest hover:border-2 hover:border-solid`}
-              >
-                <span className="hover:relative hover:bottom-64I">
-                  Plateste Acum Avans 50%
-                </span>
-              </button>
             </div>
-          </div>
+            <motion.button
+              aria-label="learn more"
+              variants={buttonVariants}
+              initial="hidden"
+              whileHover="hover"
+              onClick={() =>
+                handlePayment(
+                  STRIPE_PRICE_IDS[item.title as keyof typeof STRIPE_PRICE_IDS]
+                )
+              } // 👈 Pass priceId
+              className={`${priceButtonClasses}`}
+            >
+              <span className="hover:relative hover:bottom-64I">
+                {item.title === 'Our Community'
+                  ? 'Rezerva-ti Locul Acum'
+                  : `Start with ${
+                      item.title === 'Mentoring'
+                        ? Math.floor(priceService * 0.2)
+                        : Math.floor(priceService * 0.5)
+                    } lei`}
+              </span>
+            </motion.button>
+          </motion.div>
         );
       })}
     </>

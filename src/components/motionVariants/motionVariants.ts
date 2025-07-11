@@ -1,5 +1,72 @@
 import { Variants } from 'framer-motion';
 
+export const principlePriceVariant: Variants = {
+  hidden: {
+    y: '-10dvh',
+    opacity: 0,
+  },
+  visible: {
+    y: 0,
+    opacity: 1,
+    transition: {
+      duration: 1,
+      scale: 1.7,
+      delay: 0,
+      type: 'spring',
+      stiffness: 50, // speed of the bounce
+      damping: 10, // lower = more bounce
+    },
+  },
+  hover: {
+    scale: [1, 1.05, 1],
+    transition: {
+      duration: 0.5,
+      ease: 'easeInOut',
+    },
+  },
+  exit: {
+    scale: 1,
+    opacity: 1,
+    transition: {
+      duration: 0.25,
+      ease: 'easeInOut',
+    },
+  },
+};
+export const secondaryPriceVariant: Variants = {
+  hidden: {
+    y: '-10dvh',
+    opacity: 0,
+  },
+  visible: {
+    y: 0,
+    opacity: 1,
+    transition: {
+      duration: 1,
+      scale: 1.1,
+      delay: 0.5,
+      type: 'spring',
+      stiffness: 50, // speed of the bounce
+      damping: 10, // lower = more bounce
+    },
+  },
+  hover: {
+    scale: [1, 1.01, 1],
+    transition: {
+      duration: 0.5,
+      ease: 'easeInOut',
+    },
+  },
+  exit: {
+    scale: 1,
+    opacity: 1,
+    transition: {
+      duration: 0.25,
+      ease: 'easeInOut',
+    },
+  },
+};
+
 export const ulVariants: Variants = {
   hidden: {
     x: '-100dvw',
