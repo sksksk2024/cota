@@ -6,6 +6,7 @@ import { useUser } from '@/components/hooks/useUser';
 import { useSession } from 'next-auth/react';
 
 import Header from '@/components/Header';
+import TermsAndServices from '../TermsAndServices';
 const Guide = lazy(() => import('@/components/Guide'));
 const Working = lazy(() => import('@/components/Working'));
 const Info = lazy(() => import('@/components/Info'));
@@ -65,7 +66,8 @@ const HomeMain = () => {
               ${theme === 'theme1' ? 'bg-background-dark' : 'bg-cyan-dark'}
               `}
             >
-              <div className="relative bottom-80I w-96W md:w-144W">
+              <div className="flex flex-col justify-center items-center relative bottom-80I w-288W">
+                <TermsAndServices />
                 <CotaLogo />
               </div>
             </div>
@@ -75,7 +77,8 @@ const HomeMain = () => {
               ${theme === 'theme1' ? 'bg-background-dark' : 'bg-cyan-dark'}
               `}
             >
-              <div className="relative w-144W bottom-96I xs:bottom-288I md:bottom-0 lg:bottom-240I">
+              <div className="flex flex-col justify-center items-center relative bottom-96I w-288W xs:bottom-288I md:bottom-0 lg:bottom-240I">
+                <TermsAndServices />
                 <CotaLogo />
               </div>
             </div>

@@ -33,7 +33,7 @@ const Footer = () => {
   return (
     <footer
       id="explore"
-      className={`z-10 flex flex-col justify-center items-center py-64P sm:px-64P pb-0
+      className={`z-0 flex flex-col justify-center items-center py-64P sm:px-64P pb-0
         ${theme === 'theme1' ? 'text-white' : 'text-textis'}
         ${!displayUser ? 'gap-20' : 'gap-4'}
     `}
@@ -248,6 +248,9 @@ ${
                 >
                   <FrontendMentor />
                 </Link>
+                {/* YOUTUBE */}
+                {/* TIKTOK not now */}
+                {/* TWITCH not now */}
               </div>
               <div className="">
                 <p
@@ -260,7 +263,6 @@ ${theme === 'theme1' ? 'text-warning' : 'text-highlight'}
               </div>
             </div>
           </div>
-          {/* PLAN TO ADD SOMETHING HERE FOR PAYMENTS INSIDE MY WEBSITE(LAW FREE) */}
         </>
       )}
     </footer>

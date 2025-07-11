@@ -164,7 +164,7 @@ const Info = () => {
         {!displayName ? (
           <>
             <div
-              className={`-z-10 relative -top-64I pt-144P w-full h-500H
+              className={`z-10 relative -top-64I pt-144P w-full h-500H
           ${theme === 'theme1' ? 'bg-background-dark' : 'bg-cyan-dark'}
           `}
             >
