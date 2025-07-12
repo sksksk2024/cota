@@ -27,7 +27,7 @@ export async function POST(req: Request) {
     }
   } catch (err) {
     return NextResponse.json(
-      { error: 'Invalid user session' },
+      { error: 'Invalid user session', err },
       { status: 400 }
     );
   }

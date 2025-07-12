@@ -32,6 +32,11 @@ const Donations = () => {
     loading('Redirecting to Stripe Checkout...');
 
     try {
+      // Validate donation exists
+      if (!(donationId in STRIPE_DONATIONS)) {
+        throw new Error('Invalid product selection');
+      }
+
       const response = await fetch('/api/checkout', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },

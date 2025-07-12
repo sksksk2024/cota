@@ -3,7 +3,6 @@ import { useState } from 'react';
 import { useThemeStore } from './hooks/useThemeStore';
 import { useToast } from '@/components/hooks/useToast';
 import { loadStripe } from '@stripe/stripe-js';
-import { prisma } from '@/lib/prisma';
 import { motion } from 'framer-motion';
 import {
   buttonVariants,
@@ -46,8 +45,8 @@ const Cards = ({ data }: { data: PricingData[] }) => {
 
       const response = await fetch('/api/checkout', {
         method: 'POST',
-        credentials: 'include',
         headers: { 'Content-Type': 'application/json' },
+        credentials: 'include',
         body: JSON.stringify({ product: productName }),
       });
 
