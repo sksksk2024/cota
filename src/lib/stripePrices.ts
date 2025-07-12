@@ -1,8 +1,8 @@
 // Server-side product to price ID mapping
 export const STRIPE_PRODUCTS = {
   'Common Pack': 'STRIPE_PRICE1_ID',
-  'Rare Pack': 'STRIPE_PRICE2_ID',
-  'Legendary Pack': 'STRIPE_PRICE3_ID',
+  'Legendary Pack': 'STRIPE_PRICE2_ID',
+  'Rare Pack': 'STRIPE_PRICE3_ID',
   Remote: 'STRIPE_PRICE4_ID',
   'Our Community': 'STRIPE_PRICE5_ID',
   'One on One': 'STRIPE_PRICE6_ID',
