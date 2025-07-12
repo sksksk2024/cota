@@ -3,9 +3,11 @@ import { NextResponse } from 'next/server';
 import Stripe from 'stripe';
 import { parse } from 'cookie';
 import { getStripePriceId, StripeProduct } from '@/lib/stripePrices';
+import { getServerSession } from 'next-auth';
+import { authOptions } from '@/lib/auth';
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
-  apiVersion: '2025-03-31.basil', // Updated to stable version
+  apiVersion: '2025-06-30.basil',
 });
 
 export async function POST(req: Request) {
@@ -13,23 +15,27 @@ export async function POST(req: Request) {
   const cookies = parse(cookieHeader);
   const { product } = await req.json();
 
-  // Validate user session
-  let user: { id: string; email: string };
-  try {
-    if (!cookies.user) {
-      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+  // Try to get user from cookie
+  let user: { id: string; email: string } | null = null;
+  if (cookies.user) {
+    try {
+      user = JSON.parse(cookies.user);
+    } catch {
+      user = null;
     }
+  }
 
-    user = JSON.parse(cookies.user);
-
-    if (!user?.id || !user?.email) {
-      return NextResponse.json({ error: 'Invalid user data' }, { status: 400 });
+  // If not in cookie, try session (NextAuth)
+  if (!user) {
+    const session = await getServerSession(authOptions);
+    if (session?.user?.email && session?.user?.id) {
+      user = { id: session.user.id, email: session.user.email };
     }
-  } catch (err) {
-    return NextResponse.json(
-      { error: 'Invalid user session', err },
-      { status: 400 }
-    );
+  }
+
+  // If still no user, unauthorized
+  if (!user || !user.id || !user.email) {
+    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
 
   try {
