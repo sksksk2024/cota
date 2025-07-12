@@ -42,12 +42,15 @@ export async function POST(req: Request) {
     // Validate and get price ID
     const priceId = getStripePriceId(product as StripeProduct);
 
+    const isDonation = product.startsWith('Donation');
+    const cancelUrl = `${req.headers.get('origin')}/cancel?type=${isDonation ? 'donation' : 'service'}`;
+
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ['card'],
       line_items: [{ price: priceId, quantity: 1 }],
       mode: 'payment',
       success_url: `${req.headers.get('origin')}/success?session_id={CHECKOUT_SESSION_ID}`,
-      cancel_url: `${req.headers.get('origin')}/cancel`,
+      cancel_url: cancelUrl,
       metadata: {
         userId: user.id,
         userEmail: user.email,
