@@ -35,12 +35,12 @@ const Donations = () => {
     {
       id: STRIPE_DONATION_IDS.Donation3,
       amount: '20 lei',
-      label: 'Large Donation',
+      label: 'Big Donation',
     },
     {
       id: STRIPE_DONATION_IDS.Donation4,
       amount: '50 lei',
-      label: 'Extra Donation',
+      label: 'Mega Donation',
     },
   ];
 
