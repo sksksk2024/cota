@@ -1,14 +1,16 @@
+'use client';
 import { useState } from 'react';
 import { useThemeStore } from './hooks/useThemeStore';
 import { useToast } from '@/components/hooks/useToast';
 import { loadStripe } from '@stripe/stripe-js';
+import { prisma } from '@/lib/prisma';
 import { motion } from 'framer-motion';
 import {
   buttonVariants,
   principlePriceVariant,
   secondaryPriceVariant,
 } from './motionVariants/motionVariants';
-import { STRIPE_PRICE_IDS } from '@/lib/stripePrices';
+import { STRIPE_PRODUCTS, StripeProduct } from '@/lib/stripePrices';
 
 interface PricingData {
   title: string;
@@ -33,33 +35,34 @@ const Cards = ({ data }: { data: PricingData[] }) => {
       : 'bg-green-light text-background-dark hover:text-cyan-dark hover:bg-highlight'
   }`;
 
-  const handlePayment = async (priceId?: string) => {
+  const handlePayment = async (productName: string) => {
     loading('Redirecting to Stripe Checkout...');
 
-    const stripe = await loadStripe(
-      process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!
-    );
-
     try {
+      // Validate product exists
+      if (!(productName in STRIPE_PRODUCTS)) {
+        throw new Error('Invalid product selection');
+      }
+
       const response = await fetch('/api/checkout', {
         method: 'POST',
         credentials: 'include',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ priceId }),
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ product: productName }),
       });
 
       const data = await response.json();
 
       if (!data.sessionId) {
-        throw new Error('No sessionId returned from /api/checkout');
+        throw new Error('Checkout session failed');
       }
 
+      const stripe = await loadStripe(
+        process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!
+      );
       await stripe?.redirectToCheckout({ sessionId: data.sessionId });
     } catch (err: unknown) {
-      console.error(err);
-      error('Something went wrong during checkout.');
+      error(err instanceof Error ? err.message : 'Checkout failed');
     }
   };
 
@@ -188,11 +191,7 @@ const Cards = ({ data }: { data: PricingData[] }) => {
               variants={buttonVariants}
               initial="hidden"
               whileHover="hover"
-              onClick={() =>
-                handlePayment(
-                  STRIPE_PRICE_IDS[item.title as keyof typeof STRIPE_PRICE_IDS]
-                )
-              } // 👈 Pass priceId
+              onClick={() => handlePayment(item.title as StripeProduct)}
               className={`${priceButtonClasses}`}
             >
               <span className="hover:relative hover:bottom-64I">

@@ -12,7 +12,7 @@ import { loadStripe } from '@stripe/stripe-js';
 import PiggyBank from '@/components/svgs/PiggyBank';
 import ProtectedPageAll from '@/components/ProtectedPageAll';
 import Link from 'next/link';
-import { STRIPE_DONATION_IDS } from '@/lib/stripePrices';
+import { STRIPE_DONATIONS, StripeDonation } from '@/lib/stripePrices';
 
 const Donations = () => {
   const { error, loading } = useToast();
@@ -22,41 +22,21 @@ const Donations = () => {
   const modalRef = useRef<HTMLDivElement | null>(null);
 
   const donationOptions = [
-    {
-      id: STRIPE_DONATION_IDS.Donation1,
-      amount: '5 lei',
-      label: 'Small Donation',
-    },
-    {
-      id: STRIPE_DONATION_IDS.Donation2,
-      amount: '10 lei',
-      label: 'Medium Donation',
-    },
-    {
-      id: STRIPE_DONATION_IDS.Donation3,
-      amount: '20 lei',
-      label: 'Big Donation',
-    },
-    {
-      id: STRIPE_DONATION_IDS.Donation4,
-      amount: '50 lei',
-      label: 'Mega Donation',
-    },
-  ];
+    { id: 'Donation1', amount: '5 lei', label: 'Small Donation' },
+    { id: 'Donation2', amount: '10 lei', label: 'Medium Donation' },
+    { id: 'Donation3', amount: '20 lei', label: 'Big Donation' },
+    { id: 'Donation4', amount: '50 lei', label: 'Mega Donation' },
+  ] as const;
 
-  const handlePayment = async (priceId: string) => {
+  const handlePayment = async (donationId: StripeDonation) => {
     loading('Redirecting to Stripe Checkout...');
-
-    const stripe = await loadStripe(
-      process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!
-    );
 
     try {
       const response = await fetch('/api/checkout', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         credentials: 'include',
-        body: JSON.stringify({ priceId }), // 👈 Send priceId to API
+        body: JSON.stringify({ product: donationId }),
       });
 
       const data = await response.json();
@@ -64,6 +44,10 @@ const Donations = () => {
       if (!data.sessionId) {
         throw new Error('No sessionId returned from /api/checkout');
       }
+
+      const stripe = await loadStripe(
+        process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!
+      );
 
       await stripe?.redirectToCheckout({ sessionId: data.sessionId });
     } catch (err: unknown) {
@@ -139,7 +123,7 @@ const Donations = () => {
                   {donationOptions.map((option) => (
                     <motion.button
                       key={option.id}
-                      onClick={() => option.id && handlePayment(option.id)}
+                      onClick={() => handlePayment(option.id as StripeDonation)}
                       className="text-white font-semibold w-full bg-green-500 py-3 px-6 rounded-lg cursor-pointer hover:bg-green-600"
                       whileHover={{ scale: 1.05 }}
                       whileTap={{ scale: 0.95 }}
