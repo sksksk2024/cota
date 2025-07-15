@@ -12,7 +12,7 @@ import { Locked } from '@/components/svgs/Locked';
 const TutorialsMain = () => {
   const { theme } = useThemeStore();
 
-  const [isLive] = useState<boolean>(false);
+  const [isLive] = useState<boolean>(true);
 
   return (
     <ProtectedPageAll>
@@ -55,7 +55,7 @@ const TutorialsMain = () => {
           ) : (
             <div className="w-full h-800H flex justify-center">
               <ReactPlayer
-                url="https://www.youtube.com/watch?v=OmKfROtB45Q"
+                url="https://www.youtube.com/shorts/n0aMbpre_Bs"
                 width="100%"
                 height="100%"
                 controls={true}

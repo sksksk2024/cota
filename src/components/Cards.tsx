@@ -15,7 +15,7 @@ interface PricingData {
   title: string;
   desc: string;
   info1: string;
-  info2?: string;
+  info2?: number | string;
   info3?: number | string;
   info4?: number | string;
   info5?: number | string;

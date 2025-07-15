@@ -1,42 +1,42 @@
 export const tutorials = [
   {
-    title: '1000 pushups in a row',
-    url: 'https://www.youtube.com/watch?v=M_2z225z5Vk',
+    title: 'Tutorial',
+    url: 'https://www.youtube.com/shorts/I-W3fox7qig',
     locked: false,
   },
   {
     title: 'Tutorial',
-    url: 'https://www.youtube.com/watch?v=video_id',
-    locked: true,
+    url: 'https://www.youtube.com/shorts/Tycfqwyw5tA',
+    locked: false,
   },
   {
     title: 'Tutorial',
-    url: 'https://www.youtube.com/watch?v=video_id',
-    locked: true,
+    url: 'https://www.youtube.com/shorts/dZ0QDfmLqVE',
+    locked: false,
   },
   {
     title: 'Tutorial',
-    url: 'https://www.youtube.com/watch?v=video_id',
-    locked: true,
+    url: 'https://www.youtube.com/shorts/XXNqnumqA4A',
+    locked: false,
   },
   {
     title: 'Tutorial',
-    url: 'https://www.youtube.com/watch?v=video_id',
-    locked: true,
+    url: 'https://www.youtube.com/shorts/HqNL0sPnwc8',
+    locked: false,
   },
   {
     title: 'Tutorial',
-    url: 'https://www.youtube.com/watch?v=video_id',
-    locked: true,
+    url: 'https://www.youtube.com/shorts/mW5JF4P8dkg',
+    locked: false,
   },
   {
     title: 'Tutorial',
-    url: 'https://www.youtube.com/watch?v=video_id',
-    locked: true,
+    url: 'https://www.youtube.com/shorts/OfxbizvX_44',
+    locked: false,
   },
   {
     title: 'Tutorial',
-    url: 'https://www.youtube.com/watch?v=video_id',
-    locked: true,
+    url: 'https://www.youtube.com/shorts/RyBhxJ1Zzto',
+    locked: false,
   },
 ];

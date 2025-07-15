@@ -4,8 +4,7 @@ export const common = [
     desc: 'Landing Page',
     info1: 'No Functionalities',
     info2: '1 page long',
-    info3: '! Must watch the video here for more details !',
-    info4: 600,
+    info3: 600,
   },
 ];
 
@@ -15,8 +14,7 @@ export const rare = [
     desc: 'Website for Small Businesses & Agencies',
     info1: 'Functionalities Included( 1 per page )',
     info2: '2 pages long',
-    info3: '! Must watch the video here for more details !',
-    info4: 1000,
+    info3: 1000,
   },
 ];
 
@@ -26,8 +24,7 @@ export const legendary = [
     desc: 'Fully customisable to your needs',
     info1: 'Fancy animations that turn visitors into clients',
     info2: '3 pages long',
-    info3: '! Must watch the video here for more details !',
-    info4: 1500,
+    info3: 1500,
   },
 ];
 
@@ -51,8 +48,7 @@ export const remote = [
     title: 'Remote',
     desc: 'Workout Online',
     info1: '30 Minutes',
-    info2: '! Must watch the video here for more details !',
-    info3: 150,
+    info2: 150,
   },
 ];
 
@@ -62,8 +58,7 @@ export const oneOne = [
     desc: 'Workout with Me',
     info1: '1 Hour',
     info2: 'Wherever You Want In Cluj-Napoca City',
-    info3: '! Must watch the video here for more details !',
-    info4: 250,
+    info3: 250,
   },
 ];
 
