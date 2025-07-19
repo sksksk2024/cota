@@ -21,8 +21,14 @@ import WingsLogo from './utils/WingsLogo';
 import { useUser } from './hooks/useUser';
 import { useSession } from 'next-auth/react';
 import dynamic from 'next/dynamic';
+import { useSound } from './hooks/useSound';
+import { block, click, ding } from './sounds/sounds';
 
 const Footer = () => {
+  const { play: playClick } = useSound(click, 0.02);
+  const { play: playBlock } = useSound(block, 0.02);
+  const { play: playHover } = useSound(ding, 0.05);
+
   const { theme } = useThemeStore();
   const { user } = useUser();
 
@@ -51,6 +57,8 @@ const Footer = () => {
         `}
           >
             <button
+              onMouseEnter={playHover}
+              onClick={playBlock}
               className={`select-text text-xl font-bold flex justify-start items-center gap-2 cursor-pointer 
           ${
             theme === 'theme1'
@@ -63,6 +71,8 @@ const Footer = () => {
               {/* Business Number */}
             </button>
             <button
+              onMouseEnter={playHover}
+              onClick={playBlock}
               className={`select-text text-xl font-bold flex justify-start items-center gap-2 cursor-pointer
             ${
               theme === 'theme1'
@@ -80,6 +90,8 @@ const Footer = () => {
             <div className="flex justify-around items-center gap-10">
               {/* LINKS A BIT ROTATED WHEN HOVERED */}
               <Link
+                onMouseEnter={playHover}
+                onClick={playClick}
                 target="_blank"
                 href="https://www.instagram.com/h1_cota_alexandru_h1/"
                 passHref
@@ -87,6 +99,8 @@ const Footer = () => {
                 <Insta />
               </Link>
               <Link
+                onMouseEnter={playHover}
+                onClick={playClick}
                 target="_blank"
                 href="https://github.com/sksksk2024"
                 passHref
@@ -94,6 +108,8 @@ const Footer = () => {
                 <GitHub />
               </Link>
               <Link
+                onMouseEnter={playHover}
+                onClick={playClick}
                 target="_blank"
                 href="https://www.linkedin.com/in/alexandru-co%C8%9Ba-34567b354/"
                 passHref
@@ -101,6 +117,8 @@ const Footer = () => {
                 <LinkedIn />
               </Link>
               <Link
+                onMouseEnter={playHover}
+                onClick={playClick}
                 target="_blank"
                 href="https://www.frontendmentor.io/profile/sksksk2024"
                 passHref
@@ -138,28 +156,52 @@ ${theme === 'theme1' ? 'text-white' : 'text-textis'}
               {/* LINKS A BIT ROTATED WHEN HOVERED */}
               <div className="flex justify-center items-center gap-5 sm:gap-10">
                 <Link
+                  onMouseEnter={playHover}
+                  onClick={playClick}
                   target="_blank"
                   href="https://cotablog.onrender.com/"
                   passHref
                 >
                   <Blog />
                 </Link>
-                <Link href="/games" passHref>
+                <Link
+                  onMouseEnter={playHover}
+                  onClick={playClick}
+                  href="/games"
+                  passHref
+                >
                   <Games />
                 </Link>
-                <Link href="/live" passHref>
+                <Link
+                  onMouseEnter={playHover}
+                  onClick={playClick}
+                  href="/live"
+                  passHref
+                >
                   <Live />
                 </Link>
-                <Link href="/tutorials" passHref>
+                <Link
+                  onMouseEnter={playHover}
+                  onClick={playClick}
+                  href="/tutorials"
+                  passHref
+                >
                   <Tutorials />
                 </Link>
               </div>
               <div className="flex justify-center items-center gap-5 sm:gap-10">
-                <Link href="/donations" passHref>
+                <Link
+                  onMouseEnter={playHover}
+                  onClick={playClick}
+                  href="/donations"
+                  passHref
+                >
                   <Donations />
                 </Link>
                 <div className="relative flex justify-center items-center m-auto w-48W h-48H">
                   <Link
+                    onMouseEnter={playHover}
+                    onClick={playClick}
                     target="_blank"
                     className="absolute top-16I"
                     href="https://next-wings.onrender.com/"
@@ -168,7 +210,12 @@ ${theme === 'theme1' ? 'text-white' : 'text-textis'}
                     <WingsLogo />
                   </Link>
                 </div>
-                <Link href="/newsletter" passHref>
+                <Link
+                  onMouseEnter={playHover}
+                  onClick={playClick}
+                  href="/newsletter"
+                  passHref
+                >
                   <Newsletter />
                 </Link>
               </div>
@@ -192,6 +239,8 @@ ${theme === 'theme1' ? 'text-white' : 'text-textis'}
 `}
             >
               <button
+                onMouseEnter={playHover}
+                onClick={playBlock}
                 className={`select-text text-xl font-bold flex justify-start items-center gap-2 cursor-pointer 
 ${
   theme === 'theme1'
@@ -204,6 +253,8 @@ ${
                 {/* Business Number */}
               </button>
               <button
+                onMouseEnter={playHover}
+                onClick={playBlock}
                 className={`select-text text-xl font-bold flex justify-start items-center gap-2 cursor-pointer
 ${
   theme === 'theme1'
@@ -221,6 +272,8 @@ ${
               <div className="flex justify-around items-center gap-10">
                 {/* LINKS A BIT ROTATED WHEN HOVERED */}
                 <Link
+                  onMouseEnter={playHover}
+                  onClick={playClick}
                   target="_blank"
                   href="https://www.instagram.com/h1_cota_alexandru_h1/"
                   passHref
@@ -228,6 +281,8 @@ ${
                   <Insta />
                 </Link>
                 <Link
+                  onMouseEnter={playHover}
+                  onClick={playClick}
                   target="_blank"
                   href="https://github.com/sksksk2024"
                   passHref
@@ -235,6 +290,8 @@ ${
                   <GitHub />
                 </Link>
                 <Link
+                  onMouseEnter={playHover}
+                  onClick={playClick}
                   target="_blank"
                   href="https://www.linkedin.com/in/alexandru-co%C8%9Ba-34567b354/"
                   passHref
@@ -242,6 +299,8 @@ ${
                   <LinkedIn />
                 </Link>
                 <Link
+                  onMouseEnter={playHover}
+                  onClick={playClick}
                   target="_blank"
                   href="https://www.frontendmentor.io/profile/sksksk2024"
                   passHref

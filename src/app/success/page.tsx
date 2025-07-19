@@ -6,12 +6,21 @@ import successfulMe from '@/images/successfulMe.webp';
 import Image from 'next/image';
 import { useThemeStore } from '@/components/hooks/useThemeStore';
 import Link from 'next/link';
+import { useSound } from '@/components/hooks/useSound';
+import { yay } from '@/components/sounds/sounds';
+import { useSearchParams } from 'next/navigation';
 
 const SuccessPage = () => {
+  const { play: playYay } = useSound(yay, 0.2);
+
   const { theme } = useThemeStore();
+
+  const searchParams = useSearchParams();
+  const type = searchParams.get('type');
 
   return (
     <main
+      onMouseEnter={playYay}
       className={`overflow-y-clip h-[100dvh] ${
         theme === 'theme1'
           ? 'text-white bg-deep-dark'
@@ -24,7 +33,14 @@ const SuccessPage = () => {
           
           `}
       >
-        <h1>Thanks for the donation. It means a lot. 🥲🎉</h1>
+        {type === 'donation' ? (
+          <h1>Thanks for the donation. It means a lot. 🥲🎉</h1>
+        ) : (
+          <h1>
+            Thanks for purchasing from us. We are coming back to you as soon as
+            posible.
+          </h1>
+        )}
 
         {/* HOME LINK */}
         <motion.button

@@ -7,12 +7,16 @@ import { useSession } from 'next-auth/react';
 
 import Header from '@/components/Header';
 import TermsAndServices from '../TermsAndServices';
+import { useSound } from '../hooks/useSound';
+import { heart } from '../sounds/sounds';
 const Guide = lazy(() => import('@/components/Guide'));
 const Working = lazy(() => import('@/components/Working'));
 const Info = lazy(() => import('@/components/Info'));
 const CotaLogo = lazy(() => import('../svgs/CotaLogo'));
 
 const HomeMain = () => {
+  const { play: playClick } = useSound(heart, 0.009);
+
   const [, setIsLoading] = useState(true);
   const { theme } = useThemeStore();
   const { user } = useUser();
@@ -30,7 +34,7 @@ const HomeMain = () => {
   const displayName = session?.user?.name || user?.id;
 
   return (
-    <main className="relative w-full h-full">
+    <main className="relative w-full h-full" onMouseEnter={playClick}>
       {/* App Content */}
       <div className="relative">
         {/* Object to fill in the gaps */}

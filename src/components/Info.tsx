@@ -15,10 +15,15 @@ import { useSession } from 'next-auth/react';
 import Prices1 from './Prices1';
 import Prices2 from './Prices2';
 import Prices3 from './Prices3';
+import { useSound } from './hooks/useSound';
+import { ding, woosh } from './sounds/sounds';
 
 type PriceOptions = 1 | 2 | 3;
 
 const Info = () => {
+  const { play: playClick } = useSound(woosh, 0.8);
+  const { play: playHover } = useSound(ding, 0.05);
+
   const { theme } = useThemeStore();
 
   const [goals, setGoals] = useState<boolean>(false);
@@ -61,6 +66,8 @@ const Info = () => {
             onClick={handleToggle}
           >
             <motion.button
+              onClick={playClick}
+              onMouseEnter={playHover}
               className={`cursor-pointer px-16P pr-64P py-8P rounded-5BR font-bold tracking-wide
                 ${
                   theme === 'theme1'
@@ -75,7 +82,11 @@ const Info = () => {
             >
               Next section
             </motion.button>
-            <div className="absolute left-176I bottom-[1px]">
+            <div
+              onClick={playClick}
+              onMouseEnter={playHover}
+              className="absolute left-176I bottom-[1px]"
+            >
               <Arrow />
             </div>
           </div>
@@ -87,6 +98,8 @@ const Info = () => {
               onClick={handleToggle}
             >
               <motion.button
+                onClick={playClick}
+                onMouseEnter={playHover}
                 className={`px-16P pr-64P py-8P rounded-5BR cursor-pointer font-bold tracking-wide
                   ${
                     theme === 'theme1'
@@ -101,7 +114,11 @@ const Info = () => {
               >
                 Next section
               </motion.button>
-              <div className="absolute left-176I bottom-[1px]">
+              <div
+                onClick={playClick}
+                onMouseEnter={playHover}
+                className="absolute left-176I bottom-[1px]"
+              >
                 <Arrow />
               </div>
             </div>
@@ -116,6 +133,8 @@ const Info = () => {
           onClick={() => handlePriceOption(price)}
         >
           <motion.button
+            onClick={playClick}
+            onMouseEnter={playHover}
             className={`relative bottom-64I cursor-pointer px-16P pr-64P py-8P rounded-5BR font-bold tracking-wide
                 ${
                   theme === 'theme1'
@@ -130,7 +149,11 @@ const Info = () => {
           >
             Next section
           </motion.button>
-          <div className="relative -top-112I left-176I bottom-[4.0625rem]">
+          <div
+            onClick={playClick}
+            onMouseEnter={playHover}
+            className="relative -top-112I left-176I bottom-[4.0625rem]"
+          >
             <Arrow />
           </div>
         </div>
@@ -141,6 +164,8 @@ const Info = () => {
             onClick={() => handlePriceOption(price)}
           >
             <motion.button
+              onClick={playClick}
+              onMouseEnter={playHover}
               className={`hidden 2xl:block px-16P pr-64P py-8P rounded-5BR cursor-pointer font-bold tracking-wide
                   ${
                     theme === 'theme1'
@@ -155,7 +180,11 @@ const Info = () => {
             >
               Next section
             </motion.button>
-            <div className="hidden 2xl:block absolute left-176I bottom-[1px]">
+            <div
+              onClick={playClick}
+              onMouseEnter={playHover}
+              className="hidden 2xl:block absolute left-176I bottom-[1px]"
+            >
               <Arrow />
             </div>
           </div>

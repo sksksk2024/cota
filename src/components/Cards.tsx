@@ -10,6 +10,8 @@ import {
   secondaryPriceVariant,
 } from './motionVariants/motionVariants';
 import { STRIPE_PRODUCTS, StripeProduct } from '@/lib/stripePrices';
+import { useSound } from './hooks/useSound';
+import { click, ding, errorSound, yay } from './sounds/sounds';
 
 interface PricingData {
   title: string;
@@ -24,6 +26,11 @@ interface PricingData {
 }
 
 const Cards = ({ data }: { data: PricingData[] }) => {
+  const { play: playClick } = useSound(click, 0.01);
+  const { play: playHover } = useSound(ding, 0.1);
+  const { play: playError } = useSound(errorSound, 0.1);
+  const { play: playYay } = useSound(yay, 0.1);
+
   const { error, loading } = useToast();
   const [principle] = useState<string | null>(null);
   const { theme } = useThemeStore();
@@ -40,6 +47,7 @@ const Cards = ({ data }: { data: PricingData[] }) => {
     try {
       // Validate product exists
       if (!(productName in STRIPE_PRODUCTS)) {
+        playError();
         throw new Error('Invalid product selection');
       }
 
@@ -51,8 +59,8 @@ const Cards = ({ data }: { data: PricingData[] }) => {
       });
 
       const data = await response.json();
-
       if (!data.sessionId) {
+        playError();
         throw new Error('Checkout session failed');
       }
 
@@ -60,7 +68,9 @@ const Cards = ({ data }: { data: PricingData[] }) => {
         process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!
       );
       await stripe?.redirectToCheckout({ sessionId: data.sessionId });
+      playYay();
     } catch (err: unknown) {
+      playError();
       error(err instanceof Error ? err.message : 'Checkout failed');
     }
   };
@@ -190,7 +200,11 @@ const Cards = ({ data }: { data: PricingData[] }) => {
               variants={buttonVariants}
               initial="hidden"
               whileHover="hover"
-              onClick={() => handlePayment(item.title as StripeProduct)}
+              onClick={() => {
+                playClick();
+                handlePayment(item.title as StripeProduct);
+              }}
+              onMouseEnter={playHover}
               className={`${priceButtonClasses}`}
             >
               <span className="hover:relative hover:bottom-64I">

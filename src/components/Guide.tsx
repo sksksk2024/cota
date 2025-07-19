@@ -10,8 +10,14 @@ import Link from 'next/link';
 import { useUser } from './hooks/useUser';
 import SignOutButton from './SignOutButton';
 import { useSession } from 'next-auth/react';
+import { useSound } from './hooks/useSound';
+import { click, ding, woosh } from './sounds/sounds';
 
 const Guide = () => {
+  const { play: playClick1 } = useSound(click, 0.02);
+  const { play: playClick2 } = useSound(woosh, 0.8);
+  const { play: playHover } = useSound(ding, 0.05);
+
   const { theme } = useThemeStore();
   const [, setScrolled] = useState(false);
   const { user } = useUser();
@@ -86,7 +92,13 @@ const Guide = () => {
       >
         {openSideBar ? (
           <>
-            <li onClick={handleToggleSideBar}>
+            <li
+              onClick={() => {
+                handleToggleSideBar();
+                playClick1();
+              }}
+              onMouseEnter={playHover}
+            >
               <XMenu />
             </li>
             {navItems.map((label) =>
@@ -95,6 +107,8 @@ const Guide = () => {
                   {displayName && label === 'Edit Profile' && !user?.id ? (
                     <motion.li className={disabledClasses} key={label}>
                       <motion.button
+                        onClick={playClick1}
+                        onMouseEnter={playHover}
                         disabled
                         className={contentDisabledClasses}
                       >
@@ -103,6 +117,8 @@ const Guide = () => {
                     </motion.li>
                   ) : (
                     <motion.li
+                      onClick={playClick1}
+                      onMouseEnter={playHover}
                       className={liClasses}
                       key={label}
                       variants={buttonVariants}
@@ -129,7 +145,13 @@ const Guide = () => {
           </>
         ) : (
           <>
-            <li onClick={handleToggleSideBar}>
+            <li
+              onClick={() => {
+                handleToggleSideBar();
+                playClick1();
+              }}
+              onMouseEnter={playHover}
+            >
               <BurgerMenu />
             </li>
             {['Intro', 'About', 'Explore'].map((label) => (
@@ -142,7 +164,11 @@ const Guide = () => {
                 }
                 `}
                 key={label}
-                onClick={() => scrollTo(label.toLowerCase())}
+                onClick={() => {
+                  scrollTo(label.toLowerCase());
+                  playClick2();
+                }}
+                onMouseEnter={playHover}
                 variants={buttonVariants}
                 initial="hidden"
                 whileHover="hover"

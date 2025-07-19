@@ -1,7 +1,7 @@
 'use client';
 
 import { useToast } from '@/components/hooks/useToast';
-import { motion } from 'framer-motion';
+import { hover, motion } from 'framer-motion';
 import { OpenEye } from '@/components/svgs/OpenEye';
 import { CloseEye } from '@/components/svgs/CloseEye';
 import {
@@ -18,8 +18,21 @@ import { useRouter } from 'next/navigation';
 import { signupSchema, SignupInput } from '@/lib/schemas';
 import { signIn } from 'next-auth/react';
 import PageWrapper from '@/components/PageWrapper';
+import { useSound } from '@/components/hooks/useSound';
+import {
+  block,
+  click,
+  ding,
+  errorSound,
+  yay,
+} from '@/components/sounds/sounds';
 
 const SignUp = () => {
+  const { play: playClick } = useSound(click, 0.3);
+  const { play: playHover } = useSound(ding, 0.2);
+  const { play: playError } = useSound(errorSound, 0.1);
+  const { play: playYay } = useSound(yay, 0.1);
+
   const { success, error, loading, dismiss } = useToast();
 
   const router = useRouter();
@@ -43,6 +56,7 @@ const SignUp = () => {
     // Validate with ZOD
     const result = signupSchema.safeParse(formData);
     if (!result.success) {
+      playError();
       const errorList = result.error.errors
         .map((err) => err.message)
         .join('\n');
@@ -69,13 +83,16 @@ const SignUp = () => {
       dismiss();
 
       if (res.ok) {
+        playYay();
         success('Successfully Signed Up!');
         router.push('/');
       } else {
+        playError();
         setErrorMsg(data.error || 'Unknown error occurred');
         error(data.error || 'Something Went Wrong!');
       }
     } catch (err) {
+      playError();
       setErrorMsg(`Network error or unexpected issue: ${err}`);
       error('Something Went Wrong!');
     }
@@ -189,6 +206,8 @@ const SignUp = () => {
           </label>
 
           <motion.button
+            onClick={playClick}
+            onMouseEnter={playHover}
             type="submit"
             className={`flex justify-center items-center gap-2 font-bold text-lg text-center font-bold px-32P py-8P rounded-5BR ring-none border-none w-full tracking-0.1 shadow-soft-cyan cursor-pointer transition
             ${
@@ -230,6 +249,7 @@ const SignUp = () => {
           {/* SOCIAL AUTH */}
           <div className="flex flex-col justify-center items-center gap-5 w-full">
             <motion.button
+              onMouseEnter={playHover}
               className={`flex justify-center items-center gap-2 font-bold text-lg text-center font-bold px-32P py-8P rounded-5BR ring-none border-none w-full tracking-0.1 shadow-soft-cyan cursor-pointer transition
               ${
                 theme === 'theme1'
@@ -237,7 +257,10 @@ const SignUp = () => {
                   : ' bg-green-light text-background-dark hover:text-cyan-dark hover:bg-highlight'
               }
               `}
-              onClick={() => signIn('google', { callbackUrl: '/' })}
+              onClick={() => {
+                playClick();
+                signIn('google', { callbackUrl: '/' });
+              }}
               variants={mainButtonVariants}
               initial="hidden"
               whileHover="hover"
@@ -247,6 +270,7 @@ const SignUp = () => {
             </motion.button>
 
             <motion.button
+              onMouseEnter={playHover}
               className={`flex justify-center items-center gap-2 font-bold text-lg text-center font-bold px-32P py-8P rounded-5BR ring-none border-none w-full tracking-0.1 shadow-soft-cyan cursor-pointer transition
               ${
                 theme === 'theme1'
@@ -254,7 +278,10 @@ const SignUp = () => {
                   : ' bg-green-light text-background-dark hover:text-cyan-dark hover:bg-highlight'
               }
               `}
-              onClick={() => signIn('github', { callbackUrl: '/' })}
+              onClick={() => {
+                playClick();
+                signIn('github', { callbackUrl: '/' });
+              }}
               variants={mainButtonVariants}
               initial="hidden"
               whileHover="hover"
@@ -286,6 +313,8 @@ const SignUp = () => {
 
         {/* HOME LINK */}
         <motion.div
+          onClick={playClick}
+          onMouseEnter={playHover}
           className={`w-full min-w-container-300 max-w-container-600 text-center cursor-pointer p-16P rounded-5BR font-bold tracking-wide
         ${
           theme === 'theme1'

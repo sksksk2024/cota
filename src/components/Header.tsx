@@ -1,6 +1,6 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { hover, motion } from 'framer-motion';
 import { sunVariants, moonVariants } from './motionVariants/motionVariants';
 import CotaLogo from './svgs/CotaLogo';
 import Sun from './utils/Sun';
@@ -10,8 +10,14 @@ import { useSession } from 'next-auth/react';
 import { useToast } from './hooks/useToast';
 import { useThemeStore } from './hooks/useThemeStore';
 import { useToggleTheme } from './hooks/useToggleTheme';
+import { useSound } from './hooks/useSound';
+import { click, ding, errorSound } from './sounds/sounds';
 
 const Header = () => {
+  const { play: playClick } = useSound(click, 0.01);
+  const { play: playHover } = useSound(ding, 0.1);
+  const { play: playError } = useSound(errorSound, 0.1);
+
   const { theme } = useThemeStore();
   const toggleTheme = useToggleTheme();
   const { user } = useUser();
@@ -24,8 +30,10 @@ const Header = () => {
   // Handle theme toggle with error handling
   const handleThemeToggle = async () => {
     if (session?.user?.email || user?.email) {
+      playClick();
       toggleTheme(); // Proceed with toggling theme
     } else {
+      playError();
       error('You must sign up if you want to change the theme!');
     }
   };
@@ -50,7 +58,9 @@ const Header = () => {
               dragElastic={0.7}
             >
               <Sun
-                onClick={handleThemeToggle}
+                onClick={() => {
+                  handleThemeToggle();
+                }}
                 className="min-w-container-48 w-64W h-64H cursor-pointer fill-white text-white hover:text-warning hover:fill-warning transition-colors duration-300 md:hidden"
               />
             </motion.div>
