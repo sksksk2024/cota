@@ -252,5 +252,16 @@
     "lii1": "Sa ceri stergerea datelor tale (email me)",
     "lii2": "Sa renunti la cookie-urile neesentiale",
     "lii3": "Deconectarea logarilor tale, oricand"
+  },
+  "cancel": {
+    "title": "Niciun stres! Achizitia a fost anulata.",
+    "desc": "Te poti intoarce oricand — noi vom fi aici.",
+    "again": "Incearca din Nou",
+    "home": "Acasa"
+  },
+  "success": {
+    "title1": "Multumim pentru donatie. Inseamna mult.",
+    "title2": "Multumim pentru ca a-ti cumparat de la noi. Vom reveni la tine in cel mai scurt timp.",
+    "home": "Acasa"
   }
 }

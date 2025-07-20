@@ -7,8 +7,10 @@ import Image from 'next/image';
 import { useThemeStore } from '@/components/hooks/useThemeStore';
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
+import { useTranslation } from '@/components/hooks/useTranslation';
 
 const CancelPage = () => {
+  const { t } = useTranslation();
   const { theme } = useThemeStore();
   const searchParams = useSearchParams();
   const type = searchParams.get('type');
@@ -28,11 +30,11 @@ const CancelPage = () => {
           `}
       >
         <h1 className="leading-tight">
-          No stress! Payment was canceled.{' '}
+          {t('cancel.title')}
           {/* 🛑 the emoji to be in the favicon of this page(near future) */}
         </h1>
 
-        <p className="text-lg mt-2">Come back anytime — we’ll be here.</p>
+        <p className="text-lg mt-2">{t('cancel.desc')}</p>
 
         {type === 'donation' ? (
           <motion.button
@@ -49,7 +51,7 @@ const CancelPage = () => {
             animate="exit"
           >
             <Link href="/donations" passHref>
-              Try Again
+              {t('cancel.again')}
             </Link>
           </motion.button>
         ) : (
@@ -87,7 +89,7 @@ const CancelPage = () => {
           animate="exit"
         >
           <Link href="/" passHref>
-            Go Home
+            {t('cancel.home')}
           </Link>
         </motion.button>
 

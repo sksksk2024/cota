@@ -250,5 +250,16 @@
     "lii2": "Opt out of non-essential cookies",
     "lii3": "Disconnect social logins anytime",
     "home": "Go Home"
+  },
+  "cancel": {
+    "title": "No stress! Payment was canceled.",
+    "desc": "Come back anytime — we’ll be here.",
+    "again": "Try Again",
+    "home": "Go Home"
+  },
+  "success": {
+    "title1": "Thanks for the donation. It means a lot.",
+    "title2": "Thanks for purchasing from us. We are coming back to you as soon as posible.",
+    "home": "Go Home"
   }
 }

@@ -9,8 +9,10 @@ import Link from 'next/link';
 import { useSound } from '@/components/hooks/useSound';
 import { yay } from '@/components/sounds/sounds';
 import { useSearchParams } from 'next/navigation';
+import { useTranslation } from '@/components/hooks/useTranslation';
 
 const SuccessPage = () => {
+  const { t } = useTranslation();
   const { play: playYay } = useSound(yay, 0.2);
 
   const { theme } = useThemeStore();
@@ -34,12 +36,9 @@ const SuccessPage = () => {
           `}
       >
         {type === 'donation' ? (
-          <h1>Thanks for the donation. It means a lot. 🥲🎉</h1>
+          <h1>{t('success.title1')} 🥲🎉</h1>
         ) : (
-          <h1>
-            Thanks for purchasing from us. We are coming back to you as soon as
-            posible.
-          </h1>
+          <h1>{t('success.title2')}</h1>
         )}
 
         {/* HOME LINK */}
@@ -57,7 +56,7 @@ const SuccessPage = () => {
           animate="exit"
         >
           <Link href="/" passHref>
-            Go Home
+            {t('success.home')}
           </Link>
         </motion.button>
 
