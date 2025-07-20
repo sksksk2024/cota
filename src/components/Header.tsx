@@ -13,7 +13,6 @@ import { useToggleTheme } from './hooks/useToggleTheme';
 import { useSound } from './hooks/useSound';
 import { click, ding, errorSound } from './sounds/sounds';
 import { useTranslation } from './hooks/useTranslation';
-import { useLanguageStore } from './hooks/useLanguageStore';
 
 const Header = () => {
   const { t } = useTranslation();
