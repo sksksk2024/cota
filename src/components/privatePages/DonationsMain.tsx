@@ -85,7 +85,7 @@ const Donations = () => {
     }
   };
 
-  let altId = ['Donation1', 'Donation2', 'Donation3', 'Donation4'];
+  const altId = ['Donation1', 'Donation2', 'Donation3', 'Donation4'];
 
   return (
     <ProtectedPageAll>

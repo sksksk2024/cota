@@ -214,5 +214,43 @@
     "score": "Scor:",
     "restart": "Restart",
     "games": "Mergi la Jocuri"
+  },
+  "terms": {
+    "title": "Cunoasterea este cheia, mereu.",
+    "mini1": "Termeni si Conditii",
+    "updated": "Ultima Actualizare: ",
+    "mini2": "Servicii",
+    "desc1": "Toate achizitiile sunt servicii digitalizate. Nu exista produse fizice de livrat.",
+    "mini3": "Cumparaturi",
+    "desc2": "Toate cumparaturile sunt finale. Returnari exista doar in cazul serviciilor ce nu au putut fi livrate, in privinta unei erori.",
+    "mini4": "Contact",
+    "desc3": "Pentru intrebari: ",
+    "home": "Acasa"
+  },
+  "privacy": {
+    "title": "Politica Privata",
+    "mini1": "1. Ce Colectez",
+    "strong1": "Pentru cumparaturi:",
+    "strong11": " Email, nume (via Stripe)",
+    "strong2": "Pentru inregistrare Google/Github:",
+    "strong22": " Doar informatia publica al profilului tau",
+    "strong3": "Automat:",
+    "strong33": " Analiza vizitatorul in mare (fara cookies)",
+    "mini2": "2. Cum le Folosesc",
+    "desc": "Doar la:",
+    "desc1": "Livrarea serviciilor cumparate",
+    "desc2": "A raspunde la email-urile voastre",
+    "desc3": "A imbunatati site-ul (doar analize anonime)",
+    "mini3": "3. Trimitere de Date",
+    "li31": "Eu ",
+    "li32": "niciodata",
+    "li33": " nu iti voi vinde datele. Datele sunt trimise doar cu:",
+    "li1": "Stripe (pentru achizitii)",
+    "li2": "Render & Supabase (analiza gazduire, anonime)",
+    "mini4": "4. Drepturile Tale",
+    "lii": "Tu poti:",
+    "lii1": "Sa ceri stergerea datelor tale (email me)",
+    "lii2": "Sa renunti la cookie-urile neesentiale",
+    "lii3": "Deconectarea logarilor tale, oricand"
   }
 }

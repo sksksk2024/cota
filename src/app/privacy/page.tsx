@@ -5,8 +5,10 @@ import { buttonVariants } from '@/components/motionVariants/motionVariants';
 import Link from 'next/link';
 import CotaLogo from '@/components/svgs/CotaLogo';
 import { useThemeStore } from '@/components/hooks/useThemeStore';
+import { useTranslation } from '@/components/hooks/useTranslation';
 
 const NotFound = () => {
+  const { t } = useTranslation();
   const { theme } = useThemeStore();
 
   return (
@@ -30,7 +32,7 @@ const NotFound = () => {
             ${theme === 'theme1' ? 'text-white' : 'text-textis'}
             `}
         >
-          Knowledge is key, everytime.
+          {t('terms.title')}
         </h1>
       </section>
       <section
@@ -42,67 +44,71 @@ const NotFound = () => {
         <div className="max-w-2xl mx-auto p-8 text-sm">
           <h1 className="text-2xl font-bold mb-4">Privacy Policy</h1>
           <p className="mb-6">
-            Last Updated: {new Date().toLocaleDateString()}
+            {t('terms.updated')}
+            {new Date().toLocaleDateString()}
           </p>
 
           <section className="mb-8">
-            <h2 className="text-xl font-semibold mb-2">1. What I Collect</h2>
+            <h2 className="text-xl font-semibold mb-2">{t('privacy.mini1')}</h2>
             <ul className="pl-5 space-y-1">
               <li>
-                <strong>For purchases:</strong> Email, name (via Stripe)
+                <strong>{t('privacy.strong1')}</strong>
+                {t('privacy.strong11')}
               </li>
               <li>
-                <strong>For Google/Github login:</strong> Only your public
-                profile info
+                <strong>{t('privacy.strong2')}</strong>
+                {t('privacy.strong22')}
               </li>
               <li>
-                <strong>Automatically:</strong> Basic visitor analytics (no
-                cookies)
+                <strong>{t('privacy.strong3')}</strong>
+                {t('privacy.strong33')}
               </li>
             </ul>
           </section>
 
           <section className="mb-8">
             <h2 className="text-lg font-semibold mb-2 xl:text-xl">
-              2. How I Use It
+              {t('privacy.mini2')}
             </h2>
-            <p className="text-md">Only to:</p>
+            <p className="text-md">{t('privacy.desc')}</p>
             <ul className="pl-5 space-y-1">
-              <li>Deliver purchased services</li>
-              <li>Respond to your emails</li>
-              <li>Improve my website (anonymous stats only)</li>
+              <li>{t('privacy.desc1')}</li>
+              <li>{t('privacy.desc2')}</li>
+              <li>{t('privacy.desc3')}</li>
             </ul>
           </section>
 
           <section className="mb-8">
             <h2 className="text-lg font-semibold mb-2 xl:text-xl">
-              3. Data Sharing
+              {t('privacy.mini3')}
             </h2>
             <p className="text-md">
-              I <strong>never</strong> sell your data. Only shared with:
+              {t('privacy.li31')}
+              <strong>{t('privacy.li32')}</strong>
+              {t('privacy.li33')}
             </p>
             <ul className="pl-5 space-y-1">
-              <li>Stripe (for payments)</li>
-              <li>Render & Supabase (hosting analytics, anonymized)</li>
+              <li>{t('privacy.li1')}</li>
+              <li>{t('privacy.li2')}</li>
             </ul>
           </section>
 
           <section className="mb-8">
             <h2 className="text-lg font-semibold mb-2 xl:text-xl">
-              4. Your Rights
+              {t('privacy.mini4')}
             </h2>
-            <p className="text-md">You can:</p>
+            <p className="text-md">{t('privacy.lii')}</p>
             <ul className="pl-5 space-y-1">
-              <li>Request deletion of your data (email me)</li>
-              <li>Opt out of non-essential cookies</li>
-              <li>Disconnect social logins anytime</li>
+              <li>{t('privacy.lii1')}</li>
+              <li>{t('privacy.lii2')}</li>
+              <li>{t('privacy.lii3')}</li>
             </ul>
           </section>
 
           <section>
             <h2 className="text-lg font-semibold mb-2 xl:text-xl">Contact</h2>
             <p className="text-md">
-              For questions:{' '}
+              {t('terms.desc3')}
               <a
                 href="mailto:cota8091@gmail.com"
                 className={`underline
@@ -133,7 +139,7 @@ const NotFound = () => {
           dragElastic={0.7}
         >
           <Link href="/" passHref>
-            Go Home
+            {t('terms.home')}
           </Link>
         </motion.button>
       </section>

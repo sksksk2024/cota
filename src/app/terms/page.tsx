@@ -5,8 +5,10 @@ import { buttonVariants } from '@/components/motionVariants/motionVariants';
 import Link from 'next/link';
 import CotaLogo from '@/components/svgs/CotaLogo';
 import { useThemeStore } from '@/components/hooks/useThemeStore';
+import { useTranslation } from '@/components/hooks/useTranslation';
 
 const NotFound = () => {
+  const { t } = useTranslation();
   const { theme } = useThemeStore();
 
   return (
@@ -30,7 +32,7 @@ const NotFound = () => {
             ${theme === 'theme1' ? 'text-white' : 'text-textis'}
             `}
         >
-          Knowledge is key, everytime.
+          {t('terms.title')}
         </h1>
       </section>
       <section
@@ -40,32 +42,27 @@ const NotFound = () => {
       >
         {/* Terms */}
         <div className="max-w-2xl mx-auto p-8">
-          <h1 className="text-2xl font-bold mb-4">Terms of Service</h1>
+          <h1 className="text-2xl font-bold mb-4">{t('terms.mini1')}</h1>
           <p className="text-md mb-4">
-            Last Updated: {new Date().toLocaleDateString()}
+            {t('terms.updated')}
+            {new Date().toLocaleDateString()}
           </p>
 
           <h2 className="text-lg font-semibold mt-6 mb-2 xl:text-xl">
-            Services
+            {t('terms.mini2')}
           </h2>
-          <p className="text-md">
-            All purchases are for digital services delivered electronically. No
-            physical products will be shipped.
-          </p>
+          <p className="text-md">{t('terms.desc1')}</p>
 
           <h2 className="text-lg font-semibold mt-6 mb-2 xl:text-xl">
-            Payments
+            {t('terms.mini3')}
           </h2>
-          <p className="text-md">
-            All sales are final. Refunds are only issued in cases of failed
-            service delivery.
-          </p>
+          <p className="text-md">{t('terms.desc2')}</p>
 
           <h2 className="text-lg font-semibold mt-6 mb-2 xl:text-xl">
-            Contact
+            {t('terms.mini4')}
           </h2>
           <p className="text-md">
-            For questions:{' '}
+            {t('terms.desc3')}
             <a
               href="mailto:cota8091@gmail.com"
               className={`underline
@@ -95,7 +92,7 @@ const NotFound = () => {
           dragElastic={0.7}
         >
           <Link href="/" passHref>
-            Go Home
+            {t('terms.home')}
           </Link>
         </motion.button>
       </section>
