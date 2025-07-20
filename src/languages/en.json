@@ -14,6 +14,38 @@
     "about": "About",
     "explore": "Explore"
   },
+  "placeholders": {
+    "name": "Name",
+    "password": "Password",
+    "newPassword": "New Password",
+    "confirmPassword": "Confirm Password"
+  },
+  "up": {
+    "title": "Sign Up Page",
+    "in": "Sign In",
+    "or": "or sign up with",
+    "q": "Do you have an account already?",
+    "action": "Sign Up",
+    "home": "Go Home"
+  },
+  "in": {
+    "title": "Sign In Page",
+    "q": "Don't have an account? ",
+    "forgot": "Forgot Password?",
+    "home": "Go Home"
+  },
+  "edit": {
+    "title": "Edit Profile Page",
+    "action": "Edit Profile",
+    "delete": "Delete User",
+    "err": "Email and password cannot be changed for OAuth accounts.",
+    "home": "Go Home"
+  },
+  "forgot": {
+    "title": "Forgot Password Page",
+    "action": "Forgot Password Page",
+    "in": "Sign In"
+  },
   "about": {
     "title": "About Me and What I Do",
     "description": "I'm {name}, an 18-year-old who loves challenges and lives to grow. I've spent over 2.5 years in calisthenics, where I built both physical and mental strength, and 1.5+ years in web development, where I found a creative way to express ideas and create something meaningful. I recently launched my professional website to start my own business — one that combines my passion for fitness, tech, and helping others. My mission is to create content, tools, and opportunities that will not only inspire, but have people push past their limits, just like I try to do every day."

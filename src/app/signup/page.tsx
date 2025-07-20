@@ -20,8 +20,10 @@ import { signIn } from 'next-auth/react';
 import PageWrapper from '@/components/PageWrapper';
 import { useSound } from '@/components/hooks/useSound';
 import { click, ding, errorSound, yay } from '@/components/sounds/sounds';
+import { useTranslation } from '@/components/hooks/useTranslation';
 
 const SignUp = () => {
+  const { t } = useTranslation();
   const { play: playClick } = useSound(click, 0.3);
   const { play: playHover } = useSound(ding, 0.2);
   const { play: playError } = useSound(errorSound, 0.1);
@@ -105,7 +107,7 @@ const SignUp = () => {
             ${theme === 'theme1' ? 'text-white' : 'text-textis'}
             `}
         >
-          Sign Up Page
+          {t('up.title')}
         </h1>
 
         {/* FORM */}
@@ -129,7 +131,7 @@ const SignUp = () => {
               id="name"
               name="name"
               type="text"
-              placeholder="Name"
+              placeholder={t('placeholders.name')}
               variants={inputVariants}
               initial="hidden"
               whileHover="hover"
@@ -162,7 +164,7 @@ const SignUp = () => {
               id="password"
               name="password"
               type={showPassword ? 'text' : 'password'}
-              placeholder="Password"
+              placeholder={t('placeholders.password')}
               variants={inputVariants}
               initial="hidden"
               whileHover="hover"
@@ -214,7 +216,7 @@ const SignUp = () => {
             initial="hidden"
             whileHover="hover"
           >
-            Sign Up
+            {t('up.action')}
           </motion.button>
 
           {/* ERROR MESSAGE */}
@@ -235,7 +237,7 @@ const SignUp = () => {
           <h2 className="flex justify-center items-center gap-2 sm:gap-0 text-center w-full mx-auto my-16M">
             <span className="block bg-white w-1/6 xs:w-1/3 h-[2px]"></span>
             <span className="text-lg xs:w-1/3 tracking-widest">
-              or sign up with
+              {t('up.or')}
             </span>
             <span className="block bg-white w-1/6 xs:w-1/3 h-[2px]"></span>
           </h2>
@@ -290,7 +292,7 @@ const SignUp = () => {
               theme === 'theme1' ? 'text-white' : 'text-textis'
             }`}
           >
-            <span>Do you have an account already? </span>
+            <span>{t('up.q')} </span>
             <Link
               className={`underline font-semibold
               ${
@@ -300,7 +302,7 @@ const SignUp = () => {
               }`}
               href="/signin"
             >
-              Sign in
+              {t('up.in')}
             </Link>
           </p>
         </form>
@@ -322,7 +324,7 @@ const SignUp = () => {
           animate="exit"
         >
           <Link href="/" passHref>
-            Go Home
+            {t('up.home')}
           </Link>
         </motion.div>
       </main>

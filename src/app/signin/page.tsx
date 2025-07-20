@@ -15,8 +15,10 @@ import { FormEvent, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { signinSchema, SignInInput } from '@/lib/schemas';
 import PageWrapper from '@/components/PageWrapper';
+import { useTranslation } from '@/components/hooks/useTranslation';
 
 const SignIn = () => {
+  const { t } = useTranslation();
   const { success, error, loading, dismiss } = useToast();
 
   const router = useRouter();
@@ -86,7 +88,7 @@ const SignIn = () => {
             ${theme === 'theme1' ? 'text-white' : 'text-textis'}
             `}
         >
-          Sign In Page
+          {t('in.title')}
         </h1>
 
         {/* FORM */}
@@ -124,7 +126,7 @@ const SignIn = () => {
               id="password"
               name="password"
               type={`${showPassword ? 'text' : 'password'}`}
-              placeholder="Password"
+              placeholder={t('placeholders.password')}
               variants={inputVariants}
               initial="hidden"
               whileHover="hover"
@@ -174,7 +176,7 @@ const SignIn = () => {
             initial="hidden"
             whileHover="hover"
           >
-            Sign In
+            {t('in.action')}
           </motion.button>
 
           {/* ERROR MESSAGE */}
@@ -189,7 +191,7 @@ const SignIn = () => {
               theme === 'theme1' ? 'text-white' : 'text-textis'
             }`}
           >
-            Don’t have an account?{' '}
+            {t('in.q')}
             <Link
               className={`underline font-semibold
             ${
@@ -199,7 +201,7 @@ const SignIn = () => {
             }`}
               href="/signup"
             >
-              Sign up
+              {t('up.action')}
             </Link>
           </p>
 
@@ -212,7 +214,7 @@ const SignIn = () => {
             }`}
             href="/forgotpassword"
           >
-            Forgot Password?
+            {t('in.forgot')}
           </Link>
         </form>
 

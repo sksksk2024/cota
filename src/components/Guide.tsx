@@ -50,11 +50,11 @@ const Guide = () => {
   ];
 
   const getLinkPath = (label: string) => {
-    if (label === 'Iesi din Cont') {
+    if (label === 'Delogare') {
       label = 'Sign Out';
-    } else if (label === 'Editeaza-ti Contul') {
+    } else if (label === 'Editare Cont') {
       label = 'Edit Profile';
-    } else if (label === 'Inregistreaza-te') {
+    } else if (label === 'Inregistrare') {
       label = 'Sign Up';
     } else {
       label = 'Sign In';

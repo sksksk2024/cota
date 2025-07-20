@@ -5,14 +5,47 @@
     "defaultWelcome": "Forta nu este doar fizica - ci in fiecare decizie de a continua."
   },
   "navigation": {
-    "signUp": "Inregistreaza-te",
-    "signIn": "Inregistreaza-te ca",
+    "signUp": "Inregistrare",
+    "signIn": "Inregistrare ca",
     "signOut": "Delogare",
     "editProfile": "Editare Cont",
     "languageToggle": "English",
     "intro": "Intro",
     "about": "Despre",
     "explore": "Exploreaza"
+  },
+  "placeholders": {
+    "name": "Nume",
+    "password": "Parola",
+    "newPassword": "Parola Noua",
+    "confirmPassword": "Confirma Parola"
+  },
+  "up": {
+    "title": "Pagina Inregistrare",
+    "in": "Inregistrare ca",
+    "or": "sau inregistrare cu",
+    "q": "Ai un cont deja?",
+    "action": "Inregistrare",
+    "home": "Acasa"
+  },
+  "in": {
+    "title": "Pagina Inregistrare ca",
+    "q": "Nu ai cont inca? ",
+    "forgot": "Ai uitat parola?",
+    "action": "Inregistrare ca",
+    "home": "Acasa"
+  },
+  "edit": {
+    "title": "Pagina Editare Cont",
+    "action": "Editare Cont",
+    "delete": "Stergere Cont",
+    "err": "Nimic nu poate fi schimbat pentru conturile OAuth.",
+    "home": "Acasa"
+  },
+  "forgot": {
+    "title": "Pagina Uitare Parola",
+    "action": "Resetare Parola",
+    "in": "Inregistrare ca"
   },
   "about": {
     "title": "Despre Mine si Ce Fac",

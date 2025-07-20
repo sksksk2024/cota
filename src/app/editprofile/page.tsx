@@ -20,8 +20,10 @@ import { editProfileSchema, EditProfileInput } from '@/lib/schemas';
 import { ProtectedPageCustom } from '@/components/ProtectedPageCustom';
 import PageWrapper from '@/components/PageWrapper';
 import { ConfirmModal } from '@/components/utils/ConfirmModal';
+import { useTranslation } from '@/components/hooks/useTranslation';
 
 const EditProfile = () => {
+  const { t } = useTranslation();
   const { success, error, loading, dismiss } = useToast();
 
   const router = useRouter();
@@ -153,7 +155,7 @@ const EditProfile = () => {
             ${theme === 'theme1' ? 'text-white' : 'text-textis'}
             `}
           >
-            Edit Profile Page
+            {t('edit.title')}
           </h1>
 
           {/* FORM */}
@@ -184,7 +186,7 @@ const EditProfile = () => {
                 id="name"
                 name="name"
                 type="text"
-                placeholder="Name"
+                placeholder={t('placeholders.name')}
                 variants={inputVariants}
                 initial="hidden"
                 whileHover="hover"
@@ -299,7 +301,7 @@ const EditProfile = () => {
                     id="password"
                     name="password"
                     type={`${showPassword ? 'text' : 'password'}`}
-                    placeholder="New Password"
+                    placeholder={t('placeholders.newPassword')}
                     variants={inputVariants}
                     initial="hidden"
                     whileHover="hover"
@@ -351,7 +353,7 @@ const EditProfile = () => {
                     id="confirmPassword"
                     name="confirmPassword"
                     type={`${showConfirmPassword ? 'text' : 'password'}`}
-                    placeholder="Confirm Password"
+                    placeholder={t('placeholders.confirmPassword')}
                     variants={inputVariants}
                     initial="hidden"
                     whileHover="hover"
@@ -404,7 +406,7 @@ const EditProfile = () => {
               initial="hidden"
               whileHover="hover"
             >
-              <div className="text-lg">Edit Profile</div>
+              <div className="text-lg">{t('edit.action')}</div>
             </motion.button>
 
             {/* ERROR MESSAGE */}
@@ -433,7 +435,7 @@ const EditProfile = () => {
               whileHover="hover"
             >
               <Link href="/" passHref>
-                Go Home
+                {t('edit.home')}
               </Link>
             </motion.div>
 
@@ -451,7 +453,7 @@ const EditProfile = () => {
               initial="hidden"
               whileHover="hover"
             >
-              Delete User
+              {t('edit.delete')}
             </motion.button>
 
             <ConfirmModal
@@ -468,7 +470,7 @@ const EditProfile = () => {
         ${theme === 'theme1' ? 'text-white' : 'text-textis'}
         `}
             >
-              Email and password cannot be changed for OAuth accounts.
+              {t('edit.err')}
             </p>
           )}
         </main>

@@ -15,8 +15,10 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { forgotPasswordSchema, ForgotPasswordInput } from '@/lib/schemas';
 import PageWrapper from '@/components/PageWrapper';
+import { useTranslation } from '@/components/hooks/useTranslation';
 
 const ForgotPassword = () => {
+  const { t } = useTranslation();
   const { success, error, loading, dismiss } = useToast();
 
   const router = useRouter();
@@ -92,7 +94,7 @@ const ForgotPassword = () => {
             ${theme === 'theme1' ? 'text-white' : 'text-textis'}
             `}
         >
-          Forgot Password
+          {t('forgot.title')}
         </h1>
 
         {/* FORM */}
@@ -114,7 +116,7 @@ const ForgotPassword = () => {
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              placeholder="Enter Your Email"
+              placeholder="Email"
               variants={inputVariants}
               initial="hidden"
               whileHover="hover"
@@ -125,7 +127,7 @@ const ForgotPassword = () => {
           <label
             className={`relative group w-full`}
             htmlFor="newPassword"
-            aria-label="Enter New Password"
+            aria-label="New Password"
           >
             <motion.input
               className={`outline-none text-textis text-center font-bold px-32P py-8P rounded-5BR bg-snow-gray border-none w-full shadow-soft-cyan focus:shadow-hover-cyan placeholder:text-gray-400 placeholder:opacity-90 focus:outline-none focus:ring-0 focus:border-transparent hover:placeholder:text-gray-900
@@ -136,7 +138,7 @@ const ForgotPassword = () => {
               type={`${showPassword ? 'text' : 'password'}`}
               value={newPassword}
               onChange={(e) => setNewPassword(e.target.value)}
-              placeholder="Enter New Password"
+              placeholder={t('placeholders.newPassword')}
               variants={inputVariants}
               initial="hidden"
               whileHover="hover"
@@ -187,7 +189,7 @@ const ForgotPassword = () => {
               type={`${showConfirmPassword ? 'text' : 'password'}`}
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
-              placeholder="Confirm New Password"
+              placeholder={t('placeholders.confirmPassword')}
               variants={inputVariants}
               initial="hidden"
               whileHover="hover"
@@ -237,7 +239,7 @@ const ForgotPassword = () => {
             initial="hidden"
             whileHover="hover"
           >
-            Reset Password
+            {t('forgot.action')}
           </motion.button>
 
           {/* ERROR MESSAGE */}
@@ -265,7 +267,7 @@ const ForgotPassword = () => {
           animate="exit"
         >
           <Link href="/signin" passHref>
-            Sign In
+            {t('forgot.in')}
           </Link>
         </motion.div>
       </main>
