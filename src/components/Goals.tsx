@@ -30,9 +30,9 @@ const Goals = () => {
             <div className="font-semibold tracking-widest">
               {t('goals.intro')}
               <ul className="list-disc list-inside space-y-2">
-                {t('goals.goals').map((goal: string, index: number) => (
-                  <li key={index}>{goal}</li>
-                ))}
+                <li>{t('goals.goals1')}</li>
+                <li>{t('goals.goals2')}</li>
+                <li>{t('goals.goals3')}</li>
               </ul>
               <div className="my-32M">
                 {t('goals.transition1')}{' '}
@@ -40,11 +40,10 @@ const Goals = () => {
                 {t('goals.transition2')}
               </div>
               <ul className="list-disc list-inside space-y-2">
-                {t('goals.currentActions').map(
-                  (goal: string, index: number) => (
-                    <li key={index}>{goal}</li>
-                  )
-                )}
+                <li>{t('goals.currentActions1')}</li>
+                <li>{t('goals.currentActions2')}</li>
+                <li>{t('goals.currentActions3')}</li>
+                <li>{t('goals.currentActions4')}</li>
               </ul>
               {t('goals.conclusion')}
             </div>

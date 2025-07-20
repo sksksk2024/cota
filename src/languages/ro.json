@@ -21,20 +21,18 @@
   "goals": {
     "title": "Viziunea Mea (de lunga durata)",
     "intro": "Eu am obiective complexe — si vreau sa stiti ca suna ambitios. Eu vreau sa:",
-    "goals": [
-      "Sa construiesc o platforma care ofera recunoastere reala oameniilor ce nu sunt atata de respectati, dar care ne salveaza viata in diferite contexte: pompieri, soldati, atleti, constructori.",
-      "Ajut la a schimba ce gandesc oamenii despre sport si disciplina fizica, aratand ca este mai mult decat o pasiune — este o cariera stabila",
-      "Elimin bariera financiara, astfel ca cei talentati si consistenti sa atinga succesul, fara a conta fondul lor."
-    ],
+    "goals1": "Sa construiesc o platforma care ofera recunoastere reala oameniilor ce nu sunt atata de respectati, dar care ne salveaza viata in diferite contexte: pompieri, soldati, atleti, constructori.",
+    "goals2": "Ajut la a schimba ce gandesc oamenii despre sport si disciplina fizica, aratand ca este mai mult decat o pasiune — este o cariera stabila",
+    "goals3": "Elimin bariera financiara, astfel ca cei talentati si consistenti sa atinga succesul, fara a conta fondul lor.",
     "transition1": "Dar stiu ca nimic nu se va intampla fara",
     "action": "actiune",
     "transition2": "In momentul de fata:",
-    "currentActions": [
-      "Creez continut specific pe retelele sociale.",
-      "Contnui dezvoltarea web, astfel ca site-ul meu sa fie mai accesibil.",
-      "Scriu blog-uri consistent pentru a-mi documenta progresul in comunicare si in a ma exprima clar.",
-      "Ma antrenez constient in calisthenics pentru a demonstra valorile despre care am vorbit mai sus."
-    ],
+    "currentActions1": "Creez continut specific pe retelele sociale.",
+    "currentActions2": "Contnui dezvoltarea web, astfel ca site-ul meu sa fie mai accesibil.",
+
+    "currentActions3": "Scriu blog-uri consistent pentru a-mi documenta progresul in comunicare si in a ma exprima clar.",
+
+    "currentActions4": "Ma antrenez constient in calisthenics pentru a demonstra valorile despre care am vorbit mai sus.",
     "conclusion": "Ambitiile mele sunt marete — dar imi construiesc abilitatile, mentalitatea, si uneltele pentru a ajunge la ele, pas cu pas.",
     "qualities": {
       "title": "Calitati Principale",

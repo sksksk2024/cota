@@ -21,20 +21,16 @@
   "goals": {
     "title": "My Vision (Long Term)",
     "intro": "I have complex goals — and I know they sound ambitious. I want to:",
-    "goals": [
-      "Build a platform that gives real recognition to overlooked people: firefighters, soldiers, athletes, construction workers.",
-      "Help shift how people see sports and physical discipline, showing it's more than just a hobby — it's a powerful career path.",
-      "Remove financial barriers, so that discipline driven and talented people can reach development, no matter their background."
-    ],
+    "goal1": "Build a platform that gives real recognition to overlooked people: firefighters, soldiers, athletes, construction workers.",
+    "goals2": "Help shift how people see sports and physical discipline, showing it's more than just a hobby — it's a powerful career path.",
+    "goals3": "Remove financial barriers, so that discipline driven and talented people can reach development, no matter their background.",
     "transition1": "But I also know that none of that can happen without",
     "action": "action",
     "transition2": "Currently, Im:",
-    "currentActions": [
-      "Creating content to grow my audience on social media.",
-      "Practicing web development, making this website even more accessible.",
-      "Writing consistent blogs to document my journey in communication and self-expression.",
-      "Training mindfully in calisthenics to live the values I talk about."
-    ],
+    "currentActions1": "Creating content to grow my audience on social media.",
+    "currentActions2": "Practicing web development, making this website even more accessible.",
+    "currentActions3": "Writing consistent blogs to document my journey in communication and self-expression.",
+    "currentActions4": "Training mindfully in calisthenics to live the values I talk about.",
     "conclusion": "My ambitions are complex — but I'm building the skills, mindset, and tools to reach them step by step.",
     "qualities": {
       "title": "Core Qualities",
