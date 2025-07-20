@@ -9,8 +9,10 @@ import Link from 'next/link';
 import React from 'react';
 import { Locked } from '@/components/svgs/Locked';
 import { tutorials } from '@/components/jsonFiles/tutorials';
+import { useTranslation } from '../hooks/useTranslation';
 
 const TutorialsMain = () => {
+  const { t } = useTranslation();
   const { theme } = useThemeStore();
 
   return (
@@ -25,7 +27,7 @@ const TutorialsMain = () => {
             ${theme === 'theme1' ? 'text-white' : 'text-textis'}
           `}
         >
-          Tutorials Page
+          {t('tutorials.title')}
         </h1>
 
         {/* Tutorials Grid */}
@@ -70,7 +72,7 @@ const TutorialsMain = () => {
           `}
         >
           <Link href="/" passHref>
-            Go Home
+            {t('tutorials.home')}
           </Link>
         </motion.button>
       </main>

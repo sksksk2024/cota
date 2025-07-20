@@ -1,0 +1,187 @@
+{
+  "header": {
+    "title": "Cota Alexandru's Playground",
+    "welcome": "Welcome back, ",
+    "defaultWelcome": "Strength isn't just physical — it's in every decision to keep going."
+  },
+  "navigation": {
+    "signUp": "Sign Up",
+    "signIn": "Sign In",
+    "signOut": "Sign Out",
+    "editProfile": "Edit Profile",
+    "languageToggle": "Română",
+    "intro": "Intro",
+    "about": "About",
+    "explore": "Explore"
+  },
+  "about": {
+    "title": "About Me and What I Do",
+    "description": "I'm {name}, an 18-year-old who loves challenges and lives to grow. I've spent over 2.5 years in calisthenics, where I built both physical and mental strength, and 1.5+ years in web development, where I found a creative way to express ideas and create something meaningful. I recently launched my professional website to start my own business — one that combines my passion for fitness, tech, and helping others. My mission is to create content, tools, and opportunities that will not only inspire, but have people push past their limits, just like I try to do every day."
+  },
+  "goals": {
+    "title": "My Vision (Long Term)",
+    "intro": "I have complex goals — and I know they sound ambitious. I want to:",
+    "goals": [
+      "Build a platform that gives real recognition to overlooked people: firefighters, soldiers, athletes, construction workers.",
+      "Help shift how people see sports and physical discipline, showing it's more than just a hobby — it's a powerful career path.",
+      "Remove financial barriers, so that discipline driven and talented people can reach development, no matter their background."
+    ],
+    "transition1": "But I also know that none of that can happen without",
+    "action": "action",
+    "transition2": "Currently, Im:",
+    "currentActions": [
+      "Creating content to grow my audience on social media.",
+      "Practicing web development, making this website even more accessible.",
+      "Writing consistent blogs to document my journey in communication and self-expression.",
+      "Training mindfully in calisthenics to live the values I talk about."
+    ],
+    "conclusion": "My ambitions are complex — but I'm building the skills, mindset, and tools to reach them step by step.",
+    "qualities": {
+      "title": "Core Qualities",
+      "description1": "I don't quit. I aim high - sometimes near impossibility - because ",
+      "challange": "I enjoy the challenge of chasing results",
+      "description2": ". I don't pretend to have all the answers, but I do show up every day, ready to learn, improve, and take the next step."
+    }
+  },
+  "nextSections": {
+    "title": "Next section"
+  },
+  "sectionTitles": {
+    "title1": "Website For Brands",
+    "title2": "Become a Pro Calisthenics Athlete",
+    "title3": "0 to Genius in:"
+  },
+  "common": {
+    "title": "Common Pack",
+    "desc": "Landing Page",
+    "info1": "No Functionalities",
+    "info2": "1 page long"
+  },
+  "rare": {
+    "title": "Rare Pack",
+    "desc": "Website for Small Businesses & Agencies",
+    "info1": "Functionalities Included( 1 per page )",
+    "info2": "2 pages long"
+  },
+  "legendary": {
+    "title": "Legendary Pack",
+    "desc": "Fully customisable to your needs",
+    "info1": "Fancy animations that turn visitors into clients",
+    "info2": "3 pages long"
+  },
+  "community": {
+    "title": "Our Community",
+    "desc": "Group Chat Access",
+    "info1": "2 Free Form Checks",
+    "info2": "Motivate Eachother Daily",
+    "info3": "Monthly Secret Meeting",
+    "info4": "Personalised Services",
+    "info5": "Free Prices For The Disciplined Ones",
+    "info6": "10 Locuri Disponibile"
+  },
+  "remote": {
+    "title": "Remote",
+    "desc": "Workout Online",
+    "info1": "30 Minutes"
+  },
+  "one": {
+    "title": "One on One",
+    "desc": "Workout with Me",
+    "info1": "1 Hour",
+    "info2": "Wherever You Want In Cluj-Napoca City"
+  },
+  "mentoring": {
+    "title": "Mentoring",
+    "desc": "Learn From Me",
+    "info1": "1 Hour",
+    "info2": "Web Development",
+    "info3": "C++",
+    "info5": "More coming soon"
+  },
+  "startWith": {
+    "title1": "Start with",
+    "title2": "Save Your Spot Now"
+  },
+  "footer": {
+    "title1": "Contact Me",
+    "title2": "More To Do",
+    "title3": "Explore",
+    "soon": "More coming soon",
+    "copyright1": "Alexandru Coța. All rights reserved.",
+    "copyright2": "By using this site, you agree to our",
+    "copyright3": "Terms",
+    "between": "and",
+    "copyright4": "Privacy Policy",
+    "copyright5": ". Purchases are non-refundable digital services."
+  },
+  "newsletter": {
+    "title": "Newsletter Page",
+    "signIn": "Signed in as:",
+    "desc": "Subscribe with a different email? Click the lock icon.",
+    "button": "Subscribe",
+    "home": "Go Home"
+  },
+  "donations": {
+    "title": "Donations Page",
+    "motivation": "Help Keep Us Going",
+    "thanks1": "Thank you for considering donating!",
+    "thanks2": "Every bit helps.",
+    "cancel": "Cancel",
+    "home": "Go Home"
+  },
+  "donationPrices": {
+    "donation1": "Donation1",
+    "amount1": "5 lei",
+    "label1": "Small Donation",
+    "donation2": "Donation2",
+    "amount2": "10 lei",
+    "label2": "Medium Donation",
+    "donation3": "Donation3",
+    "amount3": "20 lei",
+    "label3": "Big Donation",
+    "donation4": "Donation4",
+    "amount4": "50 lei",
+    "label4": "Mega Donation"
+  },
+  "tutorials": {
+    "title": "Tutorials Page",
+    "home": "Go Home"
+  },
+  "live": {
+    "title1": "Live Page",
+    "title2": "Not Live",
+    "title3": "Live Now",
+    "home": "Go Home"
+  },
+  "games": {
+    "title": "Games Page",
+    "leaderboard": "Leaderboards",
+    "cancel": "Cancel",
+    "home": "Go Home"
+  },
+  "leaderboard": {
+    "title": "Leaderboard",
+    "desc": "No scores yet.",
+    "home": "Go Home"
+  },
+  "tappy": {
+    "title": "Welcome to Tappy! See this button? Click it as many times as you can in 10 seconds.",
+    "score": "Score:",
+    "time": "Time left:",
+    "click": "Click Me!",
+    "start": "Start",
+    "games": "Go To Games"
+  },
+  "stackAttack": {
+    "title": "Stack Attack! Attack every letter, they are your enemy, or your friend. Be concious.",
+    "score": "Score:",
+    "goal": "Goal Word:",
+    "games": "Go To Games"
+  },
+  "maze": {
+    "title": "Maze! Be fast, and accurate.",
+    "score": "Score:",
+    "restart": "Restart",
+    "games": "Go To Games"
+  }
+}

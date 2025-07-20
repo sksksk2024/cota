@@ -12,6 +12,7 @@ import {
 import { STRIPE_PRODUCTS, StripeProduct } from '@/lib/stripePrices';
 import { useSound } from './hooks/useSound';
 import { click, ding, errorSound, yay } from './sounds/sounds';
+import { useTranslation } from './hooks/useTranslation';
 
 interface PricingData {
   title: string;
@@ -26,6 +27,7 @@ interface PricingData {
 }
 
 const Cards = ({ data }: { data: PricingData[] }) => {
+  const { t } = useTranslation();
   const { play: playClick } = useSound(click, 0.01);
   const { play: playHover } = useSound(ding, 0.1);
   const { play: playError } = useSound(errorSound, 0.1);
@@ -76,21 +78,25 @@ const Cards = ({ data }: { data: PricingData[] }) => {
   };
 
   const handlePrinciple = (title: string) =>
-    ['Legendary Pack', 'Our Community', 'Mentoring'].includes(title);
+    [t('legendary.title'), t('community.title'), t('mentoring.title')].includes(
+      title
+    );
   return (
     <>
       {data.map((item, index) => {
         // Check if this card is the principle one
         const isPrinciple = !principle && handlePrinciple(item.title);
-        let priceService = -1;
-        if (typeof item.info3 === 'number') {
+        let priceService = 0;
+        if (typeof item.info2 === 'number') {
+          priceService = item.info2;
+        } else if (typeof item.info3 === 'number') {
           priceService = item.info3;
         } else if (typeof item.info4 === 'number') {
           priceService = item.info4;
         } else if (typeof item.info5 === 'number') {
           priceService = item.info5;
         } else {
-          priceService = -1;
+          priceService = 0;
         }
 
         return (
@@ -132,7 +138,10 @@ const Cards = ({ data }: { data: PricingData[] }) => {
                     ${isPrinciple ? 'bg-highlight' : 'bg-textis'}
                     w-full h-1 opacity-20 my-16M`}
                   />
-                  <p className="font-semibold text-lg py-8P">{item.info2}</p>
+                  <p className="font-semibold text-lg py-8P">
+                    {item.info2}
+                    {typeof item.info2 === 'number' ? ' lei' : ''}
+                  </p>
                 </>
               )}
               {item.info3 && (
@@ -208,9 +217,9 @@ const Cards = ({ data }: { data: PricingData[] }) => {
               className={`${priceButtonClasses}`}
             >
               <span className="hover:relative hover:bottom-64I">
-                {item.title === 'Our Community'
-                  ? 'Rezerva-ti Locul Acum'
-                  : `Start with ${
+                {item.title === t('community.title')
+                  ? t('startWith.title2')
+                  : `${t('startWith.title1')} ${
                       item.title === 'Mentoring'
                         ? Math.floor(priceService * 0.2)
                         : Math.floor(priceService * 0.5)

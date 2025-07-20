@@ -7,8 +7,10 @@ import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import ProtectedPageAll from '../ProtectedPageAll';
 import { useToast } from '../hooks/useToast';
+import { useTranslation } from '../hooks/useTranslation';
 
 const StackAttackMain = () => {
+  const { t } = useTranslation();
   const { theme } = useThemeStore();
 
   const [goalWord, setGoalWord] = useState<string>('StackAttack');
@@ -121,15 +123,14 @@ const StackAttackMain = () => {
             ${theme === 'theme1' ? 'text-white' : 'text-textis'}
             `}
           >
-            Stack Attack! Attack every letter, they are your enemy, or your
-            friend. Be contious.
+            {t('stackAttack.title')}
           </h1>
           <div
             className={`text-lg
               ${theme === 'theme1' ? 'text-white' : 'text-textis'}
               `}
           >
-            Score: {score}
+            {t('stackAttack.score')} {score}
           </div>
         </header>
 
@@ -139,7 +140,7 @@ const StackAttackMain = () => {
           `}
         >
           <h2>
-            Goal Word:
+            {t('stackAttack.goal')}
             <span
               className={`ml-4M
             ${theme === 'theme1' ? 'text-warning' : 'text-highlight'}
@@ -197,7 +198,7 @@ const StackAttackMain = () => {
           `}
           >
             <Link href="/games" passHref>
-              Go To Games
+              {t('stackAttack.games')}
             </Link>
           </motion.button>
         </footer>

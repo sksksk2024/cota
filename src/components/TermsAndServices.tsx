@@ -1,8 +1,11 @@
 import Link from 'next/link';
 import React from 'react';
 import { useThemeStore } from './hooks/useThemeStore';
+import { useTranslation } from './hooks/useTranslation';
 
 const TermsAndServices = () => {
+  const { t } = useTranslation();
+
   const { theme } = useThemeStore();
 
   return (
@@ -11,27 +14,29 @@ const TermsAndServices = () => {
     ${theme === 'theme1' ? 'text-white' : 'text-textis'}
     `}
     >
-      <p>© {new Date().getFullYear()} Alexandru Coța. All rights reserved.</p>
+      <p>
+        © {new Date().getFullYear()} {t('footer.copyright1')}
+      </p>
       <p className="mt-2">
-        By using this site, you agree to our{' '}
+        {t('footer.copyright2')}{' '}
         <Link
           href="/terms"
           className={`underline 
             ${theme === 'theme1' ? 'hover:text-warning' : 'hover:text-highlight'}
             `}
         >
-          Terms
+          {t('footer.copyright3')}
         </Link>{' '}
-        and{' '}
+        {t('footer.between')}{' '}
         <Link
           href="/privacy"
           className={`underline 
             ${theme === 'theme1' ? 'hover:text-warning' : 'hover:text-highlight'}
             `}
         >
-          Privacy Policy
+          {t('footer.copyright4')}
         </Link>
-        . Purchases are non-refundable digital services.
+        {t('footer.copyright5')}
       </p>
     </div>
   );

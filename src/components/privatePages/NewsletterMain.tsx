@@ -17,8 +17,11 @@ import { Unlocked } from '../svgs/Unlocked';
 import { Locked } from '../svgs/Locked';
 import { useUser } from '../hooks/useUser';
 import ProtectedPageAll from '@/components/ProtectedPageAll';
+import { useTranslation } from '../hooks/useTranslation';
 
 const NewsletterMain = () => {
+  const { t } = useTranslation();
+
   const { success, error, loading, dismiss } = useToast();
 
   const router = useRouter();
@@ -98,7 +101,7 @@ const NewsletterMain = () => {
             ${theme === 'theme1' ? 'text-white' : 'text-textis'}
             `}
         >
-          Newsletter Page
+          {t('newsletter.title')}
         </h1>
 
         {/* SUBSCRIBE FORM */}
@@ -114,7 +117,7 @@ const NewsletterMain = () => {
               <p
                 className={`${theme === 'theme1' ? 'text-white' : 'text-textis'}`}
               >
-                Signed in as:{' '}
+                {t('newsletter.signIn')}{' '}
                 <span
                   className={`font-bold ${theme === 'theme1' ? 'text-warning' : 'text-highlight'}`}
                 >
@@ -124,7 +127,7 @@ const NewsletterMain = () => {
               <p
                 className={`${theme === 'theme1' ? 'text-white' : 'text-textis'}`}
               >
-                Subscribe with a different email? Click the lock icon.
+                {t('newsletter.desc')}
               </p>
               <label
                 className={`relative group w-full
@@ -210,7 +213,7 @@ const NewsletterMain = () => {
             initial="hidden"
             whileHover="hover"
           >
-            Subscribe
+            {t('newsletter.button')}
           </motion.button>
 
           {/* ERROR MESSAGE */}
@@ -235,7 +238,7 @@ const NewsletterMain = () => {
           animate="exit"
         >
           <Link href="/" passHref>
-            Go Home
+            {t('newsletter.home')}
           </Link>
         </motion.button>
       </main>

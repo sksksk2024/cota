@@ -23,8 +23,11 @@ import { useSession } from 'next-auth/react';
 import dynamic from 'next/dynamic';
 import { useSound } from './hooks/useSound';
 import { block, click, ding } from './sounds/sounds';
+import { useTranslation } from './hooks/useTranslation';
 
 const Footer = () => {
+  const { t } = useTranslation();
+
   const { play: playClick } = useSound(click, 0.02);
   const { play: playBlock } = useSound(block, 0.02);
   const { play: playHover } = useSound(ding, 0.05);
@@ -38,7 +41,7 @@ const Footer = () => {
 
   return (
     <footer
-      id="explore"
+      id={t('navigation.explore').toLowerCase()}
       className={`z-0 flex flex-col justify-center items-center py-64P sm:px-64P pb-0
         ${theme === 'theme1' ? 'text-white' : 'text-textis'}
         ${!displayUser ? 'gap-20' : 'gap-4'}
@@ -50,7 +53,7 @@ const Footer = () => {
             className={`text-2xl text-start font-bold
             `}
           >
-            Contact Me
+            {t('footer.title1')}
           </h2>
           <div
             className={`flex flex-col justify-center items-center gap-5 md:flex-row md:gap-12
@@ -132,7 +135,7 @@ const Footer = () => {
             ${theme === 'theme1' ? 'text-warning' : 'text-highlight'}
             `}
               >
-                More coming soon
+                {t('footer.soon')}
               </p>
             </div>
           </div>
@@ -149,7 +152,7 @@ ${theme === 'theme1' ? 'text-white' : 'text-textis'}
               className={`text-2xl text-center font-bold xl:text-start
 `}
             >
-              More To Do
+              {t('footer.title2')}
             </h2>
 
             <div className="flex flex-col justify-center items-center gap-10 lg:flex-row">
@@ -232,7 +235,7 @@ ${theme === 'theme1' ? 'text-white' : 'text-textis'}
               className={`text-2xl text-center font-bold xl:text-start
 `}
             >
-              Explore
+              {t('footer.title3')}
             </h2>
             <div
               className={`flex flex-col justify-center items-center gap-5 md:flex-row md:gap-12
@@ -317,7 +320,7 @@ ${
 ${theme === 'theme1' ? 'text-warning' : 'text-highlight'}
 `}
                 >
-                  More coming soon
+                  {t('footer.soon')}
                 </p>
               </div>
             </div>

@@ -7,8 +7,10 @@ import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import ProtectedPageAll from '../ProtectedPageAll';
 import { useToast } from '../hooks/useToast';
+import { useTranslation } from '../hooks/useTranslation';
 
 const TappyMain = () => {
+  const { t } = useTranslation();
   const { theme } = useThemeStore();
 
   const [score, setScore] = useState<number>(0);
@@ -88,20 +90,19 @@ const TappyMain = () => {
             ${theme === 'theme1' ? 'text-white' : 'text-textis'}
             `}
           >
-            Welcome to Tappy! See this button? Click it as many times as you can
-            in 10 seconds.
+            {t('tappy.title')}
           </h1>
           <div
             className={`text-lg
             ${theme === 'theme1' ? 'text-white' : 'text-textis'}`}
           >
-            Score: {score}
+            {t('tappy.score')} {score}
           </div>
           <div
             className={`text-lg
             ${theme === 'theme1' ? 'text-white' : 'text-textis'}`}
           >
-            Time left: {timer}s
+            {t('tappy.time')} {timer}s
           </div>
         </header>
 
@@ -117,7 +118,7 @@ const TappyMain = () => {
           `}
               onClick={handleScore}
             >
-              Click Me!
+              {t('tappy.click')}
             </button>
           ) : (
             <button
@@ -132,7 +133,7 @@ const TappyMain = () => {
           `}
               onClick={handleStart}
             >
-              Start
+              {t('tappy.start')}
             </button>
           )}
         </main>
@@ -153,7 +154,7 @@ const TappyMain = () => {
           `}
           >
             <Link href="/games" passHref>
-              Go To Games
+              {t('tappy.games')}
             </Link>
           </motion.button>
         </footer>

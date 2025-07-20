@@ -5,9 +5,10 @@ import { useRouter } from 'next/navigation';
 
 type SignOutButtonProps = {
   contentClasses: string;
+  label: string;
 };
 
-const SignOutButton = ({ contentClasses = '' }: SignOutButtonProps) => {
+const SignOutButton = ({ contentClasses = '', label }: SignOutButtonProps) => {
   const { success, error, loading, dismiss } = useToast();
 
   const router = useRouter();
@@ -31,7 +32,7 @@ const SignOutButton = ({ contentClasses = '' }: SignOutButtonProps) => {
 
   return (
     <button onClick={handleSignOut} className={contentClasses}>
-      Sign Out
+      {label}
     </button>
   );
 };

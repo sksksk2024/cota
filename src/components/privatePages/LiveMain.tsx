@@ -8,8 +8,10 @@ import ProtectedPageAll from '@/components/ProtectedPageAll';
 import Link from 'next/link';
 import React, { useState } from 'react';
 import { Locked } from '@/components/svgs/Locked';
+import { useTranslation } from '../hooks/useTranslation';
 
 const TutorialsMain = () => {
+  const { t } = useTranslation();
   const { theme } = useThemeStore();
 
   const [isLive] = useState<boolean>(true);
@@ -26,18 +28,18 @@ const TutorialsMain = () => {
             ${theme === 'theme1' ? 'text-white' : 'text-textis'}
           `}
         >
-          Live Page -{' '}
+          {t('live.title1')} -{' '}
           {!isLive ? (
             <span
               className={`${theme === 'theme1' ? 'text-warning' : 'text-highlight'}`}
             >
-              Not Live
+              {t('live.title2')}
             </span>
           ) : (
             <span
               className={`${theme === 'theme1' ? 'text-warning' : 'text-highlight'}`}
             >
-              Live Now
+              {t('live.title3')}
             </span>
           )}
         </h1>
@@ -79,7 +81,7 @@ const TutorialsMain = () => {
           `}
         >
           <Link href="/" passHref>
-            Go Home
+            {t('live.home')}
           </Link>
         </motion.button>
       </main>

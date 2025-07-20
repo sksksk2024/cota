@@ -7,6 +7,7 @@ import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { useToast } from '@/components/hooks/useToast';
 import ProtectedPageAll from '../ProtectedPageAll';
+import { useTranslation } from '../hooks/useTranslation';
 
 type Position = {
   x: number;
@@ -67,6 +68,7 @@ const generateMaze = (
 };
 
 const MazeMain = () => {
+  const { t } = useTranslation();
   const { theme } = useThemeStore();
   const [maze, setMaze] = useState<string[][]>([]);
   const [playerPos, setPlayerPos] = useState<Position>({ x: 0, y: 0 });
@@ -176,10 +178,10 @@ const MazeMain = () => {
     `}
       >
         <header className="flex flex-col justify-center items-center gap-4 max-w-container-600">
-          <h1 className="text-xl font-bold text-center">
-            Maze! Be fast, and accurate.
-          </h1>
-          <div className="text-lg">Score: {score}</div>
+          <h1 className="text-xl font-bold text-center">{t('maze.title')}</h1>
+          <div className="text-lg">
+            {t('maze.score')} {score}
+          </div>
         </header>
 
         <main className="flex flex-col justify-center items-center gap-5 w-full min-w-container-300 max-w-container-600">
@@ -222,7 +224,7 @@ const MazeMain = () => {
             }
           `}
           >
-            Restart
+            {t('maze.restart')}
           </motion.button>
 
           {/* Go To Games Button */}
@@ -240,7 +242,7 @@ const MazeMain = () => {
           `}
           >
             <Link href="/games" passHref>
-              Go To Games
+              {t('maze.games')}
             </Link>
           </motion.button>
         </footer>

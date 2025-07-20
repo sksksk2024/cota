@@ -9,8 +9,10 @@ import React from 'react';
 import { TappyIcon } from '../svgs/TappyIcon';
 import MazeIcon from '../svgs/MazeIcon';
 import StackAttackIcon from '../svgs/StackAttackIcon';
+import { useTranslation } from '../hooks/useTranslation';
 
 const GamesMain = () => {
+  const { t } = useTranslation();
   const { theme } = useThemeStore();
 
   return (
@@ -25,7 +27,7 @@ const GamesMain = () => {
             ${theme === 'theme1' ? 'text-white' : 'text-textis'}
           `}
         >
-          Games Page
+          {t('games.title')}
         </h1>
 
         {/* Games Grid */}
@@ -103,7 +105,7 @@ const GamesMain = () => {
           animate="exit"
         >
           <Link href="/leaderboard" passHref>
-            Leaderboards
+            {t('games.leaderboard')}
           </Link>
         </motion.button>
 
@@ -122,7 +124,7 @@ const GamesMain = () => {
           animate="exit"
         >
           <Link href="/" passHref>
-            Go Home
+            {t('games.home')}
           </Link>
         </motion.button>
       </main>

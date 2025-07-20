@@ -1,0 +1,187 @@
+{
+  "header": {
+    "title": "Locul de joaca al lui Cota Alexandru",
+    "welcome": "Bine ai venit, ",
+    "defaultWelcome": "Forta nu este doar fizica - ci in fiecare decizie de a continua."
+  },
+  "navigation": {
+    "signUp": "Inregistreaza-te",
+    "signIn": "Inregistreaza-te ca",
+    "signOut": "Delogare",
+    "editProfile": "Editare Cont",
+    "languageToggle": "English",
+    "intro": "Intro",
+    "about": "Despre",
+    "explore": "Exploreaza"
+  },
+  "about": {
+    "title": "Despre Mine si Ce Fac",
+    "description": "Eu ma numesc {name}, am 18 ani si iubesc provocarile si sa ma dezvolt incontinuu. Fac calisthenics de aproape 3 ani, unde imi construiesc forta fizica si mentala, si de mai mult de 1 an jumate in a face site-uri web, unde imi gasesc cai prin a-mi exprima ideile si de a crea ceva valoros. Recent am lansat acest site web pentru a-mi incepe firma mea - una ce combina sportul, tehnologia, si ajutarea celorlalti. Misiunea mea este sa creez continut, unelte, si oportunitati care nu vor doar inspira, dar si vor face oamenii sa treaca peste limitarile proprii, asa cum fac eu in fiecare zi."
+  },
+  "goals": {
+    "title": "Viziunea Mea (de lunga durata)",
+    "intro": "Eu am obiective complexe — si vreau sa stiti ca suna ambitios. Eu vreau sa:",
+    "goals": [
+      "Sa construiesc o platforma care ofera recunoastere reala oameniilor ce nu sunt atata de respectati, dar care ne salveaza viata in diferite contexte: pompieri, soldati, atleti, constructori.",
+      "Ajut la a schimba ce gandesc oamenii despre sport si disciplina fizica, aratand ca este mai mult decat o pasiune — este o cariera stabila",
+      "Elimin bariera financiara, astfel ca cei talentati si consistenti sa atinga succesul, fara a conta fondul lor."
+    ],
+    "transition1": "Dar stiu ca nimic nu se va intampla fara",
+    "action": "actiune",
+    "transition2": "In momentul de fata:",
+    "currentActions": [
+      "Creez continut specific pe retelele sociale.",
+      "Contnui dezvoltarea web, astfel ca site-ul meu sa fie mai accesibil.",
+      "Scriu blog-uri consistent pentru a-mi documenta progresul in comunicare si in a ma exprima clar.",
+      "Ma antrenez constient in calisthenics pentru a demonstra valorile despre care am vorbit mai sus."
+    ],
+    "conclusion": "Ambitiile mele sunt marete — dar imi construiesc abilitatile, mentalitatea, si uneltele pentru a ajunge la ele, pas cu pas.",
+    "qualities": {
+      "title": "Calitati Principale",
+      "description1": "Nu renunt. Eu tintesc sus - uneori chiar imposibilul - si ",
+      "challange": "ma distrez in a-mi urmari rezultatele",
+      "description2": ". Nu pretind ca stiu toate raspunsurile, dar eu voi lucra in fiecare zi, pregatit de a invata, si de a fi mai bun decat ieri."
+    }
+  },
+  "nextSections": {
+    "title": "Urmatoarea Sectiune"
+  },
+  "sectionTitles": {
+    "title1": "Site Web pentru Firme",
+    "title2": "Devin-o Sportiv de Performanta",
+    "title3": "0 la Geniu in:"
+  },
+  "common": {
+    "title": "Pachetul Comun",
+    "desc": "Pagina de Prezentare",
+    "info1": "Nicio Functionalitate",
+    "info2": "1 pagina de inceput"
+  },
+  "rare": {
+    "title": "Pachetul Rar",
+    "desc": "Website for Small Businesses & Agencies",
+    "info1": "Include Functionalitati( 1 per pagina )",
+    "info2": "2 pagini de inceput"
+  },
+  "legendary": {
+    "title": "Pachetul Legendar",
+    "desc": "Customizat pentru nevoile tale",
+    "info1": "Animatii misto ce transforma vizitatorii in clienti",
+    "info2": "3 pagini de inceput"
+  },
+  "community": {
+    "title": "Comunitatea Noastra",
+    "desc": "Acces la grup",
+    "info1": "2 verificari de forma gratuite",
+    "info2": "Motivare reciproca zilnica",
+    "info3": "Un antrenament secret lunar",
+    "info4": "Servicii Personalizate",
+    "info5": "Premii gratuite pentru cei disciplinati",
+    "info6": "10 Locuri Disponibile"
+  },
+  "remote": {
+    "title": "La Distanta",
+    "desc": "Antrenament Online",
+    "info1": "30 Minute"
+  },
+  "one": {
+    "title": "Unu la unu",
+    "desc": "Antreneaza-te cu mine",
+    "info1": "1 Ora",
+    "info2": "Oriunde vrei in Cluj-Napoca"
+  },
+  "mentoring": {
+    "title": "Mentorat",
+    "desc": "Invata de la mine",
+    "info1": "1 Ora",
+    "info2": "Web Development",
+    "info3": "C++",
+    "info5": "Mai multe in curand"
+  },
+  "startWith": {
+    "title1": "Incepe la",
+    "title2": "Rezerva-ti Locul Acum"
+  },
+  "footer": {
+    "title1": "Contacteaza-ma",
+    "title2": "Mai Multe de Facut",
+    "title3": "Exploreaza",
+    "soon": "Mai multe in curand",
+    "copyright1": "Alexandru Coța. Toate drepturile respectate.",
+    "copyright2": "Prin folosirea site-ului, esti de acord cu",
+    "copyright3": "Termenii",
+    "between": "si",
+    "copyright4": "Politica",
+    "copyright5": " noastra. Achizitiile nu sunt returnabile prin serviciile noastre."
+  },
+  "newsletter": {
+    "title": "Pagina Noutati",
+    "signIn": "Inregistrat ca:",
+    "desc": "Te abonezi cu un alt email? Apasa pe lacat.",
+    "button": "Abonare",
+    "home": "Acasa"
+  },
+  "donations": {
+    "title": "Pagina Donatii",
+    "motivation": "Ajuta-ne sa continuam",
+    "thanks1": "Multumim pentru donatie!",
+    "thanks2": "Si putin ajuta.",
+    "cancel": "Iesi",
+    "home": "Acasa"
+  },
+  "donationPrices": {
+    "donation1": "Donatia1",
+    "amount1": "5 lei",
+    "label1": "Donatie Mica",
+    "donation2": "Donatia2",
+    "amount2": "10 lei",
+    "label2": "Donatie Medie",
+    "donation3": "Donatia3",
+    "amount3": "20 lei",
+    "label3": "Donatie Mare",
+    "donation4": "Donatie4",
+    "amount4": "50 lei",
+    "label4": "Donatie Mega"
+  },
+  "tutorials": {
+    "title": "Pagina Tutoriale",
+    "home": "Acasa"
+  },
+  "live": {
+    "title1": "Pagina Live",
+    "title2": "Niciun Live",
+    "title3": "Live Acum",
+    "home": "Acasa"
+  },
+  "games": {
+    "title": "Pagina Jocuri",
+    "leaderboard": "Clasament",
+    "cancel": "Iesi",
+    "home": "Acasa"
+  },
+  "leaderboard": {
+    "title": "Clasament",
+    "desc": "Inca nu sunt scoruri.",
+    "home": "Acasa"
+  },
+  "tappy": {
+    "title": "Bine ai venit la Tappy! Vezi butonul? Apasa-l de cat de multe ori poti in 10 secunde.",
+    "score": "Scor:",
+    "time": "Timp ramas:",
+    "click": "Apasa-ma!",
+    "start": "Incepe",
+    "games": "Mergi la Jocuri"
+  },
+  "stackAttack": {
+    "title": "Stack Attack! Ataca fiecare cuvant, ei sunt inamicii, sau prietenii tai. Fii atent.",
+    "score": "Scor:",
+    "goal": "Cuvantul Rezultat:",
+    "games": "Mergi la Jocuri"
+  },
+  "maze": {
+    "title": "Maze! Fii rapid, si precis.",
+    "score": "Scor:",
+    "restart": "Restart",
+    "games": "Mergi la Jocuri"
+  }
+}

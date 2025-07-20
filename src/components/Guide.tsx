@@ -12,8 +12,14 @@ import SignOutButton from './SignOutButton';
 import { useSession } from 'next-auth/react';
 import { useSound } from './hooks/useSound';
 import { click, ding, woosh } from './sounds/sounds';
+import { useLanguageStore } from './hooks/useLanguageStore';
+import { useTranslation } from './hooks/useTranslation';
+import en from '@/languages/en.json';
 
 const Guide = () => {
+  const { language, toggleLanguage } = useLanguageStore();
+  const { t } = useTranslation();
+
   const { play: playClick1 } = useSound(click, 0.02);
   const { play: playClick2 } = useSound(woosh, 0.8);
   const { play: playHover } = useSound(ding, 0.05);
@@ -30,14 +36,41 @@ const Guide = () => {
   const currentUser = session?.user || user || null;
 
   // Map Logic to be more clean
-  const navItems = ['Sign Up', 'Sign In', 'Sign Out', 'Edit Profile'];
+  const navItems1 = [
+    t('navigation.signUp'),
+    t('navigation.signIn'),
+    t('navigation.signOut'),
+    t('navigation.editProfile'),
+    t('navigation.languageToggle'),
+  ];
 
-  const getLinkPath = (label: string) =>
-    `/${label.toLowerCase().replace(/\s+/g, '')}`;
+  const navItems2 = [
+    t('navigation.intro'),
+    t('navigation.about'),
+    t('navigation.explore'),
+  ];
+
+  const getLinkPath = (label: string) => {
+    if (label === 'Iesi din Cont') {
+      label = 'Sign Out';
+    } else if (label === 'Editeaza-ti Contul') {
+      label = 'Edit Profile';
+    } else if (label === 'Inregistreaza-te') {
+      label = 'Sign Up';
+    } else {
+      label = 'Sign In';
+    }
+    return `/${label.toLowerCase().replace(/\s+/g, '')}`;
+  };
 
   const isVisible = (label: string, user: { id: unknown }) => {
-    if (user?.id) return label !== 'Sign In' && label !== 'Sign Up';
-    return label !== 'Sign Out' && label !== 'Edit Profile';
+    if (user?.id)
+      return (
+        label !== t('navigation.signIn') && label !== t('navigation.signUp')
+      );
+    return (
+      label !== t('navigation.signOut') && label !== t('navigation.editProfile')
+    );
   };
 
   const liClasses = `rounded-5BR cursor-pointer font-bold tracking-wide ${
@@ -77,7 +110,7 @@ const Guide = () => {
   return (
     <>
       <div
-        id="intro"
+        id={t('navigation.intro').toLowerCase()}
         className={`z-0 relative top-0 h-96H w-full
         ${theme === 'theme1' ? 'bg-background-dark' : 'bg-cyan-dark'}
         `}
@@ -101,10 +134,12 @@ const Guide = () => {
             >
               <XMenu />
             </li>
-            {navItems.map((label) =>
+            {navItems1.map((label) =>
               isVisible(label, currentUser) ? (
                 <React.Fragment key={label}>
-                  {displayName && label === 'Edit Profile' && !user?.id ? (
+                  {displayName &&
+                  label === t('navigation.editProfile') &&
+                  !user?.id ? (
                     <motion.li className={disabledClasses} key={label}>
                       <motion.button
                         onClick={playClick1}
@@ -125,8 +160,21 @@ const Guide = () => {
                       initial="hidden"
                       whileHover="hover"
                     >
-                      {displayName && label === 'Sign Out' ? (
-                        <SignOutButton contentClasses={contentClasses} />
+                      {displayName && label === t('navigation.signOut') ? (
+                        <>
+                          <SignOutButton
+                            label={t('navigation.signOut')}
+                            contentClasses={contentClasses}
+                          ></SignOutButton>
+                        </>
+                      ) : displayName &&
+                        label === t('navigation.languageToggle') ? (
+                        <button
+                          onClick={toggleLanguage}
+                          className={contentClasses}
+                        >
+                          {t('navigation.languageToggle')}
+                        </button>
                       ) : (
                         <button disabled>
                           <Link
@@ -154,7 +202,7 @@ const Guide = () => {
             >
               <BurgerMenu />
             </li>
-            {['Intro', 'About', 'Explore'].map((label) => (
+            {navItems2.map((label) => (
               <motion.li
                 className={`px-16P py-8P rounded-5BR cursor-pointer font-bold tracking-wide
                 ${

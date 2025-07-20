@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { useThemeStore } from '@/components/hooks/useThemeStore';
 import { buttonVariants } from '../motionVariants/motionVariants';
 import { motion } from 'framer-motion';
+import { useTranslation } from '../hooks/useTranslation';
 
 type Game = 'tappy' | 'maze' | 'stackattack';
 
@@ -14,6 +15,7 @@ type ScoreEntry = {
 };
 
 const LeaderboardMain = () => {
+  const { t } = useTranslation();
   const { theme } = useThemeStore();
   const [scores, setScores] = useState<ScoreEntry[]>([]);
   const [selectedGame, setSelectedGame] = useState<Game>('tappy');
@@ -53,7 +55,7 @@ const LeaderboardMain = () => {
         ${theme === 'theme1' ? 'text-white' : 'text-textis'}
         `}
       >
-        🏆 {selectedGame.toUpperCase()} Leaderboard
+        🏆 {selectedGame.toUpperCase()} {t('leaderboard.title')}
       </h1>
 
       {/* Game Switcher */}
@@ -87,7 +89,7 @@ const LeaderboardMain = () => {
         `}
       >
         {scores.length === 0 ? (
-          <li className="text-center">No scores yet.</li>
+          <li className="text-center">{t('leaderboard.desc')}</li>
         ) : (
           scores.map((entry, index) => (
             <li

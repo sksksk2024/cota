@@ -17,10 +17,13 @@ import Prices2 from './Prices2';
 import Prices3 from './Prices3';
 import { useSound } from './hooks/useSound';
 import { ding, woosh } from './sounds/sounds';
+import { useTranslation } from './hooks/useTranslation';
 
 type PriceOptions = 1 | 2 | 3;
 
 const Info = () => {
+  const { t } = useTranslation();
+
   const { play: playClick } = useSound(woosh, 0.8);
   const { play: playHover } = useSound(ding, 0.05);
 
@@ -80,12 +83,14 @@ const Info = () => {
               initial="hidden"
               whileHover="hover"
             >
-              Next section
+              {t('nextSections.title')}
             </motion.button>
             <div
               onClick={playClick}
               onMouseEnter={playHover}
-              className="absolute left-176I bottom-[1px]"
+              className={`absolute bottom-[1px]
+                ${t('nextSections.title') === 'Urmatoarea Sectiune' ? 'left-272I' : 'left-176I'}
+                `}
             >
               <Arrow />
             </div>
@@ -112,12 +117,14 @@ const Info = () => {
                 initial="hidden"
                 whileHover="hover"
               >
-                Next section
+                {t('nextSections.title')}
               </motion.button>
               <div
                 onClick={playClick}
                 onMouseEnter={playHover}
-                className="absolute left-176I bottom-[1px]"
+                className={`absolute bottom-[1px]
+                ${t('nextSections.title') === 'Urmatoarea Sectiune' ? 'left-272I' : 'left-176I'}
+                `}
               >
                 <Arrow />
               </div>
@@ -147,12 +154,14 @@ const Info = () => {
             initial="hidden"
             whileHover="hover"
           >
-            Next section
+            {t('nextSections.title')}
           </motion.button>
           <div
             onClick={playClick}
             onMouseEnter={playHover}
-            className="relative -top-112I left-176I bottom-[4.0625rem]"
+            className={`relative -top-112I bottom-[4.0625rem]
+                ${t('nextSections.title') === 'Urmatoarea Sectiune' ? 'left-272I' : 'left-176I'}
+                `}
           >
             <Arrow />
           </div>
@@ -178,12 +187,14 @@ const Info = () => {
               initial="hidden"
               whileHover="hover"
             >
-              Next section
+              {t('nextSections.title')}
             </motion.button>
             <div
               onClick={playClick}
               onMouseEnter={playHover}
-              className="hidden 2xl:block absolute left-176I bottom-[1px]"
+              className={`hidden 2xl:block absolute bottom-[1px]
+                ${t('nextSections.title') === 'Urmatoarea Sectiune' ? 'left-272I' : 'left-176I'}
+                `}
             >
               <Arrow />
             </div>

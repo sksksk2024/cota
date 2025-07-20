@@ -5,8 +5,10 @@ import { comingVariants } from './motionVariants/motionVariants';
 import Image from 'next/image';
 import workingMe from '@/images/workingMe.webp';
 import { useThemeStore } from './hooks/useThemeStore';
+import { useTranslation } from './hooks/useTranslation';
 
 const Working = () => {
+  const { t } = useTranslation();
   const { theme } = useThemeStore();
 
   return (
@@ -98,7 +100,7 @@ const Working = () => {
       </div>
       {/* Parking Spot for Sticky Nav */}
       <div
-        id="about"
+        id={t('navigation.about').toLowerCase()}
         className={`relative -top-80I h-1
         `}
       ></div>

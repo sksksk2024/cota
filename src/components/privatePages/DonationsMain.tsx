@@ -13,8 +13,10 @@ import PiggyBank from '@/components/svgs/PiggyBank';
 import ProtectedPageAll from '@/components/ProtectedPageAll';
 import Link from 'next/link';
 import { STRIPE_DONATIONS, StripeDonation } from '@/lib/stripePrices';
+import { useTranslation } from '../hooks/useTranslation';
 
 const Donations = () => {
+  const { t } = useTranslation();
   const { error, loading } = useToast();
   const { theme } = useThemeStore();
 
@@ -22,10 +24,26 @@ const Donations = () => {
   const modalRef = useRef<HTMLDivElement | null>(null);
 
   const donationOptions = [
-    { id: 'Donation1', amount: '5 lei', label: 'Small Donation' },
-    { id: 'Donation2', amount: '10 lei', label: 'Medium Donation' },
-    { id: 'Donation3', amount: '20 lei', label: 'Big Donation' },
-    { id: 'Donation4', amount: '50 lei', label: 'Mega Donation' },
+    {
+      id: t('donationPrices.donation1'),
+      amount: t('donationPrices.amount1'),
+      label: t('donationPrices.label1'),
+    },
+    {
+      id: t('donationPrices.donation2'),
+      amount: t('donationPrices.amount2'),
+      label: t('donationPrices.label2'),
+    },
+    {
+      id: t('donationPrices.donation3'),
+      amount: t('donationPrices.amount3'),
+      label: t('donationPrices.label3'),
+    },
+    {
+      id: t('donationPrices.donation4'),
+      amount: t('donationPrices.amount4'),
+      label: t('donationPrices.label4'),
+    },
   ] as const;
 
   const handlePayment = async (donationId: StripeDonation) => {
@@ -79,7 +97,7 @@ const Donations = () => {
             ${theme === 'theme1' ? 'text-white' : 'text-textis'}
           `}
         >
-          Donations Page
+          {t('donations.title')}
         </h1>
 
         <motion.button
@@ -117,11 +135,12 @@ const Donations = () => {
                   id="donation-title"
                   className="text-xl text-center text-textis font-bold mb-4"
                 >
-                  Help Keep Us Going <br /> 😁⚡
+                  {t('donations.motivation')} <br /> 😁⚡
                 </h2>
 
                 <p className="text-center text-textis mb-6">
-                  Thank you for considering donating! <br /> Every bit helps.
+                  {t('donations.thanks1')} <br />
+                  {t('donations.thanks2')}
                 </p>
 
                 <div className="grid grid-cols-1 xs:grid-cols-2 gap-4 mb-6">
@@ -145,7 +164,7 @@ const Donations = () => {
                   onClick={() => setShowModal(false)}
                   className="text-gray-500 mt-4 w-full text-sm cursor-pointer hover:underline"
                 >
-                  Cancel
+                  {t('donations.cancel')}
                 </button>
               </motion.div>
             </motion.div>
@@ -166,7 +185,7 @@ const Donations = () => {
           `}
         >
           <Link href="/" passHref>
-            Go Home
+            {t('donations.home')}
           </Link>
         </motion.button>
       </main>

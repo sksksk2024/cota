@@ -12,10 +12,15 @@ import { useThemeStore } from './hooks/useThemeStore';
 import { useToggleTheme } from './hooks/useToggleTheme';
 import { useSound } from './hooks/useSound';
 import { click, ding, errorSound } from './sounds/sounds';
+import { useTranslation } from './hooks/useTranslation';
+import { useLanguageStore } from './hooks/useLanguageStore';
 
 const Header = () => {
+  const { t } = useTranslation();
+  const { language } = useLanguageStore();
+
   const { play: playClick } = useSound(click, 0.01);
-  const { play: playHover } = useSound(ding, 0.1);
+  const { play: playHover } = useSound(ding, 0.05);
   const { play: playError } = useSound(errorSound, 0.1);
 
   const { theme } = useThemeStore();
@@ -53,6 +58,7 @@ const Header = () => {
               variants={sunVariants}
               initial="initial"
               whileHover="hover"
+              onMouseEnter={playHover}
               drag
               dragConstraints={{ left: 0, top: 0, right: 0, bottom: 0 }}
               dragElastic={0.7}
@@ -69,6 +75,7 @@ const Header = () => {
               variants={moonVariants}
               initial="initial"
               whileHover="hover"
+              onMouseEnter={playHover}
               drag
               dragConstraints={{ left: 0, top: 0, right: 0, bottom: 0 }}
               dragElastic={0.7}
@@ -87,18 +94,18 @@ const Header = () => {
         >
           {displayName ? (
             <>
-              Welcome back,{' '}
+              {t('header.welcome')}
               <span
                 className={`
-                ${theme === 'theme1' ? 'text-warning' : 'text-highlight'}
-                `}
+  ${theme === 'theme1' ? 'text-warning' : 'text-highlight'}
+  `}
               >
                 {displayName}
               </span>
               ! 🫡
             </>
           ) : (
-            "Strength isn't just physical — it's in every decision to keep going."
+            t('header.defaultWelcome')
           )}
         </h1>
 
@@ -107,6 +114,7 @@ const Header = () => {
             variants={sunVariants}
             initial="initial"
             whileHover="hover"
+            onMouseEnter={playHover}
             drag
             dragConstraints={{ left: 0, top: 0, right: 0, bottom: 0 }}
             dragElastic={0.7}
@@ -121,6 +129,7 @@ const Header = () => {
             variants={moonVariants}
             initial="initial"
             whileHover="hover"
+            onMouseEnter={playHover}
             drag
             dragConstraints={{ left: 0, top: 0, right: 0, bottom: 0 }}
             dragElastic={0.7}
