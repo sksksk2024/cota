@@ -63,7 +63,9 @@ const Cards = ({ data }: { data: PricingData[] }) => {
       const data = await response.json();
       if (!data.sessionId) {
         playError();
-        throw new Error('Checkout session failed');
+        throw new Error(
+          'Sign Up or Sign In First. Click on the Burger Menu above!'
+        );
       }
 
       const stripe = await loadStripe(
