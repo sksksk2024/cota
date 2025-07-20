@@ -85,6 +85,8 @@ const Donations = () => {
     }
   };
 
+  let altId = ['Donation1', 'Donation2', 'Donation3', 'Donation4'];
+
   return (
     <ProtectedPageAll>
       <main
@@ -144,10 +146,12 @@ const Donations = () => {
                 </p>
 
                 <div className="grid grid-cols-1 xs:grid-cols-2 gap-4 mb-6">
-                  {donationOptions.map((option) => (
+                  {donationOptions.map((option, index) => (
                     <motion.button
-                      key={option.id}
-                      onClick={() => handlePayment(option.id as StripeDonation)}
+                      key={index}
+                      onClick={() =>
+                        handlePayment(altId[index] as StripeDonation)
+                      }
                       className="text-white font-semibold w-full bg-green-500 py-3 px-6 rounded-lg cursor-pointer hover:bg-green-600"
                       whileHover={{ scale: 1.05 }}
                       whileTap={{ scale: 0.95 }}

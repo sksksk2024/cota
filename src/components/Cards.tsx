@@ -98,6 +98,33 @@ const Cards = ({ data }: { data: PricingData[] }) => {
         } else {
           priceService = 0;
         }
+        let altTitle = item.title;
+
+        switch (item.title) {
+          case 'Pachetul Comun':
+            altTitle = 'Common Pack';
+            break;
+          case 'Pachetul Rar':
+            altTitle = 'Rare Pack';
+            break;
+          case 'Pachetul Legendar':
+            altTitle = 'Legendary Pack';
+            break;
+          case 'La Distanta':
+            altTitle = 'Remote';
+            break;
+          case 'Comunitatea Noastra':
+            altTitle = 'Our Community';
+            break;
+          case 'Unu la Unu':
+            altTitle = 'One on One';
+            break;
+          case 'Mentorat':
+            altTitle = 'Mentoring';
+            break;
+          default:
+            break;
+        }
 
         return (
           <motion.div
@@ -211,7 +238,7 @@ const Cards = ({ data }: { data: PricingData[] }) => {
               whileHover="hover"
               onClick={() => {
                 playClick();
-                handlePayment(item.title as StripeProduct);
+                handlePayment(altTitle as StripeProduct);
               }}
               onMouseEnter={playHover}
               className={`${priceButtonClasses}`}
@@ -220,7 +247,7 @@ const Cards = ({ data }: { data: PricingData[] }) => {
                 {item.title === t('community.title')
                   ? t('startWith.title2')
                   : `${t('startWith.title1')} ${
-                      item.title === 'Mentoring'
+                      item.title === t('mentoring.title')
                         ? Math.floor(priceService * 0.2)
                         : Math.floor(priceService * 0.5)
                     } lei`}
