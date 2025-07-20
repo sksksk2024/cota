@@ -14,10 +14,9 @@ import { useSound } from './hooks/useSound';
 import { click, ding, woosh } from './sounds/sounds';
 import { useLanguageStore } from './hooks/useLanguageStore';
 import { useTranslation } from './hooks/useTranslation';
-import en from '@/languages/en.json';
 
 const Guide = () => {
-  const { language, toggleLanguage } = useLanguageStore();
+  const { toggleLanguage } = useLanguageStore();
   const { t } = useTranslation();
 
   const { play: playClick1 } = useSound(click, 0.02);

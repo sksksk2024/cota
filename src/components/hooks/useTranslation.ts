@@ -3,22 +3,31 @@ import { useLanguageStore } from './useLanguageStore';
 import en from '@/languages/en.json';
 import ro from '@/languages/ro.json';
 
-type Translations = typeof en; // Use English as the base type
+type DeepStringRecord = {
+  [key: string]: string | string[] | DeepStringRecord;
+};
 
 export const useTranslation = () => {
   const { language } = useLanguageStore();
 
-  const translations: Translations = language === 'ro' ? ro : en;
+  const translations: DeepStringRecord = language === 'ro' ? ro : en;
 
   // Helper function to replace placeholders (e.g., {name})
   const t = (key: string, params?: Record<string, string>) => {
     const keys = key.split('.');
-    let value: any = translations;
+    let value: unknown = translations;
 
     for (const k of keys) {
-      value = value[k];
-      if (value === undefined) return key; // Fallback to key if not found
+      if (typeof value !== 'object' || value === null) return key;
+      value = (value as Record<string, unknown>)[k];
+      if (value === undefined) return key;
     }
+
+    if (Array.isArray(value)) {
+      return value.join(', '); // Or handle arrays differently
+    }
+
+    if (typeof value !== 'string') return key;
 
     if (params) {
       return Object.entries(params).reduce(

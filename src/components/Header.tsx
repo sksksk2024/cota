@@ -1,6 +1,6 @@
 'use client';
 
-import { hover, motion } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { sunVariants, moonVariants } from './motionVariants/motionVariants';
 import CotaLogo from './svgs/CotaLogo';
 import Sun from './utils/Sun';
@@ -17,7 +17,6 @@ import { useLanguageStore } from './hooks/useLanguageStore';
 
 const Header = () => {
   const { t } = useTranslation();
-  const { language } = useLanguageStore();
 
   const { play: playClick } = useSound(click, 0.01);
   const { play: playHover } = useSound(ding, 0.05);

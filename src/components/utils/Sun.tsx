@@ -1,9 +1,7 @@
 const Sun = ({
   onClick,
-  onMouseEnter,
   className,
 }: {
-  onMouseEnter?: () => void;
   onClick?: () => void;
   className?: string;
 }) => {

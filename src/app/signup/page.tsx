@@ -1,7 +1,7 @@
 'use client';
 
 import { useToast } from '@/components/hooks/useToast';
-import { hover, motion } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { OpenEye } from '@/components/svgs/OpenEye';
 import { CloseEye } from '@/components/svgs/CloseEye';
 import {
@@ -19,13 +19,7 @@ import { signupSchema, SignupInput } from '@/lib/schemas';
 import { signIn } from 'next-auth/react';
 import PageWrapper from '@/components/PageWrapper';
 import { useSound } from '@/components/hooks/useSound';
-import {
-  block,
-  click,
-  ding,
-  errorSound,
-  yay,
-} from '@/components/sounds/sounds';
+import { click, ding, errorSound, yay } from '@/components/sounds/sounds';
 
 const SignUp = () => {
   const { play: playClick } = useSound(click, 0.3);

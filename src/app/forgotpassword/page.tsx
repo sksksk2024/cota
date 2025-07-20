@@ -15,11 +15,8 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { forgotPasswordSchema, ForgotPasswordInput } from '@/lib/schemas';
 import PageWrapper from '@/components/PageWrapper';
-import { useLanguageStore } from '@/components/hooks/useLanguageStore';
 
 const ForgotPassword = () => {
-  const { language } = useLanguageStore();
-
   const { success, error, loading, dismiss } = useToast();
 
   const router = useRouter();
