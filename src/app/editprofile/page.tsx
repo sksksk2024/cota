@@ -68,8 +68,6 @@ const EditProfile = () => {
   };
 
   const handleDeleteUser = async () => {
-    // setShowConfirm(true);
-
     loading('Deleting User...');
     try {
       const res = await fetch('/api/deleteuser', {

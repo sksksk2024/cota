@@ -33,6 +33,7 @@ export const useToast = () => {
 
   const loading = (message: string) =>
     toast.loading(message, {
+      duration: 2000,
       className: `${toastClass} ${base}`,
     });
 

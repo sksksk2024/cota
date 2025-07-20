@@ -45,7 +45,6 @@ const Cards = ({ data }: { data: PricingData[] }) => {
 
   const handlePayment = async (productName: string) => {
     loading('Redirecting to Stripe Checkout...');
-
     try {
       // Validate product exists
       if (!(productName in STRIPE_PRODUCTS)) {
